@@ -1,0 +1,54 @@
+/* src/components/Calendar.css */
+
+.month-container {
+  margin-bottom: 20px;
+  /* display: flex;
+  flex-direction: column; */
+  /* display: flex; */
+}
+
+.month-header {
+  /* border-radius: 8px; */
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-7 {
+  grid-template-columns: repeat(7, 3fr);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.day {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  border: 0.5px solid black;
+  cursor: pointer;
+  /* background-color: lightblue; */
+}
+
+.current-month {
+  background-color: white;
+  text-align: center;
+}
+
+.selected {
+  background-color: #3498db;
+  color: #fff;
+}
+.month-container {
+  width: 30.5%;
+}

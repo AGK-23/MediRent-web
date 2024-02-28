@@ -1,0 +1,463 @@
+/* styles.css */
+
+/* * {
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+body {
+
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.637);
+}
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: grey !important;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f1f1f1ad;
+} */
+
+/* Dropdwon Menu */
+/* .submenu {
+  position: relative;
+  font-family: "Montserrat", Arial;
+  font-size: 0.92vw;
+  font-weight: 500;
+  transition: color 150ms linear;
+}
+.submenu-arrow {
+  margin-top: 2px;
+
+  position: absolute;
+  display: none;
+}
+.submenu:hover .submenu-arrow {
+  display: block;
+}
+.MED {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+.med {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.social-icons {
+  display: flex;
+  gap: 1em;
+  color: rgba(128, 128, 128, 0.384);
+}
+
+.Cards > Link > img {
+  width: 100%;
+}
+.btn-register {
+  padding: 6px;
+  padding-left: 5px;
+  font-family: "Montserrat", Arial;
+  font-size: 0.781vw;
+  font-weight: 400;
+  background: #0c527b;
+  border-radius: 3px;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-right: 60px;
+}
+.dp {
+  position: relative;
+  display: inline-block;
+}
+.dpc {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1bb;
+  min-width: 160;
+  width: 150px;
+  box-shadow: 0px 8px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  right: 0px;
+}
+.dpc_black {
+  display: none;
+  position: absolute;
+  color: #f1f1f1;
+  background-color: black;
+  min-width: 160;
+  width: 200px;
+  box-shadow: 0px 8px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+
+  opacity: 0.7;
+}
+.dpc .li {
+  list-style-type: none;
+  font-weight: 400;
+  font-size: 12px;
+  padding: 10px 10px;
+}
+.dpc_black .li {
+  list-style-type: none;
+  font-weight: 100;
+  font-size: 15px;
+  padding-top: 10px;
+}
+.dpc .li {
+  color: #000;
+
+  text-decoration: none;
+  display: block;
+}
+.dpc_black .li {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dpc_black li:hover {
+  color: #0c527b;
+}
+.dpc li:hover {
+  background-color: #0c527b;
+  color: white;
+}
+.dp:hover .dpc {
+  display: block;
+}
+.dp:hover .dpc_black {
+  display: block;
+}
+.dp:hover .btn-register {
+  background-color: #0c527b;
+}
+.dp:hover .faq {
+  background-color: #0c527b;
+}
+.Drop_app {
+
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.979);
+ 
+  padding: 30px;
+
+  z-index: 50;
+  
+}
+
+.dropdown-menu {
+  background-color: rgba(0, 0, 0, 0.808);
+
+  z-index: 10;
+  width: 120vw;
+  height: 60vh;
+  position: relative;
+  color: white;
+}
+
+.dropdown_cont {
+  display: flex; 
+  flex-direction: column;
+  padding: 8px 0;
+  z-index: 1;
+  margin-left: 85px;
+  position: absolute;
+}
+.dropdown:hover {
+  color: black;
+}
+.text {
+  cursor: pointer;
+}
+.Drop {
+  font-size: smaller;
+  display: flex;
+  gap: 1.5em;
+  margin-left: 18vw;
+  width: fit-content;
+  margin-top: 5px;
+  position: absolute;
+  color: #0c527b;
+}
+
+.hero-section {
+  text-align: center;
+  background-image: url();
+}
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  margin: auto;
+}
+
+
+.dropdown-text {
+  position: relative;
+  display: inline-block;
+}
+
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.scrollable-container {
+  max-height: 200px; 
+  overflow-y: auto;
+  padding: 8px;
+} */
+
+
+/* herro section */
+/* .hero-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.map-container {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.map-container img {
+  max-width: 100%;
+}
+
+.data-container {
+  flex: 1;
+}
+
+.data-item {
+  margin-bottom: 20px;
+}
+.land {
+  background-image: url(https://www.medshousing.com/images/site/slider_1.jpg);
+  background-size: cover;
+  height: 35.365vw;
+  margin-top: 2.3vw;
+  padding-top: 5.2vw;
+  text-align: center;
+}
+.land h1 {
+  padding: 0 3vw;
+  font-size: 3.906vw;
+  color: #ffffff;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 3.6vw;
+  margin-bottom: 0;
+  font-family: "Montserrat", Arial;
+}
+.default-link {
+  border-radius: 4px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  transition: background 150ms linear;
+}
+
+input {
+  padding: 7px;
+  margin-left: 2px;
+  margin-right: 2px;
+  border-radius: 6px;
+
+}
+.Cards {
+  background-color: rgba(128, 128, 128, 0.062);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  margin-top: 20px;
+  padding-bottom: 90px;
+}
+
+.featured-medical-housing {
+  margin-top: 50px;
+}
+
+.featured-medical-housing h2 {
+  text-align: center;
+  font-size: 30px;
+}
+.featured-medical-housing a {
+  font-size: 1.302vw;
+  color: #0c527b;
+  font-family: "Old Standard TT";
+  transition: color 150ms linear;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 115px;
+  position: relative;
+  bottom: 25px;
+  position: relative;
+  top: 40px;
+}
+.housing_option h3,
+h5 {
+  width: 15vw;
+}
+
+.Card_split:hover {
+  background-color: black;
+  color: white;
+}
+.Card_split {
+  background-color: white;
+}
+.HerroSecond {
+  margin-top: 50px;
+}
+.HerroSecond h2 {
+  font-size: 2vw;
+  text-align: center;
+}
+.HerroSecond a {
+  font-size: 1.302vw;
+  color: #0c527b;
+  font-family: "Old Standard TT";
+  transition: color 150ms linear;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 115px;
+  position: relative;
+  bottom: 25px;
+}
+.HerroFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  margin-top: 0px;
+  margin-left: 110px;
+}
+
+.hr {
+  border-bottom: 50px;
+  width: 89%;
+  background-color: rgba(128, 128, 128, 0.425);
+  height: 1px;
+  margin-left: 100px;
+}
+
+.Market h2 {
+  text-align: center;
+  font-size: 1.5em;
+  color: black;
+  margin-top: 15px;
+}
+
+.AllDrop {
+  display: flex;
+}
+.Medname {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+.med_img {
+  margin-left: 80px;
+}
+.Sign {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60px;
+} 
+.hover:hover {
+  background-color: #000;
+  color: white;
+}
+.Blog {
+  display: flex;
+  gap: 3em;
+}
+.copyWrite {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+}
+.copyWrite a {
+  color: #85b8d5;
+}
+.bottom_link {
+  display: flex;
+  gap: 10px;
+}
+.bottom_link:hover {
+  color: "black";
+}
+
+.message {
+  width: 60px;
+  height: 60px;
+  background-color: #0c527b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 60px;
+  cursor: pointer;
+  color: white;
+}
+.element {
+  border-radius: 50%;
+  bottom: 28.5px;
+  height: px;
+  position: fixed;
+  right: 65px;
+  width: 15px;
+  z-index: 2147483646;
+}
+
+/* loading circle */
+/* .faqfst {
+  position: relative;
+}
+
+.faqsec {
+  cursor: pointer;
+
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  display: flex;
+  align-items: center;
+}
+
+.faqList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 5;
+  display: none;
+}
+
+.faqList ul {
+  list-style-type: none;
+
+}
+
+
+
+.faqfst.open .faqList {
+  display: block;
+}
+img {
+  display: inline-block;
+  max-width: 100%;
+}  */
+
+

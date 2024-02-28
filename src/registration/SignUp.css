@@ -1,0 +1,41 @@
+/* * {
+    margin:0;
+    padding:0;
+    
+}
+.input {
+    transition: border 0.2s ease-in-out;
+    min-width: 280px
+}
+.input:focus+.label,
+.input:active+.label
+ {
+    font-size: .75rem;
+    transition: all 0.2s ease-out;
+    top: -0.9rem;
+    background-color: #fff;
+    color: gray;
+    padding: 0 10px 0 10px;
+    margin: 0 10px 0 10px;
+}
+.input.filled+.label{
+    display: none;
+    color: white;
+}
+.label {
+    transition: all 0.2s ease-out;
+    top: 0.6rem;
+    left: 0.9rem;
+}
+
+.input:not(:placeholder-shown).input:not(:focus) ~ .label {
+    
+    font-size: .75rem;
+    transition: all 0.2s ease-out;
+    top: -0.9rem;
+    background-color: #fff;
+    color: gray;
+    padding: 0 10px 0 10px;
+    margin: 0 10px 0 10px;
+
+} */
