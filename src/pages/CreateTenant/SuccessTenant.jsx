@@ -7,7 +7,7 @@ import { ToastContainer} from "react-toastify";
 
 const SuccessTenant = () => {
   return (
-    <div className="py-0 mt-48 flex font-medium items-center justify-center max-w-screen-md mx-auto h-screen">
+    <div className="py-0 mt-48 flex font-medium items-center justify-center max-w-screen-md mx-auto">
             <ToastContainer/>
             <div className="flex flex-col mx-3">
                 <div className="flex flex-col items-center p-4 mb-4 rounded-xl">
