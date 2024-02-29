@@ -143,7 +143,7 @@ const Navbar = ({ isTopOfPage }) => {
                       JOIN US
                     </button>
                     {showPopup && (
-                      <div ref={popupRef} className="absolute left-10 top-6 bg-gray-200 border border-gray-300 mt-2">
+                      <div ref={popupRef} className="absolute right-0 top-6 bg-gray-200 border border-gray-300 mt-2">
                         <div className="flex flex-col">
                           <Link to="/auth/registration-page" className="px-4 py-1 border border-gray-300 cursor-pointer hover:bg-gray-100  whitespace-nowrap text-third" >
                             I'm a Tenant
