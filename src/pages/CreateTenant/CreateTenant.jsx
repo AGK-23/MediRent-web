@@ -40,7 +40,7 @@ const CreateTenant = () => {
         // CHARACTER MUST BE MORE THAN 8 CHARACTER
         if (userValue.length > 5) {
             setText("Too Weak")
-            setTextValue("At least 6 characters long, with one uppercase letter or one number")
+            setTextValue("At least 6 characters long, with one uppercase letter, one number and one symbol")
             // console.log("text in the input..", text);
             setTestOne(true)
         } else {
@@ -385,7 +385,7 @@ const CreateTenant = () => {
                                                 </div>
                                             ) : (
                                                 <select
-                                                    className='w-full rounded px-3 border border-gray-300 py-4 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none'
+                                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                 >
                                                     <option value="">Select a state</option>
                                                 </select>
@@ -441,13 +441,13 @@ const CreateTenant = () => {
                                             value={phone}
                                             onChange={handleInputUser}
                                             placeholder=" "
-
                                         />
                                         <label
                                             htmlFor="text"
-                                            className="label absolute mt-2 ml-3 leading-tighter text-gray-600 text-base cursor-text"
-
-                                        >Phone</label>
+                                            className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
+                                        >
+                                            Phone
+                                        </label>
                                     </div>
 
                                     <div className="bg-black py-4 px-4 text-center text-white w-full h-full justify-center items-center flex md:flex-row xs:flex-col gap-5">

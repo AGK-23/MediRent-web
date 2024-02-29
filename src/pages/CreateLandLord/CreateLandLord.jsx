@@ -193,7 +193,7 @@ const CreateLandLord = () => {
         // CHARACTER MUST BE MORE THAN 8 CHARACTER
         if (userValue.length > 5) {
             setText("Too Weak")
-            setTextValue("At least 6 characters long, with one uppercase letter or one number")
+            setTextValue("At least 6 characters long, with one uppercase letter, one number and one symbol")
             // console.log("text in the input..", text);
             setTestOne(true)
         } else {
