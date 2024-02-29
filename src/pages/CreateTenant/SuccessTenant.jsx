@@ -7,10 +7,10 @@ import { ToastContainer} from "react-toastify";
 
 const SuccessTenant = () => {
   return (
-    <div className="container  justify-center flex mx-auto max-w-screen-md items-center  rounded-lg mt-40">
+    <div className="py-0 mt-48 flex font-medium items-center justify-center max-w-screen-md mx-auto h-screen">
             <ToastContainer/>
             <div className="flex flex-col mx-3">
-                <div className="flex flex-col items-center  p-4  mb-4 rounded-xl">
+                <div className="flex flex-col items-center p-4 mb-4 rounded-xl">
                     <h1 className="flex justify-center w-full">
                     {/* <img src="/images/logoPic.png" alt="Instagram" className="mt-2 w-6/12 mb-4" /> */}
                     </h1>
@@ -36,7 +36,7 @@ const SuccessTenant = () => {
                             <div className="flex justify-start my-3">
                                 Should you have any questions or need assistance navigating your account or any of our services, please do not hesitate to reach out to our customer support team. We are here to help you every step of the way.
                             </div>
-                            
+
                             <div className="flex justify-start my-3">
                                 Thank you for choosing Medirent as your rental partner. We look forward to serving you and ensuring your stay is comfortable and enjoyable.
                             </div>
