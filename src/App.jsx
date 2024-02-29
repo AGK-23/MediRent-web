@@ -91,9 +91,7 @@ function App() {
             <Route path="/success/landlord/1" element={<SuccessLandLord />} />
             <Route path="/success/tenant/1" element={<SuccessTenant />} />
             <Route path="/auth/forgotpassword" element={<ForgotPassword />} />
-            {/* <Route path="/warehousing" element={<WarehousingPage />} />
-            <Route path="/shipping" element={<ShippingPage />} />
-            <Route path="/logistics" element={<LogisticsPage />} /> */}
+
           </Route>
 
           <Route path="/auth/">
