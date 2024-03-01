@@ -80,7 +80,7 @@ const Navbar = ({ isTopOfPage }) => {
             </div>
             <ul className="md:flex hidden md:mt-12 my-1 xs:mt-0 capitalize items-center gap-4 xl:text-sm lg:text-xs">
 
-              <div className="flex gap-4 text-gray-400 mr-10">
+              <div className="hidden gap-4 text-gray-400 mr-10">
                 <Link
                   to="/"
                   className="fab text-lg"
@@ -116,16 +116,15 @@ const Navbar = ({ isTopOfPage }) => {
 
               {/* <NavLinks /> */}
               <div className="flex w-auto justify-between gap-2">
-                <div className="md:block hidden">
+                {/* <div className="md:block hidden">
                   <Link className="link flex items-center justify-between mr-5 px-0 rounded-lg bg-[#0c527b] text-white" to="/auth/register">
                     <div className="flex justify-between items-center w-full">
                       <div className="px-2 bg-[#103f69] py-2 rounded-tl-lg rounded-bl-lg  text-[10px]"><FaGoogle /></div>
                       <div className=" font-[500] text-white px-1 py-0 text-xs">Select Language</div>
                       <div className="text-white px-2 bg-[#103f69] py-2 rounded-tr-lg rounded-br-lg text-[10px]"><BiSolidDownArrow /></div>
-
                     </div>
                   </Link>
-                </div>
+                </div> */}
                 <div className="md:block hidden">
                   <Link className="link flex items-center justify-center h-full mr-5" to="/auth/login">
                     <div className="text-gray-500 font-semibold hover:text-gray-700 text-[13px]">LOGIN</div>
@@ -140,7 +139,7 @@ const Navbar = ({ isTopOfPage }) => {
                     // onMouseEnter={() => setShowPopup(true)}
                     // onMouseLeave={() => setShowPopup(false)}
                     >
-                      JOIN US
+                      CREATE ACCOUNT
                     </button>
                     {showPopup && (
                       <div ref={popupRef} className="absolute right-0 top-6 bg-gray-200 border border-gray-300 mt-2">
@@ -162,63 +161,59 @@ const Navbar = ({ isTopOfPage }) => {
             </ul>
           </div>
 
-          <div className="md:pb-8 xs:pb-0 flex font-medium justify-between max-w-screen-xl mx-auto mt-2">
+          <div className="md:pb-8 xs:pb-0 flex font-medium justify-between max-w-screen-xl mx-auto mt-2 ">
             <div className="">
-              <div className="mt-3 flex justify-between w-full">
+              <div className="mt-3 flex justify-between w-full ">
                 <div className="flex flex-row justify-between w-full">
 
-                  <div className="mr-4 w-fit text-sm text-start flex items-center justify-start whitespace-nowrap">
+                  <div className="mr-10 w-fit text-sm text-start flex items-center justify-start whitespace-nowrap">
                     <div className=" relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/blogpath">Medical Schools</Link>
+                      <Link to="/">LandLord</Link>
                     </div>
 
                   </div>
 
-                  <div className="mr-4 w-fit text-sm text-start flex items-center justify-start px-4 whitespace-nowrap">
+                  <div className="mr-10 w-fit text-sm text-start flex items-center justify-start px-4 whitespace-nowrap">
                     <div className="text-med relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/blogpath">Hospitals</Link>
+                      <Link to="/">Tenants</Link>
                     </div>
 
                   </div>
-                  <div className="mr-4 w-fit  text-sm text-start flex items-center justify-start pr-1 whitespace-nowrap">
+                  {/* <div className="mr-4 w-fit  text-sm text-start flex items-center justify-start pr-1 whitespace-nowrap">
                     <div className="text-med relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/blogpath">Medical Housing </Link>
+                      <Link to="/">Medical Housing </Link>
                     </div>
-                  </div>
-                  <div className="mr-4 w-fit  text-sm text-start flex items-center justify-start px-4 whitespace-nowrap">
+                  </div> */}
+                  {/* <div className="mr-4 w-fit  text-sm text-start flex items-center justify-start px-4 whitespace-nowrap">
                     <div className="text-med relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/blogpath">Pricing</Link>
+                      <Link to="/">Pricing</Link>
                     </div>
-
-                  </div>
-                  <div className="mr-4 px-4 w-fit  text-sm text-start flex items-center justify-start whitespace-nowrap">
+                  </div> */}
+                  <div className="mr-10 px-4 w-fit  text-sm text-start flex items-center justify-start whitespace-nowrap">
                     <div className="text-med relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/blogpath">FAQ</Link>
-                    </div>
-
-                  </div>
-                  <div className="mr-4 px-4 w-fit  text-sm text-start flex items-center justify-start whitespace-nowrap">
-                    <div className="text-med relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/blogpath">Blog</Link>
+                      <Link to="/">FAQ</Link>
                     </div>
 
                   </div>
-                  <div className="mr-4 px-4 w-fit  text-sm text-start flex items-center justify-start whitespace-nowrap">
+                  {/* <div className="mr-4 px-4 w-fit  text-sm text-start flex items-center justify-start whitespace-nowrap">
                     <div className="text-med relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/blogpath">About Us</Link>
+                      <Link to="/">Blog</Link>
                     </div>
-
-                  </div>
-                  <div className="mr-4 px-4 w-fit  text-sm text-start flex items-center justify-start whitespace-nowrap">
+                  </div> */}
+                  <div className="mr-10 px-4 w-fit  text-sm text-start flex items-center justify-start whitespace-nowrap">
                     <div className="text-med relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/blogpath">Tenants Want Ads</Link>
+                      <Link to="/">About Us</Link>
                     </div>
-
                   </div>
+                  {/* <div className="mr-4 px-4 w-fit  text-sm text-start flex items-center justify-start whitespace-nowrap">
+                    <div className="text-med relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                      <Link to="/">Tenants Want Ads</Link>
+                    </div>
+                  </div> */}
                 </div>
               </div>
             </div>
-            <div className="w-full">
+            <div className="">
               <SearchButton />
             </div>
           </div>
@@ -298,10 +293,10 @@ const Navbar = ({ isTopOfPage }) => {
 
                   <div className="link flex items-center relative">
                     <button
-                      className=" font-[500] px-5 py-1 rounded-lg bg-[#103f69] text-white text-[13px]"
+                      className=" font-[500] px-5 py-1 rounded-lg bg-[#103f69] text-white text-[10px]"
                       onClick={() => setShowPopup(true)}
                     >
-                      JOIN US
+                      CREATE ACCCOUNT
                     </button>
                     {showPopup && (
                       <div ref={popupRef} className="z-20 absolute -left-10 top-6 bg-gray-200 border border-gray-300 mt-2">
@@ -351,22 +346,12 @@ const Navbar = ({ isTopOfPage }) => {
             >
               <li>
                 <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                  <Link to="/">Medical Schools</Link>
+                  <Link to="/">LandLord</Link>
                 </div>
               </li>
               <li>
                 <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                  <Link to="/">Hospitals</Link>
-                </div>
-              </li>
-              <li>
-                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                  <Link to="/">Medical Housing </Link>
-                </div>
-              </li>
-              <li>
-                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                  <Link to="/">Pricing</Link>
+                  <Link to="/">Tenants</Link>
                 </div>
               </li>
               <li>
@@ -374,21 +359,31 @@ const Navbar = ({ isTopOfPage }) => {
                   <Link to="/">FAQ</Link>
                 </div>
               </li>
-              <li>
+              {/* <li>
+                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                  <Link to="/">Pricing</Link>
+                </div>
+              </li> */}
+              {/* <li>
+                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                  <Link to="/">FAQ</Link>
+                </div>
+              </li> */}
+              {/* <li>
                 <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                   <Link to="/">Blog</Link>
                 </div>
-              </li>
+              </li> */}
               <li>
                 <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                   <Link to="/">About Us</Link>
                 </div>
               </li>
-              <li>
+              {/* <li>
                 <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                   <Link to="/">Tenants Want Ads</Link>
                 </div>
-              </li>
+              </li> */}
               {/* <NavbarLinks OpenScreen={OpenScreen} /> */}
               {/* <div className="mb-10 py-6 flex justify-center flex-col  sm:w-full">
                 <Link className="link flex items-center" to="/auth/register">
