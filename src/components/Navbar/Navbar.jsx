@@ -134,7 +134,7 @@ const Navbar = ({ isTopOfPage }) => {
 
                   <div className="link flex items-center relative">
                     <button
-                      className=" font-[500] px-5 py-1 rounded-lg bg-[#103f69] text-white text-[13px]"
+                      className=" font-[500] px-5 py-1 rounded-lg bg-[#0c527b] text-white text-[13px]"
                       onClick={() => setShowPopup(true)}
                     // onMouseEnter={() => setShowPopup(true)}
                     // onMouseLeave={() => setShowPopup(false)}

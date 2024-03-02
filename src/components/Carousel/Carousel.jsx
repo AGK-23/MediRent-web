@@ -12,17 +12,17 @@ import { TbTruckDelivery, TbDrone } from "react-icons/tb";
 import './Carousel.css'
 
 
-// import Product from "../../assets/imageDiv/productImage.jpg";
-// import Product1 from "../../assets/imageDiv/productImage6.jpg";
-// import Product2 from "../../assets/imageDiv/productImage3.jpg";
-// import Product4 from "../../assets/imageDiv/productImage4.jpg"
-// import Product5 from "../../assets/imageDiv/productImage5.jpg"
+import Image from "../../assets/imageDiv/productImage.jpg";
+import Image1 from "../../assets/imageDiv/productImage6.jpg";
+import Image2 from "../../assets/imageDiv/productImage3.jpg";
+import Image3 from "../../assets/imageDiv/productImage4.jpg"
+import Image4 from "../../assets/imageDiv/productImage5.jpg"
 
-import Image from "../../assets/imageDiv/product.jpg"
-import Image1 from "../../assets/imageDiv/product1.jpg"
-import Image2 from "../../assets/imageDiv/product2.jpg"
-import Image3 from "../../assets/imageDiv/product3.jpg"
-import Image4 from "../../assets/imageDiv/product4.jpg"
+// import Image from "../../assets/imageDiv/product.jpg"
+// import Image1 from "../../assets/imageDiv/product1.jpg"
+// import Image2 from "../../assets/imageDiv/product2.jpg"
+// import Image3 from "../../assets/imageDiv/product3.jpg"
+// import Image4 from "../../assets/imageDiv/product4.jpg"
 
 
 
