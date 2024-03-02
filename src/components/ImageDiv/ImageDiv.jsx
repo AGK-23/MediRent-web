@@ -141,7 +141,7 @@ const ImageDiv = () => {
                 </div>
                 <Link
                   to="/Listing"
-                  className="bg-[#0c527b] tetx-white rounded-lg py-[0.80rem] px-3"
+                  className="bg-[#008080] tetx-white rounded-lg py-[0.80rem] px-3"
                 >
                   {" "}
                   <div className="text-white"><IoArrowForward className=" rounded-sm text-center" /></div>

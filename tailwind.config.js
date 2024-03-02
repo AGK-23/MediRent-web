@@ -8,19 +8,10 @@ export default {
         primary: "#008080",
         secondary: "#F8C8DC",
         main: "#f87316",
-        third: "#FF0000",
+        third: "#008080",
         blue: "#086972",
       },
-      // customBlue: "#0c527b",
-      // w: "#262626",
-      // deepFade: "#554728",
-      // red: "#FF0000",
-      // blur: "#1096E5",
-      // gry: "#666666",
-      // b: "#3E7696",
-      // r: "#6E6B66",
-      // o: "#212121",
-      // or:"#FFFFFF"
+      
 
       backgroundImage: {
         HomeImage: "url('assets/slider_1.jpg')",

@@ -17,7 +17,7 @@ const SearchButton = () => {
       <div className="w-full">
         {!isExpanded && (
           <div className=" flex  w-full justify-end">
-            <button className="flex text-[#0c527b] " onClick={handleButtonClick}>
+            <button className="flex text-[#008080]" onClick={handleButtonClick}>
               <AiOutlineSearch style={{ fontSize: "30px" }} />
             </button>
           </div>

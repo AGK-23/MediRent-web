@@ -80,7 +80,7 @@ const Navbar = ({ isTopOfPage }) => {
             </div>
             <ul className="md:flex hidden md:mt-12 my-1 xs:mt-0 capitalize items-center gap-4 xl:text-sm lg:text-xs">
 
-              <div className="hidden gap-4 text-gray-400 mr-10">
+              <div className="hidden gap-4 text-[#008080] mr-10">
                 <Link
                   to="/"
                   className="fab text-lg"
@@ -134,7 +134,7 @@ const Navbar = ({ isTopOfPage }) => {
 
                   <div className="link flex items-center relative">
                     <button
-                      className=" font-[500] px-5 py-1 rounded-lg bg-[#0c527b] text-white text-[13px]"
+                      className=" font-[500] px-5 py-1 rounded-lg bg-[#008080] text-white text-[13px]"
                       onClick={() => setShowPopup(true)}
                     // onMouseEnter={() => setShowPopup(true)}
                     // onMouseLeave={() => setShowPopup(false)}
@@ -167,41 +167,41 @@ const Navbar = ({ isTopOfPage }) => {
                 <div className="flex flex-row justify-between w-full">
 
                   <div className="mr-10 w-fit text-sm text-start flex items-center justify-start whitespace-nowrap">
-                    <div className=" relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                    <div className=" relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                       <Link to="/">LandLord</Link>
                     </div>
 
                   </div>
 
                   <div className="mr-10 w-fit text-sm text-start flex items-center justify-start px-4 whitespace-nowrap">
-                    <div className="text-med relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                    <div className="text-med relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                       <Link to="/">Tenants</Link>
                     </div>
 
                   </div>
                   {/* <div className="mr-4 w-fit  text-sm text-start flex items-center justify-start pr-1 whitespace-nowrap">
-                    <div className="text-med relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                    <div className="text-med relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                       <Link to="/">Medical Housing </Link>
                     </div>
                   </div> */}
                   {/* <div className="mr-4 w-fit  text-sm text-start flex items-center justify-start px-4 whitespace-nowrap">
-                    <div className="text-med relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                    <div className="text-med relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                       <Link to="/">Pricing</Link>
                     </div>
                   </div> */}
                   <div className="mr-10 px-4 w-fit  text-sm text-start flex items-center justify-start whitespace-nowrap">
-                    <div className="text-med relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                    <div className="text-med relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                       <Link to="/">FAQ</Link>
                     </div>
 
                   </div>
                   {/* <div className="mr-4 px-4 w-fit  text-sm text-start flex items-center justify-start whitespace-nowrap">
-                    <div className="text-med relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                    <div className="text-med relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                       <Link to="/">Blog</Link>
                     </div>
                   </div> */}
                   <div className="mr-10 px-4 w-fit  text-sm text-start flex items-center justify-start whitespace-nowrap">
-                    <div className="text-med relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                    <div className="text-med relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                       <Link to="/">About Us</Link>
                     </div>
                   </div>
@@ -243,18 +243,18 @@ const Navbar = ({ isTopOfPage }) => {
                       variants={{
                         closed: {
                           d: "M 2 2.5 L 20 2.5",
-                          stroke: "rgb(16,63,105)",
+                          stroke: "rgb(0,128,128)",
                         },
                         open: {
                           d: "M 3 16.5 L 17 2.5",
-                          stroke: "rgb(16,63,105)",
+                          stroke: "rgb(0,128,128)",
                         },
                       }}
                       transition={transition}
                     />
                     <Path
                       d="M 2 9.423 L 20 9.423"
-                      stroke="#103f69"
+                      stroke="#008080"
                       animate={open ? "open" : "closed"}
                       initial={false}
                       variants={{
@@ -269,11 +269,11 @@ const Navbar = ({ isTopOfPage }) => {
                       variants={{
                         closed: {
                           d: "M 2 16.346 L 20 16.346",
-                          stroke: "rgb(16,63,105)",
+                          stroke: "rgb(0,128,128)",
                         },
                         open: {
                           d: "M 3 2.5 L 17 16.346",
-                          stroke: "rgb(16,63,105)",
+                          stroke: "rgb(0,128,128)",
                         },
                       }}
                       transition={transition}
@@ -293,7 +293,7 @@ const Navbar = ({ isTopOfPage }) => {
 
                   <div className="link flex items-center relative">
                     <button
-                      className=" font-[500] px-5 py-1 rounded-lg bg-[#103f69] text-white text-[10px]"
+                      className=" font-[500] px-5 py-1 rounded-lg bg-[#008080] text-white text-[10px]"
                       onClick={() => setShowPopup(true)}
                     >
                       CREATE ACCCOUNT
@@ -345,37 +345,37 @@ const Navbar = ({ isTopOfPage }) => {
               }}
             >
               <li>
-                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                   <Link to="/">LandLord</Link>
                 </div>
               </li>
               <li>
-                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                   <Link to="/">Tenants</Link>
                 </div>
               </li>
               <li>
-                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                   <Link to="/">FAQ</Link>
                 </div>
               </li>
               {/* <li>
-                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                   <Link to="/">Pricing</Link>
                 </div>
               </li> */}
               {/* <li>
-                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                   <Link to="/">FAQ</Link>
                 </div>
               </li> */}
               {/* <li>
-                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                   <Link to="/">Blog</Link>
                 </div>
               </li> */}
               <li>
-                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
+                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                   <Link to="/">About Us</Link>
                 </div>
               </li>
