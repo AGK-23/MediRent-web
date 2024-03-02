@@ -8,8 +8,18 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
-
 import '../login/login.css';
+import { TenantUser } from "../../components/EndPoints/url.jsx";
+import { validateEmail } from "../../components/EndPoints/url.jsx";
+
+
+
+
+
+
+
+
+
 
 const CreateTenant = () => {
     const navigate = useNavigate();
@@ -90,53 +100,86 @@ const CreateTenant = () => {
     const lastNameInput = useRef();
     const addressInput = useRef();
     const cityInput = useRef();
-    const postalcodeInput = useRef();
+    const postalCodeInput = useRef();
     const phoneInput = useRef();
-    const cellnumberInput = useRef();
-    const linkedinInput = useRef();
+    const mobileNumberInput = useRef();
+    const linkedInInput = useRef();
     const emailInput = useRef();
-    const emailconfirmationInput = useRef();
+    const emailConfirmationInput = useRef();
     const passwordInput = useRef();
-    const confirmpasswordInput = useRef();
+    const confirmPasswordInput = useRef();
 
 
     const [formData, setFormData] = useState({
-        firstname: "",
-        lastname: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
         address: "",
         city: "",
-        postalcode: "",
-        phone: "",
-        cellnumber: "",
-        linkedin: "",
-        email: "",
-        emailconfirmation: "",
-        password: "",
-        confirmpassword: "",
-        rentingtype: "",
-        confirmEmail: "",
         country: "",
         province: "",
-        discoveryMethod: "Facebook/socialmedia",
+        postalCode: "",
+        phone: "",
+        mobileNumber: "",
+        linkedIn: "",
+        functionOption: "",
+        emailConfirmation: "",
+        // rentingtype: "",
+        // confirmEmail: "",
+        discoveryMethod: "",
         receiveNewsletter: false,
+        role: "tenants",
     });
 
+
     var {
-        firstname,
-        lastname,
+        firstName,
+        lastName,
+        email,
+        password,
+        confirmPassword,
         address,
         city,
-        postalcode,
+        country,
+        province,
+        postalCode,
         phone,
-        cellnumber,
-        linkedin,
-        email,
-        emailconfirmation,
-        password,
-        confirmpassword,
-
-
+        mobileNumber,
+        linkedIn,
+        functionOption,
+        emailConfirmation,
+        discoveryMethod,
+        receiveNewsletter,
     } = formData;
+
+    const handleCheckboxChange = (e) => {
+        const { id, checked } = e.target;
+        setFormData({
+            ...formData,
+            [id]: checked,
+        });
+    };
+
+
+
+    const handleRadioChange = (e) => {
+        setFormData(prevState => ({
+            ...prevState,
+            functionOption: e.target.nextSibling.textContent.trim(),
+        }));
+
+        console.log("set form...", functionOption, "hair..", e.target.nextSibling.textContent.trim());
+    };
+
+    const handleReferenceChange = (e) => {
+        setFormData(prevState => ({
+            ...prevState,
+            discoveryMethod: e.target.value,
+        }));
+    };
+
 
     // const [selectedFunction, setSelectedFunction] = useState("");
 
@@ -166,8 +209,8 @@ const CreateTenant = () => {
                 const response = await fetchData();
                 setSelectedCity(response.data?.data);
                 setIsLoading(false);
-                console.log(response.data?.data);
-                console.log(selectedStates);
+                // console.log(response.data?.data);
+                // console.log(selectedStates);
             } catch (error) {
                 console.error(error);
             }
@@ -183,7 +226,7 @@ const CreateTenant = () => {
                 const response = await fetchStateData();
                 setSelectedStates(response?.data?.data);
                 setIsLoading(false);
-                console.log("state is Loading..", response.data?.data);
+                // console.log("state is Loading..", response.data?.data);
 
             } catch (error) {
                 console.error(error);
@@ -197,7 +240,7 @@ const CreateTenant = () => {
         let selectedValue = event.target.value === "Select a city" ? null : event.target.value;
         setFormData(prevFormData => ({
             ...prevFormData,
-            state: selectedValue
+            province: selectedValue
         }));
     };
 
@@ -220,14 +263,80 @@ const CreateTenant = () => {
     );
 
     const [isToggle, setIsToggle] = useState(true);
+    const [toToggle, setToToggle] = useState(true);
     const changeToggle = () => setIsToggle(!isToggle);
+    const handleToggle = () => setToToggle(!toToggle);
 
 
     const handleCreateTenantUser = async (e) => {
         e.preventDefault();
+        try {
+            // TESTING FOR EMPTY STRING
+            if (
+                !firstName ||
+                !lastName ||
+                !email ||
+                !address ||
+                !city ||
+                !country ||
+                !province ||
+                !postalCode ||
+                !phone ||
+                !mobileNumber ||
+                !linkedIn ||
+                !functionOption ||
+                !emailConfirmation ||
+                !discoveryMethod ||
+                !functionOption
+            ) {
+                toast.warning('Please fill in all required fields.');
+                return;
+            }
 
-        navigate('/success/tenant/1')
-        toast.success("Tenant's account Successfully")
+            // TESTING FOR PASSWORD MATCHING WITH CONFIRMPASSWORD
+            if (password !== confirmPassword) {
+                return toast.error("password does not match with confirmPassword");
+            }
+
+            // VALIDATE EMAIL ADDRESS 
+            if (!validateEmail(email)) {
+                return toast.error("Please enter a valid email");
+            }
+
+            // TESTING STRENGTH OF PASSWORD
+            if (!testOne) {
+                toast.error('Password is too weak');
+                return;
+            }
+
+            if (!testTwo) {
+                toast.error('Password could be stronger');
+                return;
+            }
+
+            if (!testFour) {
+                toast.error('Password not strong enough');
+                return;
+            }
+
+            // if (testFour === true && testThree === true && testTwo === true && testOne === true &&) {
+                
+            // }
+
+            console.log("all this navigate..", formData)
+
+            console.log("test four...", testFour, "test Three...", testThree, "test two...", testTwo, "test one...", testOne)
+
+
+        } catch (error) {
+            toast.error("User creation Failed");
+            console.log("Apparently the Message..", error);
+            // errRef.current.focus();
+        }
+
+
+        // navigate('/success/tenant/1')
+        // toast.success("Tenant's account Successfully")
     };
 
     const [error, setError] = useState("");
@@ -281,12 +390,12 @@ const CreateTenant = () => {
 
                                     <div className="relative my-10">
                                         <input
-                                            id="firstname"
+                                            id="firstName"
                                             className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                             type="text"
                                             ref={firstNameInput}
-                                            name="firstname"
-                                            value={firstname}
+                                            name="firstName"
+                                            value={firstName}
                                             onChange={handleInputUser}
                                             placeholder=" "
                                         />
@@ -300,12 +409,12 @@ const CreateTenant = () => {
 
                                     <div className="relative my-10">
                                         <input
-                                            id="lastname"
+                                            id="lastName"
                                             className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                             type="text"
                                             ref={lastNameInput}
-                                            name="lastname"
-                                            value={lastname}
+                                            name="lastName"
+                                            value={lastName}
                                             onChange={handleInputUser}
                                             placeholder=" "
                                         />
@@ -344,7 +453,7 @@ const CreateTenant = () => {
                                                 {selectedCity ? (
                                                     <select
                                                         onChange={handleCountryChange}
-                                                        value={selectedCountry}
+                                                        value={country}
                                                         className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                     >
                                                         <option value="">Select a country</option>
@@ -369,7 +478,7 @@ const CreateTenant = () => {
                                                 <div>
                                                     <select
                                                         onChange={handleCityChange}
-                                                        // value={selectedCities}
+                                                        value={province}
                                                         className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                     >
                                                         <option value="">Select a state</option>
@@ -385,7 +494,7 @@ const CreateTenant = () => {
                                                 </div>
                                             ) : (
                                                 <select
-                                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                                    className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                 >
                                                     <option value="">Select a state</option>
                                                 </select>
@@ -414,12 +523,12 @@ const CreateTenant = () => {
 
                                     <div className="relative my-10">
                                         <input
-                                            id="postalcode"
+                                            id="postalCode"
                                             className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                             type="text"
-                                            ref={postalcodeInput}
-                                            name="postalcode"
-                                            value={postalcode}
+                                            ref={postalCodeInput}
+                                            name="postalCode"
+                                            value={postalCode}
                                             onChange={handleInputUser}
                                             placeholder=" "
                                         />
@@ -473,12 +582,12 @@ const CreateTenant = () => {
 
                                     <div className="relative my-10">
                                         <input
-                                            id="cellnumber"
+                                            id="mobileNumber"
                                             className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                             type="text"
-                                            ref={cellnumberInput}
-                                            name="cellnumber"
-                                            value={cellnumber}
+                                            ref={mobileNumberInput}
+                                            name="mobileNumber"
+                                            value={mobileNumber}
                                             onChange={handleInputUser}
                                             placeholder=" "
 
@@ -487,7 +596,7 @@ const CreateTenant = () => {
                                             htmlFor="text"
                                             className="label absolute mt-2 ml-3 leading-tighter text-gray-600 text-base cursor-text"
 
-                                        >Cell number</label>
+                                        >Mobile Number</label>
                                     </div>
 
                                     <div className="bg-black py-4 px-4 text-center text-white md:text-base xs:text-xs">
@@ -497,12 +606,12 @@ const CreateTenant = () => {
 
                                     <div className="relative my-10">
                                         <input
-                                            id="linkedin"
+                                            id="linkedIn"
                                             className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                             type="text"
-                                            ref={linkedinInput}
-                                            name="linkedin"
-                                            value={linkedin}
+                                            ref={linkedInInput}
+                                            name="linkedIn"
+                                            value={linkedIn}
                                             onChange={handleInputUser}
                                             placeholder=" "
 
@@ -535,12 +644,12 @@ const CreateTenant = () => {
 
                                     <div className="relative my-10">
                                         <input
-                                            id="emailconfirmation"
+                                            id="emailConfirmation"
                                             className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                             type="email"
-                                            ref={emailconfirmationInput}
-                                            name="emailconfirmation"
-                                            value={emailconfirmation}
+                                            ref={emailConfirmationInput}
+                                            name="emailConfirmation"
+                                            value={emailConfirmation}
                                             onChange={handleInputUser}
                                             placeholder=""
                                         />
@@ -556,60 +665,111 @@ const CreateTenant = () => {
                                         <h1 className="mb-0 p-0 text-2xl text-black">Functions</h1>
 
 
-                                        <div className="flex items-center my-7">
-                                            <div className="rounded-full border-[2px] border-black p-2 h-4 w-4"></div>
+                                        {/* <div className="rounded-full border-[2px] border-black p-2 h-4 w-4"></div> */}
+                                        {/* <div className="flex items-center my-7">
 
-                                            <div className="ml-4" >
+                                            <div className="flex items-center">
+                                                <input
+                                                    type="radio"
+                                                    id="radioButton"
+                                                    name="radioButton"
+                                                    className="h-5 w-5 text-third border-gray-500 focus:ring-sky-600"
+                                                />
+                                                <label htmlFor="radioButton" className="ml-4">
+                                                    Medical Doctor with property/room for rent
+                                                </label>
+                                            </div>
+                                        </div> */}
+
+                                        <div className="flex items-center my-7">
+                                            <input
+                                                type="radio"
+                                                id="radioButton"
+                                                name="radioButton"
+                                                className="h-6 w-6  text-third border-gray-500 focus:ring-sky-600"
+                                                onClick={handleRadioChange}
+                                            />
+                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs">
                                                 Medical Doctor with property/room for rent
-                                            </div>
+                                            </label>
                                         </div>
 
                                         <div className="flex items-center my-7">
-                                            <div className="rounded-full border-[2px] border-black p-2 h-4 w-4"></div>
-
-                                            <div className="ml-4" >
+                                            <input
+                                                type="radio"
+                                                id="radioButton"
+                                                name="radioButton"
+                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                onClick={handleRadioChange}
+                                            />
+                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs">
                                                 Nurse, Physician Assistant or Nurse Practitioner
-                                            </div>
+                                            </label>
                                         </div>
 
                                         <div className="flex items-center my-7">
-                                            <div className="rounded-full border-[2px] border-black p-2 h-4 w-4"></div>
-
-                                            <div className="ml-4" >
+                                            <input
+                                                type="radio"
+                                                id="radioButton"
+                                                name="radioButton"
+                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                onClick={handleRadioChange}
+                                            />
+                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs">
                                                 Allied Healthcare Professional
-                                            </div>
+                                            </label>
                                         </div>
 
                                         <div className="flex items-center my-7">
-                                            <div className="rounded-full border-[2px] border-black p-2 h-4 w-4"></div>
-
-                                            <div className="ml-4" >
+                                            <input
+                                                type="radio"
+                                                id="radioButton"
+                                                name="radioButton"
+                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                onClick={handleRadioChange}
+                                            />
+                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs">
                                                 Medical Community landlord
-                                            </div>
+                                            </label>
                                         </div>
 
                                         <div className="flex items-center my-7">
-                                            <div className="rounded-full border-[2px] border-black p-2 h-4 w-4"></div>
-
-                                            <div className="ml-4" >
+                                            <input
+                                                type="radio"
+                                                id="radioButton"
+                                                name="radioButton"
+                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                onClick={handleRadioChange}
+                                            />
+                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs">
                                                 Traveling Nurse
-                                            </div>
+                                            </label>
                                         </div>
 
                                         <div className="flex items-center my-7">
-                                            <div className="rounded-full border-[2px] border-black p-2 h-4 w-4"></div>
-
-                                            <div className="ml-4" >
+                                            <input
+                                                type="radio"
+                                                id="radioButton"
+                                                name="radioButton"
+                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                onClick={handleRadioChange}
+                                            />
+                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs">
                                                 Housing for Healthcare program
-                                            </div>
+                                            </label>
                                         </div>
 
                                         <div className="flex items-center my-7">
-                                            <div className="rounded-full border-[2px] border-black p-2 h-4 w-4"></div>
-
-                                            <div className="ml-4" >
+                                            <input
+                                                type="radio"
+                                                id="radioButton"
+                                                name="radioButton"
+                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                onClick={handleRadioChange}
+                                            />
+                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs">
                                                 Others
-                                            </div>
+                                            </label>
                                         </div>
 
                                     </div>
@@ -721,12 +881,12 @@ const CreateTenant = () => {
 
                                     <div className="group relative my-10">
                                         <input
-                                            id="confirmpassword"
+                                            id="confirmPassword"
                                             className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                            type={`${isToggle ? "password" : "text"}`}
-                                            ref={confirmpasswordInput}
-                                            name="confirmpassword"
-                                            value={confirmpassword}
+                                            type={`${toToggle ? "password" : "text"}`}
+                                            ref={confirmPasswordInput}
+                                            name="confirmPassword"
+                                            value={confirmPassword}
                                             onChange={handleInputUser}
                                             placeholder=""
                                         />
@@ -741,7 +901,7 @@ const CreateTenant = () => {
 
                                         <div
                                             className="flex mt-3 flex-col h-6 "
-                                            onClick={changeToggle}
+                                            onClick={handleToggle}
                                             style={{
                                                 position: "absolute",
                                                 width: "30px",
@@ -750,7 +910,7 @@ const CreateTenant = () => {
                                                 lineHeight: "20px",
                                             }}
                                         >
-                                            {isToggle ? (
+                                            {toToggle ? (
                                                 <div className="cursor-pointer">
                                                     <svg
                                                         aria-hidden="true"
@@ -803,26 +963,32 @@ const CreateTenant = () => {
                                     <div className="mb-8 text-left">
                                         <h1 className="mb-3 text-sm">How did you discover Medirent?</h1>
 
-                                        <select className="outline-none mt-1 p-4 w-full border border-gray-300 rounded ">
-                                            <option value="face">Facebook/socialmedia</option>
-                                            <option value="medSchool">
+                                        <select
+                                            onChange={handleReferenceChange}
+                                            value={discoveryMethod}
+                                            className="outline-none mt-1 p-4 w-full border border-gray-300 rounded "
+                                        >
+                                            <option value="Facebook/socialmedia">Facebook/socialmedia</option>
+                                            <option value="Medical school admin recommended">
                                                 Medical school admin recommended
                                             </option>
-                                            <option value="friend">Friend/colleague</option>
-                                            <option value="estate">Real Estate Agent</option>
-                                            <option value="internet">Internet browsing</option>
-                                            <option value="journal">
+                                            <option value="Friend/colleague">Friend/colleague</option>
+                                            <option value="Real Estate Agent">Real Estate Agent</option>
+                                            <option value="Internet browsing">Internet browsing</option>
+                                            <option value="Journal/medical affiliated website">
                                                 Journal/medical affiliated website
                                             </option>
                                             <option value="other">other</option>
                                         </select>
                                     </div>
 
-                                    <div className="mb-8 text-left text-1xl">
+                                    <div className="mb-8 text-left text-xl">
                                         <input
                                             type="checkbox"
                                             id="receiveNewsletter"
                                             className="mr-2 border-black-500"
+                                            checked={receiveNewsletter}
+                                            onChange={handleCheckboxChange}
                                         />
                                         <label htmlFor="receiveNewsletter" className="text-gray-700">
                                             I would like to receive newsletters

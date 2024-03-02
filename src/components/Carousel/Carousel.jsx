@@ -12,12 +12,11 @@ import { TbTruckDelivery, TbDrone } from "react-icons/tb";
 import './Carousel.css'
 
 
-import Product from "../../assets/imageDiv/productImage.jpg";
-import Product1 from "../../assets/imageDiv/productImage6.jpg";
-import Product2 from "../../assets/imageDiv/productImage3.jpg";
-// import Product3 from "../../assets/imageDiv/productImage4.jpg";
-import Product4 from "../../assets/imageDiv/productImage4.jpg"
-import Product5 from "../../assets/imageDiv/productImage5.jpg"
+// import Product from "../../assets/imageDiv/productImage.jpg";
+// import Product1 from "../../assets/imageDiv/productImage6.jpg";
+// import Product2 from "../../assets/imageDiv/productImage3.jpg";
+// import Product4 from "../../assets/imageDiv/productImage4.jpg"
+// import Product5 from "../../assets/imageDiv/productImage5.jpg"
 
 import Image from "../../assets/imageDiv/product.jpg"
 import Image1 from "../../assets/imageDiv/product1.jpg"
