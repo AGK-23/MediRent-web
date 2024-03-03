@@ -83,7 +83,7 @@ function Footer() {
                                                 </div>
                                             </div>
 
-                                            <div className="grid md:grid-cols-4 xs:grid-cols-1 md:gap-5 xs:gap-10 md:px-4 xs:px-0 justify-center items-center w-full md:pt-10 xs:pt-10 pb-6">
+                                            <div className="grid lg:grid-cols-4 md:grid-cols-2 xs:grid-cols-1 md:gap-5 xs:gap-10 md:px-4 xs:px-0 justify-center items-center w-full md:pt-10 xs:pt-10 pb-6">
                                                 <div className="">
                                                     <div>
                                                         <div className='md:text-lg xs:text-sm'>
@@ -97,7 +97,7 @@ function Footer() {
                                                                 <input type="email" className="border border-lightgray rounded-md py-2 px-2 outline-none w-full " placeholder="Enter your email" />
                                                             </div>
                                                             <div className='ml-3'>
-                                                                <div className="aspect-square rounded-md text-white py-3 px-3 transition-all duration-300 bg-[#0c527b]">
+                                                                <div className="aspect-square rounded-md text-white py-3 px-3 transition-all duration-300 bg-third">
                                                                     <BsArrowRight color='white' />
                                                                 </div>
                                                             </div>
@@ -119,7 +119,7 @@ function Footer() {
                                                             <div>Add your Property Listing!</div>
                                                         </div>
                                                         <button
-                                                            className='text-sm px-10 py-3 mt-3 text-white font-medium rounded-md bg-[#0c527b]'
+                                                            className='text-sm px-10 py-3 mt-3 text-white font-medium rounded-md bg-third'
                                                         >
                                                             Sign Up
                                                         </button>
@@ -138,7 +138,7 @@ function Footer() {
                                                             <div>let landlords find you!</div>
                                                         </div>
                                                         <button
-                                                            className='text-sm px-5 py-3 mt-3 text-white font-medium rounded-md bg-[#0c527b]'
+                                                            className='text-sm px-5 py-3 mt-3 text-white font-medium rounded-md bg-third'
                                                         >
                                                             Post a want ad now!
                                                         </button>
@@ -149,7 +149,7 @@ function Footer() {
                                                 <div className='w-full h-full justify-center items-center flex flex-col gap-2'>
 
                                                     <div className='text-start'>MediRent.com</div>
-                                                    <div className='text-start text-[#0c527b]'>info@medirent.com</div>
+                                                    <div className='text-start text-third'>info@medirent.com</div>
                                                     <div className="flex gap-4 text-gray-400 ">
                                                         <Link
                                                             to="/"
@@ -189,19 +189,19 @@ function Footer() {
 
                                             <div className='flex md:flex-row xs:flex-col gap-5 my-10 float-right'>
                                                 <div className="  ">
-                                                    <Link className="text-xs transition-all duration-150 ease-linear ml-0.85vw inline-block text-[#103f69] mr-3" href="/">Mission</Link>
-                                                    <Link className="text-xs transition-all duration-150 ease-linear ml-0.85vw inline-block text-[#103f69] mr-3" href="/">Pricing</Link>
-                                                    <Link className="text-xs transition-all duration-150 ease-linear ml-0.85vw inline-block text-[#103f69] mr-3" href="/">Add your property</Link>
-                                                    <Link className="text-xs transition-all duration-150 ease-linear ml-0.85vw inline-block text-[#103f69] mr-3" href="/">FAQ</Link>
-                                                    <Link className="text-xs transition-all duration-150 ease-linear ml-0.85vw inline-block text-[#103f69] mr-3" href="/">Blog</Link>
-                                                    <Link className="text-xs transition-all duration-150 ease-linear ml-0.85vw inline-block text-[#103f69] mr-3" href="/">Privacy / GDPR</Link>
-                                                    <Link className="text-xs transition-all duration-150 ease-linear ml-0.85vw inline-block text-[#103f69] mr-3" href="/">Site Map</Link>
+                                                    <Link className="text-xs transition-all duration-150 ease-linear ml-0.85vw inline-block text-third mr-3" href="/">Mission</Link>
+                                                    <Link className="text-xs transition-all duration-150 ease-linear ml-0.85vw inline-block text-third mr-3" href="/">Pricing</Link>
+                                                    <Link className="text-xs transition-all duration-150 ease-linear ml-0.85vw inline-block text-third mr-3" href="/">Add your property</Link>
+                                                    <Link className="text-xs transition-all duration-150 ease-linear ml-0.85vw inline-block text-third mr-3" href="/">FAQ</Link>
+                                                    <Link className="text-xs transition-all duration-150 ease-linear ml-0.85vw inline-block text-third mr-3" href="/">Blog</Link>
+                                                    <Link className="text-xs transition-all duration-150 ease-linear ml-0.85vw inline-block text-third mr-3" href="/">Privacy / GDPR</Link>
+                                                    <Link className="text-xs transition-all duration-150 ease-linear ml-0.85vw inline-block text-third mr-3" href="/">Site Map</Link>
                                                 </div>
 
                                                 <span className="   font-[400] text-sm  leading-1.3vw ">
                                                     © 2024 MediRent.com
                                                     <div>
-                                                    Built by <Link href="/" className="text-xs transition-all duration-150 ease-linear inline-block text-[#103f69] ">Numérique.ca</Link>
+                                                    Built by <Link href="/" className="text-xs transition-all duration-150 ease-linear inline-block text-third ">Numérique.ca</Link>
                                                     </div> 
                                                 </span>
                                             </div>

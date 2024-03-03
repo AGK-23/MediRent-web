@@ -197,7 +197,7 @@ const Carousel = () => {
 
 
                     <img src={slides[currentIndex].imageUrl} alt="logistics" className='w-full h-screen bg-cover
-            bg-center flex justify-center lg:h-screen md:h-[70vh] sm:h-[80vh] xs:h-[80vh]' />
+            bg-center flex justify-center lg:h-screen md:h-[100vh] sm:h-[100vh] xs:h-[100vh]' />
                 </div>
             </div>
 

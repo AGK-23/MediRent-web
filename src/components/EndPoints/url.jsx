@@ -1,7 +1,9 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const BACKEND_URL = "https://medirent-api.onrender.com/index.html";
+// import { useNavigate } from "react-router-dom";
+
+export const BACKEND_URL = "https://medirent-api.onrender.com";
 
 export const validateEmail = (email) => {
     return email.match(
@@ -9,18 +11,36 @@ export const validateEmail = (email) => {
     );
 };
 
+// const navigate = useNavigate();
 // Register User
 export const TenantUser = async (userData) => {
+
+
     try {
+
+        console.log("first email...", userData)
+
+        // const config = {
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Access-Control-Allow-Origin': '*'
+        //     },
+        //     withCredentials: true
+        // };
+
         const response = await axios.post(
             `${BACKEND_URL}/account/tenant-registration`,
             userData,
-            { withCredentials: true }
+            // config
         )
+
+        console.log("tenant account..", response)
 
         if (response.success === true) {
             toast.success("Tenant's account Successfully")
         }
+
+        // navigate('/success/tenant/1')
 
         return response.data;
     } catch (error) {

@@ -128,9 +128,12 @@ const CreateTenant = () => {
         emailConfirmation: "",
         // rentingtype: "",
         // confirmEmail: "",
+        MedicalInstitution: "University of Alberta Faculty of Medicine and Dentistry (15) University of Calgary Cumming School of Medicine (22)",
+        Hospital: "Downstate Medical College of Medicine",
+
         discoveryMethod: "",
         receiveNewsletter: false,
-        role: "tenants",
+        Role: "tenants",
     });
 
 
@@ -322,6 +325,8 @@ const CreateTenant = () => {
             // if (testFour === true && testThree === true && testTwo === true && testOne === true &&) {
                 
             // }
+
+            await TenantUser(formData);
 
             console.log("all this navigate..", formData)
 
