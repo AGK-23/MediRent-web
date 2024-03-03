@@ -10,6 +10,7 @@ export default {
         main: "#f87316",
         third: "#008080",
         blue: "#086972",
+        customPink: "#F8C8DC",
       },
       
 

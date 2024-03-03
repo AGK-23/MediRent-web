@@ -234,7 +234,7 @@ const Login = () => {
                                         <div className="flex justify-end z-10 relative mt-4 ">
                                             <Link
                                                 to="/auth/forgotpassword"
-                                                className="flex justify-end z-10 relative bg-rose-500 text-white md:text-sm rounded-lg md:py-3 md:px-10 xs:text-[10px] xs:py-2 xs:px-5"
+                                                className="flex justify-end z-10 relative bg-pink-400 text-white md:text-sm rounded-lg md:py-3 md:px-10 xs:text-[10px] xs:py-2 xs:px-5"
                                             >
                                                 <span className="">Lost Password?</span>
                                             </Link>

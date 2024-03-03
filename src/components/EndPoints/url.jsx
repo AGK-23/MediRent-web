@@ -51,3 +51,33 @@ export const TenantUser = async (userData) => {
         toast.error(message);
     }
 };
+
+// export const TenantUser = async (userData) => {
+//     try {
+
+//         console.log("first email...", userData)
+
+//         const response = await axios.post(
+//             `${BACKEND_URL}/account/tenant-registration`,
+//             userData,
+//             {
+//                 credentials: 'include',
+//                 headers: (headers) => {
+//                     headers['Content-Type'] = 'application/json';
+//                     headers['Access-Control-Allow-Origin'] = '*';
+                    
+//                     return headers;
+//                 },
+//             }
+//         );
+
+//         return response.data;
+//     } catch (error) {
+//         const message =
+//             (error.response && error.response.data && error.response.data.message) ||
+//             error.message ||
+//             error.toString();
+//         toast.error(message);
+//     }
+// };
+
