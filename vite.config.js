@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 4040,
+    // https: true, // Enable HTTPS
   },
   preview: {
     port: 7575,

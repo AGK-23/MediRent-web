@@ -14,30 +14,51 @@ export const validateEmail = (email) => {
 // const navigate = useNavigate();
 // Register User
 export const TenantUser = async (userData) => {
-
-
     try {
-
-        console.log("first email...", userData)
+        console.log("first email...", userData);
 
         // const config = {
         //     headers: {
         //         'Content-Type': 'application/json',
         //         'Access-Control-Allow-Origin': '*'
         //     },
-        //     withCredentials: true
+        //     // withCredentials: true
         // };
+
+        // const response = await axios.post(
+        //     `${BACKEND_URL}/account/tenant-registration`,
+        //     userData,
+        //     // config
+        // )
+        const headers = {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+        }
+        
 
         const response = await axios.post(
             `${BACKEND_URL}/account/tenant-registration`,
-            userData,
-            // config
-        )
+            {
+                userData
+            },
+            // userData
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+                    // 'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept',
 
-        console.log("tenant account..", response)
+                },
+
+                
+            }
+        );
+
+        console.log("tenant account..", response);
 
         if (response.success === true) {
-            toast.success("Tenant's account Successfully")
+            toast.success("Tenant's account Successfully");
         }
 
         // navigate('/success/tenant/1')
@@ -49,6 +70,8 @@ export const TenantUser = async (userData) => {
             error.message ||
             error.toString();
         toast.error(message);
+
+        console.log("user profile..", error);
     }
 };
 
@@ -65,7 +88,7 @@ export const TenantUser = async (userData) => {
 //                 headers: (headers) => {
 //                     headers['Content-Type'] = 'application/json';
 //                     headers['Access-Control-Allow-Origin'] = '*';
-                    
+
 //                     return headers;
 //                 },
 //             }
@@ -80,4 +103,3 @@ export const TenantUser = async (userData) => {
 //         toast.error(message);
 //     }
 // };
-
