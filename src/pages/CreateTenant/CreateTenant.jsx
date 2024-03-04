@@ -128,12 +128,12 @@ const CreateTenant = () => {
         emailConfirmation: "",
         // rentingtype: "",
         // confirmEmail: "",
-        MedicalInstitution: "University of Alberta Faculty of Medicine and Dentistry (15) University of Calgary Cumming School of Medicine (22)",
-        Hospital: "Downstate Medical College of Medicine",
+        medicalInstitution: "University of Alberta Faculty of Medicine and Dentistry (15) University of Calgary Cumming School of Medicine (22)",
+        hospital: "Downstate Medical College of Medicine",
 
         discoveryMethod: "",
         receiveNewsletter: false,
-        Role: "tenants",
+        role: "tenants",
     });
 
 
@@ -331,6 +331,9 @@ const CreateTenant = () => {
             console.log("all this navigate..", formData)
 
             console.log("test four...", testFour, "test Three...", testThree, "test two...", testTwo, "test one...", testOne)
+
+             // navigate('/success/tenant/1')
+        // toast.success("Tenant's account Successfully")
 
 
         } catch (error) {

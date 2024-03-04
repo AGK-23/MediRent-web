@@ -3,7 +3,15 @@ import { toast } from "react-toastify";
 
 // import { useNavigate } from "react-router-dom";
 
-export const BACKEND_URL = "https://medirent-api.onrender.com";
+// export const BACKEND_URL = "https://medirent-api.onrender.com";
+
+// export const BACKEND_URL = "https://medirent-api.onrender.com/account/tenant-registration";
+
+// export const BACKEND_URL = "https://medirentapi.onrender.com";
+
+// https://medirent-api.onrender.com/
+
+
 
 export const validateEmail = (email) => {
     return email.match(
@@ -15,6 +23,9 @@ export const validateEmail = (email) => {
 // Register User
 export const TenantUser = async (userData) => {
     try {
+        // const BACKEND_URL = "https://medirent-api.onrender.com"
+
+
         console.log("first email...", userData);
 
         // const config = {
@@ -30,34 +41,33 @@ export const TenantUser = async (userData) => {
         //     userData,
         //     // config
         // )
-        const headers = {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-        }
+
+
+        // const headers = {
+        //     'Content-Type': 'application/json',
+        //     'Access-Control-Allow-Origin': '*',
+        // }
         
 
-        const response = await axios.post(
-            `${BACKEND_URL}/account/tenant-registration`,
-            {
-                userData
-            },
-            // userData
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*',
-                    // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-                    // 'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept',
+        const response = await axios.post(`https://medirent-api.onrender.com/account/tenant-registration`,
+            // {
+            //     data: userData
+            // },
+            userData,
+            // {
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //         'Access-Control-Allow-Origin': '*',
+            //         // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+            //         // 'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept',
 
-                },
-
-                
-            }
+            //     }, 
+            // }
         );
 
         console.log("tenant account..", response);
 
-        if (response.success === true) {
+        if (response.data.success === true) {
             toast.success("Tenant's account Successfully");
         }
 
