@@ -66,8 +66,8 @@ const SideNav = ({ OpenScreen, open }) => {
         <div className="">
             {isAboveMediumScreens && (
                 <div>
-                    <Appheader OpenScreen={OpenScreen} />
                     <div className="flex relative">
+                        <Appheader OpenScreen={OpenScreen} />
                         <div className="flex relative">
                             <div className="fixed top-[3.3rem] z-30">
                                 <div

@@ -19,6 +19,12 @@ import SuccessTenant from "./pages/CreateTenant/SuccessTenant.jsx";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword.jsx";
 
 
+// DASHBOARD 
+import { Roles } from "./config/roles.jsx";
+import RequireAuth from "./middleware/RequireAuth.jsx";
+import MainDashboard from "./pages/dashboard/MainPage.jsx";
+import PrivateRoute from "./middleware/PrivateRoute.jsx";
+
 
 
 
@@ -50,33 +56,9 @@ import FaqTenant from "./links/FaqTenant.jsx";
 
 
 function App() {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [isNavVisible, setIsNavVisible] = useState(true);
+  
 
-  const handleNextStep = () => {
-    setCurrentStep(currentStep + 1);
-  };
-
-  const handlePrevStep = () => {
-    setCurrentStep(currentStep - 1);
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const top = window.scrollY;
-      if (top > 100) {
-        // You can adjust this value based on your preference
-        setIsNavVisible(false);
-      } else {
-        setIsNavVisible(true);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  
 
   return (
     <ErrorBoundary>
@@ -94,13 +76,17 @@ function App() {
 
           </Route>
 
-          <Route path="/auth/">
-            {/* <Route path="register" element={<AuthRegister />} />
-            <Route path="login" element={<AuthLogin />} />
-            <Route path="security-code" element={<SecurityCode />} />
-            <Route path="ForgotPassword" element={<ForgotPassword />} />
-            <Route path="verify-business" element={<VerifyPage />} />
-            <Route path="resetPassword/:resetToken" element={<ResetPassword />} /> */}
+          <Route element={<RequireAuth allowedRoles={[...Object.values(Roles)]} />}>
+            <Route element={<PrivateRoute />}>
+              <Route path="/admin/dashboard/">
+                <Route path="landlord" element={<MainDashboard />} />
+                {/* <Route path="wallet" element={<WalletDefault />} />
+                <Route path="task" element={<TaskDefault />} />
+                <Route path="reports" element={<WalletDefault />} /> */}
+
+              </Route>
+
+            </Route>
           </Route>
 
           
