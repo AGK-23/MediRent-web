@@ -50,7 +50,7 @@ const SideNav = ({ OpenScreen, open }) => {
         // nameThree: "Manage",
         nameFour: "Dashboard",
         nameFive: "Tenants",
-        nameSix: "My Properties",
+        nameSix: "My Listings",
         // nameSeven: "Expenses",
         nameEight: "Wallet",
         // nameNine: "Cash Flow",
@@ -67,7 +67,7 @@ const SideNav = ({ OpenScreen, open }) => {
         },
         { 
             id: 2, 
-            title: "My Properties", 
+            title: "My Listings", 
             src: <PiHouseDuotone />, 
             to: "/admin/dashboard/landlord" 
         },
