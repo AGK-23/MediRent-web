@@ -55,7 +55,7 @@ const SideNav = ({ OpenScreen, open }) => {
         nameEight: "Wallet",
         // nameNine: "Cash Flow",
         nameTen: "Lease",
-        nameZero: "Payments",
+        // nameZero: "Payments",
     });
 
     const Menus = [
@@ -127,12 +127,12 @@ const SideNav = ({ OpenScreen, open }) => {
         //     to: "/admin/expenses",
         //     arrow: true,
         // },
-        {
-            id: 9,
-            title: "Payments",
-            src: <MdOutlinePayment />,
-            to: "/admin/dashboard/landlord",
-        },
+        // {
+        //     id: 9,
+        //     title: "Payments",
+        //     src: <MdOutlinePayment />,
+        //     to: "/admin/dashboard/landlord",
+        // },
     ];
 
     return (
@@ -470,7 +470,7 @@ const SideNav = ({ OpenScreen, open }) => {
 
                                                                 
 
-                                                                <Link to="/admin/dashboard/landlord">
+                                                                {/* <Link to="/admin/dashboard/landlord">
                                                                     <div
                                                                         onClick={() => {
                                                                             naming !== linkName.nameZero
@@ -498,7 +498,7 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                             </span>
                                                                         </span>
                                                                     </div>
-                                                                </Link>
+                                                                </Link> */}
                                                             </div>
                                                         </div>
                                                     </div>
