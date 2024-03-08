@@ -79,13 +79,13 @@ const SideNav = ({ OpenScreen, open }) => {
             id: 0,
             title: "Dashboard",
             src: <PiHouseDuotone />,
-            to: "/admin/dashboard/landlord",
+            to: "/admin/renter/tenant",
         },
         { 
             id: 2, 
             title: "Bookings", 
             src: <CgNotes />, 
-            to: "/admin/dashboard/landlord" 
+            to: "/admin/renter/tenant" 
         },
         // {
         //     id: 5,
@@ -99,7 +99,7 @@ const SideNav = ({ OpenScreen, open }) => {
             id: 3,
             title: "Subscription",
             src: <BsBookmarkDash />,
-            to: "/admin/dashboard/landlord",
+            to: "/admin/renter/tenant",
         },
         // {
         //     id: 10,
@@ -120,7 +120,7 @@ const SideNav = ({ OpenScreen, open }) => {
             id: 1, 
             title: "Rent Now Pay Later", 
             src: <IoWalletOutline />, 
-            to: "/admin/dashboard/landlord",
+            to: "/admin/renter/tenant",
             
         },
         
@@ -129,7 +129,7 @@ const SideNav = ({ OpenScreen, open }) => {
             title: "Maintenance",
             src: <LuStar />,
             
-            to: "/admin/dashboard/landlord",
+            to: "/admin/renter/tenant",
         },
         // {
         //     id: 8,
@@ -142,7 +142,7 @@ const SideNav = ({ OpenScreen, open }) => {
             id: 9,
             title: "Payments",
             src: <MdOutlinePayment />,
-            to: "/admin/dashboard/landlord",
+            to: "/admin/renter/tenant",
         },
         {
             id: 10,
