@@ -21,6 +21,7 @@ import { validateEmail } from "../../components/EndPoints/url.jsx";
 
 
 
+
 const CreateTenant = () => {
     const navigate = useNavigate();
     const [selectedCity, setSelectedCity] = useState("");
@@ -29,6 +30,8 @@ const CreateTenant = () => {
     // eslint-disable-next-line no-unused-vars
     const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
     const [isLoading, setIsLoading] = useState(true);
+    
+    const [userLoading, setUserLoading] = useState(false)
 
     // PASSWORD CHECKER 
     const [text, setText] = useState('');
@@ -326,15 +329,31 @@ const CreateTenant = () => {
                 
             // }
 
-            await TenantUser(formData);
+            setUserLoading(true)
 
-            console.log("all this navigate..", formData)
+            console.log("all the user ...", formData);
+
+            const response = await axios.post(`https://medirent-api.onrender.com/account/tenant-registration`,
+                formData,
+            );
+
+            setUserLoading(false)
+
+            console.log("tenant is rent..", response.data.data, "Loading..", isLoading);
+
+            if (response.data.success === true) {
+                toast.success("Tenant's account Created");
+            }
+
+            if (userLoading === false) {
+                navigate('/success/tenant/1')
+            }
+
+            // await TenantUser(formData);
+
+            // console.log("all this navigate..", formData)
 
             console.log("test four...", testFour, "test Three...", testThree, "test two...", testTwo, "test one...", testOne)
-
-             // navigate('/success/tenant/1')
-        // toast.success("Tenant's account Successfully")
-
 
         } catch (error) {
             toast.error("User creation Failed");

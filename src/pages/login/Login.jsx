@@ -87,7 +87,7 @@ const Login = () => {
 
 
             if (response.data.success === true) {
-                toast.success("Tenant's account Successfully");
+                toast.success("Account Login Successfully");
             }
 
             if (userDetails?.accountType === "Tenant") {
