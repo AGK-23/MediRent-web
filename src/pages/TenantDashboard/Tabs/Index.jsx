@@ -193,7 +193,7 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="flex justify-center flex-col py-5 "></div>
+              {/* <div className="flex justify-center flex-col py-5 "></div> */}
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
 export const Roles = {
-    Tenants: "Tenants",
+    Tenant: "Tenant",
     LandLord: "LandLord",
 }

@@ -36,9 +36,20 @@ const Index = () => {
     ];
 
     return (
-        
+
         <div>
-            <div className="text-slate-700 text-lg py-7">Properties Overview</div>
+            <div className="my-4 flex justify-between md:flex-row xs:flex-col gap-10">
+                <div>
+                    <div className="text-slate-900 text-lg font-bold">Explore Listings </div>
+                    <div className="text-gray-500 md:text-xs xs:text-[10px]">
+                    Search for properties and spaces you may like 
+                    </div>
+                </div>
+
+                <div className="rounded-full border-[2px] border-third px-10 py-2 text-sm font-semibold text-center">
+                    Browse
+                </div>
+            </div>
 
             <div className="grid gap-5 md:grid-cols-3 xs:grid-cols-1 ">
                 {Menus.map((Menu, index) => (

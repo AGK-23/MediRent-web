@@ -2,15 +2,15 @@
 
 const useAuth = () => {
 
-    let userInfo = {
-        _id: 1,
-        firstname: "john",
-        lastname: "Doe",
-        email: "johndoe@gmail.com",
-        role: "Tenants"
-    }
-    console.log("userInfo..", userInfo)
-    localStorage.setItem("token", JSON.stringify(userInfo));
+    // let userInfo = {
+    //     _id: 1,
+    //     firstname: "john",
+    //     lastname: "Doe",
+    //     email: "johndoe@gmail.com",
+    //     role: "Tenants"
+    // }
+    // console.log("userInfo..", userInfo)
+    // localStorage.setItem("token", JSON.stringify(userInfo));
 
 
     // Retrieve the stringified object from local storage
@@ -25,16 +25,16 @@ const useAuth = () => {
     let isLandLord = false;
     let isTenants = false;
     let status = "LandLord";
-    const role = userDetails?.role;
+    const role = userDetails?.accountType;
 
 
     if (userDetails) {
-        isTenants = userDetails?.role === "Tenants";
-        isLandLord = userDetails?.role === "LandLord";
+        isTenants = userDetails?.accountType === "Tenant";
+        isLandLord = userDetails?.accountType === "LandLord";
 
 
         if (isLandLord) status = "LandLord";
-        if (isTenants) status = "Tenants";
+        if (isTenants) status = "Tenant";
 
         console.log("real time role..", status)
 

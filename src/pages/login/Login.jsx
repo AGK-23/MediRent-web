@@ -1,14 +1,24 @@
 import React from "react";
-import axios from "axios";
+// import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 // import waitinRoom from "../../assets/images/waitinRoom.jpg";
 import { Link } from "react-router-dom";
 import { IoLogInOutline } from "react-icons/io5";
-import './login.css'
+
+import axios from "axios";
+import { toast } from "react-toastify";
+import './login.css';
+import { useNavigate } from "react-router-dom";
+
+
+
 
 const Login = () => {
+    const navigate = useNavigate();
     const emailInput = useRef();
     const passwordInput = useRef();
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         email: "",
@@ -17,31 +27,85 @@ const Login = () => {
 
     var {
         email,
-        password,  
+        password,
     } = formData;
 
     const handleInputUser = (e) => setFormData(
         {
-          ...formData,
-          [e.target.name]: e.target.value
+            ...formData,
+            [e.target.name]: e.target.value
         }
     );
 
-
-
-
-
+    const handlePasswordChange = (e) => {
+        setFormData({ ...formData, password: e.target.value })
+    }
 
     const [isToggle, setIsToggle] = useState(true);
     const changeToggle = () => setIsToggle(!isToggle);
 
-
-
     const handleLoginUser = async (e) => {
         e.preventDefault();
 
+        try {
+            setIsLoading(true)
 
-        // setCurrentFormKey(currentFormKey + 1);
+
+            console.log("first email...", formData);
+
+            const response = await axios.post(`https://medirent-api.onrender.com/account/signin`,
+                // {
+                //     data: userData
+                // },
+                formData,
+                // {
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //         'Access-Control-Allow-Origin': '*',
+                //         // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+                //         // 'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept',
+
+                //     }, 
+                // }
+            );
+
+            setIsLoading(false)
+
+            console.log("tenant account..", response.data.data, "Loading..", isLoading);
+
+            localStorage.setItem("token", JSON.stringify(response.data.data));
+
+            // Retrieve the stringified object from local storage
+            const storedToken = localStorage.getItem('token');
+
+
+            // Parse the stringified object back to its original form
+            const userDetails = JSON.parse(storedToken);
+
+            console.log("account item..", storedToken, userDetails);
+
+
+
+            if (response.data.success === true) {
+                toast.success("Tenant's account Successfully");
+            }
+
+            if (userDetails?.accountType === "Tenant") {
+                navigate('/admin/renter/tenant')
+            }
+
+            // navigate('/success/tenant/1')
+
+            return response.data;
+        } catch (error) {
+            const message =
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.toString();
+            toast.error(message);
+
+            console.log("user profile..", error);
+        }
     };
 
     const [error, setError] = useState("");
@@ -147,7 +211,7 @@ const Login = () => {
                                             ref={passwordInput}
                                             name="password"
                                             value={password}
-                                            onChange={handleInputUser}
+                                            onChange={handlePasswordChange}
                                             placeholder=""
                                         />
                                         <label
@@ -220,12 +284,12 @@ const Login = () => {
 
                                     <div className="flex justify-between border-b border-gray-600 pb-10">
                                         <div className="flex justify-end z-10 relative mt-4 ">
-                                            <Link
-                                                to="/"
+                                            <button
+                                                onClick={handleLoginUser}
                                                 className="flex justify-end z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-10 xs:text-[10px] xs:py-2 xs:px-5"
                                             >
                                                 <span className="">Go</span>
-                                            </Link>
+                                            </button>
                                         </div>
 
 
