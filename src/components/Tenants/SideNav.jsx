@@ -148,7 +148,7 @@ const SideNav = ({ OpenScreen, open }) => {
             id: 10,
             title: "Accounts Settings",
             src: <LuSettings />,
-            to: "/admin/cash-flow",
+            to: "/admin/renter/tenant",
             // arrow: true,
             gap: true,
             topic: "ACCOUNT MANAGEMENT",
@@ -305,7 +305,7 @@ const SideNav = ({ OpenScreen, open }) => {
                                             }}
                                         >
                                             <Link
-                                                to="/admin/dashboard/landlord"
+                                                to="/admin/renter/tenant"
                                                 className="flex gap-x-4 items-center"
                                             >
                                                 
@@ -340,7 +340,7 @@ const SideNav = ({ OpenScreen, open }) => {
                                                         >
                                                             {/* <div className="text-rose-800">{naming}</div> */}
                                                             <div>
-                                                                <Link to="/admin/dashboard/landlord">
+                                                                <Link to="/admin/renter/tenant">
                                                                     <div
                                                                         onClick={() => {
                                                                             naming !== linkName.nameFour
@@ -371,7 +371,7 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                     </div>
                                                                 </Link>
 
-                                                                <Link to="/admin/dashboard/landlord">
+                                                                <Link to="/admin/renter/tenant">
                                                                     <div
                                                                         onClick={() => {
                                                                             naming !== linkName.nameSix
@@ -403,7 +403,7 @@ const SideNav = ({ OpenScreen, open }) => {
 
                                                                 
 
-                                                                <Link to="/admin/dashboard/landlord">
+                                                                <Link to="/admin/renter/tenant">
                                                                     <div
                                                                         onClick={() => {
                                                                             naming !== linkName.nameFive
@@ -437,7 +437,7 @@ const SideNav = ({ OpenScreen, open }) => {
 
                                                                 
 
-                                                                <Link to="/admin/dashboard/landlord">
+                                                                <Link to="/admin/renter/tenant">
                                                                     <div
                                                                         onClick={() => {
                                                                             naming !== linkName.nameEight
@@ -469,7 +469,7 @@ const SideNav = ({ OpenScreen, open }) => {
 
                                                                 
 
-                                                                <Link to="/admin/dashboard/landlord">
+                                                                <Link to="/admin/renter/tenant">
                                                                     <div
                                                                         onClick={() => {
                                                                             naming !== linkName.nameTen
@@ -499,7 +499,7 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                     </div>
                                                                 </Link>
 
-                                                                <Link to="/admin/dashboard/landlord">
+                                                                <Link to="/admin/renter/tenant">
                                                                     <div
                                                                         onClick={() => {
                                                                             naming !== linkName.nameZero
@@ -529,7 +529,7 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                     </div>
                                                                 </Link>
 
-                                                                <Link to="/admin/dashboard/landlord">
+                                                                <Link to="/admin/renter/tenant">
                                                                     <div 
                                                                         className={` flex my-4 `}
                                                                     >
@@ -566,7 +566,7 @@ const SideNav = ({ OpenScreen, open }) => {
 
                                                                 
 
-                                                                {/* <Link to="/admin/dashboard/landlord">
+                                                                {/* <Link to="/admin/renter/tenant">
                                                                     <div
                                                                         onClick={() => {
                                                                             naming !== linkName.nameZero
