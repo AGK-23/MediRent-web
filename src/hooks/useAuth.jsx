@@ -24,16 +24,16 @@ const useAuth = () => {
 
     let isLandLord = false;
     let isTenants = false;
-    let status = "Tenants";
+    let status = "LandLord";
     const role = userDetails?.role;
 
 
     if (userDetails) {
         isTenants = userDetails?.role === "Tenants";
-        isLandLord = userDetails?.role === "Landlord";
+        isLandLord = userDetails?.role === "LandLord";
 
 
-        if (isLandLord) status = "Landlord";
+        if (isLandLord) status = "LandLord";
         if (isTenants) status = "Tenants";
 
         console.log("real time role..", status)

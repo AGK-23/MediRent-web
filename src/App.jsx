@@ -24,6 +24,10 @@ import { Roles } from "./config/roles.jsx";
 import RequireAuth from "./middleware/RequireAuth.jsx";
 import MainDashboard from "./pages/dashboard/MainPage.jsx";
 import PrivateRoute from "./middleware/PrivateRoute.jsx";
+import DashboardDefault from "./components/Dashboard/Layout/Layout.jsx";
+import TenantDashboard from "./components/Tenants/Layout.jsx";
+
+import TenantMainDashboard from "./pages/TenantDashboard/MainPage.jsx"
 
 
 
@@ -53,12 +57,15 @@ import FaqPath from "./links/FaqPath.jsx";
 import FaqPathsec from "./links/FaqPathsec.jsx";
 import FaqTenant from "./links/FaqTenant.jsx";
 
-
+// const Roles = {
+//   Tenants: "Tenants",
+//   Landlord: "Landlord",
+// }
 
 function App() {
-  
 
-  
+
+
 
   return (
     <ErrorBoundary>
@@ -78,18 +85,29 @@ function App() {
 
           <Route element={<RequireAuth allowedRoles={[...Object.values(Roles)]} />}>
             <Route element={<PrivateRoute />}>
-              <Route path="/admin/dashboard/">
-                <Route path="landlord" element={<MainDashboard />} />
-                {/* <Route path="wallet" element={<WalletDefault />} />
-                <Route path="task" element={<TaskDefault />} />
-                <Route path="reports" element={<WalletDefault />} /> */}
 
+              <Route path="/admin/dashboard">
+                <Route index element={<DashboardDefault />} />
+                <Route path="landlord" element={<MainDashboard />} />
+              </Route>
+
+              <Route path="/admin/renter">
+                <Route index element={<TenantDashboard />} />
+                <Route path="tenant" element={<TenantMainDashboard />} />
               </Route>
 
             </Route>
           </Route>
 
-          
+          {/* <Route element={<RequireAuth allowedRoles={[...Object.values(Roles)]} />}>
+            <Route element={<PrivateRoute />}>
+              
+            </Route>
+          </Route> */}
+
+
+
+
 
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="*" element={<NotFound />} />
