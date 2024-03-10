@@ -716,7 +716,7 @@ const CreateTenant = () => {
                                                 className="h-6 w-6  text-third border-gray-500 focus:ring-sky-600"
                                                 onClick={handleRadioChange}
                                             />
-                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs">
+                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
                                                 Medical Doctor with property/room for rent
                                             </label>
                                         </div>
@@ -729,7 +729,7 @@ const CreateTenant = () => {
                                                 className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
                                                 onClick={handleRadioChange}
                                             />
-                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs">
+                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
                                                 Nurse, Physician Assistant or Nurse Practitioner
                                             </label>
                                         </div>
@@ -742,7 +742,7 @@ const CreateTenant = () => {
                                                 className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
                                                 onClick={handleRadioChange}
                                             />
-                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs">
+                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
                                                 Allied Healthcare Professional
                                             </label>
                                         </div>
@@ -755,7 +755,7 @@ const CreateTenant = () => {
                                                 className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
                                                 onClick={handleRadioChange}
                                             />
-                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs">
+                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
                                                 Medical Community landlord
                                             </label>
                                         </div>
@@ -768,7 +768,7 @@ const CreateTenant = () => {
                                                 className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
                                                 onClick={handleRadioChange}
                                             />
-                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs">
+                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
                                                 Traveling Nurse
                                             </label>
                                         </div>
@@ -781,7 +781,7 @@ const CreateTenant = () => {
                                                 className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
                                                 onClick={handleRadioChange}
                                             />
-                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs">
+                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
                                                 Housing for Healthcare program
                                             </label>
                                         </div>
@@ -794,7 +794,7 @@ const CreateTenant = () => {
                                                 className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
                                                 onClick={handleRadioChange}
                                             />
-                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs">
+                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
                                                 Others
                                             </label>
                                         </div>
