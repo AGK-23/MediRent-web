@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 // import CurrencySelect from '../../../registration/Currency.jsx';
 import axios from 'axios';
+import { toast } from "react-toastify";
 
-const HousingDetails = ({ active, setActive }) => {
+const HousingDetails = ({ active, setActive, detailsData, setDetailsData }) => {
 
     const dailyRentInput = useRef();
     const weeklyRentInput = useRef();
@@ -12,20 +13,20 @@ const HousingDetails = ({ active, setActive }) => {
     const licenseNumberInput = useRef();
 
     // THIRD STATE IN THE CODE 
-    const [detailsData, setDetailsData] = useState({
-        termOption: "",
-        designOption: "",
-        dailyRent: "",
-        weeklyRent: "",
-        monthlyRent: "",
-        numberOfBedRoom: "",
-        numberOfBathRoom: "",
-        licenseNumber: "",
-        description: "",
-        propertyType: "",
-        currency: "",
-        amenitiesOption: [],
-    });
+    // const [detailsData, setDetailsData] = useState({
+    //     termOption: "",
+    //     designOption: "",
+    //     dailyRent: "",
+    //     weeklyRent: "",
+    //     monthlyRent: "",
+    //     numberOfBedRoom: "",
+    //     numberOfBathRoom: "",
+    //     licenseNumber: "",
+    //     description: "",
+    //     propertyType: "",
+    //     currency: "",
+    //     amenitiesOption: [],
+    // });
 
     var {
         termOption,
@@ -41,6 +42,35 @@ const HousingDetails = ({ active, setActive }) => {
         currency,
         amenitiesOption
     } = detailsData;
+
+    const handleCheckHousingDetails = () => {
+        if (
+            !termOption ||
+            !designOption ||
+            !dailyRent ||
+            !weeklyRent ||
+            !monthlyRent ||
+            !numberOfBedRoom ||
+            !numberOfBathRoom ||
+            !licenseNumber ||
+            !propertyType ||
+            !description ||
+            !currency || 
+            amenitiesOption.length === 0   
+        ) {
+            toast.warning('Please fill in all required fields.');
+            return;
+        }
+        setActive(4)
+        
+    };
+
+
+    const handleProviderThree = () => {
+        handleCheckHousingDetails()
+        console.log("all the hosing data...", detailsData);
+        // setActive(4);
+    };
 
     // const [selectedOption, setSelectedOption] = useState(null);
 
@@ -120,10 +150,7 @@ const HousingDetails = ({ active, setActive }) => {
     };
 
 
-    const handleProviderThree = () => {
-        console.log("all the hosing data...", detailsData);
-        setActive(4);
-    };
+    
 
     const renderPreviousForm = () => {
         console.log("all the prevoius data...", detailsData);

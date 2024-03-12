@@ -15,6 +15,8 @@ import Calendar from "../../registration/Calendar.jsx";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
+import { validateEmail } from "../../components/EndPoints/url.jsx";
+
 
 import '../login/login.css';
 
@@ -27,15 +29,133 @@ import AvailabilityLandlord from "./LandLordInfo/AvailabilityLandlord.jsx";
 
 const CreateLandLord = () => {
     // const [avatar, setAvatar] = useState(null);
+    const [userLoading, setUserLoading] = useState(false);
     
 
-    const [setButton, setButtonVisible] = useState(true);
-    const handleButtonClick = () => {
-        setButtonVisible(false);
-    };
+    // const [setButton, setButtonVisible] = useState(true);
+    // const handleButtonClick = () => {
+    //     setButtonVisible(false);
+    // };
+
+    // NUMBER ONE THIS IS THE STATE FOR THE LANDLORD DETAILS
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        address: "",
+        city: "",
+        postalCode: "",
+        phone: "",
+        email: "",
+        emailConfirmation: "",
+        password: "",
+        confirmPassword: "",
+        functionOption: "",
+        // rentingtype: "",
+        country: "",
+        province: "",
+        discoveryMethod: "",
+        receiveNewsletter: false,
+    });
 
 
-    const [active, setActive] = useState(5)
+
+    //NUMBER TWO THIS IS THE STATE FOR THE HOUSING DETAILS
+    const [housingData, setHousingData] = useState({
+        listingTitle: "",
+        address: "",
+        city: "",
+        postalCode: "",
+        phone: "",
+        country: "",
+        state: "",
+        promotionCode: "",
+    });
+    
+    //NUMBER THREE THIS IS THE STATE FOR THE HOUSING DETAILS
+    const [detailsData, setDetailsData] = useState({
+        termOption: "",
+        designOption: "",
+        dailyRent: "",
+        weeklyRent: "",
+        monthlyRent: "",
+        numberOfBedRoom: "",
+        numberOfBathRoom: "",
+        licenseNumber: "",
+        description: "",
+        propertyType: "",
+        currency: "",
+        amenitiesOption: [],
+    });
+
+
+    //NUMBER FOUR THIS IS THE STATE FOR THE PHOTO
+    const [avatars, setAvatars] = useState([]);
+    const [fileList, setFileList] = useState([])
+
+    // NUMBER FIVE THIS IS THE STATE FOR THE DATES
+    const [selectedDates, setSelectedDates] = useState([]);
+
+    // FINAL CREATE LISTING 
+    const [createListing, setCreateListing] = useState({
+        listingTitle: housingData?.listingTitle,
+        address: housingData?.address,
+        city: housingData?.city,
+        postalCode: housingData?.postalCode,
+        phone: housingData?.phone,
+        country: housingData?.country,
+        state: housingData?.state,
+        promotionCode: housingData?.promotionCode,
+
+        termOption: detailsData?.termOption,
+        designOption: detailsData?.designOption,
+        dailyRent: detailsData?.dailyRent,
+        weeklyRent: detailsData?.weeklyRent,
+        monthlyRent: detailsData?.monthlyRent,
+        numberOfBedRoom: detailsData?.numberOfBedRoom,
+        numberOfBathRoom: detailsData?.numberOfBathRoom,
+        licenseNumber: detailsData?.licenseNumber,
+        description: detailsData?.description,
+        propertyType: detailsData?.propertyType,
+        currency: detailsData?.currency,
+        amenitiesOption: detailsData?.amenitiesOption,
+
+        avatars: fileList,
+        propertyDates: selectedDates,
+    })
+
+    // Update createListing whenever any of the dependent states change
+    useEffect(() => {
+        setCreateListing({
+            ...createListing,
+            listingTitle: housingData?.listingTitle,
+            address: housingData?.address,
+            city: housingData?.city,
+            postalCode: housingData?.postalCode,
+            phone: housingData?.phone,
+            country: housingData?.country,
+            state: housingData?.state,
+            promotionCode: housingData?.promotionCode,
+
+            termOption: detailsData?.termOption,
+            designOption: detailsData?.designOption,
+            dailyRent: detailsData?.dailyRent,
+            weeklyRent: detailsData?.weeklyRent,
+            monthlyRent: detailsData?.monthlyRent,
+            numberOfBedRoom: detailsData?.numberOfBedRoom,
+            numberOfBathRoom: detailsData?.numberOfBathRoom,
+            licenseNumber: detailsData?.licenseNumber,
+            description: detailsData?.description,
+            propertyType: detailsData?.propertyType,
+            currency: detailsData?.currency,
+            amenitiesOption: detailsData?.amenitiesOption,
+
+            avatars: fileList,
+            propertyDates: selectedDates
+        });
+    }, [detailsData, fileList, selectedDates, housingData]);
+
+
+    const [active, setActive] = useState(1)
     const [selectedCity, setSelectedCity] = useState("");
     const [selectedStates, setSelectedStates] = useState("");
     const [selectedCountry, setSelectedCountry] = useState(''); // State to store the selected country
@@ -49,47 +169,27 @@ const CreateLandLord = () => {
     const lastNameInput = useRef();
     const addressInput = useRef();
     const cityInput = useRef();
-    const postalcodeInput = useRef();
+    const postalCodeInput = useRef();
     const phoneInput = useRef();
     const emailInput = useRef();
-    const emailconfirmationInput = useRef();
+    const emailConfirmationInput = useRef();
     const passwordInput = useRef();
-    const confirmpasswordInput = useRef();
-
-
-
-    // FIRST STATE IN THE CODE 
-    const [formData, setFormData] = useState({
-        firstname: "",
-        lastname: "",
-        address: "",
-        city: "",
-        postalcode: "",
-        phone: "",
-        email: "",
-        emailconfirmation: "",
-        password: "",
-        confirmpassword: "",
-        functionOption: "",
-        // rentingtype: "",
-        country: "",
-        province: "",
-        discoveryMethod: "",
-        receiveNewsletter: false,
-    });
+    const confirmPasswordInput = useRef();
+ 
 
     var {
-        firstname,
-        lastname,
+        firstName,
+        lastName,
         address,
         city,
-        postalcode,
+        postalCode,
         phone,
+        country,
         province,
         email,
-        emailconfirmation,
+        emailConfirmation,
         password,
-        confirmpassword,
+        confirmPassword,
         functionOption,
         discoveryMethod,
         receiveNewsletter,
@@ -159,17 +259,60 @@ const CreateLandLord = () => {
         }
     }
 
-    // TOGGLE THROUGH THE PAGE FUNCTION 
-    const handleProviderOne = () => {
-        console.log("all the data..", formData);
-        setActive(2);
+    const handleCheckLandLord = () => {
+        if (
+            !firstName ||
+            !lastName ||
+            !email ||
+            !address ||
+            !city ||
+            !country ||
+            !province ||
+            !postalCode ||
+            !phone ||
+            !functionOption ||
+            !emailConfirmation ||
+            !discoveryMethod 
+        ) {
+            toast.warning('Please fill in all required fields.');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            return toast.error("password does not match with confirmPassword");
+        }
+
+        // VALIDATE EMAIL ADDRESS 
+        if (!validateEmail(email)) {
+            return toast.error("Please enter a valid email");
+        }
+
+        // TESTING STRENGTH OF PASSWORD
+        if (!testOne) {
+            toast.error('Password is too weak');
+            return;
+        }
+
+        if (!testTwo) {
+            toast.error('Password could be stronger');
+            return;
+        }
+
+        if (!testFour) {
+            toast.error('Password not strong enough');
+            return;
+        }
+
+        setActive(2)
+        
     };
 
-
-
-    
-
-    
+    // TOGGLE THROUGH THE PAGE FUNCTION 
+    const handleProviderOne = () => {
+        handleCheckLandLord()
+        console.log("all the data..", formData);
+        
+    };
 
 
     const renderPreviousForm = () => {
@@ -204,8 +347,8 @@ const CreateLandLord = () => {
                 const response = await fetchData();
                 setSelectedCity(response.data?.data);
                 setIsLoading(false);
-                console.log(response.data?.data);
-                console.log(selectedStates);
+                // console.log(response.data?.data);
+                // console.log(selectedStates);
             } catch (error) {
                 console.error(error);
             }
@@ -219,9 +362,9 @@ const CreateLandLord = () => {
             setIsLoading(true);
             try {
                 const response = await fetchStateData();
-                setSelectedStates(response?.data?.data);
+                // setSelectedStates(response?.data?.data);
                 setIsLoading(false);
-                console.log("state is Loading..", response.data?.data);
+                // console.log("state is Loading..", response.data?.data);
 
             } catch (error) {
                 console.error(error);
@@ -274,11 +417,6 @@ const CreateLandLord = () => {
         }));
     };
 
-
-
-
-
-
     const handleInputUser = (e) => setFormData(
         {
             ...formData,
@@ -287,19 +425,37 @@ const CreateLandLord = () => {
     );
 
 
+    // CREATE LISTING FOR THE LANDLORD
+    const handleSubmitCreateListing = async () => {
+        
+        try {
+            setUserLoading(true)
+
+            console.log("the create Listing  ...", createListing);
+
+            // const response = await axios.post(`https://medirent-api.onrender.com/housing/add-listing`,
+            //     createListing
+            // );
+
+            setUserLoading(false);
+
+            // if (response.data.success === true) {
+            //     toast.success("Listing Created");
+            // }
+
+            // console.log("all the Listing..", response.data);
+
+        } catch (error) {
+            toast.error("Listing creation Failed");
+            console.error('Error creating Listing:', error);
+        }
+    };
 
 
 
 
     const [isToggle, setIsToggle] = useState(true);
     const changeToggle = () => setIsToggle(!isToggle);
-
-
-
-    
-
-    
-
     const [error, setError] = useState("");
 
 
@@ -318,8 +474,6 @@ const CreateLandLord = () => {
 
 
             <div className=" bg-[#dfdfdf] md:flex-1 flex-col w-full  items-center relative z-10 flex font-medium justify-between max-w-screen-xl mx-auto">
-
-
                 <div className=" w-full mt-10">
                     <div className="w-full lg:flex xs:hidden md:hidden flex-row justify-center">
                         <div className="flex flex-col ">
@@ -511,9 +665,6 @@ const CreateLandLord = () => {
                     </div>
                 </div>
 
-
-
-
                 <div className="flex items-center justify-center lg:w-full md:w-full">
                     <div className="w-full flex flex-col p-0 max-w-4xl px-2">
                         <div className="w-full flex-1 mt-4">
@@ -545,12 +696,12 @@ const CreateLandLord = () => {
 
                                         <div className="relative my-10">
                                             <input
-                                                id="firstname"
+                                                id="firstName"
                                                 className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                 type="text"
                                                 ref={firstNameInput}
-                                                name="firstname"
-                                                value={firstname}
+                                                name="firstName"
+                                                value={firstName}
                                                 onChange={handleInputUser}
                                                 placeholder=" "
                                             />
@@ -564,12 +715,12 @@ const CreateLandLord = () => {
 
                                         <div className="relative my-10">
                                             <input
-                                                id="lastname"
+                                                id="lastName"
                                                 className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                 type="text"
                                                 ref={lastNameInput}
-                                                name="lastname"
-                                                value={lastname}
+                                                name="lastName"
+                                                value={lastName}
                                                 onChange={handleInputUser}
                                                 placeholder=" "
                                             />
@@ -675,12 +826,12 @@ const CreateLandLord = () => {
 
                                         <div className="relative my-10">
                                             <input
-                                                id="emailconfirmation"
+                                                id="emailConfirmation"
                                                 className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                 type="email"
-                                                ref={emailconfirmationInput}
-                                                name="emailconfirmation"
-                                                value={emailconfirmation}
+                                                ref={emailConfirmationInput}
+                                                name="emailConfirmation"
+                                                value={emailConfirmation}
                                                 onChange={handleInputUser}
                                                 placeholder=""
                                             />
@@ -719,7 +870,7 @@ const CreateLandLord = () => {
                                                     {selectedCity ? (
                                                         <select
                                                             onChange={handleCountryChange}
-                                                            value={selectedCountry}
+                                                            value={country}
                                                             className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                         >
                                                             <option value="">Select a country</option>
@@ -789,12 +940,12 @@ const CreateLandLord = () => {
 
                                         <div className="relative my-10">
                                             <input
-                                                id="postalcode"
+                                                id="postalCode"
                                                 className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                 type="text"
-                                                ref={postalcodeInput}
-                                                name="postalcode"
-                                                value={postalcode}
+                                                ref={postalCodeInput}
+                                                name="postalCode"
+                                                value={postalCode}
                                                 onChange={handleInputUser}
                                                 placeholder=" "
                                             />
@@ -930,12 +1081,12 @@ const CreateLandLord = () => {
 
                                         <div className="group relative my-10">
                                             <input
-                                                id="confirmpassword"
+                                                id="confirmPassword"
                                                 className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                 type={`${isToggle ? "password" : "text"}`}
-                                                ref={confirmpasswordInput}
-                                                name="confirmpassword"
-                                                value={confirmpassword}
+                                                ref={confirmPasswordInput}
+                                                name="confirmPassword"
+                                                value={confirmPassword}
                                                 onChange={handleInputUser}
                                                 placeholder=""
                                             />
@@ -1068,6 +1219,8 @@ const CreateLandLord = () => {
                                     <Address
                                         active={active}
                                         setActive={setActive}
+                                        housingData={housingData}
+                                        setHousingData={setHousingData}
                                     />
                                 )}
 
@@ -1075,6 +1228,8 @@ const CreateLandLord = () => {
                                     <HousingDetails 
                                         active={active}
                                         setActive={setActive}
+                                        detailsData={detailsData}
+                                        setDetailsData={setDetailsData}
                                     />
                                 )}
 
@@ -1082,14 +1237,26 @@ const CreateLandLord = () => {
                                     <Photo
                                         active={active}
                                         setActive={setActive}
+                                        avatars={avatars}
+                                        setAvatars={setAvatars}
+                                        fileList={fileList}
+                                        setFileList={setFileList}
                                     />
                                 )}
 
                                 {(active > 4 && active <= 5) && (
                                     <AvailabilityLandlord
-                                    active={active}
-                                    setActive={setActive}
-                                />
+                                        active={active}
+                                        setActive={setActive}
+                                        selectedDates={selectedDates}
+                                        setSelectedDates={setSelectedDates}
+                                        formData={formData}
+                                        createListing={createListing}
+                                        userLoading={userLoading} 
+                                        setUserLoading={setUserLoading}
+                                        handleSubmitCreateListing={handleSubmitCreateListing}
+                                        
+                                    />
                                     
                                 )}
 

@@ -3,10 +3,13 @@ import axios from "axios";
 
 import { useState, useRef, useEffect } from "react";
 import { FaCircleInfo } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 
 
-const Address = ({active, setActive }) => {
+const Address = ({active, setActive, housingData, setHousingData }) => {
+    
+    
     const listingTitleInput = useRef();
     const addressInput = useRef();
     const cityInput = useRef();
@@ -16,9 +19,39 @@ const Address = ({active, setActive }) => {
     const stateInput = useRef();
     const promotionCodeInput = useRef();
 
+
+    var {
+        listingTitle,
+        address,
+        city,
+        postalCode,
+        phone,
+        country,
+        state,
+        promotionCode,
+    } = housingData;
+
+    const handleCheckAddress = () => {
+        if (
+            !listingTitle ||
+            !address ||
+            !city ||
+            !country ||
+            !postalCode ||
+            !phone ||
+            !state  
+        ) {
+            toast.warning('Please fill in all required fields.');
+            return;
+        }
+        setActive(3)
+        
+    };
+
     const handleProviderTwo = () => {
+        handleCheckAddress()
         console.log("all the hosing data...", housingData);
-        setActive(3);
+        // setActive(3);
     };
 
     const renderPreviousForm = () => {
@@ -35,27 +68,9 @@ const Address = ({active, setActive }) => {
     const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
     const [isLoading, setIsLoading] = useState(true);
 
-    const [housingData, setHousingData] = useState({
-        listingTitle: "",
-        address: "",
-        city: "",
-        postalCode: "",
-        phone: "",
-        country: "",
-        state: "",
-        promotionCode: "",
-    });
+    
 
-    var {
-        listingTitle,
-        address,
-        city,
-        postalCode,
-        phone,
-        country,
-        state,
-        promotionCode,
-    } = housingData;
+    
 
     const handleHousingUser = (e) => setHousingData(
         {
@@ -121,8 +136,8 @@ const Address = ({active, setActive }) => {
                 const response = await fetchData();
                 setSelectedCity(response.data?.data);
                 setIsLoading(false);
-                console.log(response.data?.data);
-                console.log(selectedStates);
+                // console.log(response.data?.data);
+                // console.log(selectedStates);
             } catch (error) {
                 console.error(error);
             }
@@ -136,9 +151,9 @@ const Address = ({active, setActive }) => {
             setIsLoading(true);
             try {
                 const response = await fetchStateData();
-                setSelectedStates(response?.data?.data);
+                // setSelectedStates(response?.data?.data);
                 setIsLoading(false);
-                console.log("state is Loading..", response.data?.data);
+                // console.log("state is Loading..", response.data?.data);
 
             } catch (error) {
                 console.error(error);
@@ -292,7 +307,7 @@ const Address = ({active, setActive }) => {
                                 {selectedCity ? (
                                     <select
                                         onChange={handleCountryHousingChange}
-                                        value={selectedCountry}
+                                        value={country}
                                         className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                     >
                                         <option value="">Select a country</option>

@@ -3,15 +3,20 @@ import { useNavigate } from "react-router-dom";
 import Calendar from "../../../registration/Calendar";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { toast } from "react-toastify";
+import axios from "axios";
 
 
 
-const AvailabilityLandlord = ({ active, setActive }) => {
+const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDates, formData, createListing, userLoading, setUserLoading, handleSubmitCreateListing }) => {
 
     const navigate = useNavigate();
     const [propertyPictures, setPropertyPictures] = useState(null);
 
-    const [selectedDates, setSelectedDates] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    
+
+    // const [selectedDates, setSelectedDates] = useState([]);
 
     const handleDateChange = (date) => {
         console.log("all the date..", date, "all value...", selectedDates)
@@ -34,6 +39,68 @@ const AvailabilityLandlord = ({ active, setActive }) => {
         setSelectedDates(updatedDates);
     };
 
+    const handleCheckAvailable = () => {
+
+        if (
+            selectedDates.length === 0    
+        ) {
+            toast.warning('Please fill in all required fields.');
+            return;
+        }
+        // console.log("all the houses...", createListing);
+        // toast.success("LandLord's account Successfully")
+        // setActive(5)
+        
+    };
+
+    const handleSubmit = async () => {
+        try {
+            setIsLoading(true);
+
+            console.log("all the user ...", formData);
+
+            // const response = await axios.post(`https://medirent-api.onrender.com/account/landlord-registration`,
+            //     formData,
+            // );
+
+            setIsLoading(false);
+
+            if (response.data.success === true) {
+                toast.success("Landlord's Account Created");
+            }
+
+            console.log("all the Landlord...", response.data);
+            
+        } catch (error) {
+            toast.error("Landlord creation Failed");
+            console.log("Apparently the Message..", error);
+        }
+
+    }
+
+    const handleFormSubmit = async() => {
+        // Any necessary logic before submitting the form
+
+        // Call the function to submit the createListing form
+        await handleSubmitCreateListing();
+    };
+
+    
+
+
+
+    const onSavePostClicked = async () => {
+        handleCheckAvailable()
+
+        console.log("Error");
+        await handleSubmit()
+
+        console.log("done");
+
+        await handleFormSubmit()
+        console.log("completed");
+    }
+
 
 
 
@@ -45,11 +112,12 @@ const AvailabilityLandlord = ({ active, setActive }) => {
     );
 
     const handleProviderFive = () => {
+        handleCheckAvailable()
         console.log("all the calendar..", selectedDates)
 
         // setActive(1);
         // navigate('/success/landlord/1')
-        // toast.success("LandLord's account Successfully")
+        
     };
 
     const renderPreviousForm = () => {
@@ -167,10 +235,11 @@ const AvailabilityLandlord = ({ active, setActive }) => {
                 <div className="flex justify-between pb-10">
                     <div className="flex justify-end z-10 relative mt-4  mr-3">
                         <button
-                            onClick={handleProviderFive}
-                            className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-10"
+                            // onClick={handleProviderFive}
+                            onClick={onSavePostClicked}
+                            className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-6"
                         >
-                            <span className="">Next</span>
+                            <span className="">Submit</span>
                         </button>
                     </div>
                     <div className="flex justify-end z-10 relative mt-4 ">

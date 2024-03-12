@@ -1,12 +1,15 @@
 import React from 'react'
 import { useState, useRef, useEffect } from "react";
+import { toast } from "react-toastify";
 
-const Photo = ({ active, setActive }) => {
 
-    const [avatars, setAvatars] = useState([]);
+
+const Photo = ({ active, setActive, avatars, setAvatars, fileList, setFileList }) => {
+
+    // const [avatars, setAvatars] = useState([]);
     const [text, setText] = useState("")
     const [indexCounter, setIndexCounter] = useState(0);
-    const [fileList, setFileList] = useState([])
+    // const [fileList, setFileList] = useState([])
 
     const handleFileInputChange = (e) => {
         const files = e.target.files;
@@ -43,9 +46,22 @@ const Photo = ({ active, setActive }) => {
         }
     };
 
+    const handleCheckPhotos = () => {
+        if (
+            avatars.length === 0  && 
+            fileList.length === 0   
+        ) {
+            toast.warning('Please fill in all required fields.');
+            return;
+        }
+        setActive(5)
+        
+    };
+
     const handleProviderFour = () => {
+        handleCheckPhotos()
         console.log("all the avatars..", avatars, "all the files..", fileList);
-        setActive(5);
+        // setActive(5);
     };
 
     const renderPreviousForm = () => {
