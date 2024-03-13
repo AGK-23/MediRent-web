@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import '../login/login.css';
 import { TenantUser } from "../../components/EndPoints/url.jsx";
 import { validateEmail } from "../../components/EndPoints/url.jsx";
+import Spinner from "../../assets/svg/Spinner.svg"
 
 
 
@@ -30,7 +31,7 @@ const CreateTenant = () => {
     // eslint-disable-next-line no-unused-vars
     const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
     const [isLoading, setIsLoading] = useState(true);
-    
+
     const [userLoading, setUserLoading] = useState(false)
 
     // PASSWORD CHECKER 
@@ -326,7 +327,7 @@ const CreateTenant = () => {
             }
 
             // if (testFour === true && testThree === true && testTwo === true && testOne === true &&) {
-                
+
             // }
 
             setUserLoading(true)
@@ -1028,11 +1029,27 @@ const CreateTenant = () => {
 
                                     <div className="flex justify-between  pb-10">
                                         <div className="flex justify-end z-10 relative mt-4 ">
-                                            <button
+                                            {/* <button
                                                 onClick={handleCreateTenantUser}
                                                 className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-10"
                                             >
                                                 <span className="">Go</span>
+                                            </button> */}
+                                            <button
+                                                onClick={handleCreateTenantUser}
+                                                className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-6"
+                                                disabled={userLoading} // Disable the button when userLoading is true
+                                            >
+                                                {userLoading ? ( // Display spinner if userLoading is true
+                                                    <div className="flex items-center px-6">
+                                                        <div>
+                                                            <img alt="" src={Spinner} className="text-[1px] text-white" />
+                                                        </div>
+
+                                                    </div>
+                                                ) : (
+                                                    <span className="">Go</span> // Show the "Submit" text when isLoading is false
+                                                )}
                                             </button>
                                         </div>
 

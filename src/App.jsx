@@ -83,6 +83,12 @@ function App() {
 
           </Route>
 
+          {/* <Route path="/admin/dashboard">
+            <Route index element={<DashboardDefault />} />
+            <Route path="landlord" element={<MainDashboard />} />
+            <Route path="create" element={<MainDashboard />} />
+          </Route> */}
+
           <Route element={<RequireAuth allowedRoles={[...Object.values(Roles)]} />}>
             <Route element={<PrivateRoute />}>
 

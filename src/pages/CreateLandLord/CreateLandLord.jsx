@@ -24,18 +24,22 @@ import Address from "./LandLordInfo/Address.jsx";
 import HousingDetails from "./LandLordInfo/HousingDetails.jsx";
 import Photo from "./LandLordInfo/Photo.jsx";
 import AvailabilityLandlord from "./LandLordInfo/AvailabilityLandlord.jsx";
+import Spinner from "../../assets/svg/Spinner.svg"
 
 
 
 const CreateLandLord = () => {
     // const [avatar, setAvatar] = useState(null);
     const [userLoading, setUserLoading] = useState(false);
-    
 
-    // const [setButton, setButtonVisible] = useState(true);
-    // const handleButtonClick = () => {
-    //     setButtonVisible(false);
-    // };
+    const [landLoading, setLandLoading] = useState(false);
+
+    const [loginLoading, setLoginLoading] = useState(false);
+
+
+
+
+
 
     // NUMBER ONE THIS IS THE STATE FOR THE LANDLORD DETAILS
     const [formData, setFormData] = useState({
@@ -50,14 +54,17 @@ const CreateLandLord = () => {
         password: "",
         confirmPassword: "",
         functionOption: "",
-        // rentingtype: "",
+        yearsActive: "",
         country: "",
         province: "",
         discoveryMethod: "",
         receiveNewsletter: false,
     });
 
-
+    const [loginData, setLoginData] = useState({
+        email: formData?.email,
+        password: formData?.password,
+    });
 
     //NUMBER TWO THIS IS THE STATE FOR THE HOUSING DETAILS
     const [housingData, setHousingData] = useState({
@@ -70,7 +77,7 @@ const CreateLandLord = () => {
         state: "",
         promotionCode: "",
     });
-    
+
     //NUMBER THREE THIS IS THE STATE FOR THE HOUSING DETAILS
     const [detailsData, setDetailsData] = useState({
         termOption: "",
@@ -152,7 +159,14 @@ const CreateLandLord = () => {
             avatars: fileList,
             propertyDates: selectedDates
         });
-    }, [detailsData, fileList, selectedDates, housingData]);
+
+        setLoginData({
+            ...loginData,
+            email: formData?.email,
+            password: formData?.password,
+        });
+
+    }, [detailsData, fileList, selectedDates, housingData, formData]);
 
 
     const [active, setActive] = useState(1)
@@ -175,7 +189,8 @@ const CreateLandLord = () => {
     const emailConfirmationInput = useRef();
     const passwordInput = useRef();
     const confirmPasswordInput = useRef();
- 
+    const yearsActiveInput = useRef();
+
 
     var {
         firstName,
@@ -193,6 +208,7 @@ const CreateLandLord = () => {
         functionOption,
         discoveryMethod,
         receiveNewsletter,
+        yearsActive,
     } = formData;
 
     // PASSWORD CHECKER 
@@ -259,65 +275,144 @@ const CreateLandLord = () => {
         }
     }
 
-    const handleCheckLandLord = () => {
-        if (
-            !firstName ||
-            !lastName ||
-            !email ||
-            !address ||
-            !city ||
-            !country ||
-            !province ||
-            !postalCode ||
-            !phone ||
-            !functionOption ||
-            !emailConfirmation ||
-            !discoveryMethod 
-        ) {
-            toast.warning('Please fill in all required fields.');
-            return;
+    const handleCheckLandLord = async () => {
+        // e.preventDefault();
+        try {
+            if (
+                !firstName ||
+                !lastName ||
+                !email ||
+                !address ||
+                !city ||
+                !country ||
+                !province ||
+                !postalCode ||
+                !yearsActive ||
+                !phone ||
+                !functionOption ||
+                !emailConfirmation ||
+                !discoveryMethod
+            ) {
+                toast.warning('Please fill in all required fields.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                return toast.error("password does not match with confirmPassword");
+            }
+
+            // VALIDATE EMAIL ADDRESS 
+            if (!validateEmail(email)) {
+                return toast.error("Please enter a valid email");
+            }
+
+            // TESTING STRENGTH OF PASSWORD
+            if (!testOne) {
+                toast.error('Password is too weak');
+                return;
+            }
+
+            if (!testTwo) {
+                toast.error('Password could be stronger');
+                return;
+            }
+
+            if (!testFour) {
+                toast.error('Password not strong enough');
+                return;
+            }
+
+            setLandLoading(true);
+
+            console.log("user form for landlord...", formData);
+
+            const response = await axios.post(`https://medirent-api.onrender.com/account/landlord-registration`,
+                formData,
+            );
+
+            setLandLoading(false);
+
+            console.log("Landlord is rent..", response.data.data, "Loading..", landLoading);
+
+            if (response.data.success === true) {
+                toast.success("Landlord's account Created");
+
+                await handleLoginUser()
+            }
+
+
+        } catch (error) {
+            console.log("error in the landlord..", error)
         }
 
-        if (password !== confirmPassword) {
-            return toast.error("password does not match with confirmPassword");
-        }
+        // setActive(2)
 
-        // VALIDATE EMAIL ADDRESS 
-        if (!validateEmail(email)) {
-            return toast.error("Please enter a valid email");
-        }
-
-        // TESTING STRENGTH OF PASSWORD
-        if (!testOne) {
-            toast.error('Password is too weak');
-            return;
-        }
-
-        if (!testTwo) {
-            toast.error('Password could be stronger');
-            return;
-        }
-
-        if (!testFour) {
-            toast.error('Password not strong enough');
-            return;
-        }
-
-        setActive(2)
-        
     };
+
+    const handleLoginUser = async () => {
+        // e.preventDefault();
+
+        try {
+            setLoginLoading(true)
+
+
+            console.log("lOGIN DATA...", loginData);
+
+            const response = await axios.post(`https://medirent-api.onrender.com/account/signin`,
+                loginData,
+            );
+
+            setLoginLoading(false)
+
+            console.log("landlord account..", response.data.data, "Loading..", loginLoading);
+
+            localStorage.setItem("token", JSON.stringify(response.data.data));
+
+            localStorage.setItem("accessToken", JSON.stringify(response.data.data?.accessToken));
+
+            // Retrieve the stringified object from local storage
+            const storedToken = localStorage.getItem('token');
+
+
+            // Parse the stringified object back to its original form
+            const userDetails = JSON.parse(storedToken);
+
+            console.log("account item..", storedToken, userDetails);
+
+
+
+            if (response.data.success === true) {
+                toast.success("Login Successfully");
+
+                setActive(2)
+            }
+            return response.data;
+        } catch (error) {
+            const message =
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.toString();
+            toast.error(message);
+
+            console.log("user login..", error);
+        }
+
+
+    }
 
     // TOGGLE THROUGH THE PAGE FUNCTION 
     const handleProviderOne = () => {
         handleCheckLandLord()
         console.log("all the data..", formData);
-        
+
     };
 
 
     const renderPreviousForm = () => {
         setActive(active - 1);
     };
+
+
 
     // const [selectedFunction, setSelectedFunction] = useState("");
 
@@ -424,10 +519,20 @@ const CreateLandLord = () => {
         }
     );
 
+    const handleActiveUser = (event) => {
+        const { name, value } = event.target;
+        // console.log("all the value..", value );
+
+        setFormData(prevState => ({
+            ...prevState,
+            yearsActive: value
+        }));
+    };
+
 
     // CREATE LISTING FOR THE LANDLORD
     const handleSubmitCreateListing = async () => {
-        
+
         try {
             setUserLoading(true)
 
@@ -729,6 +834,25 @@ const CreateLandLord = () => {
                                                 className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
                                             >
                                                 Last Name
+                                            </label>
+                                        </div>
+
+                                        <div className="relative my-10">
+                                            <input
+                                                id="yearsActive"
+                                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                                type="number"
+                                                ref={yearsActiveInput}
+                                                name="yearsActive"
+                                                value={yearsActive}
+                                                onChange={handleActiveUser}
+                                                placeholder=" "
+                                            />
+                                            <label
+                                                htmlFor="text"
+                                                className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
+                                            >
+                                                Years Of Active Experience
                                             </label>
                                         </div>
 
@@ -1201,12 +1325,28 @@ const CreateLandLord = () => {
 
                                         <div className="flex justify-between  pb-10">
                                             <div className="flex justify-end z-10 relative mt-4 ">
+                                                
+
+
                                                 <button
                                                     onClick={handleProviderOne}
                                                     className="flex justify-end z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-4 xs:px-10"
+                                                    disabled={landLoading} // Disable the button when userLoading is true
                                                 >
-                                                    <span className="">Next Step</span>
+                                                    {landLoading ? ( // Display spinner if userLoading is true
+                                                        <div className="flex items-center px-6">
+                                                            <div>
+                                                                <img alt="" src={Spinner} className="text-[1px] text-white" />
+                                                            </div>
+
+                                                        </div>
+                                                    ) : (
+                                                        <span className="">Next Step</span> // Show the "Submit" text when isLoading is false
+                                                    )}
                                                 </button>
+
+
+
                                             </div>
                                         </div>
 
@@ -1225,7 +1365,7 @@ const CreateLandLord = () => {
                                 )}
 
                                 {(active > 2 && active <= 3) && (
-                                    <HousingDetails 
+                                    <HousingDetails
                                         active={active}
                                         setActive={setActive}
                                         detailsData={detailsData}
@@ -1252,12 +1392,12 @@ const CreateLandLord = () => {
                                         setSelectedDates={setSelectedDates}
                                         formData={formData}
                                         createListing={createListing}
-                                        userLoading={userLoading} 
+                                        userLoading={userLoading}
                                         setUserLoading={setUserLoading}
                                         handleSubmitCreateListing={handleSubmitCreateListing}
-                                        
+
                                     />
-                                    
+
                                 )}
 
 

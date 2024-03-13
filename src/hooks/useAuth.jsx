@@ -7,7 +7,7 @@ const useAuth = () => {
     //     firstname: "john",
     //     lastname: "Doe",
     //     email: "johndoe@gmail.com",
-    //     role: "Tenants"
+    //     accountType: "LandLord"
     // }
     // console.log("userInfo..", userInfo)
     // localStorage.setItem("token", JSON.stringify(userInfo));

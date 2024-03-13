@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from "react-toastify";
 import axios from "axios";
+import Spinner from "../../../assets/svg/Spinner.svg"
 
 
 
@@ -14,7 +15,7 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
     const [propertyPictures, setPropertyPictures] = useState(null);
 
     const [isLoading, setIsLoading] = useState(false);
-    
+
 
     // const [selectedDates, setSelectedDates] = useState([]);
 
@@ -30,7 +31,7 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
         // }
 
         if (date[0] instanceof Date && !selectedDates.some(selectedDate => selectedDate.toDateString() === date[0].toDateString())) {
-            setSelectedDates([...selectedDates, date[0]]);          
+            setSelectedDates([...selectedDates, date[0]]);
         }
     };
 
@@ -42,7 +43,7 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
     const handleCheckAvailable = () => {
 
         if (
-            selectedDates.length === 0    
+            selectedDates.length === 0
         ) {
             toast.warning('Please fill in all required fields.');
             return;
@@ -50,7 +51,7 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
         // console.log("all the houses...", createListing);
         // toast.success("LandLord's account Successfully")
         // setActive(5)
-        
+
     };
 
     const handleSubmit = async () => {
@@ -70,7 +71,7 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
             }
 
             console.log("all the Landlord...", response.data);
-            
+
         } catch (error) {
             toast.error("Landlord creation Failed");
             console.log("Apparently the Message..", error);
@@ -78,14 +79,14 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
 
     }
 
-    const handleFormSubmit = async() => {
+    const handleFormSubmit = async () => {
         // Any necessary logic before submitting the form
 
         // Call the function to submit the createListing form
         await handleSubmitCreateListing();
     };
 
-    
+
 
 
 
@@ -117,7 +118,7 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
 
         // setActive(1);
         // navigate('/success/landlord/1')
-        
+
     };
 
     const renderPreviousForm = () => {
@@ -234,13 +235,32 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
 
                 <div className="flex justify-between pb-10">
                     <div className="flex justify-end z-10 relative mt-4  mr-3">
-                        <button
+                        {/* <button
                             // onClick={handleProviderFive}
                             onClick={onSavePostClicked}
                             className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-6"
                         >
                             <span className="">Submit</span>
+                        </button> */}
+
+                        <button
+                            onClick={onSavePostClicked}
+                            className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-6"
+                            disabled={userLoading} // Disable the button when userLoading is true
+                        >
+                            {userLoading ? ( // Display spinner if userLoading is true
+                                <div className="flex items-center px-6">
+                                    <div>
+                                        <img alt="" src={Spinner} className="text-[1px] text-white" />
+                                        {/* <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24"><path fill="currentColor" d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z"><animateTransform attributeName="transform" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12" /></path></svg> */}
+                                    </div>
+
+                                </div>
+                            ) : (
+                                <span className="">Submit</span> // Show the "Submit" text when isLoading is false
+                            )}
                         </button>
+
                     </div>
                     <div className="flex justify-end z-10 relative mt-4 ">
                         <button

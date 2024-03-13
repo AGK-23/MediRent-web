@@ -9,6 +9,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import './login.css';
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../assets/svg/Spinner.svg"
 
 
 
@@ -75,6 +76,8 @@ const Login = () => {
 
             localStorage.setItem("token", JSON.stringify(response.data.data));
 
+            localStorage.setItem("accessToken", JSON.stringify(response.data.data?.accessToken));
+
             // Retrieve the stringified object from local storage
             const storedToken = localStorage.getItem('token');
 
@@ -92,6 +95,10 @@ const Login = () => {
 
             if (userDetails?.accountType === "Tenant") {
                 navigate('/admin/renter/tenant')
+            }
+
+            if (userDetails?.accountType === "LandLord") {
+                navigate('/admin/dashboard/landlord')
             }
 
             // navigate('/success/tenant/1')
@@ -284,11 +291,24 @@ const Login = () => {
 
                                     <div className="flex justify-between border-b border-gray-600 pb-10">
                                         <div className="flex justify-end z-10 relative mt-4 ">
+                                            
+
                                             <button
                                                 onClick={handleLoginUser}
                                                 className="flex justify-end z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-10 xs:text-[10px] xs:py-2 xs:px-5"
+                                                disabled={isLoading} // Disable the button when isLoading is true
                                             >
-                                                <span className="">Go</span>
+                                                {isLoading ? ( // Display spinner if userLoading is true
+                                                    <div className="flex items-center px-6">
+                                                        <div>
+                                                            <img alt="" src={Spinner} className="text-[1px] text-white" />
+                                                            
+                                                        </div>
+
+                                                    </div>
+                                                ) : (
+                                                    <span className="">Go</span> // Show the "Submit" text when isLoading is false
+                                                )}
                                             </button>
                                         </div>
 
