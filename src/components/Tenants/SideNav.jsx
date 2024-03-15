@@ -9,6 +9,7 @@ import { FiPackage } from "react-icons/fi";
 import { AiOutlineTag } from "react-icons/ai";
 import { BiStoreAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // import { RiArrowRightSLine } from "react-icons/ri";
 
@@ -30,27 +31,11 @@ import { BsBookmarkDash } from "react-icons/bs";
 // import { CiStar } from "react-icons/ci";
 import { LuStar } from "react-icons/lu";
 import { LuSettings } from "react-icons/lu";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import { FiLogOut } from "react-icons/fi";
 
 
 const SideNav = ({ OpenScreen, open }) => {
+    const navigate = useNavigate();
     const [heading, setHeading] = useState("Dashboard");
     const isAboveMediumScreens = useMediaQuery("(min-width: 1024px)");
 
@@ -154,6 +139,15 @@ const SideNav = ({ OpenScreen, open }) => {
             topic: "ACCOUNT MANAGEMENT",
         },
     ];
+
+    const handleClickUser = () => {
+        console.log("all the menu..");
+        localStorage.removeItem('token'); // Assuming the token is stored in localStorage
+        localStorage.removeItem('accessToken'); // Assuming the token is stored in localStorage
+        navigate('/auth/login')
+
+    }
+
 
     return (
         <div className="">
@@ -265,6 +259,23 @@ const SideNav = ({ OpenScreen, open }) => {
                                             
                                         </div>
                                     </div>
+                                    <div>
+                                        <button
+                                            onClick={handleClickUser}
+                                            className="flex flex-row items-center cursor-pointer text-white px-4 text-sm"
+                                        >
+                                            <span className="text-lg"><FiLogOut /></span>
+
+                                            <span
+                                                className={`${!open && "hidden"
+                                                    } ml-2 origin-left duration-200 font-medium`}
+                                            >
+                                                Logout
+                                            </span>
+                                        </button>
+
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -327,9 +338,9 @@ const SideNav = ({ OpenScreen, open }) => {
                                                 </h1>
                                             </Link>
 
-                                            <div className="flex justify-between flex-col mt-10">
+                                            <div className="flex justify-between flex-col mt-10 h-full">
                                                 <>
-                                                    <div className="overflow-x-auto md:w-full sm:w-full">
+                                                    <div className="overflow-x-auto md:w-full sm:w-full h-full">
                                                         <div
                                                             className={`${naming === linkName.nameOne ||
                                                                     linkName.nameTwo ||
@@ -599,6 +610,20 @@ const SideNav = ({ OpenScreen, open }) => {
                                                         </div>
                                                     </div>
                                                 </>
+                                                <div>
+                                                    <button
+                                                        onClick={handleClickUser}
+                                                        className="px-4 flex flex-row items-center cursor-pointer mr-4 rounded-md p-2 text-white gap-x-4 w-full text-sm"
+                                                    >
+                                                        <span className="text-lg"><FiLogOut /></span>
+                                                        <span
+                                                            className={`${!open && "hidden"
+                                                                } ml-2 origin-left duration-200 font-medium`}
+                                                        >
+                                                            Logout
+                                                        </span>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

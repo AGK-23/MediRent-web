@@ -11,6 +11,7 @@ import { FaBed, FaBath, FaBookmark } from "react-icons/fa6";
 
 function Card({ item }) {
   return (
+    
     <div className="flex md:flex-row xs:flex-col gap-[10px] bg-gray-100 justify-between">
       <div className="flex w-full h-[200px] ">
         <Link to={`/admin/dashboard/listing/${item.id}`} className="flex w-full h-[200px]">

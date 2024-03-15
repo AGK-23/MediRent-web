@@ -9,6 +9,7 @@ import { FiPackage } from "react-icons/fi";
 import { AiOutlineTag } from "react-icons/ai";
 import { BiStoreAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // import { RiArrowRightSLine } from "react-icons/ri";
 
@@ -26,6 +27,10 @@ import { LuUser2 } from "react-icons/lu";
 import { AiTwotoneFileText } from "react-icons/ai";
 
 
+import { FiLogOut } from "react-icons/fi";
+
+
+
 
 
 
@@ -35,6 +40,7 @@ import { AiTwotoneFileText } from "react-icons/ai";
 
 
 const SideNav = ({ OpenScreen, open }) => {
+    const navigate = useNavigate();
     const [heading, setHeading] = useState("Dashboard");
     const isAboveMediumScreens = useMediaQuery("(min-width: 1024px)");
 
@@ -65,11 +71,11 @@ const SideNav = ({ OpenScreen, open }) => {
             src: <RiDashboardLine />,
             to: "/admin/dashboard/landlord",
         },
-        { 
-            id: 2, 
-            title: "My Listings", 
-            src: <PiHouseDuotone />, 
-            to: "/admin/dashboard/listing" 
+        {
+            id: 2,
+            title: "My Listings",
+            src: <PiHouseDuotone />,
+            to: "/admin/dashboard/listing"
         },
         // {
         //     id: 5,
@@ -100,11 +106,11 @@ const SideNav = ({ OpenScreen, open }) => {
         //     to: "/admin/pickups",
         //     arrow: true,
         // },
-        { 
-            id: 1, 
-            title: "Wallet", 
-            src: <IoWalletOutline />, 
-            to: "/admin/dashboard/landlord" 
+        {
+            id: 1,
+            title: "Wallet",
+            src: <IoWalletOutline />,
+            to: "/admin/dashboard/landlord"
         },
         // {
         //     id: 6,
@@ -135,6 +141,14 @@ const SideNav = ({ OpenScreen, open }) => {
         // },
     ];
 
+    const handleClickUser = () => {
+        console.log("all the menu..");
+        localStorage.removeItem('token'); // Assuming the token is stored in localStorage
+        localStorage.removeItem('accessToken'); // Assuming the token is stored in localStorage
+        navigate('/auth/login')
+
+    }
+
     return (
         <div className="">
             {isAboveMediumScreens && (
@@ -142,7 +156,7 @@ const SideNav = ({ OpenScreen, open }) => {
                     {/* <Appheader OpenScreen={OpenScreen} /> */}
                     <div className="flex relative">
                         <div className="flex relative">
-                            <div className="fixed  z-10">
+                            <div className="fixed z-10 ">
                                 <div
                                     className={` ${open ? "w-full" : "w-[4rem]"
                                         } flex flex-col justify-between relative h-screen py-4 px-2 border-r-[1px] border-gray-200 duration-300 z-20 bg-white`}
@@ -170,7 +184,7 @@ const SideNav = ({ OpenScreen, open }) => {
                                                         }`}
                                                 >
                                                     <div className=" text-start flex justify-start mx-auto text-primary cursor-pointer">
-                                                        
+
 
                                                         <Link to="/" className="">
                                                             <img
@@ -183,7 +197,7 @@ const SideNav = ({ OpenScreen, open }) => {
                                                 </h1>
                                             </Link>
                                         </div>
-                                        <div className="flex justify-between flex-col">
+                                        <div className="flex justify-between flex-col h-full ">
                                             <ul className="pt-6">
                                                 {Menus.map((Menu, index) => (
                                                     <Link key={index} className="" to={Menu.to}>
@@ -231,8 +245,27 @@ const SideNav = ({ OpenScreen, open }) => {
                                                     </Link>
                                                 ))}
                                             </ul>
-                                            
+
+
+
                                         </div>
+                                    </div>
+                                    <div>
+                                        <button
+                                            onClick={handleClickUser}
+                                            className="flex flex-row items-center cursor-pointer"
+                                        >
+                                            <span className="text-lg"><FiLogOut /></span>
+
+                                            <span
+                                                className={`${!open && "hidden"
+                                                    } ml-2 origin-left duration-200 font-medium`}
+                                            >
+                                                Logout
+                                            </span>
+                                        </button>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -277,13 +310,13 @@ const SideNav = ({ OpenScreen, open }) => {
                                                 to="/admin/dashboard/landlord"
                                                 className="flex gap-x-4 items-center"
                                             >
-                                                
+
                                                 <h1
                                                     className={`text-slate-600 origin-left font-medium text-xl duration-200 ${!open && "scale-0"
                                                         }`}
                                                 >
                                                     <div className=" text-start flex justify-start mx-auto text-primary cursor-pointer">
-                                                        
+
 
                                                         <Link to="/" className="">
                                                             <img
@@ -296,15 +329,15 @@ const SideNav = ({ OpenScreen, open }) => {
                                                 </h1>
                                             </Link>
 
-                                            <div className="flex justify-between flex-col mt-10">
+                                            <div className="flex justify-between flex-col mt-10 h-full">
                                                 <>
                                                     <div className="overflow-x-auto md:w-full sm:w-full">
                                                         <div
                                                             className={`${naming === linkName.nameOne ||
-                                                                    linkName.nameTwo ||
-                                                                    linkName.nameThree
-                                                                    ? ""
-                                                                    : ""
+                                                                linkName.nameTwo ||
+                                                                linkName.nameThree
+                                                                ? ""
+                                                                : ""
                                                                 } px-1 text-left md:cursor-pointer group py-0`}
                                                         >
                                                             {/* <div className="text-rose-800">{naming}</div> */}
@@ -318,8 +351,8 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                             setSubHeading("");
                                                                         }}
                                                                         className={`${naming === linkName.nameFour
-                                                                                ? " bg-third"
-                                                                                : ""
+                                                                            ? " bg-third"
+                                                                            : ""
                                                                             } mr-4 flex rounded-md p-2 cursor-pointer hover:bg-third text-slate-700 text-sm items-center gap-x-4 w-full`}
                                                                     >
                                                                         <span className="flex justify-between w-full ">
@@ -340,7 +373,7 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                     </div>
                                                                 </Link>
 
-                                                                <Link to="/admin/dashboard/landlord">
+                                                                <Link to="/admin/dashboard/listing">
                                                                     <div
                                                                         onClick={() => {
                                                                             naming !== linkName.nameSix
@@ -349,8 +382,8 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                             setSubHeading("");
                                                                         }}
                                                                         className={`${naming === linkName.nameSix
-                                                                                ? "bg-third"
-                                                                                : ""
+                                                                            ? "bg-third"
+                                                                            : ""
                                                                             } mt-3 mr-4 flex rounded-md p-2 cursor-pointer hover:bg-third text-slate-700 text-sm items-center gap-x-4 w-full`}
                                                                     >
                                                                         <span className="flex justify-between w-full ">
@@ -370,7 +403,7 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                     </div>
                                                                 </Link>
 
-                                                                
+
 
                                                                 <Link to="/admin/dashboard/landlord">
                                                                     <div
@@ -381,8 +414,8 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                             setSubHeading("");
                                                                         }}
                                                                         className={`${naming === linkName.nameFive
-                                                                                ? "bg-third"
-                                                                                : ""
+                                                                            ? "bg-third"
+                                                                            : ""
                                                                             } mt-3 mr-4 flex rounded-md p-2 cursor-pointer hover:bg-third text-slate-700 text-sm items-center gap-x-4  w-full`}
                                                                     >
                                                                         <span className="flex justify-between w-full ">
@@ -402,9 +435,9 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                     </div>
                                                                 </Link>
 
-                                                                
 
-                                                                
+
+
 
                                                                 <Link to="/admin/dashboard/landlord">
                                                                     <div
@@ -415,8 +448,8 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                             setSubHeading("");
                                                                         }}
                                                                         className={`${naming === linkName.nameEight
-                                                                                ? "bg-third"
-                                                                                : ""
+                                                                            ? "bg-third"
+                                                                            : ""
                                                                             } mt-3 mr-4 flex rounded-md p-2 cursor-pointer hover:bg-third text-slate-700 text-sm items-center gap-x-4 w-full`}
                                                                     >
                                                                         <span className="flex justify-between w-full ">
@@ -436,7 +469,7 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                     </div>
                                                                 </Link>
 
-                                                                
+
 
                                                                 <Link to="/admin/dashboard/landlord">
                                                                     <div
@@ -447,8 +480,8 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                             setSubHeading("");
                                                                         }}
                                                                         className={`${naming === linkName.nameTen
-                                                                                ? "bg-third"
-                                                                                : ""
+                                                                            ? "bg-third"
+                                                                            : ""
                                                                             } mt-3 mr-4 flex rounded-md p-2 cursor-pointer hover:bg-third text-slate-700 text-sm items-center gap-x-4 w-full`}
                                                                     >
                                                                         <span className="flex justify-between w-full ">
@@ -468,7 +501,7 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                     </div>
                                                                 </Link>
 
-                                                                
+
 
                                                                 {/* <Link to="/admin/dashboard/landlord">
                                                                     <div
@@ -503,24 +536,25 @@ const SideNav = ({ OpenScreen, open }) => {
                                                         </div>
                                                     </div>
                                                 </>
+                                                <div>
+                                                    <button
+                                                        onClick={handleClickUser}
+                                                        className="px-1 flex flex-row items-center cursor-pointer mr-4 rounded-md p-2   text-slate-700 text-sm  gap-x-4 w-full"
+                                                    >
+                                                        <span className="text-lg"><FiLogOut /></span>
+                                                        <span
+                                                            className={`${!open && "hidden"
+                                                                } ml-2 origin-left duration-200 font-medium`}
+                                                        >
+                                                            Logout
+                                                        </span>
+                                                    </button>
+                                                </div>
                                             </div>
+
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div className="hidden">
-                            <div className={`relative flex flex-col w-full `}>
-                                <div className="bg-[#dd1313] h-screen text-lg font-semibold text-lime-600 w-full z-0 relative">
-                                    <div className="top-[6rem] relative text-secondary font-semibold ">
-                                        Welcome Back to Carttel
-                                    </div>
-                                </div>
-                                <div className="bg-[#f3f3f3] h-screen text-lg font-semibold text-lime-600 w-full z-0">
-                                    <div className="top-[6rem] relative text-secondary font-semibold ">
-                                        Welcome Back to Carttel
-                                    </div>
                                 </div>
                             </div>
                         </div>

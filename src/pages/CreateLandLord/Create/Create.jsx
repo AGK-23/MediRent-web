@@ -148,7 +148,7 @@ const Create = () => {
     }, [detailsData, fileList, selectedDates, housingData]);
 
 
-    const [active, setActive] = useState(4)
+    const [active, setActive] = useState(1)
     const [selectedCity, setSelectedCity] = useState("");
     const [selectedStates, setSelectedStates] = useState("");
     const [selectedCountry, setSelectedCountry] = useState(''); // State to store the selected country
