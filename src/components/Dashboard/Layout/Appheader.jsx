@@ -1,9 +1,32 @@
 // import React from 'react'
 // import MinimalLayout from "../MinimalLayout"
 
+import { useState, useEffect } from "react";
+
 
 // eslint-disable-next-line react/prop-types
 const Appheader = ({ OpenScreen }) => {
+  // Retrieve the stringified object from local storage
+  const storedToken = localStorage.getItem('token');
+
+  const [userName, setUserName] = useState("")
+
+
+  // Parse the stringified object back to its original form
+  const userDetails = JSON.parse(storedToken);
+
+  // console.log("token image", userDetails?.firstName);
+
+  
+
+  useEffect(() => {
+    setUserName(userDetails?.firstName)
+    // console.log('Updated housingData:', userName);
+  }, [userName]); // Log housingData whenever it changes
+
+
+
+
   return (
     <div className="left-0 top-0 z-0">
       
@@ -27,7 +50,7 @@ const Appheader = ({ OpenScreen }) => {
               </svg>
             </div>
             <div className="text-[10px] ml-0 max-w-[14rem] text-third">
-              Welcome Back, Folajimi
+              Welcome Back, {userName}
             </div>
           </h1>
           {/* <div className="">
