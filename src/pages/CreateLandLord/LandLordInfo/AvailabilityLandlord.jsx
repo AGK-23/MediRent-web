@@ -93,8 +93,8 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
     const onSavePostClicked = async () => {
         handleCheckAvailable()
 
-        console.log("Error");
-        await handleSubmit()
+        // console.log("Error");
+        // await handleSubmit()
 
         console.log("done");
 

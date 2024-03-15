@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IoLogInOutline } from "react-icons/io5";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 import { BsCheckLg, BsChevronLeft, BsShopWindow } from "react-icons/bs";
 
@@ -30,6 +31,7 @@ import Spinner from "../../assets/svg/Spinner.svg"
 
 
 const CreateLandLord = () => {
+    const navigate = useNavigate();
     // const [avatar, setAvatar] = useState(null);
     const [userLoading, setUserLoading] = useState(false);
 
@@ -96,10 +98,11 @@ const CreateLandLord = () => {
         amenitiesOption: [],
     });
 
-    // const [housing, setHousing] = useState(null);
+    const [housing, setHousing] = useState(null);
 
-    const [housing, setHousing] = useState("7b057fdb-255d-4d37-b8b9-e9de3addd458");
+    // const [housing, setHousing] = useState("7b057fdb-255d-4d37-b8b9-e9de3addd458");
     
+    // const [housing, setHousing] = useState("3fa85f64-5717-4562-b3fc-2c963f66afa6");
 
     useEffect(() => {
         console.log('Updated housingData:', housing);
@@ -180,7 +183,7 @@ const CreateLandLord = () => {
     }, [detailsData, fileList, selectedDates, housingData, formData]);
 
 
-    const [active, setActive] = useState(5)
+    const [active, setActive] = useState(1)
     const [selectedCity, setSelectedCity] = useState("");
     const [selectedStates, setSelectedStates] = useState("");
     const [selectedCountry, setSelectedCountry] = useState(''); // State to store the selected country
@@ -544,21 +547,64 @@ const CreateLandLord = () => {
     const handleSubmitCreateListing = async () => {
 
         try {
+
+            // Retrieve accessToken from localStorage
+            const accessToken = JSON.parse(localStorage.getItem('accessToken'));
+
+    
+            if (!accessToken) {
+                // Handle case where accessToken is not available
+                console.error('Access Token not found in localStorage');
+                return;
+            }
+    
+            // Set the headers with the accessToken
+            const headers = {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            };
+
+
             setUserLoading(true)
 
-            console.log("the create Listing  ...", createListing);
+            const convertedDates = [];
 
-            // const response = await axios.post(`https://medirent-api.onrender.com/housing/add-listing`,
-            //     createListing
-            // );
+            selectedDates.forEach(dateString => {
+                const date = new Date(dateString);
+                const utcDate = date.toISOString();
+                convertedDates.push(utcDate);
+            });
+
+            console.log("all the year in the bank..", convertedDates);
+
+            const requestBody = {
+                listingId: housing?.id,
+                propertyDates: convertedDates
+            };
+
+
+
+            console.log("the create Listing  ...", housing, requestBody);
+
+            const response = await axios.put(`https://medirent-api.onrender.com/housing/add-availability-period`,
+                {
+                    listingId: housing?.id,
+                    propertyDates: convertedDates
+                }, 
+                { headers }
+            );
 
             setUserLoading(false);
 
-            // if (response.data.success === true) {
-            //     toast.success("Listing Created");
-            // }
+            if (response.data.success === true) {
+                toast.success("Property Dates Created");
+                setActive(1);
+                navigate('/success/landlord/1')
+
+            }
 
             // console.log("all the Listing..", response.data);
+            
 
         } catch (error) {
             setUserLoading(false);
@@ -633,7 +679,7 @@ const CreateLandLord = () => {
                 return;
             }
 
-            console.log("all the zone image...", housing, "store images...",  fileList);
+            console.log("all the zone image...", housing?.id, "store images...",  fileList);
 
             setImageLoading(true)
 
@@ -654,7 +700,7 @@ const CreateLandLord = () => {
             // Extract the housingId from the housing object
             // const housingId = housing;
 
-            formData.append('housingId', housing); // Append the housingId string
+            formData.append('housingId', housing?.id); // Append the housingId string
 
             // for (var key of formData.entries()) {
             //     console.log(key[0] + ", " + key[1]);

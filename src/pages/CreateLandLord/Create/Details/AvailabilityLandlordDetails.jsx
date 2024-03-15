@@ -48,36 +48,11 @@ const AvailabilityLandlordDetails = ({ active, setActive, selectedDates, setSele
             toast.warning('Please fill in all required fields.');
             return;
         }
-        // console.log("all the houses...", createListing);
-        // toast.success("LandLord's account Successfully")
-        // setActive(5)
+        
 
     };
 
-    const handleSubmit = async () => {
-        try {
-            setIsLoading(true);
 
-            // console.log("all the user ...", formData);
-
-            // const response = await axios.post(`https://medirent-api.onrender.com/account/landlord-registration`,
-            //     formData,
-            // );
-
-            setIsLoading(false);
-
-            if (response.data.success === true) {
-                toast.success("Landlord's Account Created");
-            }
-
-            console.log("all the Landlord...", response.data);
-
-        } catch (error) {
-            toast.error("Landlord creation Failed");
-            console.log("Apparently the Message..", error);
-        }
-
-    }
 
     const handleFormSubmit = async () => {
         // Any necessary logic before submitting the form
@@ -93,13 +68,12 @@ const AvailabilityLandlordDetails = ({ active, setActive, selectedDates, setSele
     const onSavePostClicked = async () => {
         handleCheckAvailable()
 
-        console.log("Error");
-        await handleSubmit()
+        
 
         console.log("done");
 
         await handleFormSubmit()
-        console.log("completed");
+        // console.log("completed");
     }
 
 

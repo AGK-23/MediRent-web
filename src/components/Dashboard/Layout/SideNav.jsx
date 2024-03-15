@@ -25,18 +25,7 @@ import Logo from "../../../assets/logo.png";
 import { PiHouseDuotone } from "react-icons/pi";
 import { LuUser2 } from "react-icons/lu";
 import { AiTwotoneFileText } from "react-icons/ai";
-
-
 import { FiLogOut } from "react-icons/fi";
-
-
-
-
-
-
-
-
-
 
 
 const SideNav = ({ OpenScreen, open }) => {

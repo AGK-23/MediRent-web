@@ -3,8 +3,8 @@
 import { listData } from '../../../data/Mylinks';
 import Map from './Map.jsx';
 import Card from './Card.jsx';
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 
@@ -22,6 +22,40 @@ const AllListing = () => {
   const filteredData = data.filter(item => {
     return item?.title?.toLowerCase().includes(searchTerm.toLowerCase());
   });
+
+  const [listings, setListings] = useState([]);
+
+  useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        // Retrieve accessToken from localStorage
+        const accessToken = JSON.parse(localStorage.getItem('accessToken'));
+
+    
+        if (!accessToken) {
+            // Handle case where accessToken is not available
+            console.error('Access Token not found in localStorage');
+            return;
+        }
+
+        // Set the headers with the accessToken
+        const headers = {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+        };
+
+        const response = await axios.get('https://medirent-api.onrender.com/housing/get-all-user-listings', { headers });
+
+        console.log("all the response..", response);
+        setListings(response.data);
+
+      } catch (error) {
+        console.error('Error fetching listings:', error);
+      }
+    };
+
+    fetchListings();
+  }, []); 
 
   return (
     <div className="flex flex-col h-full md:mt-0 xs:mt-20 px-5">
