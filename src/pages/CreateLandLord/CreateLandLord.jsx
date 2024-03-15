@@ -21,6 +21,7 @@ import { validateEmail } from "../../components/EndPoints/url.jsx";
 import '../login/login.css';
 
 import Address from "./LandLordInfo/Address.jsx";
+// import HousingDetails from "./LandLordInfo/HousingDetails.jsx";
 import HousingDetails from "./LandLordInfo/HousingDetails.jsx";
 import Photo from "./LandLordInfo/Photo.jsx";
 import AvailabilityLandlord from "./LandLordInfo/AvailabilityLandlord.jsx";
@@ -36,8 +37,9 @@ const CreateLandLord = () => {
 
     const [loginLoading, setLoginLoading] = useState(false);
 
+    const [housingLoading, setHousingLoading] = useState(false);
 
-
+    const [imageLoading, setImageLoading] = useState(false);
 
 
 
@@ -74,7 +76,7 @@ const CreateLandLord = () => {
         postalCode: "",
         phone: "",
         country: "",
-        state: "",
+        province: "",
         promotionCode: "",
     });
 
@@ -94,6 +96,15 @@ const CreateLandLord = () => {
         amenitiesOption: [],
     });
 
+    // const [housing, setHousing] = useState(null);
+
+    const [housing, setHousing] = useState("7b057fdb-255d-4d37-b8b9-e9de3addd458");
+    
+
+    useEffect(() => {
+        console.log('Updated housingData:', housing);
+    }, [housing]); // Log housingData whenever it changes
+
 
     //NUMBER FOUR THIS IS THE STATE FOR THE PHOTO
     const [avatars, setAvatars] = useState([]);
@@ -110,7 +121,7 @@ const CreateLandLord = () => {
         postalCode: housingData?.postalCode,
         phone: housingData?.phone,
         country: housingData?.country,
-        state: housingData?.state,
+        province: housingData?.province,
         promotionCode: housingData?.promotionCode,
 
         termOption: detailsData?.termOption,
@@ -140,7 +151,7 @@ const CreateLandLord = () => {
             postalCode: housingData?.postalCode,
             phone: housingData?.phone,
             country: housingData?.country,
-            state: housingData?.state,
+            province: housingData?.province,
             promotionCode: housingData?.promotionCode,
 
             termOption: detailsData?.termOption,
@@ -156,8 +167,8 @@ const CreateLandLord = () => {
             currency: detailsData?.currency,
             amenitiesOption: detailsData?.amenitiesOption,
 
-            avatars: fileList,
-            propertyDates: selectedDates
+            // avatars: fileList,
+            // propertyDates: selectedDates
         });
 
         setLoginData({
@@ -169,7 +180,7 @@ const CreateLandLord = () => {
     }, [detailsData, fileList, selectedDates, housingData, formData]);
 
 
-    const [active, setActive] = useState(1)
+    const [active, setActive] = useState(5)
     const [selectedCity, setSelectedCity] = useState("");
     const [selectedStates, setSelectedStates] = useState("");
     const [selectedCountry, setSelectedCountry] = useState(''); // State to store the selected country
@@ -342,6 +353,7 @@ const CreateLandLord = () => {
 
 
         } catch (error) {
+            setLandLoading(false);
             console.log("error in the landlord..", error)
         }
 
@@ -393,6 +405,7 @@ const CreateLandLord = () => {
                 error.message ||
                 error.toString();
             toast.error(message);
+            setLoginLoading(false)
 
             console.log("user login..", error);
         }
@@ -411,9 +424,6 @@ const CreateLandLord = () => {
     const renderPreviousForm = () => {
         setActive(active - 1);
     };
-
-
-
     // const [selectedFunction, setSelectedFunction] = useState("");
 
     // FUNCTION TO GET THE COUNTRY AND THE STATE
@@ -551,8 +561,131 @@ const CreateLandLord = () => {
             // console.log("all the Listing..", response.data);
 
         } catch (error) {
+            setUserLoading(false);
             toast.error("Listing creation Failed");
             console.error('Error creating Listing:', error);
+        }
+    };
+
+    const handleRentUser = async() => {
+        try {
+            // Retrieve accessToken from localStorage
+            const accessToken = JSON.parse(localStorage.getItem('accessToken'));
+
+            // setLandLoading(true);
+            setHousingLoading(true)
+            
+
+            console.log("landlord..", housingLoading)
+
+            console.log("all the data for housing..", createListing);
+    
+            if (!accessToken) {
+                // Handle case where accessToken is not available
+                console.error('Access Token not found in localStorage');
+                return;
+            }
+    
+            // Set the headers with the accessToken
+            const headers = {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            };
+    
+            // Make the POST request to create a listing
+            const response = await axios.post(`https://medirent-api.onrender.com/housing/add-listing`, 
+                createListing, 
+                { headers }
+            );
+
+            setHousingLoading(false);
+    
+            setHousing(response?.data?.data)
+
+            // Handle the response as needed
+            console.log('Listing created:', response.data, "all the housing...", housing);
+
+            if (response.data.success === true) {
+                toast.success("Listing Created");
+
+                setActive(4)
+            }
+
+            return response.data; // Return the response data if needed
+
+        } catch (error) {
+            // Handle errors
+            console.error('Error creating listing:', error);
+            setHousingLoading(false);
+            throw error; // Throw the error for further handling if needed
+        }
+    }
+
+    const handleFilesUpload = async (files) => {
+        // housing
+        // fileList
+        // "7b057fdb-255d-4d37-b8b9-e9de3addd458"
+        try {
+            const accessToken = JSON.parse(localStorage.getItem('accessToken'));
+
+            if (!accessToken) {
+                console.error('Access Token not found in localStorage');
+                return;
+            }
+
+            console.log("all the zone image...", housing, "store images...",  fileList);
+
+            setImageLoading(true)
+
+            const headers = {
+                'Authorization': `Bearer ${accessToken}`,
+                // 'Content-Type': 'multipart/form-data', // Set the content type to send files
+                // 'Content-Type': 'application/json'
+            };
+
+            const formData = new FormData();
+            
+            fileList.forEach((file, index) => {
+                console.log("all the file..", file, index);
+                formData.append(`files`, file);
+                console.log("alll the format in the data..", formData);
+            });
+
+            // Extract the housingId from the housing object
+            // const housingId = housing;
+
+            formData.append('housingId', housing); // Append the housingId string
+
+            // for (var key of formData.entries()) {
+            //     console.log(key[0] + ", " + key[1]);
+            // }
+
+            for (var [key, value] of formData.entries()) { 
+                console.log("al the key..", key, value);
+            }
+
+
+            // formData.append('housingId', housing);
+
+            console.log("format data..", formData, housing, fileList);
+
+            const response = await axios.post(`https://medirent-api.onrender.com/File/upload`, formData, { headers });
+
+            setImageLoading(false)
+
+            console.log('Files uploaded:', response.data);
+
+            if (response.data.success === true) {
+                toast.success("Images Successfully Uploaded");
+
+                setActive(5)
+            }
+
+            return response.data;
+        } catch (error) {
+            setImageLoading(false)
+            console.error('Error uploading files:', error);
+            throw error;
         }
     };
 
@@ -1325,9 +1458,7 @@ const CreateLandLord = () => {
 
                                         <div className="flex justify-between  pb-10">
                                             <div className="flex justify-end z-10 relative mt-4 ">
-                                                
-
-
+                                        
                                                 <button
                                                     onClick={handleProviderOne}
                                                     className="flex justify-end z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-4 xs:px-10"
@@ -1344,14 +1475,8 @@ const CreateLandLord = () => {
                                                         <span className="">Next Step</span> // Show the "Submit" text when isLoading is false
                                                     )}
                                                 </button>
-
-
-
                                             </div>
                                         </div>
-
-
-
                                     </div>
                                 )}
 
@@ -1370,6 +1495,10 @@ const CreateLandLord = () => {
                                         setActive={setActive}
                                         detailsData={detailsData}
                                         setDetailsData={setDetailsData}
+                                        handleRentUser={handleRentUser}
+                                        housingLoading={housingLoading}
+                                        setHousingLoading={setHousingLoading} // Pass setHousingLoading here
+                                        // updateHousingLoading={(loading) => setHousingLoading(loading)} // Pass a callback function to update housingLoading
                                     />
                                 )}
 
@@ -1381,6 +1510,8 @@ const CreateLandLord = () => {
                                         setAvatars={setAvatars}
                                         fileList={fileList}
                                         setFileList={setFileList}
+                                        handleFilesUpload={handleFilesUpload}
+                                        imageLoading={imageLoading}
                                     />
                                 )}
 

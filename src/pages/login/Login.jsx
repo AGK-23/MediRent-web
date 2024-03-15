@@ -97,7 +97,7 @@ const Login = () => {
                 navigate('/admin/renter/tenant')
             }
 
-            if (userDetails?.accountType === "LandLord") {
+            if (userDetails?.accountType === "Landlord") {
                 navigate('/admin/dashboard/landlord')
             }
 
@@ -110,6 +110,7 @@ const Login = () => {
                 error.message ||
                 error.toString();
             toast.error(message);
+            setIsLoading(false)
 
             console.log("user profile..", error);
         }

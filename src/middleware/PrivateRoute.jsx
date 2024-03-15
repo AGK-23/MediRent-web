@@ -14,7 +14,7 @@ const PrivateRoute = () => {
     console.log("private note..", userDetails, "user..", userDetails?.accountType)
 
     if (userDetails) {
-        if (userDetails?.accountType === "LandLord") {
+        if (userDetails?.accountType === "Landlord") {
             console.log("man");
             return <DashboardDefault />;
         }

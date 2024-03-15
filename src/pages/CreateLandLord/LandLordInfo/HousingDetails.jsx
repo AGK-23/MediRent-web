@@ -2,8 +2,9 @@ import { useState, useRef, useEffect } from "react";
 // import CurrencySelect from '../../../registration/Currency.jsx';
 import axios from 'axios';
 import { toast } from "react-toastify";
+import Spinner from "../../../assets/svg/Spinner.svg"
 
-const HousingDetails = ({ active, setActive, detailsData, setDetailsData }) => {
+const HousingDetails = ({  active, setActive, detailsData, setDetailsData, handleRentUser, housingLoading, setHousingLoading }) => {
 
     const dailyRentInput = useRef();
     const weeklyRentInput = useRef();
@@ -43,7 +44,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData }) => {
         amenitiesOption
     } = detailsData;
 
-    const handleCheckHousingDetails = () => {
+    const handleCheckHousingDetails = async () => {
         if (
             !termOption ||
             !designOption ||
@@ -55,19 +56,35 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData }) => {
             !licenseNumber ||
             !propertyType ||
             !description ||
-            !currency || 
-            amenitiesOption.length === 0   
+            !currency ||
+            amenitiesOption.length === 0
         ) {
             toast.warning('Please fill in all required fields.');
             return;
         }
-        setActive(4)
+        // setActive(4)
+
         
+        
+        // setHousingLoading(true);
+        
+        console.log("all the details..", housingLoading)
+        try {
+            // Call handleRentUser function from props
+            await handleRentUser();
+
+            // housingLoading will be updated in the parent component after the request is completed
+        } catch (error) {
+            // Handle errors if needed
+        }
+
     };
 
 
     const handleProviderThree = () => {
         handleCheckHousingDetails()
+
+
         console.log("all the hosing data...", detailsData);
         // setActive(4);
     };
@@ -107,7 +124,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData }) => {
 
     const handleAmenitiesChange = (event) => {
         const { value } = event.target;
-        
+
         setDetailsData(prevState => {
             let updatedAmenities = [...prevState.amenitiesOption];
 
@@ -150,7 +167,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData }) => {
     };
 
 
-    
+
 
     const renderPreviousForm = () => {
         console.log("all the prevoius data...", detailsData);
@@ -183,7 +200,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData }) => {
     const handleDailyUser = (event) => {
         const { name, value } = event.target;
         // console.log("all the value..", value );
-        
+
         setDetailsData(prevState => ({
             ...prevState,
             dailyRent: value
@@ -193,7 +210,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData }) => {
     const handleWeeklyUser = (event) => {
         const { name, value } = event.target;
         // console.log("value..", value );
-        
+
         setDetailsData(prevState => ({
             ...prevState,
             weeklyRent: value
@@ -203,7 +220,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData }) => {
     const handleMonthlyUser = (event) => {
         const { name, value } = event.target;
         // console.log("the value..", value );
-        
+
         setDetailsData(prevState => ({
             ...prevState,
             monthlyRent: value
@@ -213,7 +230,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData }) => {
     const handleBedRoomUser = (event) => {
         const { name, value } = event.target;
         // console.log("weekly..", value );
-        
+
         setDetailsData({
             ...detailsData,
             numberOfBedRoom: value
@@ -227,7 +244,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData }) => {
     const handleBathUser = (event) => {
         const { name, value } = event.target;
         // console.log("weekly..", value );
-        
+
         setDetailsData({
             ...detailsData,
             numberOfBathRoom: value
@@ -818,11 +835,23 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData }) => {
 
                 <div className="flex justify-between pb-10">
                     <div className="flex justify-end z-10 relative mt-4  mr-3">
+                        
+
                         <button
                             onClick={handleProviderThree}
-                            className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-10"
+                            className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-4"
+                            disabled={housingLoading} // Disable the button when userLoading is true
                         >
-                            <span className="">Next</span>
+                            {housingLoading ? ( // Display spinner if userLoading is true
+                                <div className="flex items-center px-6">
+                                    <div>
+                                        <img alt="" src={Spinner} className="text-[1px] text-white" />
+                                    </div>
+
+                                </div>
+                            ) : (
+                                <span className="">Next</span> // Show the "Submit" text when isLoading is false
+                            )}
                         </button>
                     </div>
                     <div className="flex justify-end z-10 relative mt-4 ">

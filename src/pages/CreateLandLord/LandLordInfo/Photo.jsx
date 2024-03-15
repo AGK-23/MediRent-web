@@ -1,10 +1,11 @@
 import React from 'react'
 import { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";
+import Spinner from "../../../assets/svg/Spinner.svg";
 
 
 
-const Photo = ({ active, setActive, avatars, setAvatars, fileList, setFileList }) => {
+const Photo = ({ active, setActive, avatars, setAvatars, fileList, setFileList, handleFilesUpload, imageLoading }) => {
 
     // const [avatars, setAvatars] = useState([]);
     const [text, setText] = useState("")
@@ -46,7 +47,7 @@ const Photo = ({ active, setActive, avatars, setAvatars, fileList, setFileList }
         }
     };
 
-    const handleCheckPhotos = () => {
+    const handleCheckPhotos = async () => {
         if (
             avatars.length === 0  && 
             fileList.length === 0   
@@ -54,7 +55,17 @@ const Photo = ({ active, setActive, avatars, setAvatars, fileList, setFileList }
             toast.warning('Please fill in all required fields.');
             return;
         }
-        setActive(5)
+        // setActive(5)
+
+        console.log("all the image details..", imageLoading)
+        try {
+            // Call handleRentUser function from props
+            await handleFilesUpload(fileList);
+
+            // housingLoading will be updated in the parent component after the request is completed
+        } catch (error) {
+            // Handle errors if needed
+        }
         
     };
 
@@ -134,11 +145,23 @@ const Photo = ({ active, setActive, avatars, setAvatars, fileList, setFileList }
 
                 <div className="flex justify-between pb-10">
                     <div className="flex justify-end z-10 relative mt-4  mr-3">
+                        
+
                         <button
                             onClick={handleProviderFour}
-                            className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-10"
+                            className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-4"
+                            disabled={imageLoading} // Disable the button when userLoading is true
                         >
-                            <span className="">Next</span>
+                            {imageLoading ? ( // Display spinner if userLoading is true
+                                <div className="flex items-center px-6">
+                                    <div>
+                                        <img alt="" src={Spinner} className="text-[1px] text-white" />
+                                    </div>
+
+                                </div>
+                            ) : (
+                                <span className="">Next</span> // Show the "Submit" text when isLoading is false
+                            )}
                         </button>
                     </div>
                     <div className="flex justify-end z-10 relative mt-4 ">

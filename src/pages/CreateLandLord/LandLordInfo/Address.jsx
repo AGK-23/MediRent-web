@@ -16,7 +16,7 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
     const postalCodeInput = useRef();
     const phoneInput = useRef();
     const countryInput = useRef();
-    const stateInput = useRef();
+    const provinceInput = useRef();
     const promotionCodeInput = useRef();
 
 
@@ -27,7 +27,7 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
         postalCode,
         phone,
         country,
-        state,
+        province,
         promotionCode,
     } = housingData;
 
@@ -39,7 +39,7 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
             !country ||
             !postalCode ||
             !phone ||
-            !state  
+            !province  
         ) {
             toast.warning('Please fill in all required fields.');
             return;
@@ -85,7 +85,7 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
         let selectedValue = event.target.value === "Select a city" ? null : event.target.value;
         setHousingData(prevHousingData => ({
             ...prevHousingData,
-            state: selectedValue
+            province: selectedValue
         }));
     };
 
@@ -332,7 +332,7 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
                                 <div>
                                     <select
                                         onChange={handleCityHousingChange}
-                                        value={state}
+                                        value={province}
                                         className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                     >
                                         <option value="">Select a state</option>
