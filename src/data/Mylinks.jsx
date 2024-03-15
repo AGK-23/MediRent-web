@@ -273,37 +273,6 @@ export const carts = [
     },
 ]
 
-export const articles = [
-    {
-        id: 1,
-        img: "https://images.pexels.com/photos/753331/pexels-photo-753331.jpeg?auto=compress&cs=tinysrgb&w=2000",
-        title: "Insights, Management",
-        font: "Importers Achieve Cost Savings Through The First Sale Rule!",
-        desc: "The trade war currently ensuing between the US and several nations around the globe, most fiercely with China, shows no signs of the first set of tariffs levied against solar.",
-        icon: <AiOutlineContainer />,
-        color: 'deeppink',
-    },
-    {
-        id: 2,
-        img: "https://images.pexels.com/photos/209251/pexels-photo-209251.jpeg?auto=compress&cs=tinysrgb&w=2000",
-        title: "Warehousing, Industry",
-        font: "Cargo Flow Through Better Supply Chain Visibility, Control.",
-        desc: "Global provider connected products for consumers, and enterprises worldwide, supply chain control is everything, provide visibility and traceability needed for",
-        icon: <AiOutlineUngroup />,
-        color: 'yellowgreen',
-    },
-    {
-        id: 3,
-        img: "https://images.pexels.com/photos/3076000/pexels-photo-3076000.jpeg?auto=compress&cs=tinysrgb&w=2000",
-        title: "Logistics, Distribution",
-        font: "Importance Of Specialized Focus In Projects, Oil & Gas Logistics?",
-        desc: "Our team provides highly skilled & experienced project managers who know the intricacies of this vertical and focus on providing innovative solutions in Oil & Gas sector.",
-        icon: <AiOutlineSend />,
-        color: '#feb019',
-    },
-
-]
-
 export const slides = [
     {
         id: 1,
@@ -343,87 +312,6 @@ export const slides = [
     },
 ]
 
-export const tools = [
-    {
-        id: 1,
-        title: "Automatic rate selection",
-        desc: "Save time with rate shipping that automatically chooses label.",
-        icon: <CiDollar />,
-        color: "lime",
-    },
-    {
-        id: 2,
-        title: "Faster bulk Shipping",
-        desc: "Carttel can select the best rates and help up to 100 orders at once.",
-        icon: <IoTicketOutline />,
-        color: "purple",
-    },
-    {
-        id: 3,
-        title: "Automated shipping rules",
-        desc: "Set up weight, values, delivery options and other specs in advance.",
-        icon: <BsBoxSeam />,
-        color: "amber",
-    },
-]
-
-export const items = [
-    {
-        id: 1,
-        title: "The same guarentee offered",
-        desc: "You'll be protected against A-Z carrier claims related to late delivery and negative feedback Just like you find in Buy Shipping.",
-        icon: <FcSurvey />,
-        color: "lime",
-        // IoShieldCheckmarkSharp
-    },
-    {
-        id: 2,
-        title: "Amazon-discounted Rates",
-        desc: "Discounts may vary per carrier, ship method, package and transit and transit route, They range up to $400 per shipping label.",
-        icon: <FcInTransit />,
-        color: "purple",
-    },
-    {
-        id: 3,
-        title: "100% Valid Tracking Rates",
-        desc: "All labels purchased through us will include a valid Tracking ID and it will automatically sync with your ecommerce account.",
-        icon: < FcSafe />,
-        color: "amber",
-    },
-]
-
-export const sounds = [
-    {
-        id: 1,
-        title: "We're flexible",
-        desc: "You can save interest by repaying your short term loan early. If things go wrong, we're here to help you.",
-        icon: <FcPuzzle />,
-        color: "lime",
-        // IoShieldCheckmarkSharp
-    },
-    {
-        id: 2,
-        title: "We're committed to you",
-        desc: "Easy navigation and user experience. Access to QuickCredit services with ease.",
-        icon: <FcViewDetails />,
-        color: "purple",
-    },
-    {
-        id: 3,
-        title: "We're transparent",
-        desc: "There are no hidden charges. We make all our fees completely clear upfront before you apply.",
-        icon: < FcIdea />,
-        color: "amber",
-    },
-    {
-        id: 4,
-        title: "We're here to help",
-        desc: "Get extensive details of requested loan facility real-time.",
-        icon: < FcCallback />,
-        color: "amber",
-    },
-]
-
 export const responsive = {
     superLargeDesktop: {
         // the naming can be any, depends on you.
@@ -445,371 +333,138 @@ export const responsive = {
     },
 };
 
-export const productData = [
+export const listData = [
     {
         id: 1,
-        icon: <RiShieldUserLine />,
-        imageurl:
-            "https://images.pexels.com/photos/4391478/pexels-photo-4391478.jpeg?auto=compress&cs=tinysrgb&w=600",
-        name: "Security For Cargo",
-       
-        description: "High Security Requirements and are certified to local Standards.",
+        title: "A Great Apartment Next to the Beach!",
+        img: "https://images.pexels.com/photos/1918291/pexels-photo-1918291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        bedroom: 2,
+        bathroom: 1,
+        price: 1000,
+        address: "456 Park Avenue, London",
+        latitude: 51.5074,
+        longitude: -0.1278,
     },
     {
         id: 2,
-        icon: <SlWallet />,
-        imageurl:
-            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZHVjdHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-        name: "Transparent Pricing",
-        price: "$21.99",
-        description: "International supply chains involves challenging regulations.",
+        title: "An Awesome Apartment Near the Park! Almost too good to be true!",
+        img: "https://images.pexels.com/photos/1428348/pexels-photo-1428348.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        bedroom: 3,
+        bathroom: 2,
+        price: 1500,
+        address: "789 Oxford Street, London",
+        latitude: 52.4862,
+        longitude: -1.8904,
     },
     {
         id: 3,
-        icon: <TfiPackage />,
-        imageurl:
-            "https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        name: "Warehouse Storage",
-        price: "$99.99",
-        description: "Depending on your product, we provide warehouse activities.",
+        title: "A New Apartment in the City!",
+        img: "https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        bedroom: 1,
+        bathroom: 1,
+        price: 800,
+        address: "101 Baker Street, London",
+        latitude: 53.4808,
+        longitude: -2.2426,
     },
     {
         id: 4,
-        icon: <VscLocation />,
-        imageurl:
-            "https://images.unsplash.com/photo-1610824352934-c10d87b700cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        name: "Real Time Tracking",
-        price: "$14.99",
-        description: "Ensure customer's supply chains are fully compliant by practices.",
+        title: "Great Location! Great Price! Great Apartment!",
+        img: "https://images.pexels.com/photos/2467285/pexels-photo-2467285.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        bedroom: 2,
+        bathroom: 1,
+        price: 1000,
+        address: "234 Kingsway, London,",
+        latitude: 53.8008,
+        longitude: -1.5491,
     },
     {
         id: 5,
-        icon: <BsCreditCard2Back />,
-        imageurl:
-            "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzB8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        name: "Easy Payment Methods",
-        price: "$38.99",
-        description: "You can make use the easy payment options, listed below.",
+        title: "Apartment 5",
+        img: "https://images.pexels.com/photos/276625/pexels-photo-276625.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        bedroom: 3,
+        bathroom: 2,
+        price: 1500,
+        address: "567 Victoria Road, London",
+        latitude: 53.4084,
+        longitude: -2.9916,
     },
     {
         id: 6,
-        icon: <BsFingerprint />,
-        imageurl:
-            "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzV8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        name: "Secure & Safe Shipping",
-        price: "$149.99",
-        description: "You can make use the easy payment options, listed below.",
+        title: "Apartment 6",
+        img: "https://images.pexels.com/photos/271816/pexels-photo-271816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        bedroom: 1,
+        bathroom: 1,
+        price: 800,
+        address: "890 Regent Street, London",
+        latitude: 54.9783,
+        longitude: -1.6174,
     },
     {
         id: 7,
-        icon: <BsGear />,
-        imageurl:
-            "https://images.unsplash.com/photo-1589782182703-2aaa69037b5b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTJ8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        name: "Personalised Solutions",
-        price: "$38.99",
-        description: "We continue to pursue that same vision in today's complex solutions.",
+        title: "Apartment 7",
+        img: "https://images.pexels.com/photos/2029667/pexels-photo-2029667.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        bedroom: 2,
+        bathroom: 1,
+        price: 1000,
+        address: "112 Piccadilly, London",
+        latitude: 53.3811,
+        longitude: -1.4701,
     },
     {
         id: 8,
-        icon: <BsPuzzle />,
-        imageurl:
-            "https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHByb2R1Y3RzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        name: "Fast & Efficient Delivery",
-        price: "$49.99",
-        description: "We enhance our operations by relieving you of the worries.",
+        title: "Apartment 8",
+        img: "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        bedroom: 3,
+        bathroom: 2,
+        price: 1500,
+        address: "8765 Main High Street, London",
+        latitude: 51.4545,
+        longitude: -2.5879,
     },
 ];
 
-export const questionData = [
-    {
-        question: "What are your shipping costs?",
-        answer: "We charge as low as $8 per pound for all shipments. Our minimum weight is 1 pound. Fragile items like TV and glass furniture have an optional crating fee.",
-    },
-    {
-        question: "Are there additional or hidden charges?",
-        answer: "There are no additional shipping and clearing charges. But, a delivery charge applies to all packages not picked up at the Lagos warehouse. It costs $15 to deliver non-extra large Items (Phones, laptops, clothing, etc. under 10 lbs) within Lagos and $20 outside. For extra-large items (TVs, Speakers, Consoles, etc. above 10 lbs), delivery within Lagos costs $20 and $30 outside Lagos.",
-    },
-    {
-        question: "How do I track my shipment?",
-        answer: "To track your shipment from the USA to Nigeria, CartTel provides a unique shipment status for each package. By checking the status, you can determine at what stage your item is in its journey to you.",
-    },
-    {
-        question: "If I get scammed by someone using the CartTel warehouse address, can I get my packages back?",
-        answer: "Yes, it is possible that we can help you get your package back.",
-    },
-    {
-        question: "How long does it take to get my package delivered to Nigeria?",
-        answer: "10 - 14 working days from the day the package ships out of our US warehouse if there is zero customs delay in Nigeria. The 10 - 14 working days don’t include the time it takes for the US store to deliver the package to our US warehouse. We ship packages every Thursday.",
-    },
-    {
-        question: "How long does it take to get my package delivered to Ghana?",
-        answer: "7 - 14 days from the day the package ships out of our US warehouse if there is zero customs delay in Nigeria. The 7 - 14 days doesn’t include the time it takes for the US store to deliver the package to our US warehouse. We ship packages every Thursday.",
-    },
-    {
-        question: "What is the acceptable mode of payment?",
-        answer: "We accept payment in Naira or US Dollars through bank-to-bank transfers and debit or credit cards. We are unable to accept cash, and cash on delivery.",
-    },
-    {
-        question: "Do I have to pay for delivery in Nigeria?",
-        answer: "We accept payment in Naira or US Dollars through bank-to-bank transfers and debit or credit cards. We are unable to accept cash, and cash on delivery.",
-    },
-];
-
-export const personalData = [
-    
-    {
-        question: "How long does it take to get my package delivered to Nigeria?",
-        answer: "10 - 14 working days from the day the package ships out of our US warehouse if there is zero customs delay in Nigeria. The 10 - 14 working days don’t include the time it takes for the US store to deliver the package to our US warehouse. We ship packages every Thursday.",
-    },
-    {
-        question: "How long does it take to get my package delivered to Ghana?",
-        answer: "7 - 14 days from the day the package ships out of our US warehouse if there is zero customs delay in Nigeria. The 7 - 14 days doesn’t include the time it takes for the US store to deliver the package to our US warehouse. We ship packages every Thursday.",
-    },
-    {
-        question: "What is the acceptable mode of payment?",
-        answer: "We accept payment in Naira or US Dollars through bank-to-bank transfers and debit or credit cards. We are unable to accept cash, and cash on delivery.",
-    },
-    {
-        question: "Do I have to pay for delivery in Nigeria?",
-        answer: "We accept payment in Naira or US Dollars through bank-to-bank transfers and debit or credit cards. We are unable to accept cash, and cash on delivery.",
-    },
-];
-
-export const businessData = [
-    {
-        question: "What are your shipping costs?",
-        answer: "We charge as low as $8 per pound for all shipments. Our minimum weight is 1 pound. Fragile items like TV and glass furniture have an optional crating fee.",
-    },
-    {
-        question: "Are there additional or hidden charges?",
-        answer: "There are no additional shipping and clearing charges. But, a delivery charge applies to all packages not picked up at the Lagos warehouse. It costs $15 to deliver non-extra large Items (Phones, laptops, clothing, etc. under 10 lbs) within Lagos and $20 outside. For extra-large items (TVs, Speakers, Consoles, etc. above 10 lbs), delivery within Lagos costs $20 and $30 outside Lagos.",
-    },
-    {
-        question: "How do I track my shipment?",
-        answer: "To track your shipment from the USA to Nigeria, CartTel provides a unique shipment status for each package. By checking the status, you can determine at what stage your item is in its journey to you.",
-    },
-    {
-        question: "If I get scammed by someone using the CartTel warehouse address, can I get my packages back?",
-        answer: "Yes, it is possible that we can help you get your package back.",
-    },
-    
-];
-
-export const questionItems = [
-    {
-        question: "Use CartTel address",
-        answer: "Get your valid US address when you sign up with CartTel. Use it as your delivery address at checkout or have your packages sent there by loved ones.",
-        icon: <img src={HomeAddress} alt="" />,
-    },
-    {
-        question: "Track your shipments",
-        answer: "Track your shipment from the US till it arrives in Nigeria on your mobile phone or the web.",
-        icon: <img src={Shipped} alt="" />,
-    },
-    {
-        question: "Deliver anywhere you choose",
-        answer: "Pay to have your shipments delivered anywhere in Nigeria or pick them up for free in our Lagos office",
-        icon: <img src={OpenBox} alt="" />,
-    },
-];
-
-export const itemData = [
-    {
-        id: 1,
-        icon: <RiShieldUserLine />,
-        imageurl:
-            "https://images.pexels.com/photos/2217513/pexels-photo-2217513.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-        name: "International shipping",
-       
-        description: "High Security Requirements and are certified to local Standards.",
-    },
-    {
-        id: 2,
-        icon: <SlWallet />,
-        imageurl:
-            "https://images.pexels.com/photos/93398/pexels-photo-93398.jpeg?auto=compress&cs=tinysrgb&w=600",
-        name: "Logistics",
-        
-        description: "International supply chains involves challenging regulations.",
-    },
-    {
-        id: 3,
-        icon: <TfiPackage />,
-        imageurl:
-            "https://images.pexels.com/photos/11589778/pexels-photo-11589778.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-        name: "Procurement",
-        
-        description: "Depending on your product, we provide warehouse activities.",
-    },
-    {
-        id: 4,
-        icon: <VscLocation />,
-        imageurl:
-            "https://images.pexels.com/photos/2226458/pexels-photo-2226458.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-        name: "Drop-shipping",
-        
-        description: "Ensure customer's supply chains are fully compliant by practices.",
-    },
-    {
-        id: 5,
-        icon: <BsCreditCard2Back />,
-        imageurl:
-            "https://images.pexels.com/photos/6169668/pexels-photo-6169668.jpeg?auto=compress&cs=tinysrgb&w=600",
-        name: "Delivery",
-        
-        description: "You can make use the easy payment options, listed below.",
-    },
-    {
-        id: 6,
-        icon: <BsFingerprint />,
-        imageurl:
-            "https://images.pexels.com/photos/4329902/pexels-photo-4329902.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-        name: "Supply Chain",
-        
-        description: "You can make use the easy payment options, listed below.",
-    },
-    {
-        id: 7,
-        icon: <BsGear />,
-        imageurl:
-            "https://images.pexels.com/photos/4480984/pexels-photo-4480984.jpeg?auto=compress&cs=tinysrgb&w=600",
-        name: "Ware-Housing",
-        
-        description: "We continue to pursue that same vision in today's complex solutions.",
-    },
-    {
-        id: 8,
-        icon: <BsPuzzle />,
-        imageurl:
-            "https://images.pexels.com/photos/1544372/pexels-photo-1544372.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-        name: "Sea Freight",
-        
-        description: "We enhance our operations by relieving you of the worries.",
-    },
-]
-
-export const links = [
-  {
-    name: "Solutions",
-    submenu: true,
-    sublinks: [
-      {
-        Head: "Topwear",
-        sublink: [
-          { name: "T-shirt", link: "/" },
-          { name: "Casual shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-        ],
-      },
-      {
-        Head: "Bottomwear",
-        sublink: [
-          { name: "T-shirt", link: "/" },
-          { name: "Casual shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-        ],
-      },
-      {
-        Head: "innerwear",
-        sublink: [
-          { name: "T-shirt", link: "/" },
-          { name: "Casual shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-        ],
-      },
-
-      {
-        Head: "sleepwear",
-        sublink: [
-          { name: "T-shirt", link: "/" },
-          { name: "Casual shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-        ],
-      },
-      {
-        Head: "footwear",
-        sublink: [
-          { name: "T-shirt", link: "/" },
-          { name: "Casual shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-        ],
-      },
+export const singlePostData = {
+    id: 1,
+    title: "Beautiful Apartment",
+    price: 1200,
+    images: [
+        "https://images.pexels.com/photos/1918291/pexels-photo-1918291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://images.pexels.com/photos/1428348/pexels-photo-1428348.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "https://images.pexels.com/photos/2467285/pexels-photo-2467285.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     ],
-  },
-  {
-    name: "Products",
-    submenu: true,
-    sublinks: [
-      {
-        Head: "Topwear",
-        sublink: [
-          { name: "T-shirt", link: "/" },
-          { name: "Casual shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-        ],
-      },
-      {
-        Head: "Bottomwear",
-        sublink: [
-          { name: "T-shirt", link: "/" },
-          { name: "Casual shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-        ],
-      },
-      {
-        Head: "innerwear",
-        sublink: [
-          { name: "T-shirt", link: "/" },
-          { name: "Casual shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-        ],
-      },
+    bedRooms: 2,
+    bathroom: 1,
+    size: 861,
+    latitude: 51.5074,
+    longitude: -0.1278,
+    city: "London",
+    address: "1234 Broadway St",
+    school: "250m away",
+    bus: "100m away",
+    restaurant: "50m away",
+    description:
+        "Future alike hill pull picture swim magic chain seed engineer nest outer raise bound easy poetry gain loud weigh me recognize farmer bare danger. actually put square leg vessels earth engine matter key cup indeed body film century shut place environment were stage vertical roof bottom lady function breeze darkness beside tin view local breathe carbon swam declared magnet escape has from pile apart route coffee storm someone hold space use ahead sheep jungle closely natural attached part top grain your grade trade corn salmon trouble new bend most teacher range anybody every seat fifteen eventually",
+};
 
-    ],
-  },
-  {
-    name: "Resources",
-    submenu: true,
-    sublinks: [
-      
-      
+export const userData = {
+    id: 1,
+    name: "John Doe",
+    img: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+};
 
-      {
-        Head: "sleepwear",
-        sublink: [
-          { name: "T-shirt", link: "/" },
-          { name: "Casual shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-        ],
-      },
-      {
-        Head: "footwear",
-        sublink: [
-          { name: "T-shirt", link: "/" },
-          { name: "Casual shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-          { name: "formal shirts", link: "/" },
-        ],
-      },
-    ],
-  },
-];
+{/* <div className="grid md:grid-cols-3 gap-4 flex-row xs:grid-cols-1 w-full justify-center ">
+        <div className="md:col-span-2 xs:col cursor-pointer flex w-full h-full">
+            <img src={images[0]} alt="" onClick={() => setImageIndex(0)} className="cursor-pointer w-full h- object-cover rounded-lg " />
+        </div>
+        <div className="md:col xs:col flex-col justify-between items-center gap-4 flex w-full ">
+            {images.slice(1).map((image, index) => (
+                <img src={image} alt="" key={index} onClick={() => setImageIndex(index + 1)} className="cursor-pointer w-full object-cover rounded-lg h-[200px]" />
+            ))}
+        </div>
+
+      </div> */}
+
+
+

@@ -27,7 +27,10 @@ import PrivateRoute from "./middleware/PrivateRoute.jsx";
 import DashboardDefault from "./components/Dashboard/Layout/Layout.jsx";
 import TenantDashboard from "./components/Tenants/Layout.jsx";
 
-import TenantMainDashboard from "./pages/TenantDashboard/MainPage.jsx"
+import TenantMainDashboard from "./pages/TenantDashboard/MainPage.jsx";
+import Create from "./pages/CreateLandLord/Create/Create.jsx";
+import AllListing from "./pages/Listing/AllListing/AllListing.jsx";
+import SinglePage from "./pages/Listing/SinglePage/SinglePage.jsx";
 
 
 
@@ -95,6 +98,9 @@ function App() {
               <Route path="/admin/dashboard">
                 <Route index element={<DashboardDefault />} />
                 <Route path="landlord" element={<MainDashboard />} />
+                <Route path="create/new" element={<Create />} />
+                <Route path="listing" element={<AllListing />} />
+                <Route path="listing/:id" element={<SinglePage />} />
               </Route>
 
               <Route path="/admin/renter">

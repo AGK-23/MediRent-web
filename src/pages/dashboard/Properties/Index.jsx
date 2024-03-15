@@ -53,7 +53,7 @@ const Index = () => {
                                 />
                                 <span className="flex justify-between ">
                                     <span className="flex flex-row relative w-full">
-                                        <span className="text-lg absolute -top-16 px-3 text-white text-sm bg-third">{Menu.address}</span>
+                                        <span className=" absolute -top-16 px-3 text-white text-sm bg-third">{Menu.address}</span>
                                     </span>
                                     {/* <span
                                         className={`ml-4 flex justify-center items-center`}

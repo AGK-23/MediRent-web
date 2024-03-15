@@ -5,6 +5,7 @@ import { BsBoxSeam } from "react-icons/bs";
 import { MdOutlineLocalShipping } from "react-icons/md";
 import ReactApexChart from "react-apexcharts";
 import { FiPlusCircle } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 // import { useState, useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
@@ -282,13 +283,19 @@ const Index = () => {
           <div className=" md:border-t md:border-b md:border-l xs:border">
             <div className="p-5">
               <div className="card-body">
-                <div className="flex justify-center items-center">
-                  <div className="">
-                    <div className="mb-5 md:text-[2rem] xs:text-[1.5rem] cursor-pointer rounded-full p-1 bg-gray-100  border-[1px] text-amber-600 flex justify-center items-center">
-                      <FiPlusCircle />
+                <Link
+                  to="/admin/dashboard/create/new"
+                  className="font-base block mb-2 text-slate-500 text-sm text-center"
+                >
+                  <div className="flex justify-center items-center">
+                    <div className="">
+                      <div className="mb-5 md:text-[2rem] xs:text-[1.5rem] cursor-pointer rounded-full p-1 bg-gray-100  border-[1px] text-amber-600 flex justify-center items-center">
+                        <FiPlusCircle />
+                      </div>
                     </div>
                   </div>
-                </div>
+                  {/* <span className="">CREATE LISTING</span> */}
+                </Link>
                 <span className="font-base block mb-2 text-slate-500 text-sm text-center">
                   CREATE LISTING
                 </span>
@@ -333,7 +340,7 @@ const Index = () => {
           <div className=" md:border-t md:border-b md:border-l xs:border">
             <div className="p-5">
               <div className="card-body">
-              <div className="flex justify-center items-center">
+                <div className="flex justify-center items-center">
                   <div className="">
                     <div className="mb-5 md:text-[2rem] xs:text-[1.5rem] cursor-pointer p-1 text-sky-600 flex justify-center items-center">
                       9
@@ -343,14 +350,14 @@ const Index = () => {
                 <span className="font-base block mb-2 text-slate-500 text-sm text-center">
                   TENANTS
                 </span>
-                
-                
+
+
               </div>
             </div>
           </div>
         </div>
       </div>
-      
+
     </div>
   );
 };

@@ -123,7 +123,7 @@ const MainLayout = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-40 flex w-full">hello dear</div>
+                    <div className="mt-40 flex w-full">hello </div>
                 </div>
             )}
             {!isAboveMediumScreens && (

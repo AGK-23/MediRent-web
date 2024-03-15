@@ -69,7 +69,7 @@ const SideNav = ({ OpenScreen, open }) => {
             id: 2, 
             title: "My Listings", 
             src: <PiHouseDuotone />, 
-            to: "/admin/dashboard/landlord" 
+            to: "/admin/dashboard/listing" 
         },
         // {
         //     id: 5,

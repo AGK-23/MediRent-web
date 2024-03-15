@@ -11,6 +11,7 @@ import { RiDashboardLine, RiPantoneLine } from "react-icons/ri";
 import { PiHouseDuotone } from "react-icons/pi";
 
 import { GoHome } from "react-icons/go";
+import { useState, useEffect } from "react";
 
 // import { useState, useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
@@ -18,10 +19,29 @@ import { GoHome } from "react-icons/go";
 // import { getUser } from "../../../features/auth/authSlice";
 
 const Index = () => {
+  const storedToken = localStorage.getItem('token');
+
+  const [userName, setUserName] = useState("")
+
+
+  // Parse the stringified object back to its original form
+  const userDetails = JSON.parse(storedToken);
+
+  // console.log("token image", userDetails?.firstName);
+
+  
+
+  useEffect(() => {
+    setUserName(userDetails?.firstName)
+    // console.log('Updated housingData:', userName);
+  }, [userName]); // Log housingData whenever it changes
+
+
+
   return (
     <div className="xs:mt-10 md:mt-0">
       <div>
-        <div className="text-slate-700 text-lg">Hello 👋, Kelvin</div>
+        <div className="text-slate-700 text-lg">Hello 👋, {userName}</div>
         <div className="text-gray-500 md:text-xs xs:text-[10px]">
           Welcome to your Medirent Dashboard
         </div>
