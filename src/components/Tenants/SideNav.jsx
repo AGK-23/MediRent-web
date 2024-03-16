@@ -51,7 +51,7 @@ const SideNav = ({ OpenScreen, open }) => {
         // nameThree: "Manage",
         nameFour: "Dashboard",
         nameFive: "Subscription",
-        nameSix: "Bookings",
+        nameSix: "Listings",
         // nameSeven: "Expenses",
         nameEight: "Rent now Pay Later",
         nameNine: "Accounts Settings",
@@ -68,9 +68,9 @@ const SideNav = ({ OpenScreen, open }) => {
         },
         { 
             id: 2, 
-            title: "Bookings", 
+            title: "Listings", 
             src: <CgNotes />, 
-            to: "/admin/renter/tenant" 
+            to: "/admin/renter/listing" 
         },
         // {
         //     id: 5,
@@ -382,7 +382,7 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                     </div>
                                                                 </Link>
 
-                                                                <Link to="/admin/renter/tenant">
+                                                                <Link to="/admin/renter/listing">
                                                                     <div
                                                                         onClick={() => {
                                                                             naming !== linkName.nameSix

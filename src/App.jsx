@@ -31,6 +31,8 @@ import TenantMainDashboard from "./pages/TenantDashboard/MainPage.jsx";
 import Create from "./pages/CreateLandLord/Create/Create.jsx";
 import AllListing from "./pages/Listing/AllListing/AllListing.jsx";
 import SinglePage from "./pages/Listing/SinglePage/SinglePage.jsx";
+import TenantListing from "./pages/TenantDashboard/TenantListing/TenantListing.jsx";
+import TenantSinglePage from "./pages/TenantDashboard/TenantListing/TenantSinglePage.jsx";
 
 
 
@@ -106,6 +108,8 @@ function App() {
               <Route path="/admin/renter">
                 <Route index element={<TenantDashboard />} />
                 <Route path="tenant" element={<TenantMainDashboard />} />
+                <Route path="listing" element={<TenantListing />} />
+                <Route path="tenant/listing/:id" element={<TenantSinglePage  />} />
               </Route>
 
             </Route>
