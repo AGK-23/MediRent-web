@@ -346,6 +346,21 @@ const CreateTenant = () => {
                 toast.success("Tenant's account Created");
             }
 
+            console.log("tenants account..", response.data.data);
+
+            localStorage.setItem("token", JSON.stringify(response.data.data));
+
+            localStorage.setItem("accessToken", JSON.stringify(response.data.data?.accessToken));
+
+            // Retrieve the stringified object from local storage
+            const storedToken = localStorage.getItem('token');
+
+
+            // Parse the stringified object back to its original form
+            const userDetails = JSON.parse(storedToken);
+
+            console.log("account item data..", storedToken, userDetails);
+
             if (userLoading === false) {
                 navigate('/success/tenant/1')
             }

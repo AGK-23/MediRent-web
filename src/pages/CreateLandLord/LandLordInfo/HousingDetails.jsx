@@ -810,7 +810,7 @@ const HousingDetails = ({  active, setActive, detailsData, setDetailsData, handl
 
 
                 <div className="bg-[#fff9e2] py-4 px-4 text-start text-[#c29c4b] md:text-base xs:text-xs my-10">
-                    MedsHousing will automatically select the nearest medical school and hospital to your location, but you can always change it later in your dashboard.
+                    MediRent will automatically select the nearest medical school and hospital to your location, but you can always change it later in your dashboard.
                 </div>
 
                 <div className="bg-[#fff9e2] py-4 px-4 text-start text-[#c29c4b] md:text-base xs:text-xs my-10">

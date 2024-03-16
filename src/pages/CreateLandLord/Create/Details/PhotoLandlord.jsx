@@ -14,7 +14,7 @@ const PhotoLandlord = ({ active, setActive, avatars, setAvatars, fileList, setFi
 
     const handleFileInputChange = (e) => {
         const files = e.target.files;
-        const maxPhotos = 5;
+        const maxPhotos = 4;
         const maxSize = 2 * 1024 * 1024; // 2MB in bytes
 
         if (files) {
@@ -41,7 +41,7 @@ const PhotoLandlord = ({ active, setActive, avatars, setAvatars, fileList, setFi
                         setIndexCounter((prevCounter) => prevCounter + 1); // Increment indexCounter
                     }
                 } else {
-                    alert(`You can only upload a maximum of 5 photos.`);
+                    alert(`You can only upload a maximum of 4 photos.`);
                 }
             });
         }
@@ -87,7 +87,7 @@ const PhotoLandlord = ({ active, setActive, avatars, setAvatars, fileList, setFi
                 </div>
 
                 <h1 className="md:text-base xs:text-sm text-center text-black font-mormal">
-                    Your current package allows you to upload up to  <b className="font-bold">5 pictures.</b>
+                    Your current package allows you to upload up to  <b className="font-bold">4 pictures.</b>
                 </h1>
 
                 <div className="grid justify-between items-center py-2 md:grid-cols-1 xs:grid-cols-1 xs:gap-5 lg:gap-5">

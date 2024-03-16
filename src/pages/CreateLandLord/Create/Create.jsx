@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 import { BsCheckLg } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,6 +24,7 @@ import Spinner from "../../../assets/svg/Spinner.svg"
 
 
 const Create = () => {
+    const navigate = useNavigate();
     // const [avatar, setAvatar] = useState(null);
     const [userLoading, setUserLoading] = useState(false);
 
@@ -230,21 +232,64 @@ const Create = () => {
     const handleSubmitCreateListing = async () => {
 
         try {
+
+            // Retrieve accessToken from localStorage
+            const accessToken = JSON.parse(localStorage.getItem('accessToken'));
+
+    
+            if (!accessToken) {
+                // Handle case where accessToken is not available
+                console.error('Access Token not found in localStorage');
+                return;
+            }
+    
+            // Set the headers with the accessToken
+            const headers = {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            };
+
+
             setUserLoading(true)
 
-            console.log("the create Listing  ...", createListing);
+            const convertedDates = [];
 
-            // const response = await axios.post(`https://medirent-api.onrender.com/housing/add-listing`,
-            //     createListing
-            // );
+            selectedDates.forEach(dateString => {
+                const date = new Date(dateString);
+                const utcDate = date.toISOString();
+                convertedDates.push(utcDate);
+            });
+
+            console.log("all the year in the bank..", convertedDates);
+
+            const requestBody = {
+                listingId: housing?.id,
+                propertyDates: convertedDates
+            };
+
+
+
+            console.log("the create Listing  ...", housing, requestBody);
+
+            const response = await axios.put(`https://medirent-api.onrender.com/housing/add-availability-period`,
+                {
+                    listingId: housing?.id,
+                    propertyDates: convertedDates
+                }, 
+                { headers }
+            );
 
             setUserLoading(false);
 
-            // if (response.data.success === true) {
-            //     toast.success("Listing Created");
-            // }
+            if (response.data.success === true) {
+                toast.success("Property Dates Created");
+                // setActive(1);
+                navigate('/admin/dashboard/listing')
+
+            }
 
             // console.log("all the Listing..", response.data);
+            
 
         } catch (error) {
             setUserLoading(false);
@@ -319,7 +364,7 @@ const Create = () => {
                 return;
             }
 
-            console.log("all the zone image...", housing, "store images...", fileList);
+            console.log("all the zone image...", housing?.id, "store images...", fileList);
 
             setImageLoading(true)
 
@@ -340,7 +385,7 @@ const Create = () => {
             // Extract the housingId from the housing object
             // const housingId = housing;
 
-            formData.append('housingId', housing); // Append the housingId string
+            formData.append('housingId', housing?.id); // Append the housingId string
 
             // for (var key of formData.entries()) {
             //     console.log(key[0] + ", " + key[1]);
@@ -416,7 +461,7 @@ const Create = () => {
                 </div> */}
 
 
-                <div className=" bg-gray-100 md:flex-1 flex-col w-full items-center relative z-10 flex font-medium justify-between max-w-screen-xl mx-auto">
+                <div className=" bg-gray-100 md:flex-1 flex-col w-full items-center relative flex font-medium justify-between max-w-screen-xl mx-auto">
                     <div className=" w-full mt-10">
                         <div className="w-full lg:flex xs:hidden md:hidden flex-row justify-center">
                             <div className="flex flex-col ">

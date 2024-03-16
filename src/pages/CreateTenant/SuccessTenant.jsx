@@ -50,7 +50,7 @@ const SuccessTenant = () => {
                             </div>
 
                         </div>
-                        <Link to="/auth/login" className="flex justify-center items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[10px] xs:py-3 xs:px-10">
+                        <Link to="/admin/renter/tenant" className="flex justify-center items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[10px] xs:py-3 xs:px-10">
                             Log in into your account
                         </Link>
                     </div>
