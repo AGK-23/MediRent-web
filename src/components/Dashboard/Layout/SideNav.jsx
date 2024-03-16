@@ -59,12 +59,14 @@ const SideNav = ({ OpenScreen, open }) => {
             title: "Dashboard",
             src: <RiDashboardLine />,
             to: "/admin/dashboard/landlord",
+            show: true 
         },
         {
             id: 2,
             title: "My Listings",
             src: <PiHouseDuotone />,
-            to: "/admin/dashboard/listing"
+            to: "/admin/dashboard/listing",
+            show: true 
         },
         // {
         //     id: 5,
@@ -79,6 +81,7 @@ const SideNav = ({ OpenScreen, open }) => {
             title: "Tenants",
             src: <LuUser2 />,
             to: "/admin/dashboard/landlord",
+            show: false
         },
         // {
         //     id: 10,
@@ -99,7 +102,8 @@ const SideNav = ({ OpenScreen, open }) => {
             id: 1,
             title: "Wallet",
             src: <IoWalletOutline />,
-            to: "/admin/dashboard/landlord"
+            to: "/admin/dashboard/landlord",
+            show: false
         },
         // {
         //     id: 6,
@@ -114,6 +118,7 @@ const SideNav = ({ OpenScreen, open }) => {
             src: <AiTwotoneFileText />,
             gap: true,
             to: "/admin/dashboard/landlord",
+            show: false
         },
         // {
         //     id: 8,
@@ -196,14 +201,14 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                     ? setHeading(Menu.title)
                                                                     : setHeading(Menu.title);
                                                             }}
-                                                            className={`flex rounded-md p-2 cursor-pointer hover:bg-third text-slate-700 text-sm items-center gap-x-4 
+                                                            className={`flex rounded-md p-2 cursor-pointer  text-slate-700 text-sm items-center gap-x-4 
                                                             ${Menu.gap
                                                                     ? "mt-4"
                                                                     : "mt-2"
                                                                 } 
-                                                            ${heading ===
-                                                                Menu.title &&
-                                                                "bg-third"
+                                                            ${Menu.show ===
+                                                                true ?
+                                                                " hover:bg-third hover:text-white": ""
                                                                 } `}
                                                         >
                                                             <li key={index} className="flex flex-row w-full">
