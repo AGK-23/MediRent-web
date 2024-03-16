@@ -65,12 +65,14 @@ const SideNav = ({ OpenScreen, open }) => {
             title: "Dashboard",
             src: <PiHouseDuotone />,
             to: "/admin/renter/tenant",
+            show: true 
         },
         { 
             id: 2, 
             title: "Listings", 
             src: <CgNotes />, 
-            to: "/admin/renter/listing" 
+            to: "/admin/renter/listing",
+            show: true 
         },
         // {
         //     id: 5,
@@ -85,6 +87,7 @@ const SideNav = ({ OpenScreen, open }) => {
             title: "Subscription",
             src: <BsBookmarkDash />,
             to: "/admin/renter/tenant",
+            show: false 
         },
         // {
         //     id: 10,
@@ -106,6 +109,7 @@ const SideNav = ({ OpenScreen, open }) => {
             title: "Rent Now Pay Later", 
             src: <IoWalletOutline />, 
             to: "/admin/renter/tenant",
+            show: false 
             
         },
         
@@ -113,8 +117,8 @@ const SideNav = ({ OpenScreen, open }) => {
             id: 7,
             title: "Maintenance",
             src: <LuStar />,
-            
             to: "/admin/renter/tenant",
+            show: false 
         },
         // {
         //     id: 8,
@@ -128,6 +132,7 @@ const SideNav = ({ OpenScreen, open }) => {
             title: "Payments",
             src: <MdOutlinePayment />,
             to: "/admin/renter/tenant",
+            show: false 
         },
         {
             id: 10,
@@ -137,6 +142,7 @@ const SideNav = ({ OpenScreen, open }) => {
             // arrow: true,
             gap: true,
             topic: "ACCOUNT MANAGEMENT",
+            show: false 
         },
     ];
 
@@ -213,16 +219,19 @@ const SideNav = ({ OpenScreen, open }) => {
                                                                     ? setHeading(Menu.title)
                                                                     : setHeading(Menu.title);
                                                             }}
-                                                            className={`mb-2 flex rounded-full p-2 cursor-pointer hover:bg-pink-500 hover:text-white text-white text-sm items-center gap-x-4 
+                                                            className={`mb-2 flex rounded-full p-2 cursor-pointer   text-white text-sm items-center gap-x-4 
                                                             ${Menu.gap
                                                                     ? "my-4"
                                                                     : "mt-2"
                                                                 } 
                                                             
-                                                            ${heading ===
-                                                                Menu.title &&
-                                                                "bg-pink-500 text-white"
-                                                                } `}
+                                                            ${Menu.show ===
+                                                                true ?
+                                                                " text-white hover:bg-pink-500 hover:text-white" : ""
+                                                                } 
+                                                            
+                                                                
+                                                            `}
                                                         >
                                                             <li key={index} className="flex flex-row w-full">
                                                                 <span className="flex justify-between w-full">
