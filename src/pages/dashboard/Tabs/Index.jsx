@@ -6,6 +6,7 @@ import { MdOutlineLocalShipping } from "react-icons/md";
 import ReactApexChart from "react-apexcharts";
 import { FiPlusCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 // import { useState, useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
@@ -275,9 +276,36 @@ const state = {
 };
 
 const Index = () => {
+  const storedToken = localStorage.getItem('token');
+
+  const [userName, setUserName] = useState("")
+
+
+  // Parse the stringified object back to its original form
+  const userDetails = JSON.parse(storedToken);
+
+  // console.log("token image", userDetails?.firstName);
+
+  
+
+  useEffect(() => {
+    setUserName(userDetails?.firstName)
+    // console.log('Updated housingData:', userName);
+  }, [userName]); // Log housingData whenever it changes
+
+
+
+
+
   return (
-    <div className="mt-0">
-      <div className="text-slate-700 text-lg">User Overview</div>
+    <div className="md:mt-0 xs:mt-10">
+      <div>
+        <div className="text-slate-700 text-lg">Hello 👋, {userName}</div>
+        <div className="text-gray-500 md:text-xs xs:text-[10px]">
+          Welcome to your Landlord's Dashboard
+        </div>
+      </div>
+      {/* <div className="text-slate-700 text-md">User Overview</div> */}
       <div className="mt-5 pb-5">
         <div className="grid flex-row gap-0 md:grid-cols-4 xs:grid-cols-1 shadow-md ">
           <div className=" md:border-t md:border-b md:border-l xs:border">

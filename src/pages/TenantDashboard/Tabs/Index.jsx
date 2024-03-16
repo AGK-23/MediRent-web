@@ -43,7 +43,7 @@ const Index = () => {
       <div>
         <div className="text-slate-700 text-lg">Hello 👋, {userName}</div>
         <div className="text-gray-500 md:text-xs xs:text-[10px]">
-          Welcome to your Medirent Dashboard
+          Welcome to your Tenant's Dashboard
         </div>
       </div>
       <div className="mt-5 pb-5">
