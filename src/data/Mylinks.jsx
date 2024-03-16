@@ -454,7 +454,33 @@ export const userData = {
     img: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 };
 
-
+{/* <div className="slider">
+            {avatars?.length < 0 && (
+                <div className="fullSlider fixed inset-0 flex justify-between items-center bg-black z-50">
+                    <div className="arrow flex items-center justify-center flex-1" onClick={() => changeSlide("left")}>
+                        <div className="text-4xl font-bold text-white cursor-pointer">
+                            <BsChevronCompactLeft />
+                        </div>
+                    </div>
+                    <div className="imgContainer flex-10">
+                        <img src={avatars[imageIndex]} alt="" className="w-full h-full object-cover" />
+                    </div>
+                    <div className="arrow flex items-center justify-center flex-1" onClick={() => changeSlide("right")}>
+                        <div className="text-4xl font-bold text-white cursor-pointer">
+                            <BsChevronCompactRight />
+                        </div>
+                    </div>
+                    <div className="close absolute top-0 right-0 text-white text-3xl font-bold py-5 px-10 cursor-pointer" onClick={() => setImageIndex(null)}>X</div>
+                </div>
+            )}
+            <div className="grid md:grid-cols-3 gap-4 flex-row xs:grid-cols-1 w-full justify-center">
+                {avatars?.map((image, index) => (
+                    <div key={index} onClick={() => setImageIndex(index)} className="cursor-pointer">
+                        <img src={image} alt="" className="object-cover rounded-lg h-[200px]" />
+                    </div>
+                ))}
+            </div>
+        </div> */}
 
 
 
