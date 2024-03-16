@@ -13,6 +13,7 @@ import axios from 'axios';
 
 const AllListing = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -31,31 +32,40 @@ const AllListing = () => {
         // Retrieve accessToken from localStorage
         const accessToken = JSON.parse(localStorage.getItem('accessToken'));
 
-    
+
         if (!accessToken) {
-            // Handle case where accessToken is not available
-            console.error('Access Token not found in localStorage');
-            return;
+          // Handle case where accessToken is not available
+          console.error('Access Token not found in localStorage');
+          return;
         }
 
         // Set the headers with the accessToken
         const headers = {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
         };
+
+        setIsLoading(true)
 
         const response = await axios.get('https://medirent-api.onrender.com/housing/get-all-user-listings', { headers });
 
-        console.log("all the response..", response);
-        setListings(response.data);
+        console.log("all the response..", response?.data);
+        setListings(response?.data?.data);
+
+        setIsLoading(false)
 
       } catch (error) {
         console.error('Error fetching listings:', error);
+        setIsLoading(false)
       }
     };
 
     fetchListings();
-  }, []); 
+  }, []);
+
+  const filteredListing = listings.filter(item => {
+    return item?.title?.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   return (
     <div className="flex flex-col h-full md:mt-0 xs:mt-20 px-5">
@@ -72,9 +82,19 @@ const AllListing = () => {
         <div className="h-full grid md:grid-cols-2 xs:grid-cols-1 gap-10 overflow-y-auto justify-center items-center pb-12">
           {/* <Filter /> */}
 
-          {filteredData.map(item => (
+          {/* {filteredListing.map(item => (
             <Card key={item.id} item={item} />
-          ))}
+          ))} */}
+
+          {!isLoading ? (
+            filteredListing.map(item => (
+              <Card key={item.id} item={item} />
+            ))
+          ) : (
+            <div className='w-screen flex justify-center items-center h-screen '>
+              <div className="loader"></div>
+            </div>
+          )}
         </div>
       </div>
       {/* <div className="h-fit flex-3 md:flex w-full bg-third xs:hidden">

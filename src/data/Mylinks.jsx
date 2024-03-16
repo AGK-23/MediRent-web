@@ -454,17 +454,7 @@ export const userData = {
     img: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 };
 
-{/* <div className="grid md:grid-cols-3 gap-4 flex-row xs:grid-cols-1 w-full justify-center ">
-        <div className="md:col-span-2 xs:col cursor-pointer flex w-full h-full">
-            <img src={images[0]} alt="" onClick={() => setImageIndex(0)} className="cursor-pointer w-full h- object-cover rounded-lg " />
-        </div>
-        <div className="md:col xs:col flex-col justify-between items-center gap-4 flex w-full ">
-            {images.slice(1).map((image, index) => (
-                <img src={image} alt="" key={index} onClick={() => setImageIndex(index + 1)} className="cursor-pointer w-full object-cover rounded-lg h-[200px]" />
-            ))}
-        </div>
 
-      </div> */}
 
 
 

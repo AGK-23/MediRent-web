@@ -385,7 +385,7 @@ const Create = () => {
             // Extract the housingId from the housing object
             // const housingId = housing;
 
-            formData.append('housingId', housing?.id); // Append the housingId string
+            // formData.append('listingId', housing?.id); // Append the housingId string
 
             // for (var key of formData.entries()) {
             //     console.log(key[0] + ", " + key[1]);
@@ -400,7 +400,7 @@ const Create = () => {
 
             console.log("format data..", formData, housing, fileList);
 
-            const response = await axios.post(`https://medirent-api.onrender.com/File/upload`, formData, { headers });
+            const response = await axios.post(`https://medirent-api.onrender.com/File/upload?listingId=${housing?.id}`, formData, { headers });
 
             setImageLoading(false)
 
