@@ -1167,8 +1167,6 @@ const CreateLandLord = () => {
 
                                         <div className="">
                                             <div >
-
-
                                                 <div className="relative my-10">
                                                     {selectedCity ? (
                                                         <select
@@ -1188,8 +1186,6 @@ const CreateLandLord = () => {
                                                     )}
 
                                                 </div>
-
-
                                             </div>
                                             <div className="relative my-10">
 

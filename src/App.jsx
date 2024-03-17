@@ -17,6 +17,7 @@ import CreateLandLord from "./pages/CreateLandLord/CreateLandLord.jsx";
 import SuccessLandLord from "./pages/CreateLandLord/SuccessLandLord.jsx";
 import SuccessTenant from "./pages/CreateTenant/SuccessTenant.jsx";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword.jsx";
+import ListingHome from "./components/ListingHome/ListingHome.jsx";
 
 
 // DASHBOARD 
@@ -79,6 +80,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<MainPage />} />
+            <Route path="/listings" element={<ListingHome />} />
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/registration-page" element={<CreateTenant />} />
             <Route path="/auth/housing-subscription" element={<CreateLandLord />} />
