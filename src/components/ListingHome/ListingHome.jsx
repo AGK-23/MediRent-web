@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import ListingItem from './ListingItem';
 import { useLocation } from 'react-router-dom';
+import NoFound from "../../assets/svg/NoHouse.svg"
 
 
 const ListingHome = () => {
@@ -21,24 +22,29 @@ const ListingHome = () => {
 
     useEffect(() => {
         console.log('estate in the building:', result, emptyLoading);
-    }, [result]); 
+    }, [result]);
 
-    
 
-    
+
+
 
     return (
-        <div className="flex flex-col h-full md:mt-0 xs:mt-20 px-5 ">
+        <div className="flex flex-col h-full md:mt-0 xs:mt-20">
 
-            <div className=" h-screen flex-col justify-center items-center">
-                <div className="h-full grid md:grid-cols-2 xs:grid-cols-1 gap-10 overflow-y-auto justify-center items-center pb-12">
-                    {!emptyLoading ? (
+            <div className="h-screen flex-col justify-center items-center md:mt-0 xs:mt-20 overflow-y-hidden">
+                <div className="h-full grid md:grid-cols-2 xs:grid-cols-1 gap-10  justify-center items-center pb-12 md:px-10 xs:px-0 ">
+                    {result?.length > 0  ? (
                         result?.map(item => (
                             <ListingItem key={item.id} item={item} />
                         ))
                     ) : (
-                        <div className='w-screen flex justify-center items-center h-screen '>
-                            <div className="loader"></div>
+                        <div className="flex justify-center items-center w-screen h-full ">
+                            <div className='flex flex-col '>
+                                
+                                <img alt="" src={NoFound} className="text-7xl w-full  h-full" />
+                                <div className='md:text-2xl xs:text-lg font-semibold text-center mt-5 text-gray-600'>No Location Found</div>
+                            </div>
+
                         </div>
                     )}
                 </div>
