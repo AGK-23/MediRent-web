@@ -73,7 +73,7 @@ const Index = () => {
                 );
 
                 console.log("all the response..", response?.data?.data);
-                setListings(response?.data?.data?.items);
+                setListings(response?.data?.data?.items.slice(0, 3));
 
                 console.log("all the positive report..", listings)
 
