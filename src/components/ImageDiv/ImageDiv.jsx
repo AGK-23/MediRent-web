@@ -69,6 +69,9 @@ const ImageDiv = () => {
 
   var { country, province } = formData;
 
+  const [listings, setListings] = useState([]);
+  const [emptyLoading, setEmptyLoading] = useState(true)
+
   // FUNCTION TO GET THE COUNTRY AND THE STATE
   function fetchData() {
     const options = {
@@ -140,6 +143,18 @@ const ImageDiv = () => {
     }));
   };
 
+//   useEffect(() => {
+//     console.log('Updated housingData:', listings);
+// }, [listings]); 
+
+useEffect(() => {
+  if (listings.length > 0) {
+    console.log('Updated housingData:', listings);
+      // Navigate to /listings only if listings array is not empty
+      navigate('/listings', { state: { result: listings, emptyLoading } });
+  }
+}, [listings]); // Run the effect whenever listings state changes
+
   const handleListing = async () => {
     // e.preventDefault();
     try {
@@ -157,22 +172,40 @@ const ImageDiv = () => {
         {
           pageIndex: 1,
           pageSize: 10,
-          filter: province,
+          filter: "country",
           keyword: country
         },
 
       );
 
+      if (response?.data?.code === null) {
+        setEmptyLoading(false)
+        console.log("empty Loading...", emptyLoading);
+      }
+
       setUserLoading(false);
 
-      console.log("Landlord is rent..", response.data.data);
+      console.log("Landlord is rent..", response.data.data.items);
+      setListings(response?.data?.data?.items);
+
+      console.log("all the user..", listings);
 
       if (response.data.success === true) {
-        toast.success("Landlord's account Created");
+        // toast.success("Landlord's account Created");
+        // navigate('/listings', { state: { result: listings, emptyLoading } });
       }
     } catch (error) {
       setUserLoading(false);
       console.log("error in the landlord..", error);
+
+      console.log("all the promise in the code..", error?.response?.data);
+      if (error?.response?.data?.data === null) {
+        setEmptyLoading(false)
+        console.log("empty Loading...", emptyLoading);
+        navigate('/listings', { state: { result: listings, emptyLoading } });
+      }
+
+      console.log("the current image..", emptyLoading)
     }
 
     // setActive(2)

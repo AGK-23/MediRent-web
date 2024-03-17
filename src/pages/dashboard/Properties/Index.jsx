@@ -41,11 +41,6 @@ const Index = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(false)
 
-
-
-
-
-
     const [listings, setListings] = useState([]);
     useEffect(() => {
         const fetchListings = async () => {

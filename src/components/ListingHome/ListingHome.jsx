@@ -1,89 +1,54 @@
 
 
-import Card from '../../pages/Listing/AllListing/Card';
+// import Card from '../../pages/Listing/AllListing/Card';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import ListingItem from './ListingItem';
+import { useLocation } from 'react-router-dom';
 
 
-const ListingHome  = () => {
+const ListingHome = () => {
+    const location = useLocation();
+    // const history = useHistory();
 
-  const [isLoading, setIsLoading] = useState(false)
+    // Destructure result with a default empty object in case location.state is not available
+    const { result } = location.state;
 
-  
-  
-
-  const [listings, setListings] = useState([]);
-
-  useEffect(() => {
-    const fetchListings = async () => {
-      try {
-        // Retrieve accessToken from localStorage
-        const accessToken = JSON.parse(localStorage.getItem('accessToken'));
+    const { listings = [], emptyLoading } = result;
+    const [isLoading, setIsLoading] = useState(false);
 
 
-        if (!accessToken) {
-          // Handle case where accessToken is not available
-          console.error('Access Token not found in localStorage');
-          return;
-        }
+    useEffect(() => {
+        console.log('estate in the building:', result, emptyLoading);
+    }, [result]); 
 
-        // Set the headers with the accessToken
-        const headers = {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-        };
+    
 
-        setIsLoading(true)
+    
 
-        const response = await axios.get('https://medirent-api.onrender.com/housing/get-all-user-listings', { headers });
+    return (
+        <div className="flex flex-col h-full md:mt-0 xs:mt-20 px-5 ">
 
-        console.log("all the response..", response?.data);
-        setListings(response?.data?.data);
-
-        setIsLoading(false)
-
-      } catch (error) {
-        console.error('Error fetching listings:', error);
-        setIsLoading(false)
-      }
-    };
-
-    fetchListings();
-  }, []);
-
-  const filteredListing = listings.filter(item => {
-    return item?.title?.toLowerCase().includes(searchTerm.toLowerCase());
-  });
-
-  return (
-    <div className="flex flex-col h-full md:mt-0 xs:mt-20 px-5">
-      
-      <div className=" h-full flex-col justify-center items-center">
-        <div className="h-full grid md:grid-cols-2 xs:grid-cols-1 gap-10 overflow-y-auto justify-center items-center pb-12">
-          {/* <Filter /> */}
-
-          {/* {filteredListing.map(item => (
-            <Card key={item.id} item={item} />
-          ))} */}
-
-          {!isLoading ? (
-            filteredListing.map(item => (
-              <Card key={item.id} item={item} />
-            ))
-          ) : (
-            <div className='w-screen flex justify-center items-center h-screen '>
-              <div className="loader"></div>
+            <div className=" h-screen flex-col justify-center items-center">
+                <div className="h-full grid md:grid-cols-2 xs:grid-cols-1 gap-10 overflow-y-auto justify-center items-center pb-12">
+                    {!emptyLoading ? (
+                        result?.map(item => (
+                            <ListingItem key={item.id} item={item} />
+                        ))
+                    ) : (
+                        <div className='w-screen flex justify-center items-center h-screen '>
+                            <div className="loader"></div>
+                        </div>
+                    )}
+                </div>
             </div>
-          )}
-        </div>
-      </div>
-      {/* <div className="h-fit flex-3 md:flex w-full bg-third xs:hidden">
+            {/* <div className="h-fit flex-3 md:flex w-full bg-third xs:hidden">
             <Map items={data} />
 
           </div> */}
-    </div>
-  );
+        </div>
+    );
 }
 
 export default ListingHome 
