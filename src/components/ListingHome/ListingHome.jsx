@@ -29,9 +29,9 @@ const ListingHome = () => {
 
 
     return (
-        <div className="flex flex-col h-full md:mt-0 xs:mt-20 ">
+        <div className="flex flex-col h-full md:mt-20 xs:mt-20 ">
 
-            <div className="h-screen flex-col justify-center items-center md:mt-0 xs:mt-20 ">
+            <div className="h-full flex-col justify-center items-center md:mt-32 xs:mt-20 ">
                 <div className="h-full grid md:grid-cols-2 xs:grid-cols-1 gap-10  justify-center items-center pb-12 md:px-10 xs:px-0 ">
                     {result?.length > 0  ? (
                         result?.map(item => (
