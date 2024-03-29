@@ -7,10 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "test:chrome": "npx playwright test --headed --browser=chromium",
-    "test:firefox": "npx playwright test --headed --browser=firefox",
-    "test:safari": "npx playwright test --headed --browser=webkit"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@react-google-maps/api": "^2.19.3",
