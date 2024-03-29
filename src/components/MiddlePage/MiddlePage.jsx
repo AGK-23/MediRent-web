@@ -13,7 +13,7 @@ import Medicine12 from "../../assets/medicine_12.jpg";
 import Medicine7 from "../../assets/medicine_7.jpg";
 import Medicine4 from "../../assets/medicine_4.jpg";
 
-import { Fade } from 'react-reveal';
+
 
 
 

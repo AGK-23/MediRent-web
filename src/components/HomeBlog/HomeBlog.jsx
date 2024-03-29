@@ -16,7 +16,7 @@ import Medicine4 from "../../assets/medicine_4.jpg";
 import Card14 from "../../assets/card_14.jpg";
 import Card13 from "../../assets/card_13.jpeg";
 
-import { Fade } from 'react-reveal';
+
 
 
 
@@ -34,7 +34,6 @@ const HomeBlog = () => {
                             <div className="mx-auto">
                                 <div className="flex justify-center items-center flex-col">
 
-                                <Fade up >
                                     <div>
                                         <div className='relative px-2'>
                                             <Link className="text-1.302vw absolute right-4 text-[#0c527b] font-serif transition-colors duration-150 top-6" href="/">See all →</Link>
@@ -95,8 +94,7 @@ const HomeBlog = () => {
                                         
 
                                     </div>
-
-                                </Fade>
+                                
 
 
 
