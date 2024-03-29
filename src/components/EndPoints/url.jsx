@@ -26,7 +26,7 @@ export const TenantUser = async (userData) => {
         // const BACKEND_URL = "https://medirent-api.onrender.com"
 
 
-        console.log("first email...", userData);
+        // console.log("first email...", userData);
 
         // const config = {
         //     headers: {
@@ -81,7 +81,7 @@ export const TenantUser = async (userData) => {
             error.toString();
         toast.error(message);
 
-        console.log("user profile..", error);
+        // console.log("user profile..", error);
     }
 };
 

@@ -12,7 +12,7 @@ const Layout = () => {
 
   const OpenScreen = () => {
     setOpen(!open);
-    console.log("open screen...", open);
+    // console.log("open screen...", open);
   };
 
   return (

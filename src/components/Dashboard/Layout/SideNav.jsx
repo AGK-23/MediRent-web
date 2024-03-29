@@ -136,7 +136,7 @@ const SideNav = ({ OpenScreen, open }) => {
     ];
 
     const handleClickUser = () => {
-        console.log("all the menu..");
+        // console.log("all the menu..");
         localStorage.removeItem('token'); // Assuming the token is stored in localStorage
         localStorage.removeItem('accessToken'); // Assuming the token is stored in localStorage
         navigate('/auth/login')

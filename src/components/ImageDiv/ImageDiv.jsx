@@ -166,7 +166,7 @@ useEffect(() => {
 
       setUserLoading(true);
 
-      console.log("user form for landlord...", formData);
+      // console.log("user form for landlord...", formData);
 
       const response = await axios.post('https://medirent-api.onrender.com/housing/get-all-listings',
         {
@@ -180,15 +180,15 @@ useEffect(() => {
 
       if (response?.data?.code === null) {
         setEmptyLoading(false)
-        console.log("empty Loading...", emptyLoading);
+        // console.log("empty Loading...", emptyLoading);
       }
 
       setUserLoading(false);
 
-      console.log("Landlord is rent..", response.data.data.items);
+      // console.log("Landlord is rent..", response.data.data.items);
       setListings(response?.data?.data?.items);
 
-      console.log("all the user..", listings);
+      // console.log("all the user..", listings);
 
       if (response.data.success === true) {
         // toast.success("Landlord's account Created");
@@ -196,16 +196,16 @@ useEffect(() => {
       }
     } catch (error) {
       setUserLoading(false);
-      console.log("error in the landlord..", error);
+      // console.log("error in the landlord..", error);
 
       console.log("all the promise in the code..", error?.response?.data);
       if (error?.response?.data?.data === null) {
         setEmptyLoading(false)
-        console.log("empty Loading...", emptyLoading);
+        // console.log("empty Loading...", emptyLoading);
         navigate('/listings', { state: { result: listings, emptyLoading } });
       }
 
-      console.log("the current image..", emptyLoading)
+      // console.log("the current image..", emptyLoading)
     }
 
     // setActive(2)
