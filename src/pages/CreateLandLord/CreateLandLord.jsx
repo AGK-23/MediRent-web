@@ -338,7 +338,7 @@ const CreateLandLord = () => {
 
             setLandLoading(true);
 
-            console.log("user form for landlord...", formData);
+            // console.log("user form for landlord...", formData);
 
             const response = await axios.post(`https://medirent-api.onrender.com/account/landlord-registration`,
                 formData,
@@ -346,7 +346,7 @@ const CreateLandLord = () => {
 
             setLandLoading(false);
 
-            console.log("Landlord is rent..", response.data.data, "Loading..", landLoading);
+            // console.log("Landlord is rent..", response.data.data, "Loading..", landLoading);
 
             if (response.data.success === true) {
                 toast.success("Landlord's account Created");
@@ -357,7 +357,7 @@ const CreateLandLord = () => {
 
         } catch (error) {
             setLandLoading(false);
-            console.log("error in the landlord..", error)
+            // console.log("error in the landlord..", error)
         }
 
         // setActive(2)
@@ -371,7 +371,7 @@ const CreateLandLord = () => {
             setLoginLoading(true)
 
 
-            console.log("lOGIN DATA...", loginData);
+            // console.log("lOGIN DATA...", loginData);
 
             const response = await axios.post(`https://medirent-api.onrender.com/account/signin`,
                 loginData,
@@ -379,7 +379,7 @@ const CreateLandLord = () => {
 
             setLoginLoading(false)
 
-            console.log("landlord account..", response.data.data, "Loading..", loginLoading);
+            // console.log("landlord account..", response.data.data, "Loading..", loginLoading);
 
             localStorage.setItem("token", JSON.stringify(response.data.data));
 
@@ -392,7 +392,7 @@ const CreateLandLord = () => {
             // Parse the stringified object back to its original form
             const userDetails = JSON.parse(storedToken);
 
-            console.log("account item..", storedToken, userDetails);
+            // console.log("account item..", storedToken, userDetails);
 
 
 
@@ -410,7 +410,7 @@ const CreateLandLord = () => {
             toast.error(message);
             setLoginLoading(false)
 
-            console.log("user login..", error);
+            // console.log("user login..", error);
         }
 
 
@@ -419,7 +419,7 @@ const CreateLandLord = () => {
     // TOGGLE THROUGH THE PAGE FUNCTION 
     const handleProviderOne = () => {
         handleCheckLandLord()
-        console.log("all the data..", formData);
+        // console.log("all the data..", formData);
 
     };
 
@@ -502,7 +502,7 @@ const CreateLandLord = () => {
             functionOption: e.target.nextSibling.textContent.trim(),
         }));
 
-        console.log("king ...", functionOption, "hair..", e.target.nextSibling.textContent.trim());
+        // console.log("king ...", functionOption, "hair..", e.target.nextSibling.textContent.trim());
     };
 
     const handleCityChange = (event) => {
@@ -575,7 +575,7 @@ const CreateLandLord = () => {
                 convertedDates.push(utcDate);
             });
 
-            console.log("all the year in the bank..", convertedDates);
+            // console.log("all the year in the bank..", convertedDates);
 
             const requestBody = {
                 listingId: housing?.id,
@@ -584,7 +584,7 @@ const CreateLandLord = () => {
 
 
 
-            console.log("the create Listing  ...", housing, requestBody);
+            // console.log("the create Listing  ...", housing, requestBody);
 
             const response = await axios.put(`https://medirent-api.onrender.com/housing/add-availability-period`,
                 {
@@ -628,7 +628,7 @@ const CreateLandLord = () => {
     
             if (!accessToken) {
                 // Handle case where accessToken is not available
-                console.error('Access Token not found in localStorage');
+                // console.error('Access Token not found in localStorage');
                 return;
             }
     
@@ -661,7 +661,7 @@ const CreateLandLord = () => {
 
         } catch (error) {
             // Handle errors
-            console.error('Error creating listing:', error);
+            // console.error('Error creating listing:', error);
             setHousingLoading(false);
             throw error; // Throw the error for further handling if needed
         }
@@ -679,7 +679,7 @@ const CreateLandLord = () => {
                 return;
             }
 
-            console.log("all the zone image...", housing?.id, "store images...",  fileList);
+            // console.log("all the zone image...", housing?.id, "store images...",  fileList);
 
             setImageLoading(true)
 
@@ -692,9 +692,9 @@ const CreateLandLord = () => {
             const formData = new FormData();
             
             fileList.forEach((file, index) => {
-                console.log("all the file..", file, index);
+                // console.log("all the file..", file, index);
                 formData.append(`files`, file);
-                console.log("alll the format in the data..", formData);
+                // console.log("alll the format in the data..", formData);
             });
 
             // Extract the housingId from the housing object
@@ -707,19 +707,19 @@ const CreateLandLord = () => {
             // }
 
             for (var [key, value] of formData.entries()) { 
-                console.log("al the key..", key, value);
+                // console.log("al the key..", key, value);
             }
 
 
             // formData.append('housingId', housing);
 
-            console.log("format data..", formData, housing, fileList);
+            // console.log("format data..", formData, housing, fileList);
 
             const response = await axios.post(`https://medirent-api.onrender.com/File/upload?listingId=${housing?.id}`, formData, { headers });
 
             setImageLoading(false)
 
-            console.log('Files uploaded:', response.data);
+            // console.log('Files uploaded:', response.data);
 
             if (response.data.success === true) {
                 toast.success("Images Successfully Uploaded");
@@ -730,7 +730,7 @@ const CreateLandLord = () => {
             return response.data;
         } catch (error) {
             setImageLoading(false)
-            console.error('Error uploading files:', error);
+            // console.error('Error uploading files:', error);
             throw error;
         }
     };

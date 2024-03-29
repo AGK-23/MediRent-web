@@ -198,7 +198,7 @@ useEffect(() => {
       setUserLoading(false);
       // console.log("error in the landlord..", error);
 
-      console.log("all the promise in the code..", error?.response?.data);
+      // console.log("all the promise in the code..", error?.response?.data);
       if (error?.response?.data?.data === null) {
         setEmptyLoading(false)
         // console.log("empty Loading...", emptyLoading);

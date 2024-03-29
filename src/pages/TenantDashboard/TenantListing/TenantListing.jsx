@@ -48,12 +48,12 @@ const TenantListing = () => {
                     { headers }
                 );
 
-                console.log("all main page..", response?.data?.data);
+                // console.log("all main page..", response?.data?.data);
                 setListings(response?.data?.data?.items);
 
-                console.log("all the top..", listings)
+                // console.log("all the top..", listings)
 
-                console.log("made from Africa ..", response?.data?.data?.items);
+                // console.log("made from Africa ..", response?.data?.data?.items);
 
                 setIsLoading(false)
 

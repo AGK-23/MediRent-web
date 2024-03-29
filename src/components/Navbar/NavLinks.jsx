@@ -47,7 +47,7 @@ const NavLinks = () => {
 
   let domNode = useClickOutside(() => {
     setHeading("");
-    console.log(subHeading)
+    // console.log(subHeading)
   });
 
   return (

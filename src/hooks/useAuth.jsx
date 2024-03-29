@@ -20,7 +20,7 @@ const useAuth = () => {
     // Parse the stringified object back to its original form
     const userDetails = JSON.parse(storedToken);
 
-    console.log("all the role..", storedToken, userDetails);
+    // console.log("all the role..", storedToken, userDetails);
 
     let isLandLord = false;
     let isTenants = false;
@@ -36,7 +36,7 @@ const useAuth = () => {
         if (isLandLord) status = "Landlord";
         if (isTenants) status = "Tenant";
 
-        console.log("real time role..", status)
+        // console.log("real time role..", status)
 
         // return {
         //     roles,
@@ -46,11 +46,11 @@ const useAuth = () => {
         // }
     }
 
-    console.log("all the money..", role,
-    status,
-    isTenants,
-    isLandLord,
-    userDetails)
+    // console.log("all the money..", role,
+    // status,
+    // isTenants,
+    // isLandLord,
+    // userDetails)
 
     return {
         role,

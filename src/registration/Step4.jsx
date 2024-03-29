@@ -51,7 +51,7 @@ class App extends Component {
             this.state.selectedFile.name
         );
 
-        console.log(this.state.selectedFile);
+        // console.log(this.state.selectedFile);
 
 
         axios.post("api/uploadfile", formData);

@@ -23,7 +23,7 @@ function TenantSinglePage() {
 
     useEffect(() => {
 
-        console.log("data life..", id)
+        // console.log("data life..", id)
         const fetchListings = async () => {
             try {
                 // Retrieve accessToken from localStorage
@@ -44,7 +44,7 @@ function TenantSinglePage() {
 
                 const response = await axios.get(`https://medirent-api.onrender.com/housing/get-listing/${id}`, { headers });
 
-                console.log("all the individual person..", response?.data);
+                // console.log("all the individual person..", response?.data);
                 setListings(response?.data?.data);
 
             } catch (error) {
