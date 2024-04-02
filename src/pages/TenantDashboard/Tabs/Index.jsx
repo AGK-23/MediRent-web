@@ -1,22 +1,7 @@
-// import React from 'react'
-import { AiOutlinePieChart, AiOutlineClockCircle } from "react-icons/ai";
-import { HiArrowSmUp, HiArrowSmDown } from "react-icons/hi";
-import { BsBoxSeam } from "react-icons/bs";
-import { MdOutlineLocalShipping } from "react-icons/md";
-import ReactApexChart from "react-apexcharts";
-import { FiPlusCircle } from "react-icons/fi";
 
-import { RiDashboardLine, RiPantoneLine } from "react-icons/ri";
-
-import { PiHouseDuotone } from "react-icons/pi";
-
-import { GoHome } from "react-icons/go";
 import { useState, useEffect } from "react";
 
-// import { useState, useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate, Link } from "react-router-dom";
-// import { getUser } from "../../../features/auth/authSlice";
+
 
 const Index = () => {
   const storedToken = localStorage.getItem('token');

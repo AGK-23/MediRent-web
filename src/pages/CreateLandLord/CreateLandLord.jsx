@@ -11,8 +11,7 @@ import { BsCheckLg, BsChevronLeft, BsShopWindow } from "react-icons/bs";
 
 // import Currency from "../../registration/Currency.jsx"
 
-import { AiOutlineCloudUpload } from "react-icons/ai";
-import Calendar from "../../registration/Calendar.jsx";
+
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 

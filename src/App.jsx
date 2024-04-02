@@ -40,33 +40,9 @@ import TenantSinglePage from "./pages/TenantDashboard/TenantListing/TenantSingle
 
 
 
-import SignUp from "../src/registration/SignUp";
-import SignUp5 from "../src/registration/SignUp5.jsx"
-import Home from "./Home.jsx";
-import Signing from "./Signed/Signing.jsx";
-import CopyWrite from "./LandPage/CopyWrite.jsx";
-import Medhouse from "./LandPage/Medhouse.jsx";
-import Nav from "./Nav.jsx";
-// import "./App.css";
-import BlogPath from "./links/BlogPath.jsx";
-import Purpular from "./links/Purpular.jsx";
-import Pricing from "./links/Pricing.jsx";
-import AboutPath from "./links/AboutPath.jsx";
-import Adding from "./links/Adding.jsx";
-import Cardsec from "./links/Cardsec.jsx";
-import Cardthd from "./links/Cardthd.jsx";
-import Addingft from "./links/Addingft.jsx";
-import Messageme from "./Message/Messageme.jsx";
-import Mapapi from "./LandPage/Mapapi.jsx";
-import Listing from "./links/Listing.jsx";
-import FaqPath from "./links/FaqPath.jsx";
-import FaqPathsec from "./links/FaqPathsec.jsx";
-import FaqTenant from "./links/FaqTenant.jsx";
 
-// const Roles = {
-//   Tenants: "Tenants",
-//   Landlord: "Landlord",
-// }
+
+
 
 function App() {
 
@@ -90,12 +66,6 @@ function App() {
 
           </Route>
 
-          {/* <Route path="/admin/dashboard">
-            <Route index element={<DashboardDefault />} />
-            <Route path="landlord" element={<MainDashboard />} />
-            <Route path="create" element={<MainDashboard />} />
-          </Route> */}
-
           <Route element={<RequireAuth allowedRoles={[...Object.values(Roles)]} />}>
             <Route element={<PrivateRoute />}>
 
@@ -116,17 +86,6 @@ function App() {
 
             </Route>
           </Route>
-
-          {/* <Route element={<RequireAuth allowedRoles={[...Object.values(Roles)]} />}>
-            <Route element={<PrivateRoute />}>
-              
-            </Route>
-          </Route> */}
-
-
-
-
-
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
