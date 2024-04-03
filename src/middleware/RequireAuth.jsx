@@ -2,9 +2,17 @@ import useAuth from "../hooks/useAuth";
 import { Navigate, useLocation, Outlet } from "react-router-dom";
 // import { Roles } from "../../config/roles";
 
-const RequireAuth = ({ allowedRoles }) => {
+const RequireAuth = () => {
     const location = useLocation();
     const { role } = useAuth();
+
+    const roles = {
+        Tenant: "Tenant",
+        Landlord: "Landlord",
+    }
+
+    let allowedRoles = Object.values(roles)
+    console.log("all the role..", allowedRoles)
 
 
     let requiredRoles = allowedRoles.filter(allowedRole => allowedRole.includes(role))[0]

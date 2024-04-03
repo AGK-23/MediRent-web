@@ -1,85 +1,87 @@
-import { useState, useEffect } from "react";
+import React, { lazy, Suspense } from 'react';
+import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import Featured from "./components/Navbar/Featured";
-// eslint-disable-next-line no-unused-vars
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import Spinner from './components/Spinner/Spinner';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 
-import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary.jsx";
-import NotFound from "./pages/Error/error.jsx";
-import Unauthorized from "./pages/Error/unathorized.jsx";
-import Layout from "./components/Navbar/Layout.jsx";
-import MainPage from "./components/MainPage/MainPage.jsx";
-import Login from "./pages/login/Login.jsx";
-import CreateTenant from "./pages/CreateTenant/CreateTenant.jsx";
-import CreateLandLord from "./pages/CreateLandLord/CreateLandLord.jsx";
-import SuccessLandLord from "./pages/CreateLandLord/SuccessLandLord.jsx";
-import SuccessTenant from "./pages/CreateTenant/SuccessTenant.jsx";
-import ForgotPassword from "./pages/ForgotPassword/ForgotPassword.jsx";
-import ListingHome from "./components/ListingHome/ListingHome.jsx";
 
+// import { Roles } from "./config/roles.jsx";
 
-// DASHBOARD 
-import { Roles } from "./config/roles.jsx";
-import RequireAuth from "./middleware/RequireAuth.jsx";
-import MainDashboard from "./pages/dashboard/MainPage.jsx";
-import PrivateRoute from "./middleware/PrivateRoute.jsx";
-import DashboardDefault from "./components/Dashboard/Layout/Layout.jsx";
-import TenantDashboard from "./components/Tenants/Layout.jsx";
+const { Roles } = lazy(() => import('./config/roles.jsx'));
+const RequireAuth = lazy(() => import('./middleware/RequireAuth.jsx'));
+const PrivateRoute = lazy(() => import('./middleware/PrivateRoute.jsx'));
 
-import TenantMainDashboard from "./pages/TenantDashboard/MainPage.jsx";
-import Create from "./pages/CreateLandLord/Create/Create.jsx";
-import AllListing from "./pages/Listing/AllListing/AllListing.jsx";
-import SinglePage from "./pages/Listing/SinglePage/SinglePage.jsx";
-import TenantListing from "./pages/TenantDashboard/TenantListing/TenantListing.jsx";
-import TenantSinglePage from "./pages/TenantDashboard/TenantListing/TenantSinglePage.jsx";
-
+const Layout = lazy(() => import('./components/Navbar/Layout'));
+const MainPage = lazy(() => import('./components/MainPage/MainPage'));
+const ListingHome = lazy(() => import('./components/ListingHome/ListingHome'));
+const Login = lazy(() => import('./pages/login/Login'));
+const CreateTenant = lazy(() => import('./pages/CreateTenant/CreateTenant'));
+const CreateLandLord = lazy(() => import('./pages/CreateLandLord/CreateLandLord'));
+const SuccessLandLord = lazy(() => import('./pages/CreateLandLord/SuccessLandLord'));
+const SuccessTenant = lazy(() => import('./pages/CreateTenant/SuccessTenant'));
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword/ForgotPassword'));
+const DashboardDefault = lazy(() => import('./components/Dashboard/Layout/Layout'));
+const MainDashboard = lazy(() => import('./pages/dashboard/MainPage'));
+const TenantDashboard = lazy(() => import('./components/Tenants/Layout'));
+const TenantMainDashboard = lazy(() => import('./pages/TenantDashboard/MainPage'));
+const Create = lazy(() => import('./pages/CreateLandLord/Create/Create'));
+const AllListing = lazy(() => import('./pages/Listing/AllListing/AllListing'));
+const SinglePage = lazy(() => import('./pages/Listing/SinglePage/SinglePage'));
+const TenantListing = lazy(() => import('./pages/TenantDashboard/TenantListing/TenantListing'));
+const TenantSinglePage = lazy(() => import('./pages/TenantDashboard/TenantListing/TenantSinglePage'));
+const Unauthorized = lazy(() => import('./pages/Error/unathorized'));
+const NotFound = lazy(() => import('./pages/Error/error'));
 
 function App() {
   return (
     <ErrorBoundary>
       <div>
         <ToastContainer />
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/listings" element={<ListingHome />} />
-            <Route path="/auth/login" element={<Login />} />
-            <Route path="/auth/registration-page" element={<CreateTenant />} />
-            <Route path="/auth/housing-subscription" element={<CreateLandLord />} />
-            <Route path="/success/landlord/1" element={<SuccessLandLord />} />
-            <Route path="/success/tenant/1" element={<SuccessTenant />} />
-            <Route path="/auth/forgotpassword" element={<ForgotPassword />} />
+          <Suspense fallback={<Spinner />}>
+            <Routes>
 
-          </Route>
+                <Route path="/" element={<Layout />}>
+                  <Route path="/" element={<MainPage />} />
+                  <Route path="/listings" element={<ListingHome />} />
+                  <Route path="/auth/login" element={<Login />} />
+                  <Route path="/auth/registration-page" element={<CreateTenant />} />
+                  <Route path="/auth/housing-subscription" element={<CreateLandLord />} />
+                  <Route path="/success/landlord/1" element={<SuccessLandLord />} />
+                  <Route path="/success/tenant/1" element={<SuccessTenant />} />
+                  <Route path="/auth/forgotpassword" element={<ForgotPassword />} />
+                </Route>
+                <Route element={<RequireAuth  />}>
+                  <Route element={<PrivateRoute />}>
+                      <Route path="/admin/dashboard">
+                        <Route index element={<DashboardDefault />} />
+                        <Route path="landlord" element={<MainDashboard />} />
+                        <Route path="create/new" element={<Create />} />
+                        <Route path="listing" element={<AllListing />} />
+                        <Route path="listing/:id" element={<SinglePage />} />
+                      </Route>
 
-          <Route element={<RequireAuth allowedRoles={[...Object.values(Roles)]} />}>
-            <Route element={<PrivateRoute />}>
+                      <Route path="/admin/renter">
+                        <Route index element={<TenantDashboard />} />
+                        <Route path="tenant" element={<TenantMainDashboard />} />
+                        <Route path="listing" element={<TenantListing />} />
+                        <Route path="tenant/listing/:id" element={<TenantSinglePage />} />
+                      </Route>
+                  </Route>
+                </Route>
+                <Route path="/unauthorized" element={<Unauthorized />} />
+                <Route path="*" element={<NotFound />} />
+              
 
-              <Route path="/admin/dashboard">
-                <Route index element={<DashboardDefault />} />
-                <Route path="landlord" element={<MainDashboard />} />
-                <Route path="create/new" element={<Create />} />
-                <Route path="listing" element={<AllListing />} />
-                <Route path="listing/:id" element={<SinglePage />} />
-              </Route>
+              
+            </Routes>
 
-              <Route path="/admin/renter">
-                <Route index element={<TenantDashboard />} />
-                <Route path="tenant" element={<TenantMainDashboard />} />
-                <Route path="listing" element={<TenantListing />} />
-                <Route path="tenant/listing/:id" element={<TenantSinglePage  />} />
-              </Route>
-
-            </Route>
-          </Route>
-          <Route path="/unauthorized" element={<Unauthorized />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+          </Suspense>
       </div>
     </ErrorBoundary>
   );
 }
 
 export default App;
+
