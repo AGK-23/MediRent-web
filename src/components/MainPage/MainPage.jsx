@@ -2,7 +2,6 @@ import React from 'react'
 import ImageDiv from '../ImageDiv/ImageDiv';
 import MiddlePage from '../MiddlePage/MiddlePage';
 import HomeBlog from '../HomeBlog/HomeBlog';
-import { Link } from 'react-router-dom'
 
 const MainPage = () => {
     return (

@@ -1,25 +1,10 @@
-import { BiLoaderCircle, BiGridAlt, BiServer, BiBuilding } from "react-icons/bi";
+
 import { TbBrandMonday, TbAppsFilled, TbBoxPadding, TbBrandAmigo } from "react-icons/tb";
-import { BsBoxSeam, BsFingerprint, BsGear, BsPuzzle, BsCreditCard2Back } from "react-icons/bs";
-import { IoTicketOutline } from "react-icons/io5";
-import { FcSurvey, FcInTransit, FcSafe, FcCallback, FcIdea, FcViewDetails, FcPuzzle } from "react-icons/fc";
-import { CiDollar } from "react-icons/ci";
-import { RiShieldUserLine } from "react-icons/ri";
-import { SlWallet } from "react-icons/sl";
-import { VscLocation } from "react-icons/vsc";
-
-import Container from '../assets/wrapper/container.png';
-import Ship from '../assets/wrapper/ship.png';
-import Warehouse from '../assets/wrapper/warehouse.png'
-
-import Shipped from '../assets/images/shipped.png';
-import HomeAddress from '../assets/images/home-address.png';
-import OpenBox from '../assets/images/open-box.png';
-
-import { AiOutlineContainer, AiOutlineUngroup, AiOutlineSend } from "react-icons/ai";
 
 
-import { TfiPackage } from "react-icons/tfi";
+
+
+
 
 
 
@@ -74,31 +59,7 @@ export const cards = [
     },
 ];
 
-export const products = [
-    {
-        id: 1,
-        title: "Logistics",
-        desc: "We can arrange and provides with the comprehensive service in the sphere of urgent, valuable, fragile or any cargoes conscientious accelerated delivery by air.",
 
-        icon: <img src={Container} alt="" className="w-16 h-16" />,
-        color: "lime",
-        // IoShieldCheckmarkSharp
-    },
-    {
-        id: 2,
-        title: "Shipping & Delivery",
-        desc: "We provides with the main types of basic conditions International sea transportation is implemented by our partners’ vessels, the largest ocean carriers.",
-        icon: <img src={Ship} alt="" className="w-16 h-16" />,
-        color: "purple",
-    },
-    {
-        id: 3,
-        title: "WareHousing",
-        desc: "We provides with the main types of basic conditions International sea transportation is implemented by our partners’ vessels, the largest ocean carriers.",
-        icon: <img src={Warehouse} alt="" className="w-16 h-16" />,
-        color: "amber",
-    },
-]
 
 export const projects = [
     {
@@ -234,44 +195,7 @@ export const projectImage = [
     },
 ];
 
-export const carts = [
-    {
-        id: 1,
-        img: "https://images.pexels.com/photos/1095814/pexels-photo-1095814.jpeg?auto=compress&cs=tinysrgb&w=600",
-        title: "Marketplace",
-        font: "Find a home, pay monthly",
-        desc: "Find a home you love and pay monthly or quarterly. Our homes come fully furnished and equipped with the amenities you need. All you have to do is select a space, subscribe and your Spleet home is warm, comfortable, and ready for living.",
-        icon: <BiGridAlt />,
-        color: 'mediumseagreen',
-    },
-    {
-        id: 2,
-        img: "https://images.pexels.com/photos/3057960/pexels-photo-3057960.jpeg?auto=compress&cs=tinysrgb&w=600",
-        title: "Rent Now, Pay Later",
-        font: "Rental loans made easy",
-        desc: "Spleet’s Rent Now, Pay Later gives you access to low interest, no collateral loans up to ₦3,000,000 to finance rent payments.",
-        icon: <BiLoaderCircle />,
-        color: '#ff4560',
-    },
-    {
-        id: 3,
-        img: "https://images.pexels.com/photos/1117211/pexels-photo-1117211.jpeg?auto=compress&cs=tinysrgb&w=600",
-        title: "Rent Now, Pay Later",
-        font: "Rental loans made easy",
-        desc: "Find a home you love and pay monthly or quarterly. Our homes come fully furnished and equipped with the amenities you need. All you have to do is select a space, subscribe and your Spleet home is warm, comfortable, and ready for living.",
-        icon: <BiServer />,
-        color: '#ac63ee',
-    },
-    {
-        id: 4,
-        img: "https://images.pexels.com/photos/2231742/pexels-photo-2231742.jpeg?auto=compress&cs=tinysrgb&w=600",
-        title: "Rent Now, Pay Later",
-        font: "Rental loans made easy",
-        desc: "Find a home you love and pay monthly or quarterly. Our homes come fully furnished and equipped with the amenities you need. All you have to do is select a space, subscribe and your Spleet home is warm, comfortable, and ready for living.",
-        icon: <BiBuilding />,
-        color: "#008ffb",
-    },
-]
+
 
 export const slides = [
     {
@@ -454,33 +378,6 @@ export const userData = {
     img: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 };
 
-{/* <div className="slider">
-            {avatars?.length < 0 && (
-                <div className="fullSlider fixed inset-0 flex justify-between items-center bg-black z-50">
-                    <div className="arrow flex items-center justify-center flex-1" onClick={() => changeSlide("left")}>
-                        <div className="text-4xl font-bold text-white cursor-pointer">
-                            <BsChevronCompactLeft />
-                        </div>
-                    </div>
-                    <div className="imgContainer flex-10">
-                        <img src={avatars[imageIndex]} alt="" className="w-full h-full object-cover" />
-                    </div>
-                    <div className="arrow flex items-center justify-center flex-1" onClick={() => changeSlide("right")}>
-                        <div className="text-4xl font-bold text-white cursor-pointer">
-                            <BsChevronCompactRight />
-                        </div>
-                    </div>
-                    <div className="close absolute top-0 right-0 text-white text-3xl font-bold py-5 px-10 cursor-pointer" onClick={() => setImageIndex(null)}>X</div>
-                </div>
-            )}
-            <div className="grid md:grid-cols-3 gap-4 flex-row xs:grid-cols-1 w-full justify-center">
-                {avatars?.map((image, index) => (
-                    <div key={index} onClick={() => setImageIndex(index)} className="cursor-pointer">
-                        <img src={image} alt="" className="object-cover rounded-lg h-[200px]" />
-                    </div>
-                ))}
-            </div>
-        </div> */}
 
 
 

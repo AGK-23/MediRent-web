@@ -1,8 +1,6 @@
 
-
-// import Card from '../../pages/Listing/AllListing/Card';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+
 
 import ListingItem from './ListingItem';
 import { useLocation } from 'react-router-dom';

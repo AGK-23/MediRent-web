@@ -1,18 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import Medicine from "../../assets/medicine_16.jpg";
-import Medicine9 from "../../assets/medicine_9.jpg";
-import Medicine14 from "../../assets/medicine_14.jpg";
-import Medicine10 from "../../assets/medicine_10.jpg";
-import Medicine8 from "../../assets/medicine_8.jpg";
-import Medicine5 from "../../assets/medicine_5.jpeg";
-import Medicine3 from "../../assets/medicine_3.jpg";
-import Medicine2 from "../../assets/medicine_2.jpg";
-import Medicine1 from "../../assets/medicine_1.jpg";
-import Medicine12 from "../../assets/medicine_12.jpg";
-import Medicine7 from "../../assets/medicine_7.jpg";
-import Medicine4 from "../../assets/medicine_4.jpg";
-
 import Card14 from "../../assets/card_14.jpg";
 import Card13 from "../../assets/card_13.jpeg";
 

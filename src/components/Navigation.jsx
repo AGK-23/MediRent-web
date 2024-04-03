@@ -2,7 +2,7 @@
 // Import the Logo component
 
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.jpeg";
 import {
   FaFacebook,
   FaTwitter,

@@ -1,8 +1,6 @@
 import React from "react";
 
-import Image1 from "../../../assets/home/apartment1.jpg";
-import Image2 from "../../../assets/home/apartment2.jpg";
-import Image3 from "../../../assets/home/apartment3.jpg";
+
 
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
@@ -10,32 +8,7 @@ import axios from 'axios';
 
 
 const Index = () => {
-    const Menus = [
-        {
-            id: 1,
-            address: "21, Valley Heights Craighall Park",
-            price: "54,700",
-            apartment: "2bed 2bath 1park",
-            images: Image1,
-            to: "/admin/dashboard",
-        },
-        {
-            id: 2,
-            address: "16, The Vale Bryanston",
-            price: "7,670,500",
-            apartment: "4bed 2bath 2park",
-            images: Image2,
-            to: "/admin/dashboard",
-        },
-        {
-            id: 3,
-            address: "2, The Glen Bryandale New Subway",
-            price: "174,750",
-            apartment: "1bed 1bath 1park",
-            images: Image3,
-            to: "/admin/dashboard",
-        },
-    ];
+    
 
 
     const [isLoading, setIsLoading] = useState(false)

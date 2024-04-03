@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-// import CurrencySelect from '../../../registration/Currency.jsx';
+
 import axios from 'axios';
 import { toast } from "react-toastify";
 import Spinner from "../../../assets/svg/Spinner.svg"

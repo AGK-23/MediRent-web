@@ -1,18 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-// import { useNavigate } from "react-router-dom";
-
-// export const BACKEND_URL = "https://medirent-api.onrender.com";
-
-// export const BACKEND_URL = "https://medirent-api.onrender.com/account/tenant-registration";
-
-// export const BACKEND_URL = "https://medirentapi.onrender.com";
-
-// https://medirent-api.onrender.com/
-
-
-
 export const validateEmail = (email) => {
     return email.match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/

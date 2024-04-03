@@ -1,15 +1,13 @@
 import React from "react";
 import axios from "axios";
 import { useState, useRef, useEffect } from "react";
-// import waitinRoom from "../../assets/images/waitinRoom.jpg";
-import { Link } from "react-router-dom";
-import { IoLogInOutline } from "react-icons/io5";
+
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 import '../login/login.css';
-import { TenantUser } from "../../components/EndPoints/url.jsx";
+
 import { validateEmail } from "../../components/EndPoints/url.jsx";
 import Spinner from "../../assets/svg/Spinner.svg"
 

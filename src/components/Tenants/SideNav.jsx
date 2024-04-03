@@ -1,13 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-
-import { RiDashboardLine, RiPantoneLine } from "react-icons/ri";
 import { IoWalletOutline } from "react-icons/io5";
-import { MdOutlineMoveToInbox, MdOutlinePayment } from "react-icons/md";
-// import { IoMdNotificationsOutline } from "react-icons/io";
-import { FiPackage } from "react-icons/fi";
-import { AiOutlineTag } from "react-icons/ai";
-import { BiStoreAlt } from "react-icons/bi";
+import { MdOutlinePayment } from "react-icons/md";
+
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -18,14 +13,11 @@ import useMediaQuery from "../../hooks/useMediaQuery.jsx";
 import arrowRight from "../../assets/images/arrow-right.png";
 // import MinimalLayout from '../MinimalLayout';
 import Appheader from "../Dashboard/Layout/Appheader.jsx";
-import { HiOutlineChevronRight, HiOutlineChevronDown } from "react-icons/hi";
+import { HiOutlineChevronRight } from "react-icons/hi";
 
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/logo.jpeg";
 
 import { PiHouseDuotone } from "react-icons/pi";
-import { LuUser2 } from "react-icons/lu";
-import { AiTwotoneFileText } from "react-icons/ai";
-
 import { CgNotes } from "react-icons/cg";
 import { BsBookmarkDash } from "react-icons/bs";
 // import { CiStar } from "react-icons/ci";

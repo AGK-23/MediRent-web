@@ -1,7 +1,7 @@
 // import React from 'react'
 
 import { listData } from '../../../data/Mylinks';
-import Map from './Map.jsx';
+
 import Card from './Card.jsx';
 import { useState, useEffect } from 'react';
 import axios from 'axios';

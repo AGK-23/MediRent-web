@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Card from '../../Listing/AllListing/Card';
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import TenantCard from './TenantCard';

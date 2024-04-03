@@ -20,7 +20,7 @@ import arrowRight from "../../../assets/images/arrow-right.png";
 import Appheader from "../Layout/Appheader.jsx";
 import { HiOutlineChevronRight, HiOutlineChevronDown } from "react-icons/hi";
 
-import Logo from "../../../assets/logo.png";
+import Logo from "../../../assets/logo.jpeg";
 
 import { PiHouseDuotone } from "react-icons/pi";
 import { LuUser2 } from "react-icons/lu";

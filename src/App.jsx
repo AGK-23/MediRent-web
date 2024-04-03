@@ -36,19 +36,7 @@ import TenantListing from "./pages/TenantDashboard/TenantListing/TenantListing.j
 import TenantSinglePage from "./pages/TenantDashboard/TenantListing/TenantSinglePage.jsx";
 
 
-
-
-
-
-
-
-
-
 function App() {
-
-
-
-
   return (
     <ErrorBoundary>
       <div>

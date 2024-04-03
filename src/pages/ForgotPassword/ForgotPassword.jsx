@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useState, useRef, useEffect } from "react";
-// import waitinRoom from "../../assets/images/waitinRoom.jpg";
+
 import { Link } from "react-router-dom";
 import { IoLogInOutline } from "react-icons/io5";
 import '../login/login.css'
