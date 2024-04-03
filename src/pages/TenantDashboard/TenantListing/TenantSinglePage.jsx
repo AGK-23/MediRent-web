@@ -1,12 +1,11 @@
 import Slider from '../../Listing/SinglePage/Slider/Slider';
-import { userData } from '../../../data/Mylinks';
 import { useState, useEffect } from 'react';
-import { singlePostData } from '../../../data/Mylinks';
+
 // import singlePostData from './singlePostData';
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { FaLocationDot } from "react-icons/fa6";
-import { FaBed, FaBath, FaBookmark, FaPhone } from "react-icons/fa6";
+import { FaBed, FaBath, FaPhone } from "react-icons/fa6";
 import { RiArrowRightSLine } from "react-icons/ri";
 
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import { lazy, Suspense } from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 import axios from "axios";
@@ -14,12 +14,19 @@ import { validateEmail } from "../../../components/EndPoints/url.jsx";
 
 import '../../login/login.css';
 
-import AddressLandlord from './Details/AddressLandlord.jsx';
+// import AddressLandlord from './Details/AddressLandlord.jsx';
 // import HousingDetails from "./LandLordInfo/HousingDetails.jsx";
-import HousingDetails from "../../CreateLandLord/LandLordInfo/HousingDetails.jsx";
-import Photo from "../../CreateLandLord/LandLordInfo/Photo.jsx";
-import AvailabilityLandlord from "../../CreateLandLord/LandLordInfo/AvailabilityLandlord.jsx";
-import Spinner from "../../../assets/svg/Spinner.svg"
+// import HousingDetails from "../../CreateLandLord/LandLordInfo/HousingDetails.jsx";
+// import Photo from "../../CreateLandLord/LandLordInfo/Photo.jsx";
+// import AvailabilityLandlord from "../../CreateLandLord/LandLordInfo/AvailabilityLandlord.jsx";
+
+// import Spinner from "../../../assets/svg/Spinner.svg"
+
+
+const AddressLandlord = lazy(() => import('./Details/AddressLandlord.jsx'));
+const HousingDetails = lazy(() => import('../../CreateLandLord/LandLordInfo/HousingDetails.jsx'));
+const Photo = lazy(() => import('../../CreateLandLord/LandLordInfo/Photo.jsx'));
+const AvailabilityLandlord = lazy(() => import('../../CreateLandLord/LandLordInfo/AvailabilityLandlord.jsx'));
 
 
 
@@ -35,12 +42,6 @@ const Create = () => {
     const [housingLoading, setHousingLoading] = useState(false);
 
     const [imageLoading, setImageLoading] = useState(false);
-
-
-
-   
-
-    
 
     //NUMBER TWO THIS IS THE STATE FOR THE HOUSING DETAILS
     const [housingData, setHousingData] = useState({
@@ -157,14 +158,6 @@ const Create = () => {
     // eslint-disable-next-line no-unused-vars
     const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
     const [isLoading, setIsLoading] = useState(true);
-
-
-
-
-
-
-    
-
 
     const renderPreviousForm = () => {
         setActive(active - 1);
