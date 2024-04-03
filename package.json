@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "engines": {
-  "node": "20.x"
+  "node": "18.x"
 },
   "dependencies": {
     "@react-google-maps/api": "^2.19.3",
