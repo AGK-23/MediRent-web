@@ -9,6 +9,10 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "engines": {
+  "node": "20.x"
+},
+
   "dependencies": {
     "apexcharts": "^3.46.0",
     "axios": "^1.6.7",
