@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Slider from '../../Listing/SinglePage/Slider/Slider';
 import { useState, useEffect } from 'react';
 

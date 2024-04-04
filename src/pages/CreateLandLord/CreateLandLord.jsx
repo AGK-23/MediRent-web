@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { BsCheckLg, BsChevronLeft, BsShopWindow } from "react-icons/bs";
+import { BsCheckLg } from "react-icons/bs";
 
 // import Currency from "../../registration/Currency.jsx"
 
@@ -175,13 +175,14 @@ const CreateLandLord = () => {
             email: formData?.email,
             password: formData?.password,
         });
+        // [detailsData, fileList, selectedDates, housingData, formData]
 
-    }, [detailsData, fileList, selectedDates, housingData, formData]);
+    }, [detailsData, fileList, selectedDates, housingData, formData, createListing , loginData]);
 
 
     const [active, setActive] = useState(1)
     const [selectedCity, setSelectedCity] = useState("");
-    const [selectedStates, setSelectedStates] = useState("");
+    // const [selectedStates, setSelectedStates] = useState("");
     const [selectedCountry, setSelectedCountry] = useState(''); // State to store the selected country
     // eslint-disable-next-line no-unused-vars
     const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
@@ -353,7 +354,7 @@ const CreateLandLord = () => {
 
         } catch (error) {
             setLandLoading(false);
-            // console.log("error in the landlord..", error)
+            console.log("error in the landlord..", isLoading, loginLoading)
         }
 
         // setActive(2)
@@ -388,7 +389,7 @@ const CreateLandLord = () => {
             // Parse the stringified object back to its original form
             const userDetails = JSON.parse(storedToken);
 
-            // console.log("account item..", storedToken, userDetails);
+            console.log("account item..", storedToken, userDetails);
 
 
 
@@ -420,9 +421,9 @@ const CreateLandLord = () => {
     };
 
 
-    const renderPreviousForm = () => {
-        setActive(active - 1);
-    };
+    // const renderPreviousForm = () => {
+    //     setActive(active - 1);
+    // };
     // const [selectedFunction, setSelectedFunction] = useState("");
 
     // FUNCTION TO GET THE COUNTRY AND THE STATE
@@ -468,7 +469,7 @@ const CreateLandLord = () => {
                 const response = await fetchStateData();
                 // setSelectedStates(response?.data?.data);
                 setIsLoading(false);
-                // console.log("state is Loading..", response.data?.data);
+                console.log("state is Loading..", response.data?.data);
 
             } catch (error) {
                 console.error(error);
@@ -529,7 +530,7 @@ const CreateLandLord = () => {
     );
 
     const handleActiveUser = (event) => {
-        const { name, value } = event.target;
+        const { value } = event.target;
         // console.log("all the value..", value );
 
         setFormData(prevState => ({
@@ -577,6 +578,8 @@ const CreateLandLord = () => {
                 listingId: housing?.id,
                 propertyDates: convertedDates
             };
+
+            console.log("first..", requestBody)
 
 
 
@@ -702,9 +705,7 @@ const CreateLandLord = () => {
             //     console.log(key[0] + ", " + key[1]);
             // }
 
-            for (var [key, value] of formData.entries()) { 
-                // console.log("al the key..", key, value);
-            }
+            
 
 
             // formData.append('housingId', housing);
@@ -736,7 +737,7 @@ const CreateLandLord = () => {
 
     const [isToggle, setIsToggle] = useState(true);
     const changeToggle = () => setIsToggle(!isToggle);
-    const [error, setError] = useState("");
+    // const [error, setError] = useState("");
 
 
     return (

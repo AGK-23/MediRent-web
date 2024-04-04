@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import useMediaQuery from "../../hooks/useMediaQuery.jsx";
 
-import NavbarLinks from "./NavbarLinks";
+// import NavbarLinks from "./NavbarLinks";
 import Logo from "../../assets/logo.jpeg";
-import { BiSolidDownArrow } from "react-icons/bi";
-import { FaGoogle } from "react-icons/fa";
+// import { BiSolidDownArrow } from "react-icons/bi";
+// import { FaGoogle } from "react-icons/fa";
 import {
   FaFacebook,
   FaTwitter,

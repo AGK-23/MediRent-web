@@ -1,15 +1,15 @@
-import { lazy, Suspense } from "react";
+import { lazy} from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BsCheckLg } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-import { validateEmail } from "../../../components/EndPoints/url.jsx";
+// import { validateEmail } from "../../../components/EndPoints/url.jsx";
 
 
 import '../../login/login.css';
@@ -35,9 +35,9 @@ const Create = () => {
     // const [avatar, setAvatar] = useState(null);
     const [userLoading, setUserLoading] = useState(false);
 
-    const [landLoading, setLandLoading] = useState(false);
+    // const [landLoading, setLandLoading] = useState(false);
 
-    const [loginLoading, setLoginLoading] = useState(false);
+    // const [loginLoading, setLoginLoading] = useState(false);
 
     const [housingLoading, setHousingLoading] = useState(false);
 
@@ -148,20 +148,22 @@ const Create = () => {
 
         
 
-    }, [detailsData, fileList, selectedDates, housingData]);
+    }, [detailsData, fileList, selectedDates, housingData, createListing]);
 
 
     const [active, setActive] = useState(1)
+    // eslint-disable-next-line no-unused-vars
     const [selectedCity, setSelectedCity] = useState("");
-    const [selectedStates, setSelectedStates] = useState("");
-    const [selectedCountry, setSelectedCountry] = useState(''); // State to store the selected country
+    // const [selectedStates, setSelectedStates] = useState("");
+    // const [selectedCountry, setSelectedCountry] = useState(''); // State to store the selected country
     // eslint-disable-next-line no-unused-vars
     const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
+    // eslint-disable-next-line no-unused-vars
     const [isLoading, setIsLoading] = useState(true);
 
-    const renderPreviousForm = () => {
-        setActive(active - 1);
-    };
+    // const renderPreviousForm = () => {
+    //     setActive(active - 1);
+    // };
     // const [selectedFunction, setSelectedFunction] = useState("");
 
     // FUNCTION TO GET THE COUNTRY AND THE STATE
@@ -204,6 +206,7 @@ const Create = () => {
         async function fetchStateLogData() {
             setIsLoading(true);
             try {
+                // eslint-disable-next-line no-unused-vars
                 const response = await fetchStateData();
                 // setSelectedStates(response?.data?.data);
                 setIsLoading(false);
@@ -417,8 +420,9 @@ const Create = () => {
 
 
     const [isToggle, setIsToggle] = useState(true);
+    // eslint-disable-next-line no-unused-vars
     const changeToggle = () => setIsToggle(!isToggle);
-    const [error, setError] = useState("");
+    // const [error, setError] = useState("");
 
 
 

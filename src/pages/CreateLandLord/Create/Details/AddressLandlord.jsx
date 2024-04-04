@@ -15,8 +15,8 @@ const AddressLandlord = ({ active, setActive, housingData, setHousingData }) => 
     const cityInput = useRef();
     const postalCodeInput = useRef();
     const phoneInput = useRef();
-    const countryInput = useRef();
-    const provinceInput = useRef();
+    // const countryInput = useRef();
+    // const provinceInput = useRef();
     const promotionCodeInput = useRef();
 
 
@@ -62,7 +62,7 @@ const AddressLandlord = ({ active, setActive, housingData, setHousingData }) => 
 
 
     const [selectedCity, setSelectedCity] = useState("");
-    const [selectedStates, setSelectedStates] = useState("");
+    // const [selectedStates, setSelectedStates] = useState("");
     const [selectedCountry, setSelectedCountry] = useState(''); // State to store the selected country
     // eslint-disable-next-line no-unused-vars
     const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
@@ -153,14 +153,14 @@ const AddressLandlord = ({ active, setActive, housingData, setHousingData }) => 
                 const response = await fetchStateData();
                 // setSelectedStates(response?.data?.data);
                 setIsLoading(false);
-                // console.log("state is Loading..", response.data?.data);
+                console.log("state is Loading..", response.data?.data, isLoading);
 
             } catch (error) {
                 console.error(error);
             }
         }
         fetchStateLogData();
-    }, []);
+    }, [isLoading]);
 
 
 

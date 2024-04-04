@@ -5,10 +5,10 @@ import Slider from './Slider/Slider';
 import { useState, useEffect } from 'react';
 
 // import singlePostData from './singlePostData';
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { FaLocationDot } from "react-icons/fa6";
-import { FaBed, FaBath, FaBookmark, FaPhone } from "react-icons/fa6";
+import { FaBed, FaBath, FaPhone } from "react-icons/fa6";
 import { RiArrowRightSLine } from "react-icons/ri";
 
 
@@ -19,9 +19,11 @@ import axios from 'axios';
 function SinglePage() {
     const [listings, setListings] = useState([]);
     const { id } = useParams(); // Use useParams to get the addressId from the URL
+
+    
     useEffect(() => {
 
-        console.log("data life..", id)
+        // console.log("data life..", id)
         const fetchListings = async () => {
             try {
                 // Retrieve accessToken from localStorage
@@ -51,6 +53,7 @@ function SinglePage() {
         };
 
         fetchListings();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 

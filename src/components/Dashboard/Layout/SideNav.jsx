@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 
-import { RiDashboardLine, RiPantoneLine } from "react-icons/ri";
+import { RiDashboardLine } from "react-icons/ri";
 import { IoWalletOutline } from "react-icons/io5";
-import { MdOutlineMoveToInbox, MdOutlinePayment } from "react-icons/md";
+// import { MdOutlineMoveToInbox, MdOutlinePayment } from "react-icons/md";
 // import { IoMdNotificationsOutline } from "react-icons/io";
-import { FiPackage } from "react-icons/fi";
-import { AiOutlineTag } from "react-icons/ai";
-import { BiStoreAlt } from "react-icons/bi";
+// import { FiPackage } from "react-icons/fi";
+// import { AiOutlineTag } from "react-icons/ai";
+// import { BiStoreAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +18,7 @@ import useMediaQuery from "../../../hooks/useMediaQuery";
 import arrowRight from "../../../assets/images/arrow-right.png";
 // import MinimalLayout from '../MinimalLayout';
 import Appheader from "../Layout/Appheader.jsx";
-import { HiOutlineChevronRight, HiOutlineChevronDown } from "react-icons/hi";
+import { HiOutlineChevronRight } from "react-icons/hi";
 
 import Logo from "../../../assets/logo.jpeg";
 
@@ -159,9 +159,8 @@ const SideNav = ({ OpenScreen, open }) => {
                                         <div>
                                             <img
                                                 src={arrowRight}
-                                                className={`absolute cursor-pointer -right-3 top-14 w-7 bg-white
-                                                border-[1px] border-gray-300 z-20 rounded-full  ${!open && "rotate-180"
-                                                    }`}
+                                                alt="img"
+                                                className={`absolute cursor-pointer -right-3 top-14 w-7 bg-white border-[1px] border-gray-300 z-20 rounded-full  ${!open && "rotate-180" }`}
                                                 onClick={OpenScreen}
                                             />
                                             <Link

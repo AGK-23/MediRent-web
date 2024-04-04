@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // import React from 'react'
 
 import { listData } from '../../../data/Mylinks';
@@ -49,7 +50,7 @@ const AllListing = () => {
 
         const response = await axios.get('https://medirent-api.onrender.com/housing/get-all-user-listings', { headers });
 
-        console.log("all the response..", response?.data);
+        console.log("all the response..", response?.data, "filter..", filteredData);
         setListings(response?.data?.data);
 
         setIsLoading(false)

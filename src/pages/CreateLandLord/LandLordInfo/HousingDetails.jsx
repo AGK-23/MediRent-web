@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useRef, useEffect } from "react";
 // import CurrencySelect from '../../../registration/Currency.jsx';
 import axios from 'axios';
@@ -93,7 +94,7 @@ const HousingDetails = ({  active, setActive, detailsData, setDetailsData, handl
 
     const [currencies, setCurrencies] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [selectedCurrency, setSelectedCurrency] = useState(null);
+    // const [selectedCurrency, setSelectedCurrency] = useState(null);
 
     useEffect(() => {
         const fetchCurrencies = async () => {
@@ -114,7 +115,7 @@ const HousingDetails = ({  active, setActive, detailsData, setDetailsData, handl
                 // console.log("currency..", currencies)
                 setLoading(false);
             } catch (error) {
-                console.error('Error fetching currencies:', error.message);
+                console.error('Error fetching currencies:', error.message, "isLoading..", loading);
             }
         };
 
@@ -198,7 +199,7 @@ const HousingDetails = ({  active, setActive, detailsData, setDetailsData, handl
     );
 
     const handleDailyUser = (event) => {
-        const { name, value } = event.target;
+        const { value } = event.target;
         // console.log("all the value..", value );
 
         setDetailsData(prevState => ({
@@ -208,7 +209,7 @@ const HousingDetails = ({  active, setActive, detailsData, setDetailsData, handl
     };
 
     const handleWeeklyUser = (event) => {
-        const { name, value } = event.target;
+        const { value } = event.target;
         // console.log("value..", value );
 
         setDetailsData(prevState => ({
@@ -218,7 +219,7 @@ const HousingDetails = ({  active, setActive, detailsData, setDetailsData, handl
     };
 
     const handleMonthlyUser = (event) => {
-        const { name, value } = event.target;
+        const { value } = event.target;
         // console.log("the value..", value );
 
         setDetailsData(prevState => ({
@@ -228,7 +229,7 @@ const HousingDetails = ({  active, setActive, detailsData, setDetailsData, handl
     };
 
     const handleBedRoomUser = (event) => {
-        const { name, value } = event.target;
+        const { value } = event.target;
         // console.log("weekly..", value );
 
         setDetailsData({
@@ -242,7 +243,7 @@ const HousingDetails = ({  active, setActive, detailsData, setDetailsData, handl
     };
 
     const handleBathUser = (event) => {
-        const { name, value } = event.target;
+        const { value } = event.target;
         // console.log("weekly..", value );
 
         setDetailsData({

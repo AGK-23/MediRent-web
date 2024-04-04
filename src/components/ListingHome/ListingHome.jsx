@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 
 import ListingItem from './ListingItem';
@@ -15,12 +17,12 @@ const ListingHome = () => {
     const { result } = location.state;
 
     const { listings = [], emptyLoading } = result;
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
 
     useEffect(() => {
         console.log('estate in the building:', result, emptyLoading);
-    }, [result]);
+    }, [result, emptyLoading]);
 
 
 

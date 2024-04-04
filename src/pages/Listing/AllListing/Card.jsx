@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
-import { FaBed, FaBath, FaBookmark } from "react-icons/fa6";
+import { FaBed, FaBath } from "react-icons/fa6";
 
 
 
@@ -18,6 +18,7 @@ function Card({ item }) {
           {/* <img src={item.img} alt="" className="w-full h-full object-cover rounded-lg" /> */}
           <img
             src={item.avatars[0]}
+            alt="images"
             className={`cursor-pointer w-full h-full object-cover rounded-lg`}
           />
         </Link>

@@ -163,6 +163,7 @@ const SideNav = ({ OpenScreen, open }) => {
                                         <div>
                                             <img
                                                 src={arrowRight}
+                                                alt="images"
                                                 className={`absolute cursor-pointer -right-3 top-14 w-7 bg-white
                                                 border-[1px] border-gray-300 z-20 rounded-full  ${!open && "rotate-180"
                                                     }`}

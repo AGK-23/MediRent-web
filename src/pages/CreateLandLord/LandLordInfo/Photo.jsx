@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useRef, useEffect } from "react";
+import { useState} from "react";
 import { toast } from "react-toastify";
 import Spinner from "../../../assets/svg/Spinner.svg";
 
@@ -42,6 +42,7 @@ const Photo = ({ active, setActive, avatars, setAvatars, fileList, setFileList, 
                     }
                 } else {
                     alert(`You can only upload a maximum of 4 photos.`);
+                    console.log(text, indexCounter, "image..")
                 }
             });
         }
