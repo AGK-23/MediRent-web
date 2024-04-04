@@ -19,10 +19,6 @@ import axios from 'axios';
 function SinglePage() {
     const [listings, setListings] = useState([]);
     const { id } = useParams(); // Use useParams to get the addressId from the URL
-
-
-
-
     useEffect(() => {
 
         console.log("data life..", id)
