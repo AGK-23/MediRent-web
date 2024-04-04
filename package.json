@@ -18,7 +18,6 @@
     "apexcharts": "^3.46.0",
     "axios": "^1.6.7",
     "framer-motion": "^10.12.13",
-    "gsap": "^3.10.4",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
     "react-calendar": "^4.8.0",
