@@ -13,6 +13,7 @@ const HomeBlog = () => {
     return (
         <div className='mt-4 '>
             <div>
+            
                 <div className=" flex font-medium justify-between max-w-screen-xl mx-auto ">
 
                     <div className=" w-full flex justify-center ">
