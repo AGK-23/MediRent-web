@@ -1,1 +1,0 @@
-import{r as n}from"./react-apexcharts-chunk-Cs4qZfgr.js";const c=s=>{const[e,r]=n.useState(!1);return n.useEffect(()=>{const t=window.matchMedia(s);t.matches!==e&&r(t.matches);const a=()=>r(t.matches);return window.addEventListener("resize",a),()=>window.removeEventListener("resize",a)},[e,s]),e};export{c as u};
