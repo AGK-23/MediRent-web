@@ -135,34 +135,34 @@ const Login = () => {
             setError("An error occurred. Please try again.");
         }
     };
-    const handleForgotPassword = async () => {
-        try {
-            // Your "Forgot Password" logic here...
-            if (!forgotPasswordEmail) {
-                setForgotPasswordSuccess("Please enter your email.");
-                return;
-            }
+    // const handleForgotPassword = async () => {
+    //     try {
+    //         // Your "Forgot Password" logic here...
+    //         if (!forgotPasswordEmail) {
+    //             setForgotPasswordSuccess("Please enter your email.");
+    //             return;
+    //         }
 
-            // Simulate a successful request for the example
-            const response = await axios.post(
-                "https://jsonplaceholder.typicode.com/posts",
-                {
-                    email: forgotPasswordEmail,
-                }
-            );
+    //         // Simulate a successful request for the example
+    //         const response = await axios.post(
+    //             "https://jsonplaceholder.typicode.com/posts",
+    //             {
+    //                 email: forgotPasswordEmail,
+    //             }
+    //         );
 
-            if (response.status === 201) {
-                console.log("Password reset email sent successfully.");
-                setForgotPasswordSuccess("Password reset email sent successfully.");
-            } else {
-                console.error("Failed to send password reset email.");
-                setForgotPasswordSuccess("Failed to send password reset email.");
-            }
-        } catch (error) {
-            console.error("Error during password reset:", error);
-            setForgotPasswordSuccess("An error occurred. Please try again.");
-        }
-    };
+    //         if (response.status === 201) {
+    //             console.log("Password reset email sent successfully.");
+    //             setForgotPasswordSuccess("Password reset email sent successfully.");
+    //         } else {
+    //             console.error("Failed to send password reset email.");
+    //             setForgotPasswordSuccess("Failed to send password reset email.");
+    //         }
+    //     } catch (error) {
+    //         console.error("Error during password reset:", error);
+    //         setForgotPasswordSuccess("An error occurred. Please try again.");
+    //     }
+    // };
 
     return (
         <div className="py-0 mt-32 bg-white">
@@ -292,7 +292,7 @@ const Login = () => {
 
                                     <div className="flex justify-between border-b border-gray-600 pb-10">
                                         <div className="flex justify-end z-10 relative mt-4 ">
-                                            
+
 
                                             <button
                                                 onClick={handleLoginUser}
@@ -303,7 +303,7 @@ const Login = () => {
                                                     <div className="flex items-center px-6">
                                                         <div>
                                                             <img alt="" src={Spinner} className="text-[1px] text-white" />
-                                                            
+
                                                         </div>
 
                                                     </div>

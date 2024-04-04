@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   mode: "jit",
+
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
@@ -12,7 +13,7 @@ export default {
         blue: "#086972",
         customPink: "#F8C8DC",
       },
-      
+
 
       backgroundImage: {
         HomeImage: "url('assets/slider_1.jpg')",
@@ -28,7 +29,7 @@ export default {
     },
     // 'sm': '540px',
     screens: {
-      
+
       'xs': '240px',
       'sm': '640px',
       'md': '768px',
@@ -40,5 +41,4 @@ export default {
   },
   plugins: [],
 }
-
 

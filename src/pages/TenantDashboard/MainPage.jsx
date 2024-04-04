@@ -2,6 +2,7 @@
 // import Tabs from './Tabs/Index.jsx';
 // import Properties from './Properties/Index.jsx'
 import React, { lazy, Suspense } from 'react';
+import Spinner from '../../components/Spinner/Spinner.jsx';
 
 const Tabs = lazy(() => import('./Tabs/Index.jsx'));
 const Properties = lazy(() => import('./Properties/Index.jsx'));

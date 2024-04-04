@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import axios from 'axios'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from "react-toastify";
@@ -60,9 +60,9 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
 
             console.log("all the user ...", formData);
 
-            // const response = await axios.post(`https://medirent-api.onrender.com/account/landlord-registration`,
-            //     formData,
-            // );
+            const response = await axios.post(`https://medirent-api.onrender.com/account/landlord-registration`,
+                formData,
+            );
 
             setIsLoading(false);
 

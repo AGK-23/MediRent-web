@@ -7,9 +7,9 @@ import { toast } from "react-toastify";
 
 
 
-const Address = ({active, setActive, housingData, setHousingData }) => {
-    
-    
+const Address = ({ active, setActive, housingData, setHousingData }) => {
+
+
     const listingTitleInput = useRef();
     const addressInput = useRef();
     const cityInput = useRef();
@@ -39,13 +39,13 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
             !country ||
             !postalCode ||
             !phone ||
-            !province  
+            !province
         ) {
             toast.warning('Please fill in all required fields.');
             return;
         }
         setActive(3)
-        
+
     };
 
     const handleProviderTwo = () => {
@@ -68,9 +68,9 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
     const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
     const [isLoading, setIsLoading] = useState(true);
 
-    
 
-    
+
+
 
     const handleHousingUser = (e) => setHousingData(
         {
@@ -191,7 +191,7 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
                                 <button
                                     className={`choose-btn border-3 rounded p-2 mt-4 ${isBoxChosen(1) ? 'bg-third text-white' : 'bg-green-500 text-white'
                                         }`}
-                                    onClick={() => onNextBox()}
+                                    // onClick={() => onNextBox()}
                                     disabled
                                 >
                                     {isBoxChosen(1) ? 'Selected' : 'Choose'}
@@ -217,7 +217,7 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
                                 <button
                                     className={`choose-btn border-3 rounded p-2 mt-4 ${isBoxChosen(2) ? 'bg-third text-white' : 'bg-green-500 text-white'
                                         }`}
-                                    onClick={() => onNextBox()}
+                                    // onClick={() => onNextBox()}
                                     disabled
                                 >
                                     {isBoxChosen(2) ? 'Selected' : 'Choose'}
@@ -242,7 +242,7 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
                                 <button
                                     className={`choose-btn border-3 rounded p-2 mt-4 ${isBoxChosen(3) ? 'bg-third text-white' : 'bg-green-500 text-white'
                                         }`}
-                                    onClick={() => onNextBox()}
+                                    // onClick={() => onNextBox()}
                                     disabled
                                 >
                                     {isBoxChosen(3) ? 'Selected' : 'Choose'}
