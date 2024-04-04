@@ -1,9 +1,9 @@
 
 
 import Slider from './Slider/Slider';
-import { userData } from '../../../data/Mylinks';
+
 import { useState, useEffect } from 'react';
-import { singlePostData } from '../../../data/Mylinks';
+
 // import singlePostData from './singlePostData';
 import { Link, useNavigate, useParams } from "react-router-dom";
 
@@ -14,7 +14,7 @@ import { RiArrowRightSLine } from "react-icons/ri";
 
 import axios from 'axios';
 
-import Map from '../AllListing/Map';
+
 
 function SinglePage() {
     const [listings, setListings] = useState([]);
