@@ -15,7 +15,7 @@ import arrowRight from "../../assets/images/arrow-right.png";
 import Appheader from "../Dashboard/Layout/Appheader.jsx";
 import { HiOutlineChevronRight } from "react-icons/hi";
 
-import Logo from "../../assets/logo.jpeg";
+import Logo from "../../assets/logo.png";
 
 import { PiHouseDuotone } from "react-icons/pi";
 import { CgNotes } from "react-icons/cg";

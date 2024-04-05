@@ -1,6 +1,6 @@
 // import styles from "./Spinner.module.scss";
 import './Spinner.css';
-import Logo from "../../assets/logo.jpeg";
+import Logo from "../../assets/logo.png";
 
 export default function Spinner() {
   return (

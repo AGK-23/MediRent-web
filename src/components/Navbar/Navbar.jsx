@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import useMediaQuery from "../../hooks/useMediaQuery.jsx";
 
 import NavbarLinks from "./NavbarLinks";
-import Logo from "../../assets/logo.jpeg";
+import Logo from "../../assets/logo.png";
 import { BiSolidDownArrow } from "react-icons/bi";
 import { FaGoogle } from "react-icons/fa";
 import {

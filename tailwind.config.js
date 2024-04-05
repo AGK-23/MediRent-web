@@ -15,7 +15,7 @@ export default {
       
 
       backgroundImage: {
-        HomeImage: "url('assets/slider_1.jpg')",
+        HomeImage: "url('assets/slider_1.png')",
 
       },
       backgroundSize: {
