@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { FaSearch, FaArrowDown } from "react-icons/fa";
 import { IoArrowForward } from "react-icons/io5";
 import { useState, useRef, useEffect } from "react";
@@ -61,7 +62,7 @@ const ImageDiv = () => {
   });
 
   const [selectedCity, setSelectedCity] = useState("");
-  const [selectedStates, setSelectedStates] = useState("");
+  // const [selectedStates, setSelectedStates] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(""); // State to store the selected country
   // eslint-disable-next-line no-unused-vars
   const [selectedCities, setSelectedCities] = useState(""); // State to store the selected city
@@ -153,7 +154,7 @@ useEffect(() => {
       // Navigate to /listings only if listings array is not empty
       navigate('/listings', { state: { result: listings, emptyLoading } });
   }
-}, [listings]); // Run the effect whenever listings state changes
+}, [listings, navigate, emptyLoading]); // Run the effect whenever listings state changes
 
   const handleListing = async () => {
     // e.preventDefault();

@@ -1,20 +1,21 @@
-import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+/* eslint-disable no-unused-vars */
+import { useState, useRef } from "react";
+// import { useNavigate } from "react-router-dom";
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from "react-toastify";
-import axios from "axios";
+// import axios from "axios";
 import Spinner from "../../../assets/svg/Spinner.svg"
 
 
 
 const AvailabilityLandlordDetails = ({ active, setActive, selectedDates, setSelectedDates, createListing, userLoading, setUserLoading, handleSubmitCreateListing }) => {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [propertyPictures, setPropertyPictures] = useState(null);
 
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
 
     // const [selectedDates, setSelectedDates] = useState([]);

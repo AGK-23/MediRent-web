@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 
 
@@ -122,7 +123,7 @@ const Index = () => {
 
                                     </div>
                                     <div className="flex py-4 px-5 flex-col ">
-                                        <Link to='/admin/renter/listing' className="md:text-sm xs:text-xs px-3 text-gray-500 rounded-3xl px-3 py-2 border-[1px] border-gray-700 w-fit">
+                                        <Link to='/admin/renter/listing' className="md:text-sm xs:text-xs text-gray-500 rounded-3xl px-3 py-2 border-[1px] border-gray-700 w-fit">
                                             View All Listing
                                         </Link>
 

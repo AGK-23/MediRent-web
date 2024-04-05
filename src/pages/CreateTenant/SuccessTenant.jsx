@@ -1,6 +1,6 @@
 import React from 'react'
 import Verified from "../../assets/images/verified-icon.gif"
-import { useState } from "react";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { ToastContainer} from "react-toastify";

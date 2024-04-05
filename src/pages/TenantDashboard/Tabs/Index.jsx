@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import { useState, useEffect } from "react";
 
@@ -19,7 +20,7 @@ const Index = () => {
   useEffect(() => {
     setUserName(userDetails?.firstName)
     // console.log('Updated housingData:', userName);
-  }, [userName]); // Log housingData whenever it changes
+  }, [userName, userDetails?.firstName]); // Log housingData whenever it changes
 
 
 
@@ -72,7 +73,7 @@ const Index = () => {
                   </div>
 
                   <div>
-                    <div className="text-gray-500 md:text-[15px] xs:text-[10px] mt-10 text-[#324bd9]">
+                    <div className=" md:text-[15px] xs:text-[10px] mt-10 text-[#324bd9]">
                       See All
                     </div>
                   </div>
@@ -91,7 +92,7 @@ const Index = () => {
                         </div>
 
                         <div>
-                          <div className="text-gray-500 md:text-[15px] xs:text-[10px] text-[#324bd9]">
+                          <div className=" md:text-[15px] xs:text-[10px] text-[#324bd9]">
                             See All
                           </div>
                         </div>
@@ -111,7 +112,7 @@ const Index = () => {
                         </div>
 
                         <div>
-                          <div className="text-gray-500 md:text-[15px] xs:text-[10px] text-[#324bd9]">
+                          <div className=" md:text-[15px] xs:text-[10px] text-[#324bd9]">
                             See All
                           </div>
                         </div>

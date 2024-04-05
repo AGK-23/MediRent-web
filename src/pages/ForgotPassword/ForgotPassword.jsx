@@ -1,9 +1,9 @@
 import React from "react";
-import axios from "axios";
-import { useState, useRef, useEffect } from "react";
+// import axios from "axios";
+import { useState, useRef} from "react";
 
 import { Link } from "react-router-dom";
-import { IoLogInOutline } from "react-icons/io5";
+// import { IoLogInOutline } from "react-icons/io5";
 import '../login/login.css'
 
 const ForgotPassword = () => {
@@ -45,60 +45,14 @@ const ForgotPassword = () => {
 
 
 
-    const handleLoginUser = async (e) => {
-        e.preventDefault();
+    // const handleLoginUser = async (e) => {
+    //     e.preventDefault();
 
 
-        // setCurrentFormKey(currentFormKey + 1);
-    };
-
-    const [error, setError] = useState("");
-    const handleLogin = async () => {
-        try {
-            const response = await axios.get(
-                "https://jsonplaceholder.typicode.com/posts/1"
-            );
-
-            if (response.status === 200) {
-                console.log("Login successful!", response.data);
-                setError("");
-            } else {
-                console.error("Login failed.");
-                setError("Invalid email or password.");
-            }
-        } catch (error) {
-            console.error("Error during login:", error);
-            setError("An error occurred. Please try again.");
-        }
-    };
-    // const handleForgotPassword = async () => {
-    //     try {
-    //         // Your "Forgot Password" logic here...
-    //         if (!forgotPasswordEmail) {
-    //             setForgotPasswordSuccess("Please enter your email.");
-    //             return;
-    //         }
-
-    //         // Simulate a successful request for the example
-    //         const response = await axios.post(
-    //             "https://jsonplaceholder.typicode.com/posts",
-    //             {
-    //                 email: forgotPasswordEmail,
-    //             }
-    //         );
-
-    //         if (response.status === 201) {
-    //             console.log("Password reset email sent successfully.");
-    //             setForgotPasswordSuccess("Password reset email sent successfully.");
-    //         } else {
-    //             console.error("Failed to send password reset email.");
-    //             setForgotPasswordSuccess("Failed to send password reset email.");
-    //         }
-    //     } catch (error) {
-    //         console.error("Error during password reset:", error);
-    //         setForgotPasswordSuccess("An error occurred. Please try again.");
-    //     }
+    //     // setCurrentFormKey(currentFormKey + 1);
     // };
+
+    // const [error, setError] = useState("");
 
     return (
         <div className="py-0 mt-32 bg-white">

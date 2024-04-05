@@ -215,7 +215,7 @@ const CreateTenant = () => {
                 setSelectedCity(response.data?.data);
                 setIsLoading(false);
                 // console.log(response.data?.data);
-                // console.log(selectedStates);
+                console.log(selectedStates);
             } catch (error) {
                 console.error(error);
             }
@@ -381,7 +381,7 @@ const CreateTenant = () => {
         // toast.success("Tenant's account Successfully")
     };
 
-    const [error, setError] = useState("");
+    // const [error, setError] = useState("");
 
 
     return (

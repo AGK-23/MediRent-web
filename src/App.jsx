@@ -9,7 +9,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 // import { Roles } from "./config/roles.jsx";
 
-const { Roles } = lazy(() => import('./config/roles.jsx'));
+// const { Roles } = lazy(() => import('./config/roles.jsx'));
 const RequireAuth = lazy(() => import('./middleware/RequireAuth.jsx'));
 const PrivateRoute = lazy(() => import('./middleware/PrivateRoute.jsx'));
 
