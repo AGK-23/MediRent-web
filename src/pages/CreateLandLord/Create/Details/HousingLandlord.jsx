@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { useState, useRef, useEffect } from "react";
 
 import axios from 'axios';
@@ -92,8 +94,9 @@ const HousingLandlord = ({  active, setActive, detailsData, setDetailsData, hand
     // const [selectedOption, setSelectedOption] = useState(null);
 
     const [currencies, setCurrencies] = useState([]);
+    // eslint-disable-next-line no-unused-vars
     const [loading, setLoading] = useState(true);
-    const [selectedCurrency, setSelectedCurrency] = useState(null);
+    // const [selectedCurrency, setSelectedCurrency] = useState(null);
 
     useEffect(() => {
         const fetchCurrencies = async () => {
@@ -198,7 +201,7 @@ const HousingLandlord = ({  active, setActive, detailsData, setDetailsData, hand
     );
 
     const handleDailyUser = (event) => {
-        const { name, value } = event.target;
+        const { value } = event.target;
         // console.log("all the value..", value );
 
         setDetailsData(prevState => ({
@@ -208,7 +211,7 @@ const HousingLandlord = ({  active, setActive, detailsData, setDetailsData, hand
     };
 
     const handleWeeklyUser = (event) => {
-        const { name, value } = event.target;
+        const { value } = event.target;
         // console.log("value..", value );
 
         setDetailsData(prevState => ({
@@ -388,7 +391,7 @@ const HousingLandlord = ({  active, setActive, detailsData, setDetailsData, hand
                             <select
                                 onChange={handleCurrencyChange}
                                 value={currency}
-                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                className="md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                             >
                                 <option value="">Select a Currency</option>
                                 {currencies?.map((currency, index) => (

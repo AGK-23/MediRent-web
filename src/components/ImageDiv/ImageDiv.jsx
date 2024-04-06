@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { FaSearch, FaArrowDown } from "react-icons/fa";
 import { IoArrowForward } from "react-icons/io5";
 import { useState, useRef, useEffect } from "react";
@@ -114,7 +115,7 @@ const ImageDiv = () => {
       try {
         // eslint-disable-next-line no-unused-vars
         const response = await fetchStateData();
-        // setSelectedStates(response?.data?.data);
+        setSelectedStates(response?.data?.data);
         setIsLoading(false);
         // console.log("state is Loading..", response.data?.data);
       } catch (error) {
@@ -154,7 +155,7 @@ useEffect(() => {
       // Navigate to /listings only if listings array is not empty
       navigate('/listings', { state: { result: listings, emptyLoading } });
   }
-}, [listings]); // Run the effect whenever listings state changes
+}, [listings, navigate, emptyLoading]); // Run the effect whenever listings state changes
 
   const handleListing = async () => {
     // e.preventDefault();
@@ -306,8 +307,8 @@ useEffect(() => {
                         <select
                           onChange={handleCountryChange}
                           value={country}
-                          className="h-12 w-full px-6 rounded-md border border-gray-300 md:py-3 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                          // className="h-12 w-full rounded-xl border border-gray-300 bg-gray-50 px-4  outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:ring-[1px] focus:ring-gray-400"
+                          className="md:h-12 xs:h-12 w-full px-6 rounded-md border border-gray-300 md:py-3 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                          // className="md:h-14 xs:h-12 w-full rounded-xl border border-gray-300 bg-gray-50 px-4  outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:ring-[1px] focus:ring-gray-400"
                         >
                           <option value="">Select a country</option>
                           {selectedCity?.map((country, index) => (
@@ -327,7 +328,7 @@ useEffect(() => {
                         <select
                           onChange={handleCityChange}
                           value={province}
-                          className="h-12 w-full px-6 rounded-md border border-gray-300 md:py-3 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                          className="md:h-12 xs:h-12 w-full px-6 rounded-md border border-gray-300 md:py-3 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                         >
                           <option value="">Select a state</option>
                           {selectedCity
@@ -340,7 +341,7 @@ useEffect(() => {
                         </select>
                       </div>
                     ) : (
-                      <select className="h-12 w-full px-6 rounded-md border border-gray-300 md:py-3 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md">
+                      <select className="md:h-12 xs:h-12 w-full px-6 rounded-md border border-gray-300 md:py-3 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md">
                         <option value="">Select a state</option>
                       </select>
                     )}

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,7 +9,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 // import { Roles } from "./config/roles.jsx";
 
-const { Roles } = lazy(() => import('./config/roles.jsx'));
+// const { Roles } = lazy(() => import('./config/roles.jsx'));
 const RequireAuth = lazy(() => import('./middleware/RequireAuth.jsx'));
 const PrivateRoute = lazy(() => import('./middleware/PrivateRoute.jsx'));
 

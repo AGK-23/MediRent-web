@@ -1,11 +1,11 @@
-import React from "react";
+// import React from "react";
 import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { BsCheckLg, BsChevronLeft, BsShopWindow } from "react-icons/bs";
-
+import { BsCheckLg } from "react-icons/bs";
+// BsChevronLeft, BsShopWindow
 // import Currency from "../../registration/Currency.jsx"
 
 
@@ -33,6 +33,7 @@ const CreateLandLord = () => {
 
     const [landLoading, setLandLoading] = useState(false);
 
+    // eslint-disable-next-line no-unused-vars
     const [loginLoading, setLoginLoading] = useState(false);
 
     const [housingLoading, setHousingLoading] = useState(false);
@@ -141,9 +142,46 @@ const CreateLandLord = () => {
     })
 
     // Update createListing whenever any of the dependent states change
+    // useEffect(() => {
+    //     setCreateListing({
+    //         ...createListing,
+    //         listingTitle: housingData?.listingTitle,
+    //         address: housingData?.address,
+    //         city: housingData?.city,
+    //         postalCode: housingData?.postalCode,
+    //         phone: housingData?.phone,
+    //         country: housingData?.country,
+    //         province: housingData?.province,
+    //         promotionCode: housingData?.promotionCode,
+
+    //         termOption: detailsData?.termOption,
+    //         designOption: detailsData?.designOption,
+    //         dailyRent: detailsData?.dailyRent,
+    //         weeklyRent: detailsData?.weeklyRent,
+    //         monthlyRent: detailsData?.monthlyRent,
+    //         numberOfBedRoom: detailsData?.numberOfBedRoom,
+    //         numberOfBathRoom: detailsData?.numberOfBathRoom,
+    //         licenseNumber: detailsData?.licenseNumber,
+    //         description: detailsData?.description,
+    //         propertyType: detailsData?.propertyType,
+    //         currency: detailsData?.currency,
+    //         amenitiesOption: detailsData?.amenitiesOption,
+
+    //         // avatars: fileList,
+    //         // propertyDates: selectedDates
+    //     });
+
+    //     setLoginData({
+    //         ...loginData,
+    //         email: formData?.email,
+    //         password: formData?.password,
+    //     });
+
+    // }, [detailsData, housingData, formData, loginData, createListing]);
+
     useEffect(() => {
-        setCreateListing({
-            ...createListing,
+        setCreateListing(prevState => ({
+            ...prevState,
             listingTitle: housingData?.listingTitle,
             address: housingData?.address,
             city: housingData?.city,
@@ -152,7 +190,7 @@ const CreateLandLord = () => {
             country: housingData?.country,
             province: housingData?.province,
             promotionCode: housingData?.promotionCode,
-
+    
             termOption: detailsData?.termOption,
             designOption: detailsData?.designOption,
             dailyRent: detailsData?.dailyRent,
@@ -164,27 +202,25 @@ const CreateLandLord = () => {
             description: detailsData?.description,
             propertyType: detailsData?.propertyType,
             currency: detailsData?.currency,
-            amenitiesOption: detailsData?.amenitiesOption,
-
-            // avatars: fileList,
-            // propertyDates: selectedDates
-        });
-
-        setLoginData({
-            ...loginData,
+            amenitiesOption: detailsData?.amenitiesOption
+        }));
+    
+        setLoginData(prevState => ({
+            ...prevState,
             email: formData?.email,
-            password: formData?.password,
-        });
-
-    }, [detailsData, fileList, selectedDates, housingData, formData, loginData, createListing]);
+            password: formData?.password
+        }));
+    }, [detailsData, housingData, formData]);
 
 
     const [active, setActive] = useState(1)
     const [selectedCity, setSelectedCity] = useState("");
+    // eslint-disable-next-line no-unused-vars
     const [selectedStates, setSelectedStates] = useState("");
     const [selectedCountry, setSelectedCountry] = useState(''); // State to store the selected country
     // eslint-disable-next-line no-unused-vars
     const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
+    // eslint-disable-next-line no-unused-vars
     const [isLoading, setIsLoading] = useState(true);
 
 
@@ -382,11 +418,11 @@ const CreateLandLord = () => {
             localStorage.setItem("accessToken", JSON.stringify(response.data.data?.accessToken));
 
             // Retrieve the stringified object from local storage
-            const storedToken = localStorage.getItem('token');
+            // const storedToken = localStorage.getItem('token');
 
 
             // Parse the stringified object back to its original form
-            const userDetails = JSON.parse(storedToken);
+            // const userDetails = JSON.parse(storedToken);
 
             // console.log("account item..", storedToken, userDetails);
 
@@ -420,9 +456,9 @@ const CreateLandLord = () => {
     };
 
 
-    const renderPreviousForm = () => {
-        setActive(active - 1);
-    };
+    // const renderPreviousForm = () => {
+    //     setActive(active - 1);
+    // };
     // const [selectedFunction, setSelectedFunction] = useState("");
 
     // FUNCTION TO GET THE COUNTRY AND THE STATE
@@ -466,7 +502,7 @@ const CreateLandLord = () => {
             setIsLoading(true);
             try {
                 const response = await fetchStateData();
-                // setSelectedStates(response?.data?.data);
+                setSelectedStates(response?.data?.data);
                 setIsLoading(false);
                 // console.log("state is Loading..", response.data?.data);
 
@@ -529,7 +565,7 @@ const CreateLandLord = () => {
     );
 
     const handleActiveUser = (event) => {
-        const { name, value } = event.target;
+        const { value } = event.target;
         // console.log("all the value..", value );
 
         setFormData(prevState => ({
@@ -573,10 +609,10 @@ const CreateLandLord = () => {
 
             // console.log("all the year in the bank..", convertedDates);
 
-            const requestBody = {
-                listingId: housing?.id,
-                propertyDates: convertedDates
-            };
+            // const requestBody = {
+            //     listingId: housing?.id,
+            //     propertyDates: convertedDates
+            // };
 
 
 
@@ -663,7 +699,7 @@ const CreateLandLord = () => {
         }
     }
 
-    const handleFilesUpload = async (files) => {
+    const handleFilesUpload = async () => {
         // housing
         // fileList
         // "7b057fdb-255d-4d37-b8b9-e9de3addd458"
@@ -687,7 +723,7 @@ const CreateLandLord = () => {
 
             const formData = new FormData();
             
-            fileList.forEach((file, index) => {
+            fileList.forEach((file) => {
                 // console.log("all the file..", file, index);
                 formData.append(`files`, file);
                 // console.log("alll the format in the data..", formData);
@@ -702,9 +738,9 @@ const CreateLandLord = () => {
             //     console.log(key[0] + ", " + key[1]);
             // }
 
-            for (var [key, value] of formData.entries()) { 
-                // console.log("al the key..", key, value);
-            }
+            // for (var [key, value] of formData.entries()) { 
+            //     console.log("al the key..", key, value);
+            // }
 
 
             // formData.append('housingId', housing);
@@ -736,7 +772,7 @@ const CreateLandLord = () => {
 
     const [isToggle, setIsToggle] = useState(true);
     const changeToggle = () => setIsToggle(!isToggle);
-    const [error, setError] = useState("");
+    // const [error, setError] = useState("");
 
 
     return (
@@ -1168,7 +1204,7 @@ const CreateLandLord = () => {
                                                         <select
                                                             onChange={handleCountryChange}
                                                             value={country}
-                                                            className="h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                                            className="md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                         >
                                                             <option value="">Select a country</option>
                                                             {selectedCity?.map((country, index) => (
@@ -1191,7 +1227,7 @@ const CreateLandLord = () => {
                                                         <select
                                                             onChange={handleCityChange}
                                                             value={province}
-                                                            className="h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                                            className="md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                         >
                                                             <option value="">Select a state</option>
                                                             {selectedCity
@@ -1206,7 +1242,7 @@ const CreateLandLord = () => {
                                                     </div>
                                                 ) : (
                                                     <select
-                                                        className='h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md'
+                                                        className='md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md'
                                                     >
                                                         <option value="">Select a state</option>
                                                     </select>

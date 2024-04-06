@@ -1,32 +1,32 @@
-import { lazy, Suspense } from "react";
+// import { lazy} from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BsCheckLg } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-import { validateEmail } from "../../../components/EndPoints/url.jsx";
+// import { validateEmail } from "../../../components/EndPoints/url.jsx";
 
 
 import '../../login/login.css';
 
-// import AddressLandlord from './Details/AddressLandlord.jsx';
+import AddressLandlord from './Details/AddressLandlord.jsx';
 // import HousingDetails from "./LandLordInfo/HousingDetails.jsx";
-// import HousingDetails from "../../CreateLandLord/LandLordInfo/HousingDetails.jsx";
-// import Photo from "../../CreateLandLord/LandLordInfo/Photo.jsx";
-// import AvailabilityLandlord from "../../CreateLandLord/LandLordInfo/AvailabilityLandlord.jsx";
+import HousingDetails from "../../CreateLandLord/LandLordInfo/HousingDetails.jsx";
+import Photo from "../../CreateLandLord/LandLordInfo/Photo.jsx";
+import AvailabilityLandlord from "../../CreateLandLord/LandLordInfo/AvailabilityLandlord.jsx";
 
 // import Spinner from "../../../assets/svg/Spinner.svg"
 
 
-const AddressLandlord = lazy(() => import('./Details/AddressLandlord.jsx'));
-const HousingDetails = lazy(() => import('../../CreateLandLord/LandLordInfo/HousingDetails.jsx'));
-const Photo = lazy(() => import('../../CreateLandLord/LandLordInfo/Photo.jsx'));
-const AvailabilityLandlord = lazy(() => import('../../CreateLandLord/LandLordInfo/AvailabilityLandlord.jsx'));
+// const AddressLandlord = lazy(() => import('./Details/AddressLandlord.jsx'));
+// const HousingDetails = lazy(() => import('../../CreateLandLord/LandLordInfo/HousingDetails.jsx'));
+// const Photo = lazy(() => import('../../CreateLandLord/LandLordInfo/Photo.jsx'));
+// const AvailabilityLandlord = lazy(() => import('../../CreateLandLord/LandLordInfo/AvailabilityLandlord.jsx'));
 
 
 
@@ -35,9 +35,10 @@ const Create = () => {
     // const [avatar, setAvatar] = useState(null);
     const [userLoading, setUserLoading] = useState(false);
 
-    const [landLoading, setLandLoading] = useState(false);
+    // eslint-disable-next-line no-unused-vars
+    // const [landLoading, setLandLoading] = useState(false);
 
-    const [loginLoading, setLoginLoading] = useState(false);
+    // const [loginLoading, setLoginLoading] = useState(false);
 
     const [housingLoading, setHousingLoading] = useState(false);
 
@@ -118,8 +119,8 @@ const Create = () => {
 
     // Update createListing whenever any of the dependent states change
     useEffect(() => {
-        setCreateListing({
-            ...createListing,
+        setCreateListing(prevState => ({
+            ...prevState,
             listingTitle: housingData?.listingTitle,
             address: housingData?.address,
             city: housingData?.city,
@@ -128,7 +129,7 @@ const Create = () => {
             country: housingData?.country,
             province: housingData?.province,
             promotionCode: housingData?.promotionCode,
-
+    
             termOption: detailsData?.termOption,
             designOption: detailsData?.designOption,
             dailyRent: detailsData?.dailyRent,
@@ -140,81 +141,76 @@ const Create = () => {
             description: detailsData?.description,
             propertyType: detailsData?.propertyType,
             currency: detailsData?.currency,
-            amenitiesOption: detailsData?.amenitiesOption,
-
-            // avatars: fileList,
-            // propertyDates: selectedDates
-        });
-
+            amenitiesOption: detailsData?.amenitiesOption
+        }));
+    
         
-
-    }, [detailsData, fileList, selectedDates, housingData, createListing]);
+    }, [detailsData, housingData]);
 
 
     const [active, setActive] = useState(1)
-    const [selectedCity, setSelectedCity] = useState("");
-    const [selectedStates, setSelectedStates] = useState("");
-    const [selectedCountry, setSelectedCountry] = useState(''); // State to store the selected country
+    // const [selectedCity, setSelectedCity] = useState("");
+    // const [selectedStates, setSelectedStates] = useState("");
+    // const [selectedCountry, setSelectedCountry] = useState(''); // State to store the selected country
     // eslint-disable-next-line no-unused-vars
-    const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
-    const [isLoading, setIsLoading] = useState(true);
+    // const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
+    // const [isLoading, setIsLoading] = useState(true);
 
-    const renderPreviousForm = () => {
-        setActive(active - 1);
-    };
+    // const renderPreviousForm = () => {
+    //     setActive(active - 1);
+    // };
     // const [selectedFunction, setSelectedFunction] = useState("");
 
     // FUNCTION TO GET THE COUNTRY AND THE STATE
-    function fetchData() {
-        const options = {
-            method: "GET",
-            // url: 'http://states-and-cities.com/api/v1/states',
-            url: "https://countriesnow.space/api/v0.1/countries/states",
-        };
-        return axios.request(options);
-    }
+    // function fetchData() {
+    //     const options = {
+    //         method: "GET",
+    //         // url: 'http://states-and-cities.com/api/v1/states',
+    //         url: "https://countriesnow.space/api/v0.1/countries/states",
+    //     };
+    //     return axios.request(options);
+    // }
 
-    function fetchStateData() {
-        const options = {
-            method: "GET",
-            url: 'https://countriesnow.space/api/v0.1/countries',
-            // url: "https://countriesnow.space/api/v0.1/countries",
-        };
-        return axios.request(options);
-    }
+    // function fetchStateData() {
+    //     const options = {
+    //         method: "GET",
+    //         url: 'https://countriesnow.space/api/v0.1/countries',
+    //         // url: "https://countriesnow.space/api/v0.1/countries",
+    //     };
+    //     return axios.request(options);
+    // }
 
-    useEffect(() => {
-        async function fetchAndLogData() {
-            setIsLoading(true);
-            try {
-                const response = await fetchData();
-                setSelectedCity(response.data?.data);
-                setIsLoading(false);
-                // console.log(response.data?.data);
-                // console.log(selectedStates);
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        fetchAndLogData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    // useEffect(() => {
+    //     async function fetchAndLogData() {
+    //         setIsLoading(true);
+    //         try {
+    //             const response = await fetchData();
+    //             setSelectedCity(response.data?.data);
+    //             setIsLoading(false);
+                
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     }
+    //     fetchAndLogData();
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, []);
 
-    useEffect(() => {
-        async function fetchStateLogData() {
-            setIsLoading(true);
-            try {
-                const response = await fetchStateData();
-                setSelectedStates(response?.data?.data);
-                setIsLoading(false);
-                // console.log("state is Loading..", response.data?.data);
+    // useEffect(() => {
+    //     async function fetchStateLogData() {
+    //         setIsLoading(true);
+    //         try {
+    //             const response = await fetchStateData();
+    //             setSelectedStates(response?.data?.data);
+    //             setIsLoading(false);
+                
 
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        fetchStateLogData();
-    }, []);
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     }
+    //     fetchStateLogData();
+    // }, []);
 
     
 
@@ -345,7 +341,7 @@ const Create = () => {
         }
     }
 
-    const handleFilesUpload = async (files) => {
+    const handleFilesUpload = async () => {
         // housing
         // fileList
         // "7b057fdb-255d-4d37-b8b9-e9de3addd458"
@@ -384,9 +380,9 @@ const Create = () => {
             //     console.log(key[0] + ", " + key[1]);
             // }
 
-            for (var [key, value] of formData.entries()) {
-                console.log("al the key..", key, value);
-            }
+            // for (var [key, value] of formData.entries()) {
+            //     console.log("al the key..", key, value);
+            // }
 
 
             // formData.append('housingId', housing);
@@ -417,6 +413,7 @@ const Create = () => {
 
 
     const [isToggle, setIsToggle] = useState(true);
+    // eslint-disable-next-line no-unused-vars
     const changeToggle = () => setIsToggle(!isToggle);
     // const [error, setError] = useState("");
 

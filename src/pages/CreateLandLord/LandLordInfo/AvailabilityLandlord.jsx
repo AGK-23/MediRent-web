@@ -1,5 +1,7 @@
-import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import { useState, useRef } from "react";
+// import { useNavigate } from "react-router-dom";
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -11,7 +13,7 @@ import Spinner from "../../../assets/svg/Spinner.svg"
 
 const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDates, formData, createListing, userLoading, setUserLoading, handleSubmitCreateListing }) => {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [propertyPictures, setPropertyPictures] = useState(null);
 
     const [isLoading, setIsLoading] = useState(false);
@@ -54,30 +56,30 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
 
     };
 
-    const handleSubmit = async () => {
-        try {
-            setIsLoading(true);
+    // const handleSubmit = async () => {
+    //     try {
+    //         setIsLoading(true);
 
-            console.log("all the user ...", formData);
+    //         console.log("all the user ...", formData);
 
-            // const response = await axios.post(`https://medirent-api.onrender.com/account/landlord-registration`,
-            //     formData,
-            // );
+    //         const response = await axios.post(`https://medirent-api.onrender.com/account/landlord-registration`,
+    //             formData,
+    //         );
 
-            setIsLoading(false);
+    //         setIsLoading(false);
 
-            if (response.data.success === true) {
-                toast.success("Landlord's Account Created");
-            }
+    //         if (response.data.success === true) {
+    //             toast.success("Landlord's Account Created");
+    //         }
 
-            console.log("all the Landlord...", response.data);
+    //         console.log("all the Landlord...", response.data);
 
-        } catch (error) {
-            toast.error("Landlord creation Failed");
-            console.log("Apparently the Message..", error);
-        }
+    //     } catch (error) {
+    //         toast.error("Landlord creation Failed");
+    //         console.log("Apparently the Message..", error);
+    //     }
 
-    }
+    // }
 
     const handleFormSubmit = async () => {
         // Any necessary logic before submitting the form

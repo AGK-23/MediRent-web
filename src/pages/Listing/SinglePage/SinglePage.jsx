@@ -5,10 +5,10 @@ import Slider from './Slider/Slider';
 import { useState, useEffect } from 'react';
 
 // import singlePostData from './singlePostData';
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { FaLocationDot } from "react-icons/fa6";
-import { FaBed, FaBath, FaBookmark, FaPhone } from "react-icons/fa6";
+import { FaBed, FaBath, FaPhone } from "react-icons/fa6";
 import { RiArrowRightSLine } from "react-icons/ri";
 
 
@@ -51,7 +51,7 @@ function SinglePage() {
         };
 
         fetchListings();
-    }, []);
+    }, [id]);
 
 
 
@@ -246,7 +246,7 @@ function SinglePage() {
                                 </div>
 
                                 <div className="grid md:grid-cols-5 xs:grid-cols-1 gap-2">
-                                    {listings?.housingDetails?.amenities.map((amenity, index) => (
+                                    {listings?.housingDetails?.amenities.map((amenity) => (
                                         <div key={amenity?.id} className="flex items-center h-full bg-white rounded overflow-hidden  border-dashed border-2 border-gray-200">
                                             <div className="flex flex-row justify-center items-center w-full">
                                                 <span className="inline-block h-full w-full rounded overflow-hidden px-2 py-2 text-center text-third md:text-md xs:text-xs">

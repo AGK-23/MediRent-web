@@ -1,6 +1,6 @@
-import React from 'react'
+// import React from 'react'
 import Verified from "../../assets/images/verified-icon.gif"
-import { useState } from "react";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { ToastContainer} from "react-toastify";
@@ -50,7 +50,7 @@ const SuccessTenant = () => {
                             </div>
 
                         </div>
-                        <Link to="/admin/renter/tenant" className="flex justify-center items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[10px] xs:py-3 xs:px-10">
+                        <Link to="/auth/login" className="flex justify-center items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[10px] xs:py-3 xs:px-10">
                             Log in into your account
                         </Link>
                     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 
@@ -24,6 +24,7 @@ import Spinner from "../../assets/svg/Spinner.svg"
 const CreateTenant = () => {
     const navigate = useNavigate();
     const [selectedCity, setSelectedCity] = useState("");
+    // eslint-disable-next-line no-unused-vars
     const [selectedStates, setSelectedStates] = useState("");
     const [selectedCountry, setSelectedCountry] = useState(''); // State to store the selected country
     // eslint-disable-next-line no-unused-vars
@@ -381,7 +382,7 @@ const CreateTenant = () => {
         // toast.success("Tenant's account Successfully")
     };
 
-    const [error, setError] = useState("");
+    // const [error, setError] = useState("");
 
 
     return (
@@ -496,7 +497,7 @@ const CreateTenant = () => {
                                                     <select
                                                         onChange={handleCountryChange}
                                                         value={country}
-                                                        className="h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                                        className="md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                     >
                                                         <option value="">Select a country</option>
                                                         {selectedCity?.map((country, index) => (
@@ -521,7 +522,7 @@ const CreateTenant = () => {
                                                     <select
                                                         onChange={handleCityChange}
                                                         value={province}
-                                                        className="h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                                        className="md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                     >
                                                         <option value="">Select a state</option>
                                                         {selectedCity
@@ -536,7 +537,7 @@ const CreateTenant = () => {
                                                 </div>
                                             ) : (
                                                 <select
-                                                    className="h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                                    className="md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                 >
                                                     <option value="">Select a state</option>
                                                 </select>
@@ -611,7 +612,7 @@ const CreateTenant = () => {
                                                 <div className="flex">
                                                     <div className=" border-[3px] rounded border-sky-500 p-2 h-4 w-4 mr-5"></div>
                                                     <div className="md:text-base xs:text-xs">
-                                                        Check this box to create a want ad and get notifications when a new listing fits what you're looking for!
+                                                        Check this box to create a want ad and get notifications when a new listing fits what you are looking for!
                                                     </div>
                                                 </div>
 

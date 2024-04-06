@@ -1,3 +1,7 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 // import React from 'react'
 import axios from "axios";
 
@@ -308,7 +312,7 @@ const AddressLandlord = ({active, setActive, housingData, setHousingData }) => {
                                     <select
                                         onChange={handleCountryHousingChange}
                                         value={country}
-                                        className="h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                        className="md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                     >
                                         <option value="">Select a country</option>
                                         {selectedCity?.map((country, index) => (
@@ -333,7 +337,7 @@ const AddressLandlord = ({active, setActive, housingData, setHousingData }) => {
                                     <select
                                         onChange={handleCityHousingChange}
                                         value={province}
-                                        className="h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                        className="md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                     >
                                         <option value="">Select a state</option>
                                         {selectedCity
@@ -348,7 +352,7 @@ const AddressLandlord = ({active, setActive, housingData, setHousingData }) => {
                                 </div>
                             ) : (
                                 <select
-                                    className="h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                    className="md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                 >
                                     <option value="">Select a state</option>
                                 </select>
