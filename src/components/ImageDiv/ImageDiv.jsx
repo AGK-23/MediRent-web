@@ -16,7 +16,7 @@ import Spinner from "../../assets/svg/Spinner.svg";
 const ImageDiv = () => {
   const navigate = useNavigate();
   // const [avatar, setAvatar] = useState(null);
-  const [userLoading, setUserLoading] = useState(true);
+  const [userLoading, setUserLoading] = useState(false);
 
   const [selectedDate, setSelectedDate] = useState(null);
 
