@@ -496,7 +496,7 @@ const CreateTenant = () => {
                                                     <select
                                                         onChange={handleCountryChange}
                                                         value={country}
-                                                        className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                                        className="h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                     >
                                                         <option value="">Select a country</option>
                                                         {selectedCity?.map((country, index) => (
@@ -521,7 +521,7 @@ const CreateTenant = () => {
                                                     <select
                                                         onChange={handleCityChange}
                                                         value={province}
-                                                        className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                                        className="h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                     >
                                                         <option value="">Select a state</option>
                                                         {selectedCity
@@ -536,7 +536,7 @@ const CreateTenant = () => {
                                                 </div>
                                             ) : (
                                                 <select
-                                                    className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                                    className="h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                                 >
                                                     <option value="">Select a state</option>
                                                 </select>

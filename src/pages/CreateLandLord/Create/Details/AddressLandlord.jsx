@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import axios from "axios";
 
 import { useState, useRef, useEffect } from "react";
@@ -151,7 +151,7 @@ const AddressLandlord = ({active, setActive, housingData, setHousingData }) => {
             setIsLoading(true);
             try {
                 const response = await fetchStateData();
-                // setSelectedStates(response?.data?.data);
+                setSelectedStates(response?.data?.data);
                 setIsLoading(false);
                 // console.log("state is Loading..", response.data?.data);
 
@@ -308,7 +308,7 @@ const AddressLandlord = ({active, setActive, housingData, setHousingData }) => {
                                     <select
                                         onChange={handleCountryHousingChange}
                                         value={country}
-                                        className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                        className="h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                     >
                                         <option value="">Select a country</option>
                                         {selectedCity?.map((country, index) => (
@@ -333,7 +333,7 @@ const AddressLandlord = ({active, setActive, housingData, setHousingData }) => {
                                     <select
                                         onChange={handleCityHousingChange}
                                         value={province}
-                                        className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                        className="h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                     >
                                         <option value="">Select a state</option>
                                         {selectedCity
@@ -348,7 +348,7 @@ const AddressLandlord = ({active, setActive, housingData, setHousingData }) => {
                                 </div>
                             ) : (
                                 <select
-                                    className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                    className="h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                 >
                                     <option value="">Select a state</option>
                                 </select>

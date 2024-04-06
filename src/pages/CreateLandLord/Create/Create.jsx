@@ -148,7 +148,7 @@ const Create = () => {
 
         
 
-    }, [detailsData, fileList, selectedDates, housingData]);
+    }, [detailsData, fileList, selectedDates, housingData, createListing]);
 
 
     const [active, setActive] = useState(1)
@@ -205,7 +205,7 @@ const Create = () => {
             setIsLoading(true);
             try {
                 const response = await fetchStateData();
-                // setSelectedStates(response?.data?.data);
+                setSelectedStates(response?.data?.data);
                 setIsLoading(false);
                 // console.log("state is Loading..", response.data?.data);
 
@@ -418,7 +418,7 @@ const Create = () => {
 
     const [isToggle, setIsToggle] = useState(true);
     const changeToggle = () => setIsToggle(!isToggle);
-    const [error, setError] = useState("");
+    // const [error, setError] = useState("");
 
 
 

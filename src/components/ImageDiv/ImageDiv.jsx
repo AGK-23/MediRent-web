@@ -16,7 +16,7 @@ import Spinner from "../../assets/svg/Spinner.svg";
 const ImageDiv = () => {
   const navigate = useNavigate();
   // const [avatar, setAvatar] = useState(null);
-  const [userLoading, setUserLoading] = useState(false);
+  const [userLoading, setUserLoading] = useState(true);
 
   const [selectedDate, setSelectedDate] = useState(null);
 
@@ -112,6 +112,7 @@ const ImageDiv = () => {
     async function fetchStateLogData() {
       setIsLoading(true);
       try {
+        // eslint-disable-next-line no-unused-vars
         const response = await fetchStateData();
         // setSelectedStates(response?.data?.data);
         setIsLoading(false);
@@ -305,7 +306,8 @@ useEffect(() => {
                         <select
                           onChange={handleCountryChange}
                           value={country}
-                          className="w-full px-6 rounded-md border border-gray-300 md:py-3 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                          className="h-12 w-full px-6 rounded-md border border-gray-300 md:py-3 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                          // className="h-12 w-full rounded-xl border border-gray-300 bg-gray-50 px-4  outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:ring-[1px] focus:ring-gray-400"
                         >
                           <option value="">Select a country</option>
                           {selectedCity?.map((country, index) => (
@@ -325,7 +327,7 @@ useEffect(() => {
                         <select
                           onChange={handleCityChange}
                           value={province}
-                          className="w-full px-6 rounded-md border border-gray-300 md:py-3 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                          className="h-12 w-full px-6 rounded-md border border-gray-300 md:py-3 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                         >
                           <option value="">Select a state</option>
                           {selectedCity
@@ -338,7 +340,7 @@ useEffect(() => {
                         </select>
                       </div>
                     ) : (
-                      <select className="w-full px-6 rounded-md border border-gray-300 md:py-3 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md">
+                      <select className="h-12 w-full px-6 rounded-md border border-gray-300 md:py-3 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md">
                         <option value="">Select a state</option>
                       </select>
                     )}
@@ -347,7 +349,7 @@ useEffect(() => {
 
                 <button
                   onClick={handleListing}
-                  className="bg-[#008080] tetx-white rounded-lg py-[0.80rem] px-3"
+                  className="bg-[#008080] tetx-white rounded-lg py-[0.60rem] px-3"
                   disabled={userLoading}
                 >
                   

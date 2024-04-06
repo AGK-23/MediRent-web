@@ -388,7 +388,7 @@ const HousingDetails = ({  active, setActive, detailsData, setDetailsData, handl
                             <select
                                 onChange={handleCurrencyChange}
                                 value={currency}
-                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                className="h-14 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                             >
                                 <option value="">Select a Currency</option>
                                 {currencies?.map((currency, index) => (
