@@ -24,15 +24,6 @@ const ForgotPassword = () => {
         setLostEmail(e.target.value);
     };
 
-
-    const handleReferenceChange = (e) => {
-        setFormData(prevState => ({
-            ...prevState,
-            discoveryMethod: e.target.value,
-        }));
-    };
-
-
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -54,33 +45,7 @@ const ForgotPassword = () => {
     const changeToggle = () => setIsToggle(!isToggle);
 
 
-
-    const handleLoginUser = async (e) => {
-        e.preventDefault();
-
-
-        // setCurrentFormKey(currentFormKey + 1);
-    };
-
-    const [error, setError] = useState("");
-    const handleLogin = async () => {
-        try {
-            const response = await axios.get(
-                "https://jsonplaceholder.typicode.com/posts/1"
-            );
-
-            if (response.status === 200) {
-                console.log("Login successful!", response.data);
-                setError("");
-            } else {
-                console.error("Login failed.");
-                setError("Invalid email or password.");
-            }
-        } catch (error) {
-            console.error("Error during login:", error);
-            setError("An error occurred. Please try again.");
-        }
-    };
+    
     const handleForgotPassword = async (e) => {
         e.preventDefault();
 
@@ -97,10 +62,7 @@ const ForgotPassword = () => {
             }
             setUserLoading(true)
 
-
             console.log("first email...", lostEmail);
-
-
 
             const response = await axiosPrivate.post("/account/recover-password", lostEmail);
 
@@ -108,17 +70,9 @@ const ForgotPassword = () => {
 
             setUserLoading(false)
 
-
-
-
-
-
-
             if (response.data.Success === true) {
                 toast.success("Email Sent Successfully");
             }
-
-
 
             return response.data;
         } catch (error) {
