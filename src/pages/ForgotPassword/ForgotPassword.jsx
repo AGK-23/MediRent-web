@@ -1,21 +1,36 @@
-import React from "react";
+// import React from "react";
 import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 
 import { Link } from "react-router-dom";
-import { IoLogInOutline } from "react-icons/io5";
+// import { IoLogInOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+import Spinner from "../../assets/svg/Spinner.svg"
 import '../login/login.css'
+import { axiosPrivate } from "../../api/axios";
+
 
 const ForgotPassword = () => {
     const emailInput = useRef();
     const passwordInput = useRef();
     const lostEmailInput = useRef();
+    const [userLoading, setUserLoading] = useState(false)
 
     const [lostEmail, setLostEmail] = useState("");
 
-    const handleEmailUser = (e) => setLostEmail(
-        setLostEmail(e.target.value)
-    );
+    const handleChange = (e) => {
+        setLostEmail(e.target.value);
+    };
+
+
+    const handleReferenceChange = (e) => {
+        setFormData(prevState => ({
+            ...prevState,
+            discoveryMethod: e.target.value,
+        }));
+    };
 
 
     const [formData, setFormData] = useState({
@@ -25,20 +40,15 @@ const ForgotPassword = () => {
 
     var {
         email,
-        password,  
+        password,
     } = formData;
 
     const handleInputUser = (e) => setFormData(
         {
-          ...formData,
-          [e.target.name]: e.target.value
+            ...formData,
+            [e.target.name]: e.target.value
         }
     );
-
-
-
-
-
 
     const [isToggle, setIsToggle] = useState(true);
     const changeToggle = () => setIsToggle(!isToggle);
@@ -71,34 +81,58 @@ const ForgotPassword = () => {
             setError("An error occurred. Please try again.");
         }
     };
-    const handleForgotPassword = async () => {
+    const handleForgotPassword = async (e) => {
+        e.preventDefault();
+
+        console.log("forgot..", lostEmail)
+
         try {
-            // Your "Forgot Password" logic here...
-            if (!forgotPasswordEmail) {
-                setForgotPasswordSuccess("Please enter your email.");
+            if (
+
+                !lostEmail
+
+            ) {
+                toast.warning('Please fill in all required fields.');
                 return;
             }
+            setUserLoading(true)
 
-            // Simulate a successful request for the example
-            const response = await axios.post(
-                "https://jsonplaceholder.typicode.com/posts",
-                {
-                    email: forgotPasswordEmail,
-                }
-            );
 
-            if (response.status === 201) {
-                console.log("Password reset email sent successfully.");
-                setForgotPasswordSuccess("Password reset email sent successfully.");
-            } else {
-                console.error("Failed to send password reset email.");
-                setForgotPasswordSuccess("Failed to send password reset email.");
+            console.log("first email...", lostEmail);
+
+
+
+            const response = await axiosPrivate.post("/account/recover-password", lostEmail);
+
+            console.log("response in the code..", response)
+
+            setUserLoading(false)
+
+
+
+
+
+
+
+            if (response.data.Success === true) {
+                toast.success("Email Sent Successfully");
             }
+
+
+
+            return response.data;
         } catch (error) {
-            console.error("Error during password reset:", error);
-            setForgotPasswordSuccess("An error occurred. Please try again.");
+            const message =
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.toString();
+            toast.error(message);
+            setUserLoading(false)
+
+            console.log("user profile..", message, error);
         }
     };
+
 
     return (
         <div className="py-0 mt-32 bg-white">
@@ -118,7 +152,7 @@ const ForgotPassword = () => {
                 <div className="flex items-center justify-center lg:w-full md:w-full">
                     <div className="w-full flex flex-col p-0 max-w-4xl px-2">
 
-                        <div className="w-full flex-1 mt-4">
+                        <div className="w-full hidden flex-1 mt-4">
 
 
                             <div className="my-10 text-center">
@@ -239,7 +273,7 @@ const ForgotPassword = () => {
                                     </div>
 
 
-                                    
+
                                 </div>
 
 
@@ -258,15 +292,27 @@ const ForgotPassword = () => {
                             <div className="">
                                 <div className="">
                                     <div className="relative ">
-                                        <input
+                                        {/* <input
                                             id="email"
                                             className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
                                             type="email"
                                             ref={lostEmailInput}
                                             name="email"
                                             value={lostEmail}
-                                            onChange={handleEmailUser}
+                                            onChange={handleChange}
                                             placeholder=""
+                                        /> */}
+
+                                        <input
+                                            id="email"
+                                            className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
+                                            type="email"
+                                            ref={lostEmailInput}
+                                            name="email"
+                                            // type="text"
+                                            value={lostEmail}
+                                            onChange={handleChange}
+                                            placeholder="Enter lost email"
                                         />
                                         <label
                                             htmlFor="email"
@@ -275,16 +321,32 @@ const ForgotPassword = () => {
                                             E-mail
                                         </label>
                                     </div>
-                                    
+
 
                                     <div className="flex justify-between border-b border-gray-600 my-6 pb-10">
                                         <div className="flex justify-end z-10 relative mt-4 ">
-                                            <Link
-                                                to="/"
+                                            {/* <button
+                                                onClick={handleCreateTenantUser}
                                                 className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-10"
                                             >
                                                 <span className="">Go</span>
-                                            </Link>
+                                            </button> */}
+                                            <button
+                                                onClick={handleForgotPassword}
+                                                className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-6"
+                                                disabled={userLoading} // Disable the button when userLoading is true
+                                            >
+                                                {userLoading ? ( // Display spinner if userLoading is true
+                                                    <div className="flex items-center px-6">
+                                                        <div>
+                                                            <img alt="" src={Spinner} className="text-[1px] text-white" />
+                                                        </div>
+
+                                                    </div>
+                                                ) : (
+                                                    <span className="">Go</span> // Show the "Submit" text when isLoading is false
+                                                )}
+                                            </button>
                                         </div>
 
                                     </div>

@@ -1,15 +1,19 @@
-import React from "react";
+// import React from "react";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 
 import { Link } from "react-router-dom";
 
 
-import axios from "axios";
+// import axios from "axios";
 import { toast } from "react-toastify";
 import './login.css';
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../assets/svg/Spinner.svg"
+
+// import { encryptAes, deCryptedData } from "../../components/EndPoints/Encrypted";
+
+import { axiosPrivate } from "../../api/axios";
 
 
 
@@ -54,29 +58,38 @@ const Login = () => {
 
             console.log("first email...", formData);
 
-            const response = await axios.post(`https://medirent-api.onrender.com/account/signin`,
-                // {
-                //     data: userData
-                // },
-                formData,
-                // {
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //         'Access-Control-Allow-Origin': '*',
-                //         // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-                //         // 'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept',
+            // const encryptedForm = encryptAes(formData);
 
-                //     }, 
-                // }
-            );
+            // console.log("encrypted data...", encryptedForm);
+
+            // const response = await axios.post(`https://medirent-api.onrender.com/account/signin`,
+            //     // {
+            //     //     data: encryptedForm
+            //     // },
+            //     encryptedForm,
+            //     {
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //             // 'Content-Type': 'text/plain',
+            //             // 'Access-Control-Allow-Origin': '*',
+            //             // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+            //             // 'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept',
+
+            //         }, 
+            //     }
+            // );
+
+            const response = await axiosPrivate.post("/account/signin", formData);
+
+            console.log("response in the code..", response)
 
             setIsLoading(false)
 
-            console.log("tenant account..", response.data.data, "Loading..", isLoading);
+            console.log("tenant account..", response, "Loading..", isLoading);
 
-            localStorage.setItem("token", JSON.stringify(response.data.data));
+            localStorage.setItem("token", JSON.stringify(response?.data));
 
-            localStorage.setItem("accessToken", JSON.stringify(response.data.data?.accessToken));
+            localStorage.setItem("accessToken", JSON.stringify(response.data?.Data?.AccessToken));
 
             // Retrieve the stringified object from local storage
             const storedToken = localStorage.getItem('token');
@@ -93,11 +106,11 @@ const Login = () => {
                 toast.success("Account Login Successfully");
             }
 
-            if (userDetails?.accountType === "Tenant") {
+            if (userDetails?.Data?.AccountType === "Tenant") {
                 navigate('/admin/renter/tenant')
             }
 
-            if (userDetails?.accountType === "Landlord") {
+            if (userDetails?.Data?.AccountType === "Landlord") {
                 navigate('/admin/dashboard/landlord')
             }
 
@@ -112,57 +125,11 @@ const Login = () => {
             toast.error(message);
             setIsLoading(false)
 
-            console.log("user profile..", error);
+            console.log("user profile..", message, error);
         }
     };
 
-    const [error, setError] = useState("");
-    const handleLogin = async () => {
-        try {
-            const response = await axios.get(
-                "https://jsonplaceholder.typicode.com/posts/1"
-            );
 
-            if (response.status === 200) {
-                console.log("Login successful!", response.data);
-                setError("");
-            } else {
-                console.error("Login failed.");
-                setError("Invalid email or password.");
-            }
-        } catch (error) {
-            console.error("Error during login:", error);
-            setError("An error occurred. Please try again.");
-        }
-    };
-    const handleForgotPassword = async () => {
-        try {
-            // Your "Forgot Password" logic here...
-            if (!forgotPasswordEmail) {
-                setForgotPasswordSuccess("Please enter your email.");
-                return;
-            }
-
-            // Simulate a successful request for the example
-            const response = await axios.post(
-                "https://jsonplaceholder.typicode.com/posts",
-                {
-                    email: forgotPasswordEmail,
-                }
-            );
-
-            if (response.status === 201) {
-                console.log("Password reset email sent successfully.");
-                setForgotPasswordSuccess("Password reset email sent successfully.");
-            } else {
-                console.error("Failed to send password reset email.");
-                setForgotPasswordSuccess("Failed to send password reset email.");
-            }
-        } catch (error) {
-            console.error("Error during password reset:", error);
-            setForgotPasswordSuccess("An error occurred. Please try again.");
-        }
-    };
 
     return (
         <div className="py-0 mt-32 bg-white">

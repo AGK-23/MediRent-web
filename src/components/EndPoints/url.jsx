@@ -1,5 +1,5 @@
-import axios from "axios";
-import { toast } from "react-toastify";
+// import axios from "axios";
+// import { toast } from "react-toastify";
 
 export const validateEmail = (email) => {
     return email.match(
@@ -9,69 +9,69 @@ export const validateEmail = (email) => {
 
 // const navigate = useNavigate();
 // Register User
-export const TenantUser = async (userData) => {
-    try {
-        // const BACKEND_URL = "https://medirent-api.onrender.com"
+// export const TenantUser = async (userData) => {
+//     try {
+//         // const BACKEND_URL = "https://medirent-api.onrender.com"
 
 
-        // console.log("first email...", userData);
+//         // console.log("first email...", userData);
 
-        // const config = {
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Access-Control-Allow-Origin': '*'
-        //     },
-        //     // withCredentials: true
-        // };
+//         // const config = {
+//         //     headers: {
+//         //         'Content-Type': 'application/json',
+//         //         'Access-Control-Allow-Origin': '*'
+//         //     },
+//         //     // withCredentials: true
+//         // };
 
-        // const response = await axios.post(
-        //     `${BACKEND_URL}/account/tenant-registration`,
-        //     userData,
-        //     // config
-        // )
+//         // const response = await axios.post(
+//         //     `${BACKEND_URL}/account/tenant-registration`,
+//         //     userData,
+//         //     // config
+//         // )
 
 
-        // const headers = {
-        //     'Content-Type': 'application/json',
-        //     'Access-Control-Allow-Origin': '*',
-        // }
+//         // const headers = {
+//         //     'Content-Type': 'application/json',
+//         //     'Access-Control-Allow-Origin': '*',
+//         // }
         
 
-        const response = await axios.post(`https://medirent-api.onrender.com/account/tenant-registration`,
-            // {
-            //     data: userData
-            // },
-            userData,
-            // {
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Access-Control-Allow-Origin': '*',
-            //         // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-            //         // 'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept',
+//         const response = await axios.post(`https://medirent-api.onrender.com/account/tenant-registration`,
+//             // {
+//             //     data: userData
+//             // },
+//             userData,
+//             // {
+//             //     headers: {
+//             //         'Content-Type': 'application/json',
+//             //         'Access-Control-Allow-Origin': '*',
+//             //         // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+//             //         // 'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept',
 
-            //     }, 
-            // }
-        );
+//             //     }, 
+//             // }
+//         );
 
-        console.log("tenant account..", response);
+//         console.log("tenant account..", response);
 
-        if (response.data.success === true) {
-            toast.success("Tenant's account Successfully");
-        }
+//         if (response.data.success === true) {
+//             toast.success("Tenant's account Successfully");
+//         }
 
-        // navigate('/success/tenant/1')
+//         // navigate('/success/tenant/1')
 
-        return response.data;
-    } catch (error) {
-        const message =
-            (error.response && error.response.data && error.response.data.message) ||
-            error.message ||
-            error.toString();
-        toast.error(message);
+//         return response.data;
+//     } catch (error) {
+//         const message =
+//             (error.response && error.response.data && error.response.data.message) ||
+//             error.message ||
+//             error.toString();
+//         toast.error(message);
 
-        // console.log("user profile..", error);
-    }
-};
+//         // console.log("user profile..", error);
+//     }
+// };
 
 // export const TenantUser = async (userData) => {
 //     try {

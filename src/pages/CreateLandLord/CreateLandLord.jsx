@@ -24,6 +24,8 @@ import Photo from "./LandLordInfo/Photo.jsx";
 import AvailabilityLandlord from "./LandLordInfo/AvailabilityLandlord.jsx";
 import Spinner from "../../assets/svg/Spinner.svg"
 
+import { axiosPrivate } from "../../api/axios.jsx";
+
 
 
 const CreateLandLord = () => {
@@ -372,15 +374,17 @@ const CreateLandLord = () => {
 
             // console.log("user form for landlord...", formData);
 
-            const response = await axios.post(`https://medirent-api.onrender.com/account/landlord-registration`,
-                formData,
-            );
+            // const response = await axios.post(`https://medirent-api.onrender.com/account/landlord-registration`,
+            //     formData,
+            // );
+
+            const response = await axiosPrivate.post("/account/landlord-registration", formData);
 
             setLandLoading(false);
 
             // console.log("Landlord is rent..", response.data.data, "Loading..", landLoading);
 
-            if (response.data.success === true) {
+            if (response?.data?.Success === true) {
                 toast.success("Landlord's account Created");
 
                 await handleLoginUser()
@@ -405,17 +409,19 @@ const CreateLandLord = () => {
 
             // console.log("lOGIN DATA...", loginData);
 
-            const response = await axios.post(`https://medirent-api.onrender.com/account/signin`,
-                loginData,
-            );
+            // const response = await axios.post(`https://medirent-api.onrender.com/account/signin`,
+            //     loginData,
+            // );
+
+            const response = await axiosPrivate.post("/account/signin", loginData);
 
             setLoginLoading(false)
 
             // console.log("landlord account..", response.data.data, "Loading..", loginLoading);
 
-            localStorage.setItem("token", JSON.stringify(response.data.data));
+            localStorage.setItem("token", JSON.stringify(response?.data));
 
-            localStorage.setItem("accessToken", JSON.stringify(response.data.data?.accessToken));
+            localStorage.setItem("accessToken", JSON.stringify(response.data?.Data?.AccessToken));
 
             // Retrieve the stringified object from local storage
             // const storedToken = localStorage.getItem('token');
@@ -428,7 +434,7 @@ const CreateLandLord = () => {
 
 
 
-            if (response.data.success === true) {
+            if (response.data.Success === true) {
                 toast.success("Login Successfully");
 
                 setActive(2)

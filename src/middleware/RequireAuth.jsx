@@ -18,7 +18,7 @@ const RequireAuth = () => {
     let requiredRoles = allowedRoles.filter(allowedRole => allowedRole.includes(role))[0]
 
 
-    // console.log("roles..", role, allowedRoles, requiredRoles)
+    console.log("roles..", role, allowedRoles, requiredRoles)
 
     const content = (
         requiredRoles

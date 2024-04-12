@@ -11,14 +11,14 @@ const PrivateRoute = () => {
 
     const userDetails = JSON.parse(storedToken);
 
-    // console.log("private note..", userDetails, "user..", userDetails?.accountType)
+    console.log("private note..", userDetails, "user..", userDetails?.Data?.AccountType)
 
     if (userDetails) {
-        if (userDetails?.accountType === "Landlord") {
+        if (userDetails?.Data?.AccountType === "Landlord") {
             // console.log("man");
             return <DashboardDefault />;
         }
-        if (userDetails?.accountType === "Tenant") {
+        if (userDetails?.Data?.AccountType === "Tenant") {
             // console.log("object");
             return <TenantDashboard />;
         } 

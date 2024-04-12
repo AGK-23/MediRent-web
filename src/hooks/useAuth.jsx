@@ -20,17 +20,17 @@ const useAuth = () => {
     // Parse the stringified object back to its original form
     const userDetails = JSON.parse(storedToken);
 
-    // console.log("all the role..", storedToken, userDetails);
+    console.log("all the role..", storedToken, userDetails);
 
     let isLandLord = false;
     let isTenants = false;
     let status = "Landlord";
-    const role = userDetails?.accountType;
+    const role = userDetails?.Data?.AccountType;
 
 
     if (userDetails) {
-        isTenants = userDetails?.accountType === "Tenant";
-        isLandLord = userDetails?.accountType === "Landlord";
+        isTenants = userDetails?.Data?.AccountType === "Tenant";
+        isLandLord = userDetails?.Data?.AccountType === "Landlord";
 
 
         if (isLandLord) status = "Landlord";

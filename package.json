@@ -10,13 +10,14 @@
     "preview": "vite preview"
   },
   "engines": {
-  "node": "20.x",
-  "npm":"10.2.4"
-},
+    "node": "20.x",
+    "npm": "10.2.4"
+  },
   "dependencies": {
     "@vitejs/plugin-react": "^4.2.1",
     "apexcharts": "^3.46.0",
     "axios": "^1.6.7",
+    "crypto-js": "^4.2.0",
     "framer-motion": "^10.12.13",
     "gsap": "^3.10.4",
     "react": "^18.2.0",

@@ -289,9 +289,9 @@ const Index = () => {
   
 
   useEffect(() => {
-    setUserName(userDetails?.firstName)
+    setUserName(userDetails?.Data?.FirstName)
     // console.log('Updated housingData:', userName);
-  }, [userName]); // Log housingData whenever it changes
+  }, [userDetails]); // Log housingData whenever it changes
 
 
 
@@ -300,7 +300,7 @@ const Index = () => {
   return (
     <div className="md:mt-0 xs:mt-10">
       <div>
-        <div className="text-slate-700 text-lg">Hello 👋, {userName}</div>
+        <div className="text-slate-700 text-lg">Hello 👋 {userName},</div>
         <div className="text-gray-500 md:text-xs xs:text-[10px]">
           Welcome to your Landlord's Dashboard
         </div>

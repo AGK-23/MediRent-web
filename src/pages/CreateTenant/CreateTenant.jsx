@@ -9,9 +9,10 @@ import { useNavigate } from "react-router-dom";
 import '../login/login.css';
 
 import { validateEmail } from "../../components/EndPoints/url.jsx";
+
 import Spinner from "../../assets/svg/Spinner.svg"
 
-
+import { axiosPrivate } from "../../api/axios.jsx";
 
 
 
@@ -333,23 +334,25 @@ const CreateTenant = () => {
 
             console.log("all the user ...", formData);
 
-            const response = await axios.post(`https://medirent-api.onrender.com/account/tenant-registration`,
-                formData,
-            );
+            // const response = await axios.post(`https://medirent-api.onrender.com/account/tenant-registration`,
+            //     formData,
+            // );
+
+            const response = await axiosPrivate.post("/account/tenant-registration", formData);
 
             setUserLoading(false)
 
-            console.log("tenant is rent..", response.data.data, "Loading..", isLoading);
+            console.log("tenant is rent..", response.data, "Loading..", isLoading);
 
-            if (response.data.success === true) {
+            if (response?.data?.Success === true) {
                 toast.success("Tenant's account Created");
             }
 
-            console.log("tenants account..", response.data.data);
+            console.log("tenants account..", response.data);
 
-            localStorage.setItem("token", JSON.stringify(response.data.data));
+            localStorage.setItem("token", JSON.stringify(response?.data));
 
-            localStorage.setItem("accessToken", JSON.stringify(response.data.data?.accessToken));
+            localStorage.setItem("accessToken", JSON.stringify(response.data?.Data?.AccessToken));
 
             // Retrieve the stringified object from local storage
             const storedToken = localStorage.getItem('token');
