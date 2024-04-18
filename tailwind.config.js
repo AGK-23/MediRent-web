@@ -16,6 +16,11 @@ export default {
 
       backgroundImage: {
         HomeImage: "url('assets/slider_1.png')",
+        ProductImage: "url('assets/imageDiv/productImage.png')",
+        ProductImage2: "url('assets/imageDiv/productImage6.png')",
+        ProductImage3: "url('assets/imageDiv/productImage3.png')",
+        ProductImage4: "url('assets/imageDiv/productImage4.png')",
+        ProductImage5: "url('assets/imageDiv/productImage5.png')",
 
       },
       backgroundSize: {

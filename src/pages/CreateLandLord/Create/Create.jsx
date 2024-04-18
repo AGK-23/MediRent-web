@@ -260,7 +260,7 @@ const Create = () => {
 
             console.log("the create Listing  ...", housing, requestBody);
 
-            const response = await axios.put(`https://medirent-api.onrender.com/housing/add-availability-period`,
+            const response = await axios.put(`https://medirent-api-3gwy.onrender.com/housing/add-availability-period`,
                 {
                     listingId: housing?.id,
                     propertyDates: convertedDates
@@ -313,7 +313,7 @@ const Create = () => {
             };
 
             // Make the POST request to create a listing
-            const response = await axios.post(`https://medirent-api.onrender.com/housing/add-listing`,
+            const response = await axios.post(`https://medirent-api-3gwy.onrender.com/housing/add-listing`,
                 createListing,
                 { headers }
             );
@@ -389,7 +389,7 @@ const Create = () => {
 
             console.log("format data..", formData, housing, fileList);
 
-            const response = await axios.post(`https://medirent-api.onrender.com/File/upload?listingId=${housing?.id}`, formData, { headers });
+            const response = await axios.post(`https://medirent-api-3gwy.onrender.com/File/upload?listingId=${housing?.id}`, formData, { headers });
 
             setImageLoading(false)
 

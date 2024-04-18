@@ -14,12 +14,12 @@ const ListingHome = () => {
     // Destructure result with a default empty object in case location.state is not available
     const { result } = location.state;
 
-    const { listings = [], emptyLoading } = result;
+    // const { emptyLoading } = result;
     const [isLoading, setIsLoading] = useState(false);
 
 
     useEffect(() => {
-        console.log('estate in the building:', result, emptyLoading);
+        console.log('estate in the building:', result);
     }, [result]);
 
 

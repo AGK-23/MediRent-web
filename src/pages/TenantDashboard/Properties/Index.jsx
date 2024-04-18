@@ -5,6 +5,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import NoFound from "../../../assets/svg/NoHouse.svg"
 
 
 const Index = () => {
@@ -35,7 +36,7 @@ const Index = () => {
 
                 setIsLoading(true)
 
-                const response = await axios.post('https://medirent-api.onrender.com/housing/get-all-listings',
+                const response = await axios.post('https://medirent-api-3gwy.onrender.com/housing/get-all-listings',
                     {
                         pageIndex: 1,
                         pageSize: 10,
@@ -82,10 +83,20 @@ const Index = () => {
                 </Link>
             </div>
 
-            <div className="grid gap-5 md:grid-cols-3 xs:grid-cols-1 ">
+            <div className="">
                 {!isLoading ? (
+                    !listings ?
+                    <div className="flex justify-center items-center h-full ">
+                            <div className='flex flex-col '>
+                                
+                                <img alt="" src={NoFound} className="text-7xl w-full  h-full" />
+                                <div className='md:text-2xl xs:text-lg font-semibold text-center mt-5 text-gray-600'>No Listing Found</div>
+                            </div>
+
+                        </div>
+                    :
                     listings?.map((Menu, index) => (
-                        <div key={index} className="">
+                        <div key={index} className="grid gap-5 md:grid-cols-3 xs:grid-cols-1 ">
                             <div
                                 className={`flex rounded-md py-1 cursor-pointer hover:bg-light-white text-secondary text-sm items-center gap-x-4`}
                             >
@@ -130,7 +141,8 @@ const Index = () => {
                                 </li>
                             </div>
                         </div>
-                    ))
+                    )) 
+                    
                 ) : (
                     <div className='w-screen flex justify-center items-center h-[50vh] '>
                         <div className="loader"></div>

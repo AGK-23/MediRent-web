@@ -1,5 +1,7 @@
 import axios from 'axios';
-const BASE_URL = "https://medirent-api.onrender.com";
+// const BASE_URL = "https://medirent-api.onrender.com";
+
+const BASE_URL = "https://medirent-api-3gwy.onrender.com";
 
 import { encryptAes, deCryptedData } from '../components/EndPoints/Encrypted';
 // import { _config } from 'gsap/gsap-core';

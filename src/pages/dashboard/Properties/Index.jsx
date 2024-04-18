@@ -31,7 +31,7 @@ const Index = () => {
 
                 setIsLoading(true)
 
-                const response = await axios.get('https://medirent-api.onrender.com/housing/get-all-user-listings', { headers });
+                const response = await axios.get('https://medirent-api-3gwy.onrender.com/housing/get-all-user-listings', { headers });
 
                 console.log("all the response..", response?.data);
                 setListings(response?.data?.data.slice(0, 3));

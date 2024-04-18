@@ -4,6 +4,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import TenantCard from './TenantCard';
+import NoFound from "../../../assets/svg/NoHouse.svg"
+
+
 
 
 const TenantListing = () => {
@@ -13,7 +16,7 @@ const TenantListing = () => {
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
     };
-    
+
 
     const [listings, setListings] = useState([]);
 
@@ -38,7 +41,7 @@ const TenantListing = () => {
 
                 setIsLoading(true)
 
-                const response = await axios.post('https://medirent-api.onrender.com/housing/get-all-listings',
+                const response = await axios.post('https://medirent-api-3gwy.onrender.com/housing/get-all-listings',
                     {
                         pageIndex: 1,
                         pageSize: 10,
@@ -66,7 +69,7 @@ const TenantListing = () => {
         fetchListings();
     }, []);
 
-    const filteredListing = listings.filter(item => {
+    const filteredListing = listings?.filter(item => {
         return item?.title?.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
@@ -82,17 +85,24 @@ const TenantListing = () => {
                 />
             </div>
             <div className=" h-full flex-col justify-center items-center">
-                <div className="h-full grid md:grid-cols-2 xs:grid-cols-1 gap-10 overflow-y-auto justify-center items-center pb-12">
-                    {/* <Filter /> */}
-
-                    {/* {filteredListing.map(item => (
-              <Card key={item.id} item={item} />
-            ))} */}
+                <div className="h-full grid md:grid-cols-1 xs:grid-cols-1 gap-10 overflow-y-auto justify-center items-center pb-12">
+                    
 
                     {!isLoading ? (
-                        filteredListing.map(item => (
-                            <TenantCard key={item.id} item={item} />
-                        ))
+                        !listings ?
+                            <div className="flex justify-center items-center w-full h-full ">
+                                <div className='flex flex-col '>
+
+                                    <img alt="" src={NoFound} className="text-7xl w-full  h-full" />
+                                    <div className='md:text-2xl xs:text-lg font-semibold text-center mt-5 text-gray-600'>No Listing Found</div>
+                                </div>
+
+                            </div>
+                            :
+                            filteredListing?.map(item => (
+                                
+                                <TenantCard key={item.id} item={item} />
+                            ))
                     ) : (
                         <div className='w-screen flex justify-center items-center h-screen '>
                             <div className="loader"></div>

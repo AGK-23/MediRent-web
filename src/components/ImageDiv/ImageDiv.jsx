@@ -150,7 +150,7 @@ const ImageDiv = () => {
 // }, [listings]); 
 
 useEffect(() => {
-  if (listings.length > 0) {
+  if (!listings || listings.length > 0) {
     console.log('Updated housingData:', listings);
       // Navigate to /listings only if listings array is not empty
       navigate('/listings', { state: { result: listings, emptyLoading } });
@@ -170,7 +170,7 @@ useEffect(() => {
 
       // console.log("user form for landlord...", formData);
 
-      const response = await axios.post('https://medirent-api.onrender.com/housing/get-all-listings',
+      const response = await axios.post('https://medirent-api-3gwy.onrender.com/housing/get-all-listings',
         {
           pageIndex: 1,
           pageSize: 10,

@@ -33,13 +33,15 @@ import Image4 from "../../assets/imageDiv/productImage5.png"
 
 
 const Carousel = () => {
+
     const slides = [
         {
             id: 1,
             imageUrl: Image,
             data: 'Create and send invoices directly to client, Manage invoices directly from your account.',
             title: 'Create instant Invoices',
-            icon: <MdOutlineWarehouse />
+            icon: <MdOutlineWarehouse />,
+            bgImage: "ProductImage"
 
         },
         {
@@ -47,28 +49,32 @@ const Carousel = () => {
             imageUrl: Image1,
             data: 'Create your team, assign role to employees, Track employees day-to-day activities',
             title: 'Team Creation & Assign task to employees',
-            icon: <IoBoatOutline />
+            icon: <IoBoatOutline />,
+            bgImage: "ProductImage2"
         },
         {
             id: 3,
             imageUrl: Image2,
             data: 'Track your inventory, know how much inventory is currently located in your store. Outsource vendors to re-stock your store.',
             title: 'Inventory Management',
-            icon: <SiYourtraveldottv />
+            icon: <SiYourtraveldottv />,
+            bgImage: "ProductImage3"
         },
         {
             id: 4,
             imageUrl: Image3,
             data: 'Helping procure and shipping from foreign online store like ebay, Amazon etc.',
             title: 'Supply Chain Manangement',
-            icon: <TbTruckDelivery />
+            icon: <TbTruckDelivery />,
+            bgImage: "ProductImage4"
         },
         {
             id: 5,
             imageUrl: Image4,
             data: 'Know your store activities, How good your store is performing, Get Insight into your store Health.',
             title: 'Store Management',
-            icon: <TbDrone />
+            icon: <TbDrone />,
+            bgImage: `ProductImage5`
         },
         // {
         //     id: 6,
@@ -193,11 +199,15 @@ const Carousel = () => {
                     className='w-full h-fit bg-center bg-cover bg-no-repeat duration-500 '
 
                 ></div> */}
+                {/* <div className={`${slides[currentIndex].bgImage} bg-white w-full h-screen bg-cover bg-center flex justify-center lg:h-[100vh] md:h-[100vh] sm:h-[100vh] xs:h-[100vh]`}>
+                </div> */}
+
                 <div className="">
+                    <img src={slides[currentIndex].imageUrl} alt="logistics"
+                        // className="" 
+                        className='w-full h-screen object-cover bg-center flex justify-center' 
+                    />
 
-
-                    <img src={slides[currentIndex].imageUrl} alt="logistics" className='w-full h-screen bg-cover
-            bg-center flex justify-center lg:h-screen md:h-[100vh] sm:h-[100vh] xs:h-[100vh]' />
                 </div>
             </div>
 

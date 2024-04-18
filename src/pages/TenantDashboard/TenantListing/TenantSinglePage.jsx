@@ -41,7 +41,7 @@ function TenantSinglePage() {
                     'Content-Type': 'application/json',
                 };
 
-                const response = await axios.get(`https://medirent-api.onrender.com/housing/get-listing/${id}`, { headers });
+                const response = await axios.get(`https://medirent-api-3gwy.onrender.com/housing/get-listing/${id}`, { headers });
 
                 // console.log("all the individual person..", response?.data);
                 setListings(response?.data?.data);
