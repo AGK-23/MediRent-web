@@ -258,16 +258,6 @@ const HousingLandlord = ({  active, setActive, detailsData, setDetailsData, hand
         // }));
     };
 
-
-
-
-
-
-
-
-
-
-
     return (
         <div>
             <div className="my-10">

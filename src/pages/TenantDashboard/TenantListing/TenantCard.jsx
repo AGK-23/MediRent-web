@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+// import React from 'react'
 
 import { Link } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
-import { FaBed, FaBath, FaBookmark } from "react-icons/fa6";
+import { FaBed, FaBath } from "react-icons/fa6";
 
 
 const TenantCard = ({ item }) => {
     return (
-      <div className="h-full grid md:grid-cols-2 xs:grid-cols-1 gap-10 overflow-y-auto justify-center items-center pb-12">
+      <div className="h-full grid md:grid-cols-1 xs:grid-cols-1 gap-10 overflow-y-auto justify-center items-center pb-12">
         <div className="flex md:flex-row xs:flex-col gap-[10px] bg-gray-100 justify-between">
           <div className="flex w-full h-[200px] ">
             <Link to={`/admin/renter/tenant/listing/${item.id}`} className="flex w-full h-[200px]">

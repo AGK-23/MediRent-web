@@ -49,7 +49,7 @@ const Index = () => {
                 console.log("all the response..", response?.data?.data);
                 setListings(response?.data?.data?.items.slice(0, 3));
 
-                console.log("all the positive report..", listings)
+                // console.log("all the positive report..", listings)
 
                 console.log("made from ..", response?.data?.data?.items);
 
@@ -83,7 +83,7 @@ const Index = () => {
                 </Link>
             </div>
 
-            <div className="">
+            <div className="grid gap-5 md:grid-cols-3 xs:grid-cols-1">
                 {!isLoading ? (
                     !listings ?
                     <div className="flex justify-center items-center h-full ">
@@ -96,7 +96,7 @@ const Index = () => {
                         </div>
                     :
                     listings?.map((Menu, index) => (
-                        <div key={index} className="grid gap-5 md:grid-cols-3 xs:grid-cols-1 ">
+                        <div key={index} className="">
                             <div
                                 className={`flex rounded-md py-1 cursor-pointer hover:bg-light-white text-secondary text-sm items-center gap-x-4`}
                             >

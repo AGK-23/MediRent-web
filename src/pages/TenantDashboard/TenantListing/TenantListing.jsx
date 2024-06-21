@@ -84,31 +84,31 @@ const TenantListing = () => {
                     className="p-2 border border-gray-300 rounded-md my-10 xs:w-full md:w-3/12 outline-gray-200"
                 />
             </div>
-            <div className=" h-full flex-col justify-center items-center">
-                <div className="h-full grid md:grid-cols-1 xs:grid-cols-1 gap-10 overflow-y-auto justify-center items-center pb-12">
-                    
+            <div className="grid gap-5 md:grid-cols-2 xs:grid-cols-1">
+                
 
-                    {!isLoading ? (
-                        !listings ?
-                            <div className="flex justify-center items-center w-full h-full ">
-                                <div className='flex flex-col '>
+                {!isLoading ? (
+                    !listings ?
+                        <div className="flex justify-center items-center w-full h-full ">
+                            <div className='flex flex-col '>
 
-                                    <img alt="" src={NoFound} className="text-7xl w-full  h-full" />
-                                    <div className='md:text-2xl xs:text-lg font-semibold text-center mt-5 text-gray-600'>No Listing Found</div>
-                                </div>
-
+                                <img alt="" src={NoFound} className="text-7xl w-full  h-full" />
+                                <div className='md:text-2xl xs:text-lg font-semibold text-center mt-5 text-gray-600'>No Listing Found</div>
                             </div>
-                            :
-                            filteredListing?.map(item => (
-                                
-                                <TenantCard key={item.id} item={item} />
-                            ))
-                    ) : (
-                        <div className='w-screen flex justify-center items-center h-screen '>
-                            <div className="loader"></div>
+
                         </div>
-                    )}
-                </div>
+                        :
+                        filteredListing?.map(item => (
+                            
+                            <TenantCard key={item.id} item={item} />
+                        ))
+                ) : (
+                    <div className='w-screen flex justify-center items-center h-screen '>
+                        <div className="loader"></div>
+                    </div>
+                )}
+            </div>
+            <div className=" h-full flex flex-row justify-center items-center">
             </div>
             {/* <div className="h-fit flex-3 md:flex w-full bg-third xs:hidden">
               <Map items={data} />

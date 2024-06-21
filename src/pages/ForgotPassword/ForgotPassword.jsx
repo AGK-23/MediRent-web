@@ -1,6 +1,6 @@
 // import React from "react";
-import axios from "axios";
-import { useState, useRef, useEffect } from "react";
+// import axios from "axios";
+import { useState, useRef } from "react";
 
 import { Link } from "react-router-dom";
 // import { IoLogInOutline } from "react-icons/io5";
@@ -18,11 +18,20 @@ const ForgotPassword = () => {
     const lostEmailInput = useRef();
     const [userLoading, setUserLoading] = useState(false)
 
-    const [lostEmail, setLostEmail] = useState("");
+    const [lostEmail, setLostEmail] = useState({
+        email: "",
+    });
 
-    const handleChange = (e) => {
-        setLostEmail(e.target.value);
-    };
+    var {
+        email,
+    } = lostEmail;
+
+    const handleChange = (e) => setLostEmail(
+        {
+            ...lostEmail,
+            [e.target.name]: e.target.value
+        }
+    );
 
     const [formData, setFormData] = useState({
         email: "",
@@ -30,7 +39,7 @@ const ForgotPassword = () => {
     });
 
     var {
-        email,
+        // email,
         password,
     } = formData;
 
@@ -264,7 +273,7 @@ const ForgotPassword = () => {
                                             ref={lostEmailInput}
                                             name="email"
                                             // type="text"
-                                            value={lostEmail}
+                                            value={lostEmail.email}
                                             onChange={handleChange}
                                             placeholder="Enter lost email"
                                         />
