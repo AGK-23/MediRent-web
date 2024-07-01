@@ -3,20 +3,23 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import useMediaQuery from "../../hooks/useMediaQuery.jsx";
+import PrimaryButton from "../primaryButton/PrimaryButton.jsx"
 
 // import NavbarLinks from "./NavbarLinks";
 import Logo from "../../assets/logo.png";
 // import { BiSolidDownArrow } from "react-icons/bi";
 // import { FaGoogle } from "react-icons/fa";
-import {
-  FaFacebook,
-  FaTwitter,
-  FaPinterest,
-  FaInstagram,
-  FaLinkedin,
-} from "react-icons/fa";
+// import {
+//   FaFacebook,
+//   FaTwitter,
+//   FaPinterest,
+//   FaInstagram,
+//   FaLinkedin,
+// } from "react-icons/fa";
 
-import SearchButton from "../SearchButton.jsx";
+// import SearchButton from "../SearchButton.jsx";
+
+import NavLinks from "./NavLinks.jsx";
 
 const Path = (props) => (
   <motion.path
@@ -61,163 +64,66 @@ const Navbar = ({ isTopOfPage }) => {
   };
 
   return (
-    <nav className={`${navbarBackground} fixed w-full top-0 left-0 z-50 `}>
+    <nav className={`${navbarBackground} fixed w-full top-0 left-0 z-20 `}>
 
       {isAboveMediumScreens && (
-        <div className=" px-10">
-          <div className=" flex font-medium justify-between max-w-screen-xl mx-auto ">
-            <div className="z-50 py-2 md:w-auto w-full flex justify-between ">
-              <div className="">
-                {/* <img src={Logo} alt="logo" className=" md:cursor-pointer h-7" /> */}
-                <Link to="/" className="">
-                  <img alt="" src={Logo} className="text-[1px] w-32 h-16 cursor-pointer" />
-                </Link>
+        <div className="md:w-full xs:w-full flex items-center font-medium justify-between mx-2 md:px-32 xs:px-0 ">
+          <div className="z-10 p-3 md:w-auto w-full flex justify-around">
+            <div className="mr-0">
+              <Link className="px-2 w-full  flex flex-row justify-center" to="/">
 
-                {/* <div className="text-xl md:hidden" onClick={() => setOpen(!open)}>
-                  <ion-icon name={`${open ? "close" : "menu"}`}></ion-icon>
-
-                </div> */}
+                <div className=" text-start justify-start mx-auto text-white cursor-pointer w-full flex">
+                  <div className="">
+                    <Link to="/" className="">
+                      <img alt="" src={Logo} className="text-[1px] w-32 h-16 cursor-pointer" />
+                    </Link>
+                  </div>
+                </div>
+              </Link>
+              <div className="text-xl md:hidden" onClick={() => setOpen(!open)}>
+                <ion-icon name={`${open ? "close" : "menu"}`}></ion-icon>
               </div>
             </div>
-            <ul className="md:flex hidden md:mt-12 my-1 xs:mt-0 capitalize items-center gap-4 xl:text-sm lg:text-xs">
 
-              <div className="hidden gap-4 text-[#008080] mr-10">
-                <Link
-                  to="/"
-                  className="fab text-lg"
-                >
-                  <FaFacebook />
-                </Link>
-                <Link
-                  to="/"
-                  className="fab text-lg"
-                >
-                  <FaTwitter />
-                </Link>
-
-                <Link
-                  to="/"
-                  className="fab text-lg"
-                >
-                  <FaPinterest />
-                </Link>
-                <Link
-                  to="/"
-                  className="fab text-lg"
-                >
-                  <FaInstagram />
-                </Link>
-                <Link
-                  to="/"
-                  className="fab text-lg"
-                >
-                  <FaLinkedin />
+          </div>
+          <div className="px-0">
+            <NavLinks />
+          </div>
+          <ul className="md:flex hidden capitalize justify-center items-center gap-0">
+            <div className="flex w-auto justify-between gap-0">
+              <div className="md:block hidden ">
+                <Link className="link flex items-center" to="/auth/login">
+                  <PrimaryButton text={"Login"} />
                 </Link>
               </div>
+              <div className="md:block hidden">
 
-              {/* <NavLinks /> */}
-              <div className="flex w-auto justify-between gap-2">
-                {/* <div className="md:block hidden">
-                  <Link className="link flex items-center justify-between mr-5 px-0 rounded-lg bg-[#0c527b] text-white" to="/auth/register">
-                    <div className="flex justify-between items-center w-full">
-                      <div className="px-2 bg-[#103f69] py-2 rounded-tl-lg rounded-bl-lg  text-[10px]"><FaGoogle /></div>
-                      <div className=" font-[500] text-white px-1 py-0 text-xs">Select Language</div>
-                      <div className="text-white px-2 bg-[#103f69] py-2 rounded-tr-lg rounded-br-lg text-[10px]"><BiSolidDownArrow /></div>
-                    </div>
-                  </Link>
-                </div> */}
-                <div className="md:block hidden">
-                  <Link className="link flex items-center justify-center h-full mr-5" to="/auth/login">
-                    <div className="text-gray-500 font-semibold hover:text-gray-700 text-[13px]">LOGIN</div>
-                  </Link>
-                </div>
-                <div className="md:block hidden">
+                <div className="link flex items-center relative">
+                  <button
+                    className=" font-[500] px-[41px] py-[12px] text-[14px] rounded-full bg-[#008080] text-white"
+                    onClick={() => setShowPopup(true)}
 
-                  <div className="link flex items-center relative">
-                    <button
-                      className=" font-[500] px-5 py-1 rounded-lg bg-[#008080] text-white text-[13px]"
-                      onClick={() => setShowPopup(true)}
-                    // onMouseEnter={() => setShowPopup(true)}
-                    // onMouseLeave={() => setShowPopup(false)}
-                    >
-                      CREATE ACCOUNT
-                    </button>
-                    {showPopup && (
-                      <div ref={popupRef} className="absolute right-0 top-6 bg-gray-200 border border-gray-300 mt-2">
-                        <div className="flex flex-col">
-                          <Link to="/auth/registration-page" className="px-4 py-1 border border-gray-300 cursor-pointer hover:bg-gray-100  whitespace-nowrap text-third" >
-                            I'm a Tenant
-                          </Link>
-                          <Link to="/auth/housing-subscription" className="px-4 py-1 border border-gray-300 cursor-pointer hover:bg-gray-100  whitespace-nowrap text-third">
-                            I'm a Landlord
-                          </Link>
+                  >
+                    Create Account
+                  </button>
+                  {showPopup && (
+                    <div ref={popupRef} className="absolute right-0 top-6 bg-gray-200 border border-gray-300 mt-2">
+                      <div className="flex flex-col">
+                        <Link to="/auth/registration-page" className="px-4 py-1 border border-gray-300 cursor-pointer hover:bg-gray-100  whitespace-nowrap text-third" >
+                          I'm a Tenant
+                        </Link>
+                        <Link to="/auth/housing-subscription" className="px-4 py-1 border border-gray-300 cursor-pointer hover:bg-gray-100  whitespace-nowrap text-third">
+                          I'm a Landlord
+                        </Link>
 
-                        </div>
                       </div>
-                    )}
-                  </div>
-
+                    </div>
+                  )}
                 </div>
-              </div>
-            </ul>
-          </div>
 
-          <div className="md:pb-8 xs:pb-0 flex font-medium justify-between max-w-screen-xl mx-auto mt-2 ">
-            <div className="">
-              <div className="mt-3 flex justify-between w-full ">
-                <div className="flex flex-row justify-between w-full">
-
-                  <div className="mr-10 w-fit text-sm text-start flex items-center justify-start whitespace-nowrap">
-                    <div className=" relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/">LandLord</Link>
-                    </div>
-
-                  </div>
-
-                  <div className="mr-10 w-fit text-sm text-start flex items-center justify-start px-4 whitespace-nowrap">
-                    <div className="text-med relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/">Tenants</Link>
-                    </div>
-
-                  </div>
-                  {/* <div className="mr-4 w-fit  text-sm text-start flex items-center justify-start pr-1 whitespace-nowrap">
-                    <div className="text-med relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/">Medical Housing </Link>
-                    </div>
-                  </div> */}
-                  {/* <div className="mr-4 w-fit  text-sm text-start flex items-center justify-start px-4 whitespace-nowrap">
-                    <div className="text-med relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/">Pricing</Link>
-                    </div>
-                  </div> */}
-                  <div className="mr-10 px-4 w-fit  text-sm text-start flex items-center justify-start whitespace-nowrap">
-                    <div className="text-med relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/">FAQ</Link>
-                    </div>
-
-                  </div>
-                  {/* <div className="mr-4 px-4 w-fit  text-sm text-start flex items-center justify-start whitespace-nowrap">
-                    <div className="text-med relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/">Blog</Link>
-                    </div>
-                  </div> */}
-                  <div className="mr-10 px-4 w-fit  text-sm text-start flex items-center justify-start whitespace-nowrap">
-                    <div className="text-med relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/">About Us</Link>
-                    </div>
-                  </div>
-                  {/* <div className="mr-4 px-4 w-fit  text-sm text-start flex items-center justify-start whitespace-nowrap">
-                    <div className="text-med relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                      <Link to="/">Tenants Want Ads</Link>
-                    </div>
-                  </div> */}
-                </div>
               </div>
             </div>
-            <div className="">
-              <SearchButton />
-            </div>
-          </div>
+          </ul>
         </div>
       )}
       {!isAboveMediumScreens && (
@@ -318,9 +224,9 @@ const Navbar = ({ isTopOfPage }) => {
               </div>
 
               {/* THIRD NAVBAR  */}
-              <div className="w-full bg-gray-100  relative left-0 pt-1">
+              {/* <div className="w-full bg-gray-100  relative left-0 pt-1">
                 <SearchButton />
-              </div>
+              </div> */}
 
             </div>
           </div>

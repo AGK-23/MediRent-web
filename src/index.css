@@ -1,14 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Sora", sans-serif;
 }
 
 html {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Sora", sans-serif;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -ms-overflow-style: scrollbar;
@@ -290,6 +291,178 @@ input[type="file"]::file-selector-button:active {
     stroke-dasharray: 90, 150;
     stroke-dashoffset: -124;
   }
+}
+
+/* Customize the scrollbar width */
+::-webkit-scrollbar {
+  width: 50px; /* Adjust the width as needed */
+  height: 2px;
+  display: none;
+}
+
+/* Customize the scrollbar track */
+::-webkit-scrollbar-track {
+  /* background: #f1f1f1;  Set the background color of the track */
+}
+
+/* Customize the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  /* background: #888; Set the color of the thumb */
+}
+
+/* SCROLLING ANIMATION */
+
+.scroller {
+  /* max-width: 600px; */
+  width: auto;
+}
+
+.scroller__inner {
+  padding-block: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.scroller[data-animated="true"] {
+  overflow: hidden;
+  -webkit-mask: linear-gradient(
+    90deg,
+    transparent,
+    white 20%,
+    white 80%,
+    transparent
+  );
+  mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+
+.scroller[data-animated="true"] .scroller__inner {
+  width: max-content;
+  flex-wrap: nowrap;
+  animation: scroll var(--_animation-duration, 40s)
+    var(--_animation-direction, forwards) linear infinite;
+}
+
+.scroller[data-direction="right"] {
+  --_animation-direction: reverse;
+}
+
+.scroller[data-direction="left"] {
+  --_animation-direction: forwards;
+}
+
+.scroller[data-speed="fast"] {
+  --_animation-duration: 50s;
+}
+
+.scroller[data-speed="slow"] {
+  --_animation-duration: 100s;
+}
+
+@keyframes scroll {
+  to {
+    transform: translate(calc(-50% - 0.5rem));
+  }
+}
+
+
+/* TABS */
+.tab {
+  transition: all 0.3s ease-in-out;
+  color: #7C7C7C
+}
+
+.tab-active {
+  color: var(--primary);
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+.tab-active::before {
+  content: '';
+  position: absolute;
+  height: 2px;
+  width: 120%;
+  left: 50%;
+  background-color: var(--primary);
+  bottom: -2px;
+  transform: translateX(-50%);
+  animation: underline-link 0.3s linear;
+}
+
+.tab:hover {
+  color: var(--primary);
+  position: relative;
+}
+
+.tab:hover::before {
+  content: '';
+  position: absolute;
+  height: 2px;
+  width: 120%;
+  left: 50%;
+  background-color: var(--primary);
+  bottom: -2px;
+  transform: translateX(-50%);
+  animation: underline-link 0.3s linear;
+}
+
+@keyframes underline-link {
+  from {
+    width: 0%;
+
+  }
+
+  to {
+    width: 100%;
+    transform: translateX(-50%);
+  }
+}
+
+/* FAQS CSS */
+.open-line {
+  margin-top: 10px;
+  transition: transform 0.5s;
+}
+
+.horizontal-line {
+  /* top: 50%; */
+  transform: translateY(-50%);
+}
+
+.question-container {
+  transition: height 3s, border-color 3s; /* Apply transition to height and border-color properties over 3 seconds */
+  overflow: hidden; /* Hide any overflow content */
+
+  transition: transform 0.5s;
+}
+
+.border-line {
+  transition: border-color 3s; /* Apply transition to border-color property over 3 seconds */
+}
+
+.open-bar {
+  /* border-color: red !important; 
+  background-color: red; */
+  animation: animate-faq .4s linear;
+  padding-bottom: 24px;
+}
+
+@keyframes animate-faq {
+  from {
+    height: 100px !important;
+    padding-bottom: 0px;
+  }
+  to {
+    height: 200px !important;
+  }
+}
+
+.drop-line {
+  transition: transform 0.5s;
+  /* animation-name: example;
+  animation-duration: .5s;
+  animation-timing-function: ease-in; */
 }
 
 

@@ -1,12 +1,10 @@
 
+
 import { TbBrandMonday, TbAppsFilled, TbBoxPadding, TbBrandAmigo } from "react-icons/tb";
 
-
-
-
-
-
-
+import Key from "../assets/svg/key.svg";
+import Schedule from "../assets/svg/schedule.svg";
+import searchTab from"../assets/svg/search-tab.svg";
 
 export const cards = [
     {
@@ -58,8 +56,6 @@ export const cards = [
         img: "https://images.pexels.com/photos/15032623/pexels-photo-15032623.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
     },
 ];
-
-
 
 export const projects = [
     {
@@ -194,7 +190,6 @@ export const projectImage = [
         username: "Ward Brewer",
     },
 ];
-
 
 
 export const slides = [
@@ -378,6 +373,71 @@ export const userData = {
     img: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 };
 
+export const links = [
+    {
+      name: "Tenants",
+      submenu: true,
+    },
+    {
+      name: "LandLord",
+      submenu: true,
+    },
+    {
+      name: "FAQs",
+      submenu: false,
+    },
+    {
+      name: "About Us",
+      submenu: false,
+    },
+];
+
+export const newComersData = [
+    {
+        id: 1,
+        name: "Search for Listings",
+        description: "Use our comprehensive search tool to explore available rental properties in your desired city or neighborhood. Filter by price, size, and amenities to find options that match your needs.",
+        image: searchTab,
+        
+    },
+    {
+        id: 2,
+        name: "Schedule Viewings",
+        description: "Once you've found some potential homes, contact the landlords or property managers to schedule viewings.This gives you a chance to see the properties in person, ask questions, and get a feel for the area.",
+        image: Schedule,
+    },
+    {
+        id: 3,
+        name: "Apply and Secure Your Rental",
+        description: "After selecting the perfect home, complete the rental application and provide necessary documentation, such as proof of income and references.Once approved, sign the lease agreement, and you're ready to move in!",
+        image: Key,
+    },
+    
+    
+];
+
+export const questionData = [
+    {
+        question: "How does Medirent Work?",
+        answer: "At Medirent, we provide specialized housing solutions for the medical community with flexible rental options, including monthly, quarterly, and biannual plans. Once you find a space that suits your needs, simply create a booking by providing a few details about yourself.",
+    },
+    {
+        question: "How do I create an account?",
+        answer: "From healthcare to hospitality, manufacturing, or property management, VampFi offers tailored solutions to meet your specific needs and industry requirements.",
+    },
+    {
+        question: "Can I search for housing in specific locations?",
+        answer: "Yes, VampFi is suitable for small businesses. Our solutions are designed to be scalable and adaptable, catering to all business sizes. With our user-friendly interface and flexible features, small businesses can benefit from efficiency improvements, cost savings, and streamlined operations just like larger organizations.",
+    },
+    {
+        question: "Is there a fee to list a property on Medirent?",
+        answer: "VampFi takes security seriously and employs robust measures to ensure the protection of our user’s data and systems. We utilize advanced encryption protocols, secure access control, and regular security audits to safeguard against unauthorized access, data breaches, and other security threats.",
+    },
+    {
+        question: "How do I contact a host or a renter?",
+        answer: "Absolutely! Whether you are managing FM services in-house or outsourcing them to third-party vendor, VampFi provides the tools you need to effectively monitor, track, and optimize your facility management operations.",
+    },
+];
 
 
 
