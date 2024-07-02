@@ -18,8 +18,8 @@ const SearchTab = () => {
 
 
     return (
-        <div className="px-2">
-            <div className="grid md:grid-cols-5 xs:grid-cols-2 xs:gap-6 lg:gap-16 md:gap-0 rounded-lg shadow-lg md:px-6 xs:px-5 py-6 md:w-fit xs:w-full bg-white">
+        <div className="px-0">
+            <div className="grid md:grid-cols-5 xs:grid-cols-2 xs:gap-6 lg:gap-16 md:gap-0 rounded-lg shadow-lg border-[1px] md:px-6 xs:px-5 py-6 md:w-full xs:w-full bg-white">
                 <div className="flex flex-col col">
                     <div className="text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[17px]" >
                         Location
@@ -38,7 +38,7 @@ const SearchTab = () => {
                 </div>
                 <div className="flex flex-col col">
                     <div className="text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[17px]" >
-                        Prince Range
+                        Price Range
                     </div>
                     <div className="text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[17px]">
                         Select
@@ -81,7 +81,6 @@ const SearchTab = () => {
 
                         </button>
                     </div>
-
                 </div>
 
 

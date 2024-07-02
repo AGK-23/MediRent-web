@@ -20,7 +20,7 @@ import Duplex from "../../assets/Search/duplex.svg";
 const CustomSlider = styled(Slider)({
     color: '#5A6770',
     '& .MuiSlider-thumb': {
-        color: '#D0DAE3',
+        color: '#FFA499',
         boxShadow:
             '0px 0px 1px 0px rgba(0,0,0,0.2), 0px 0px 0px 0px rgba(0,0,0,0.14), 0px 0px 1px 0px rgba(0,0,0,0.12)',
     },
@@ -37,7 +37,6 @@ const CustomSlider = styled(Slider)({
 
 const SearchFilter = ({ isOpen, closeModal }) => {
     const [naming, setNaming] = useState("House");
-    const [selectTransaction, setSelectTransaction] = useState("Buy");
     const [selectedBathroom, setSelectedBathroom] = useState("");
     const [selectedBedroom, setSelectedBedroom] = useState("");
 
@@ -48,8 +47,6 @@ const SearchFilter = ({ isOpen, closeModal }) => {
     const [checkedItems, setCheckedItems] = useState(new Array(8).fill(false));
     const [selectedItems, setSelectedItems] = useState([]);
 
-    const [community, setCommunity] = useState(new Array(8).fill(false));
-    const [selectedCommunity, setSelectedCommunity] = useState([]);
 
     const handleChange1 = (event, newValue, activeThumb) => {
         if (!Array.isArray(newValue)) {
@@ -78,7 +75,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
             const updatedCheckedItems = [...prevCheckedItems];
             updatedCheckedItems[index] = !updatedCheckedItems[index];
             // const checkedCount = updatedCheckedItems.filter(Boolean).length;
-            
+
 
             // Update the selectedItems array
             const selectedItem = ['Swimming Pool', 'Heating System', 'Garden', 'Garage', 'Backyard', 'Finished Basement', 'Fireplace', 'Balcony'][index];
@@ -94,26 +91,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
         });
     };
 
-    const handleChangeCommunity = (index) => {
-        setCommunity((prevCommunities) => {
-            const updatedCommunities = [...prevCommunities];
-            updatedCommunities[index] = !updatedCommunities[index];
-            // const checkedCount = updatedCommunities.filter(Boolean).length;
-            
-
-            // Update the selectedItems array
-            const selectedItem = ['Gated Community', 'Clubhouse', 'School & College', 'Gym/Fitness Center', 'Tennis Courts', 'Playground', 'Airport'][index];
-            if (updatedCommunities[index]) {
-                if (!selectedCommunity.includes(selectedItem)) {
-                    setSelectedCommunity((prevSelectedItems) => [...new Set([...prevSelectedItems, selectedItem])]);
-                    // console.log("object", selectedItems, selectedItem);
-                }
-            } else {
-                setSelectedCommunity((prevSelectedItems) => [...new Set([...prevSelectedItems.filter((item) => item !== selectedItem)])]);
-            }
-            return updatedCommunities;
-        });
-    };
+    
 
 
     // eslint-disable-next-line no-unused-vars
@@ -124,12 +102,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
         nameFour: "Duplex",
     });
 
-    // eslint-disable-next-line no-unused-vars
-    const [transactionType, setTransactionType] = useState({
-        nameOne: "Buy",
-        nameTwo: "Sell",
-        nameThree: "Rent",
-    });
+
 
     const numberOfPlaces = [
         // { label: "Voter ID", value: "Voter ID", disabled: true, index: 0 },
@@ -166,7 +139,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                         <div className="md:px-6 pb-0 xs:px-2 border-0 rounded-2xl shadow-lg relative flex flex-col bg-white md:mx-10 xs:mx-2 outline-none focus:outline-none">
                             <div className="flex py-2 border-b border-solid border-slate-200 w-full">
                                 <div
-                                    className="md:text-lg xs:text-[12px] text-secondary w-full flex justify-center items-center font-[600] "
+                                    className="md:text-lg xs:text-[12px] text-black w-full flex justify-center items-center font-[600] "
                                 >
                                     Advanced Filters
                                 </div>
@@ -187,101 +160,9 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                             </div>
                             <div className="relative flex-auto mt-6">
 
-                                <div>
-                                    <div className="md:text-[15px] xs:text-[12px] text-secondary  w-full flex justify-start items-center font-[600] ">Transaction Type</div>
 
-                                    <div className='flex justify-start items-center my-3'>
-
-                                        {/* <div className='flex md:gap-5 xs:gap-4 font-light'>
-                                            <div className='md:text-lg xs:text-xs rounded-full md:px-6 xs:px-4 lg:px-10 py-0 bg-[#5A6770] text-white flex justify-center items-center'>
-                                                Buy
-                                            </div>
-                                            <div className='md:text-lg xs:text-xs rounded-full md:px-6 xs:px-4 lg:px-10 py-0 bg-transparent border-[1px] border-[#c3c7cb] text-black flex justify-center items-center'>
-                                                Sell
-                                            </div>
-                                            <div className='md:text-lg xs:text-xs rounded-full md:px-6 xs:px-4 lg:px-10 py-0 bg-transparent border-[1px] border-[#c3c7cb] text-black flex justify-center items-center'>
-                                                Rent
-                                            </div>
-
-                                        </div> */}
-
-                                        <div className='flex justify-start items-center my-3'>
-
-                                        <div className="mt-0 ">
-                                            <div className=" w-full">
-                                                <div
-                                                    className={`${selectTransaction === transactionType.nameOne ||
-                                                        transactionType.nameTwo ||
-                                                        transactionType.nameThree
-                                                        ? ""
-                                                        : ""
-                                                        } border-none`}
-                                                >
-                                                    <div className="w-full justify-center items-center  ">
-                                                        <div className="flex md:gap-5 xs:gap-4 font-light ">
-                                                            <div
-                                                                className={`${selectTransaction === transactionType.nameOne ? "bg-[#5A6770] text-white" : "border-[1px] border-[#c3c7cb] text-black"
-                                                                    } cursor-pointer md:text-lg xs:text-xs rounded-full md:px-6 xs:px-4 lg:px-10 py-0 flex justify-center items-center`}
-                                                                onClick={() => {
-                                                                    selectTransaction !== transactionType.nameOne
-                                                                        ? setSelectTransaction(transactionType.nameOne)
-                                                                        : setSelectTransaction(transactionType.nameOne);
-
-                                                                }}
-                                                            >
-                                                                <div className="flex justify-center flex-col items-center w-ful ">
-                                                                    
-
-                                                                    {transactionType.nameOne}
-                                                                    
-
-                                                                </div>
-                                                            </div>
-
-                                                            <div
-                                                                className={`${selectTransaction === transactionType.nameTwo ? "bg-[#5A6770] text-white" : "border-[1px] border-[#c3c7cb] text-black"
-                                                                    } cursor-pointer md:text-lg xs:text-xs rounded-full md:px-6 xs:px-4 lg:px-10 py-0 flex justify-center items-center`}
-                                                                onClick={() => {
-                                                                    selectTransaction !== transactionType.nameTwo
-                                                                        ? setSelectTransaction(transactionType.nameTwo)
-                                                                        : setSelectTransaction(transactionType.nameTwo);
-                                                                }}
-                                                            >
-                                                                <div className="flex justify-center flex-col items-center w-ful ">
-                                                                    {transactionType.nameTwo}
-                                                                </div>
-                                                            </div>
-
-
-                                                            <div
-                                                                className={`${selectTransaction === transactionType.nameThree ? "bg-[#5A6770] text-white" : "border-[1px] border-[#c3c7cb] text-black"
-                                                                    } cursor-pointer md:text-lg xs:text-xs rounded-full md:px-6 xs:px-4 lg:px-10 py-0 flex justify-center items-center`}
-                                                                onClick={() => {
-                                                                    selectTransaction !== transactionType.nameThree
-                                                                        ? setSelectTransaction(transactionType.nameThree)
-                                                                        : setSelectTransaction(transactionType.nameThree);
-                                                                }}
-                                                            >
-                                                                <div className="flex justify-center flex-col items-center w-ful ">
-                                                                    {transactionType.nameThree}
-                                                                </div>
-                                                            </div>
-
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-
-                                <div className="mt-10 ">
-                                    <div className="md:text-[15px] xs:text-[12px] text-secondary w-full flex justify-start items-center font-[600] ">Property Type</div>
+                                <div className="mt-0 ">
+                                    <div className="md:text-[15px] xs:text-[12px] text-black w-full flex justify-start items-center font-[600] ">Property Type</div>
 
                                     <div className='flex justify-start items-center my-3'>
 
@@ -298,7 +179,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                                     <div className="w-full justify-center items-center  ">
                                                         <div className="text-center grid md:grid-cols-4 xs:grid-cols-2 md:gap-10 xs:gap-4 md:w-full xs:w-full text-sm border-none outline-none">
                                                             <div
-                                                                className={`${naming === linkName.nameOne ? "border-secondary" : "border-[#c3c7cb]"
+                                                                className={`${naming === linkName.nameOne ? "border-secondary text-black" : "border-[#c3c7cb]"
                                                                     } py-4 flex items-center justify-center group w-full  px-10 text-center  border-[2px] rounded-lg`}
                                                                 onClick={() => {
                                                                     naming !== linkName.nameOne
@@ -317,7 +198,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                                                     </div>
 
                                                                     <div
-                                                                        className={`${naming === linkName.nameOne ? "text-black" : "text-[#c3c7cb]"
+                                                                        className={`${naming === linkName.nameOne ? "text-slate-900 font-semibold" : "text-[#c3c7cb]"
                                                                             } flex mt-2 justify-center items-center text-center text-gray-600 w-full whitespace-nowrap`}
 
                                                                     >
@@ -347,7 +228,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                                                     </div>
 
                                                                     <div
-                                                                        className={`${naming === linkName.nameTwo ? "text-black" : "text-[#c3c7cb]"
+                                                                        className={`${naming === linkName.nameTwo ? "text-slate-900 font-semibold" : "text-[#c3c7cb]"
                                                                             } flex mt-2 justify-center items-center text-center text-gray-600 w-full whitespace-nowrap`}
 
                                                                     >
@@ -378,7 +259,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                                                     </div>
 
                                                                     <div
-                                                                        className={`${naming === linkName.nameThree ? "text-black" : "text-[#c3c7cb]"
+                                                                        className={`${naming === linkName.nameThree ? "text-slate-900 font-semibold" : "text-[#c3c7cb]"
                                                                             } flex mt-2 justify-center items-center text-center text-gray-600 w-full whitespace-nowrap`}
 
                                                                     >
@@ -408,7 +289,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                                                     </div>
 
                                                                     <div
-                                                                        className={`${naming === linkName.nameFour ? "text-black" : "text-[#c3c7cb]"
+                                                                        className={`${naming === linkName.nameFour ? "text-slate-900 font-semibold" : "text-[#c3c7cb]"
                                                                             } flex mt-2 justify-center items-center text-center text-gray-600 w-full whitespace-nowrap`}
 
                                                                     >
@@ -431,7 +312,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
 
                                 <div className=' flex justify-between md:flex-row xs:flex-col gap-5 my-5 items-center '>
                                     <div className='flex justify-start w-full flex-col'>
-                                        <div className="md:text-[15px] xs:text-[12px] text-secondary  w-full flex justify-start items-center font-[600] ">Location</div>
+                                        <div className="md:text-[15px] xs:text-[12px] text-black  w-full flex justify-start items-center font-[600] ">Location</div>
 
                                         <input
                                             className="relative mt-3 h-12 w-full text-[1rem] outline-none border-[1px] px-2 rounded-[4px] bg-[#f7f7f7]"
@@ -445,7 +326,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                     </div>
 
                                     <div className='flex justify-start w-full flex-col '>
-                                        <div className="md:text-[15px] xs:text-[12px] text-secondary  w-full flex justify-start items-center font-[600]">Rooms</div>
+                                        <div className="md:text-[15px] xs:text-[12px] text-black  w-full flex justify-start items-center font-[600]">Rooms</div>
 
                                         <div className='flex mt-3 gap-5'>
                                             <div className='flex w-full'>
@@ -494,7 +375,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                 </div>
 
                                 <div className='my-5'>
-                                    <div className="md:text-[15px] xs:text-[12px] text-secondary  w-full flex justify-start items-center font-[600] ">Range</div>
+                                    <div className="md:text-[15px] xs:text-[12px] text-black  w-full flex justify-start items-center font-[600] ">Range</div>
 
                                     <div className='flex my-3'>
 
@@ -544,7 +425,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
 
                                 <div className='grid md:grid-cols-3 xs:grid-cols-2 gap-5 my-5 items-center '>
                                     <div className='flex mt-3 gap-5 flex-col'>
-                                        <div className="md:text-[15px] xs:text-[12px] text-secondary  w-full flex justify-start items-center font-[600]">Build Year</div>
+                                        <div className="md:text-[15px] xs:text-[12px] text-black  w-full flex justify-start items-center font-[600]">Build Year</div>
                                         <div className='flex w-full'>
                                             <select
                                                 value={selectedYear}
@@ -565,7 +446,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                     </div>
 
                                     <div className='flex mt-3 gap-5 flex-col'>
-                                        <div className="md:text-[15px] xs:text-[12px] text-secondary  w-full flex justify-start items-center font-[600]">Plot Size</div>
+                                        <div className="md:text-[15px] xs:text-[12px] text-black  w-full flex justify-start items-center font-[600]">Plot Size</div>
                                         <div className='flex w-full'>
                                             <select
                                                 value={selectedPlotSize}
@@ -584,99 +465,58 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                             </select>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
 
                                 <div className='my-10'>
-                                    <div className="md:text-[15px] xs:text-[12px] text-secondary  w-full flex justify-start items-center font-[600] ">Features and Amenities</div>
+                                    <div className="md:text-[15px] xs:text-[12px] text-black  w-full flex justify-start items-center font-[600] ">Features and Amenities</div>
 
                                     <div className='w-full grid md:grid-cols-3 xs:grid-cols-2'>
-                                            {['Swimming Pool', 'Heating System', 'Garden', 'Garage', 'Backyard', 'Finished Basement', 'Fireplace', 'Balcony'].map((item, index) => (
-                                                <div key={index} className="mr-3 relative my-3 w-full">
-                                                    <input
-                                                        type="checkbox"
-                                                        id={`checkbox-${index}`}
-                                                        name="renting"
-                                                        className="absolute opacity-0 h-6 w-6 cursor-pointer"
-                                                        value={item}
-                                                        checked={checkedItems[index]}
-                                                        onChange={() => handleCheckboxChange(index)}
-                                                    />
-                                                    <label
-                                                        htmlFor={`checkbox-${index}`}
-                                                        className="flex items-center cursor-pointer text-primary"
+                                        {['Swimming Pool', 'Heating System', 'Garden', 'Garage', 'Backyard', 'Finished Basement', 'Fireplace', 'Balcony'].map((item, index) => (
+                                            <div key={index} className="mr-3 relative my-3 w-full">
+                                                <input
+                                                    type="checkbox"
+                                                    id={`checkbox-${index}`}
+                                                    name="renting"
+                                                    className="absolute opacity-0 h-6 w-6 cursor-pointer"
+                                                    value={item}
+                                                    checked={checkedItems[index]}
+                                                    onChange={() => handleCheckboxChange(index)}
+                                                />
+                                                <label
+                                                    htmlFor={`checkbox-${index}`}
+                                                    className="flex items-center cursor-pointer "
+                                                >
+                                                    <div
+                                                        className={`w-4 h-4 border-[1px] ${checkedItems[index] ? 'border-gray-500 bg-gray-500' : 'border-gray-500 bg-white'} rounded-[3px] flex justify-center items-center mr-2`}
                                                     >
-                                                        <div
-                                                            className={`w-4 h-4 border-[1px] ${checkedItems[index] ? 'border-secondary bg-secondary' : 'border-secondary bg-white'} rounded-[3px] flex justify-center items-center mr-2`}
-                                                        >
-                                                            {checkedItems[index] && (
-                                                                <svg
-                                                                    className="fill-white w-5 h-5 p-0 pointer-events-none flex justify-center items-center mb-[0px]"
-                                                                    viewBox="0 0 20 20"
-                                                                >
-                                                                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                                                                </svg>
-                                                            )}
-                                                        </div>
-                                                        <span className="select-none text-secondary whitespace-nowrap md:text-[15px] xs:text-[12px]">{item}</span>
-                                                    </label>
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                    
+                                                        {checkedItems[index] && (
+                                                            <svg
+                                                                className="fill-white w-5 h-5 p-0 pointer-events-none flex justify-center items-center mb-[0px]"
+                                                                viewBox="0 0 20 20"
+                                                            >
+                                                                <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                                                            </svg>
+                                                        )}
+                                                    </div>
+                                                    <span className="select-none border-gray-500 whitespace-nowrap md:text-[15px] text-gray-500 xs:text-[12px]">{item}</span>
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
 
-                                <div className='mt-10 mb-14'>
-                                    <div className="md:text-[15px] xs:text-[12px] text-secondary  w-full flex justify-start items-center font-[600] ">Community Amenities</div>
-
-                                    <div className='w-full grid md:grid-cols-3 xs:grid-cols-2'>
-                                            {['Gated Community', 'Clubhouse', 'School & College', 'Gym/Fitness Center', 'Tennis Courts', 'Playground', 'Airport'].map((item, index) => (
-                                                <div key={index} className="mr-3 relative my-3 w-full">
-                                                    <input
-                                                        type="checkbox"
-                                                        id={`checkbox-${index}`}
-                                                        name="renting"
-                                                        className="absolute opacity-0 h-6 w-6 cursor-pointer"
-                                                        value={item}
-                                                        checked={community[index]}
-                                                        onChange={() => handleChangeCommunity(index)}
-                                                    />
-                                                    <label
-                                                        htmlFor={`checkbox-${index}`}
-                                                        className="flex items-center cursor-pointer text-primary"
-                                                    >
-                                                        <div
-                                                            className={`w-4 h-4 border-[1px] ${community[index] ? 'border-secondary bg-secondary' : 'border-secondary bg-white'} rounded-[3px] flex justify-center items-center mr-2`}
-                                                        >
-                                                            {community[index] && (
-                                                                <svg
-                                                                    className="fill-white w-5 h-5 p-0 pointer-events-none flex justify-center items-center mb-[0px]"
-                                                                    viewBox="0 0 20 20"
-                                                                >
-                                                                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                                                                </svg>
-                                                            )}
-                                                        </div>
-                                                        <span className="select-none text-secondary whitespace-nowrap md:text-[15px] xs:text-[12px]">{item}</span>
-                                                    </label>
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                    
-                                </div>                                
                             </div>
 
                             <div className="flex py-2 border-t border-solid border-slate-200 w-full">
                                 <div
                                     className="md:text-lg xs:text-[12px] text-secondary w-full flex justify-end items-center gap-5"
                                 >
-                                    
-                                    <button className='text-[12px] rounded-lg md:px-6 xs:px-4 lg:px-6 py-1 bg-transparent border-[1px] border-[#c3c7cb] text-black flex justify-center items-center'>Clear All</button>
-                                    <button className='text-[12px] rounded-lg md:px-6 xs:px-4 lg:px-6 py-1 border-[1px] bg-black text-white flex justify-center items-center'>Apply</button>
+
+                                    <button className='text-[12px] rounded-full md:px-6 xs:px-4 lg:px-6 py-1 bg-transparent border-[2px] font-[600] border-[#c3c7cb] text-gray-500 flex justify-center items-center'>Clear All</button>
+                                    <button className='text-[12px] rounded-full md:px-8 xs:px-6 lg:px-8 py-1 border-[2px] border-transparent bg-[#5893A5] text-white flex justify-center items-center'>Apply</button>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>

@@ -68,7 +68,7 @@ const FaqsPage = () => {
                             <div className="mb-3 md:px-0 xs:px-0 text-black flex-col font-normal md:mb-7 xs:mb-3 flex flex-wrap justify-center items-center text-center mt-[0px]">
 
                                 <div
-                                    className="flex justify-center items-center flex-col xs:px-0 question-container border-line"
+                                    className="md:w-[40rem] xs:w-full flex justify-center items-center flex-col xs:px-0 question-container border-line"
                                 >
                                     {questionData.map((question, questionIndex) => {
                                         return (

@@ -1,13 +1,23 @@
 /* eslint-disable react/no-unescaped-entities */
 
-
-
-
+import { useEffect } from "react";
 import Listing from "../../assets/svg/homeListing.svg"
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate} from "react-router-dom";
 
 
 const HomeListing = () => {
+
+    const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLinkClick = (path) => {
+    navigate(path);
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
  
 
     return (
@@ -39,13 +49,13 @@ const HomeListing = () => {
                                             Explore a curated selection of properties designed for the medical community and enjoy flexible monthly payments. Medirent-managed homes are move-in ready and include all essential services.
                                         </div>
 
-                                        <Link
-                                            to="/"
-
+                                        <button
+                                            
+                                            onClick={() => handleLinkClick('/all-listings')}
                                             className={`bg-primary font-normal text-white w-fit rounded-full opacity-70 px-[30px] py-[5px] text-center
                                                 flex justify-between items-center group`}
 
-                                        >View Listings</Link>
+                                        >View Listings</button>
 
                                         <div className="text-[#717171] mb-2 flex text-[16px] text-start py-5 xs:flex-col md:flex-row">
                                             <span>Looking to list your space instead?</span>

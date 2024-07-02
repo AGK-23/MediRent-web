@@ -97,10 +97,6 @@ const ServicePage = () => {
                                 </div>
                             </div>
 
-
-
-
-
                             <motion.div
                                 initial='hidden'
                                 animate='visible'
@@ -136,11 +132,8 @@ const ServicePage = () => {
                                                             </div>
 
                                                         </div>
-
                                                     </div>
                                                     <div className="py-2 flex md:w-[450px] xs:w-fit justify-center bg-[#fefefe] rounded-lg shadow-lg">
-
-
                                                         <div className="px-[25px]">
                                                             <div className="mt-0 text-start text-[24px] leading-6 py-[20px] font-semibold text-black ">
                                                                 Get Tenant Insurance
@@ -161,12 +154,8 @@ const ServicePage = () => {
                                                                 />
 
                                                             </div>
-
                                                         </div>
-
                                                     </div>
-
-
                                                 </div>
                                             </div>
                                         </div>
@@ -232,19 +221,15 @@ const ServicePage = () => {
                                                         </div>
 
                                                     </div>
-
-
                                                 </div>
                                             </div>
                                         </div>
                                     </>
                                 )}
-
                             </motion.div>
                         </div>
                     </div>
                 </section>
-
             </div>
 
         </div>
