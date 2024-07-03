@@ -56,7 +56,7 @@ const TopPage = () => {
                 
             </div>
 
-            <div className='absolute lg:-bottom-[6rem] md:-bottom-[6.5rem] xs:-bottom-[15rem]'>
+            <div className='absolute lg:-bottom-[6rem] md:-bottom-[6.5rem] xs:-bottom-[13rem]'>
                 <SearchTab />
             </div>
 

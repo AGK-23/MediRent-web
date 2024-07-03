@@ -18,39 +18,31 @@ const SearchTab = () => {
 
 
     return (
-        <div className="px-0">
-            <div className="grid md:grid-cols-5 xs:grid-cols-2 xs:gap-6 lg:gap-16 md:gap-0 rounded-lg shadow-lg border-[1px] md:px-6 xs:px-5 py-6 md:w-full xs:w-full bg-white">
-                <div className="flex flex-col col">
-                    <div className="text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[17px]" >
+        <div className="md:px-0 xs:px-2">
+            <div className="grid md:grid-cols-5 xs:grid-cols-2 lg:gap-16 md:gap-0 xs:gap-6 rounded-lg shadow-lg border-[1px] md:px-6 xs:px-5 py-6 md:w-full xs:w-full bg-white">
+                <div className="flex flex-col col  w-full md:mr-0 xs:mr-[69px]">
+                    <div className="text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
                         Location
                     </div>
-                    <div className="text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[17px]">
-                        Select
-                    </div>
+                    <input type="text" placeholder="Select" className="text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/>
                 </div>
-                <div className="flex flex-col col">
-                    <div className="text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[17px]" >
+                <div className="flex flex-col col w-full">
+                    <div className="w-full md:text-start xs:text-end text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
                         Property Type
                     </div>
-                    <div className="text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[17px]">
-                        Select
-                    </div>
+                    <input type="text" placeholder="Select" className="md:text-start xs:text-end text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/>
                 </div>
                 <div className="flex flex-col col">
-                    <div className="text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[17px]" >
+                    <div className="text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
                         Price Range
                     </div>
-                    <div className="text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[17px]">
-                        Select
-                    </div>
+                    <input type="text" placeholder="Select" className="text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/>
                 </div>
                 <div className="flex flex-col col">
-                    <div className="text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[17px]" >
+                    <div className="md:text-start xs:text-end text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
                         Property Size
                     </div>
-                    <div className="text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[17px]">
-                        Select
-                    </div>
+                    <input type="text" placeholder="Select" className="md:text-start xs:text-end text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/>
                 </div>
                 
 
