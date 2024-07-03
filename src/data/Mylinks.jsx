@@ -5,6 +5,7 @@ import { TbBrandMonday, TbAppsFilled, TbBoxPadding, TbBrandAmigo } from "react-i
 import Key from "../assets/svg/key.svg";
 import Schedule from "../assets/svg/schedule.svg";
 import searchTab from"../assets/svg/search-tab.svg";
+import Checked from "../assets/svg/checked.svg"
 
 export const cards = [
     {
@@ -377,12 +378,12 @@ export const links = [
     {
       name: "Tenants",
       submenu: true,
-      link:'/'
+      
     },
     {
       name: "LandLord",
       submenu: true,
-      link:'/'
+      
     },
     {
         name: "Listing",
@@ -419,6 +420,30 @@ export const newComersData = [
         id: 3,
         name: "Apply and Secure Your Rental",
         description: "After selecting the perfect home, complete the rental application and provide necessary documentation, such as proof of income and references.Once approved, sign the lease agreement, and you're ready to move in!",
+        image: Key,
+    },
+    
+    
+];
+
+export const housingSolutionData = [
+    {
+        id: 1,
+        name: "Tailored Listings",
+        description: "Our platform exclusively features properties that cater to the specific needs of medical professionals, ensuring comfort and convenience.",
+        image: searchTab,
+        
+    },
+    {
+        id: 2,
+        name: "Verified Properties",
+        description: "Each listing undergoes thorough verification to guarantee safety, reliability, and quality, giving you peace of mind.",
+        image: Checked,
+    },
+    {
+        id: 3,
+        name: "Flexible Rental Options",
+        description: "Choose from a variety of rental plans, including monthly, quarterly, and biannual options, to fit your unique schedule and commitments.",
         image: Key,
     },
     

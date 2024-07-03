@@ -60,17 +60,12 @@ const HomeListing = () => {
                                             <span>Looking to list your space instead?</span>
                                             <span className="text-primary underline underline-offset-4 ml-1 font-normal"> Sign up as a Host</span>
                                         </div>
-
-
-
-
                                     </div>
 
                                 </div>
                             </div>
 
                             <div className=" mb-3 md:px-4 xs:px-0 text-black flex-col font-normal md:mb-7 xs:mb-3 flex flex-wrap justify-center items-center text-center mt-[0px]">
-
                                 <div className=" w-fit ">
                                     <div className="flex justify-center items-center w-fit">
                                         <img alt="" src={Listing} className=" cursor-pointer" />
@@ -79,12 +74,6 @@ const HomeListing = () => {
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
-
                         </div>
                     </div>
                 </section>

@@ -49,18 +49,12 @@ const TopPage = () => {
                             className="cursor-pointer w-[239px] h-[288px]"
                         />
                     </div>
-                    
-
-                </Fade>
-
-                
+                </Fade>                
             </div>
 
             <div className='absolute lg:-bottom-[6rem] md:-bottom-[6.5rem] xs:-bottom-[13rem]'>
                 <SearchTab />
             </div>
-
-
         </div>
     )
 }

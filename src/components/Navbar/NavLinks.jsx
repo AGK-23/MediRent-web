@@ -87,7 +87,7 @@ const NavLinks = () => {
           {heading === "Tenants" && (
             <>
               <div
-                className={`absolute rounded-xl bg-white w-fit left-[491px] flex-col top-[4.15rem] border-t-[1px] flex gap-0 px-4 justify-center py-4 border-b-[1px] border-gray-200`}
+                className={`absolute rounded-xl border-[1px] bg-white w-fit left-[491px] flex-col top-[4.15rem] border-t-[1px] flex gap-0 px-4 justify-center py-4 border-b-[1px] border-gray-200`}
               >
                 <div className="py-2 flex max-w-[20rem] justify-center bg-[#fefefe] rounded-lg">
                   <div className="mr-5">
@@ -134,7 +134,7 @@ const NavLinks = () => {
           {heading === "LandLord" && (
             <>
               <div
-                className={`absolute rounded-xl bg-white w-fit left-[610px] flex-col top-[4.15rem] border-t-[1px] flex gap-0 px-4 justify-center py-4 border-b-[1px] border-gray-200`}
+                className={`absolute rounded-xl border-[1px] bg-white w-fit left-[610px] flex-col top-[4.15rem] border-t-[1px] flex gap-0 px-4 justify-center py-4 border-b-[1px] border-gray-200`}
               >
                 <div className="py-2 flex max-w-[20rem] justify-center bg-[#fefefe] rounded-lg">
                   <div className="mr-5">
