@@ -95,6 +95,7 @@ const AvailabilityModal = ({ availability, onClose }) => {
                                     inputType="textarea"
                                     setValue={setFormData}
                                     value={address}
+                                    disabled={true}
 
                                     label={''}
                                     className='px-0 mb-[14px] md:w-[400px] xs:w-full text-[16px] !h-[100px] text-gray-500'

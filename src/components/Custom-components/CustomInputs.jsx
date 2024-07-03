@@ -54,6 +54,7 @@ const CustomInputs = ({ value, wrapperClass, setValue, className, label, type, i
                     required={required}
                     ref={inputRef} />
                 : <textarea
+                    disabled={disabled}
                     defaultValue={''}
                     value={value} onChange={(e) => {
                         if (setValue)

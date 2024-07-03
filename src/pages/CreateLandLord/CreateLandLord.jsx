@@ -782,7 +782,7 @@ const CreateLandLord = () => {
 
 
     return (
-        <div className="py-0 mt-32 bg-white">
+        <div className="py-0 md:mt-32 xs:mt-[4rem] bg-white">
             <div className="flex font-medium justify-between max-w-screen-xl mx-auto">
                 <div
                     className="bg-white w-full h-screen bg-HomeImage bg-cover

@@ -92,15 +92,15 @@ function Footer() {
                         </div>
                     </div>
                     <div className="text-center flex md:justify-center xs:justify-start w-full h-full  md:mt-[125px] xs:mt-0 xs:mb-10 md:mb-0">
-                        <div className=''>
+                        <div className='flex flex-col'>
                             <h2 className='text-start font-semibold mb-6 text-xl text-slate-900'>Company</h2>
 
-                            <div className='mb-4 text-start text-[16px] font-[400] text-gray-400'>
+                            <Link to="/about-us" className='mb-4 text-start text-[16px] font-[400] text-gray-400'>
                                 <span className=' text-[#1B2126] hover:text-primary cursor-pointer'>About</span>
-                            </div>
-                            <div className='mb-4 text-start text-[16px] font-[400] text-gray-400'>
+                            </Link>
+                            <Link to="/faqs" className='mb-4 text-start text-[16px] font-[400] text-gray-400'>
                                 <span className=' text-[#1B2126] hover:text-primary cursor-pointer'>FAQs</span>
-                            </div>
+                            </Link>
                             <div className='mb-4 text-start text-[16px] font-[400] text-gray-400'>
                                 <span className=' text-[#1B2126] hover:text-primary cursor-pointer'>Support</span>
                             </div>

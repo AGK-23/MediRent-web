@@ -17,6 +17,7 @@ function NavbarLinks({ OpenScreen }) {
   const [linkName, setLinkName] = useState({
     nameOne: "LandLord",
     nameTwo: "Tenants",
+    nameThree: "Create Account",
   });
 
   return (
@@ -135,6 +136,49 @@ function NavbarLinks({ OpenScreen }) {
               <button onClick={OpenScreen} className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                 <Link to="/about-us">About Us</Link>
               </button>
+            </div>
+
+            <div>
+              <button onClick={OpenScreen} className="py-3 text-center border-[1px] bg-white w-full border-gray-500 px-1 inline-block capitalize relative leading-1vw text-[#008080] hover:text-black font-[500] transition-colors duration-150 ease-linear">
+                <Link to="/auth/login">Login</Link>
+              </button>
+            </div>
+
+            <h1
+              className={`${naming === linkName.nameThree ? "text-primary" : "text-primary"
+                } py-4 flex justify-between items-center md:pr-0 pr-5 group`}
+              onClick={() => {
+                naming !== linkName.nameThree
+                  ? setNaming(linkName.nameThree)
+                  : setNaming("");
+                setSubHeading("");
+              }}
+            >
+              {linkName.nameThree}
+              <span className="text-sm inline">
+                {naming === linkName.nameThree ? <HiOutlineChevronUp /> : <HiOutlineChevronDown />}
+
+              </span>
+            </h1>
+            <div className=" top-0 left-0 w-full bg-white overflow-x-auto">
+              {naming === "Create Account" && (
+                <>
+                  <div
+                    className={`bg-white w-full left-0  flex flex-col px-1 justify-center py-1`}
+                  >
+                    <button onClick={OpenScreen} className="py-2 flex flex-col max-w-[30rem]">
+                      <Link to="/auth/housing-subscription" className="mt-2 mb-2 text-start text-[15px] leading-6 font-semibold">
+                        Create LandLord's Account
+                      </Link>
+                    </button>
+                    <button onClick={OpenScreen} className="py-2 flex flex-col max-w-[30rem]">
+                      <Link to="/auth/registration-page" className="mt-2 mb-2 text-start text-[15px] leading-6 font-semibold">
+                        Create Tenant's Account
+                      </Link>
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
 
           </div>
