@@ -190,7 +190,7 @@ const Navbar = ({ isTopOfPage }) => {
               </div>
 
               {/* SECOND NAVBAR */}
-              <div className="w-full py-1 px-1 flex justify-between">
+              <div className="w-full py-1 px-1 hidden justify-between">
                 <div className="block">
                   <Link className="link flex items-center justify-center h-full mr-5" to="/auth/login">
                     <div className="text-gray-500 font-semibold hover:text-gray-700 text-[13px]">LOGIN</div>
@@ -239,7 +239,7 @@ const Navbar = ({ isTopOfPage }) => {
 
             <ul
               className={`
-              bg-white fixed h-fit top-32 overflow-y-auto bottom-0 py-10 px-4 md:w-[450px] w-full
+              bg-white fixed h-fit top-[4rem] overflow-y-auto bottom-0 py-10 px-4 md:w-[450px] w-full
               duration-500 ${open ? "left-0" : "left-[-100%]"}
               `}
               style={{
@@ -266,45 +266,13 @@ const Navbar = ({ isTopOfPage }) => {
                   <Link to="/">FAQ</Link>
                 </div>
               </li>
-              {/* <li>
-                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                  <Link to="/">Pricing</Link>
-                </div>
-              </li> */}
-              {/* <li>
-                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                  <Link to="/">FAQ</Link>
-                </div>
-              </li> */}
-              {/* <li>
-                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                  <Link to="/">Blog</Link>
-                </div>
-              </li> */}
+              
               <li>
                 <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
                   <Link to="/">About Us</Link>
                 </div>
               </li>
-              {/* <li>
-                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#0c527b] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                  <Link to="/">Tenants Want Ads</Link>
-                </div>
-              </li> */}
-              {/* <NavbarLinks OpenScreen={OpenScreen} /> */}
-              {/* <div className="mb-10 py-6 flex justify-center flex-col  sm:w-full">
-                <Link className="link flex items-center" to="/auth/register">
-                  <button className=" w-full rounded-sm p-2 px-1 text-sm bg-orange-500 text-white">
-                    Open an Account
-                  </button>
-                </Link>
-
-                <Link className="link flex items-center" to="/auth/register">
-                  <button className="my-4 w-full rounded-sm p-2 px-1 text-sm bg-white text-primary border-2">
-                    Sign In
-                  </button>
-                </Link>
-              </div> */}
+              
             </ul>
           </div>
         </div>

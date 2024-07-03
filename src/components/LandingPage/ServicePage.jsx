@@ -60,11 +60,11 @@ const ServicePage = () => {
                                     className=" w-full h-full"
                                 >
                                     <div className=" mb-3 md:px-4 xs:px-0 text-black flex-col font-normal md:mb-7 xs:mb-3 flex flex-wrap justify-center items-center text-center">
-                                        <span className="text-[20px] leading-[25.2px] text-[#DB877D]">
+                                        <span className="md:text-[20px] xs:text-[14px] leading-[25.2px] text-[#DB877D]">
                                             Our Services
                                         </span>
 
-                                        <div className="text-[32px] leading-[40.32px] font-semibold md:w-[540px] xs:w-fit">
+                                        <div className="md:text-[32px] xs:text-[21px] md:leading-[40.32px] xs:leading-[26.46px] font-semibold md:w-[540px] xs:w-fit">
                                             Looking to rent or lease a space? We’ve got you covered.
                                         </div>
 
@@ -107,7 +107,7 @@ const ServicePage = () => {
                                         <div className="mb-3 md:px-4 xs:px-0 text-black flex-col font-normal md:mb-7  xs:mb-3 flex flex-wrap justify-center items-center text-center mt-[50px]">
 
                                             <div className=" w-full ">
-                                                <div className="flex md:flex-row xs:flex-col justify-center items-center w-full gap-10 px-2">
+                                                <div className="flex lg:flex-row md:flex-col  xs:flex-col justify-center items-center w-full gap-10 px-2">
                                                     <div className="py-2 flex md:w-[450px] xs:w-fit justify-center bg-[#fefefe] rounded-lg shadow-lg">
 
                                                         <div className="px-[25px]">
@@ -167,7 +167,7 @@ const ServicePage = () => {
                                         <div className="mb-3 md:px-4 xs:px-0 text-black flex-col font-normal md:mb-7  xs:mb-3 flex flex-wrap justify-center items-center text-center mt-[50px]">
 
                                             <div className=" w-full ">
-                                                <div className="flex md:flex-row xs:flex-col justify-center items-center w-full gap-10 px-2">
+                                                <div className="flex lg:flex-row md:flex-col xs:flex-col justify-center items-center w-full gap-10 px-2">
                                                     <div className="py-2 flex md:w-[450px] xs:w-fit justify-center bg-[#fefefe] rounded-lg shadow-lg">
 
                                                         <div className="px-[25px]">

@@ -26,21 +26,20 @@ const HomeListing = () => {
 
                 <section
                     className=" 
-                    flex justify-center items-center md:px-[120px] xs:px-3 md:mt-10 xs:mt-12"
+                    flex justify-center items-center md:mt-10 xs:mt-12 "
                 >
                     <div className="flex flex-col justify-center items-center ">
                         <div className="relative z-10 grid md:grid-cols-2 xs:grid-cols-1 gap-10">
                             <div className="flex justify-center items-center flex-col ">
                                 <div
-
                                     className=" w-full h-full flex items-center justify-center "
                                 >
                                     <div className=" mb-3 md:px-4 xs:px-0 text-black flex-col font-normal md:mb-7 xs:mb-3 flex ">
-                                        <span className="text-[20px] leading-[25.2px] text-[#DB877D]">
+                                        <span className="md:text-[20px] xs:text-[14px] leading-[25.2px] text-[#DB877D]">
                                             Listings
                                         </span>
 
-                                        <div className="text-[32px] leading-[40.32px] font-semibold md:w-[540px] xs:w-full flex ">
+                                        <div className="md:text-[32px] xs:text-[21px] md:leading-[40.32px] xs:leading-[26.46px] font-semibold md:w-full xs:w-fit">
                                             Discover Exceptional Spaces with Medirent
                                         </div>
                                         
@@ -70,7 +69,7 @@ const HomeListing = () => {
                                 </div>
                             </div>
 
-                            <div className="mb-3 md:px-4 xs:px-0 text-black flex-col font-normal md:mb-7 xs:mb-3 flex flex-wrap justify-center items-center text-center mt-[0px]">
+                            <div className=" mb-3 md:px-4 xs:px-0 text-black flex-col font-normal md:mb-7 xs:mb-3 flex flex-wrap justify-center items-center text-center mt-[0px]">
 
                                 <div className=" w-fit ">
                                     <div className="flex justify-center items-center w-fit">

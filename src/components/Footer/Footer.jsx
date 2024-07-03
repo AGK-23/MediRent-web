@@ -126,14 +126,14 @@ function Footer() {
 
                 </div>
                 <div className="md:w-full xs:w-full text-center py-3 flex md:flex-row justify-around xs:flex-col border-t border-[#DDDDDD] lg:px-40 md:px-10 xs:px-2">
-                    <div className="w-full flex md:flex-row xs:flex-row md:justify-start xs:justify-start md:items-start xs:items-start">
-                        <div className="text-gray-800 flex text-sm md:w-fit xs:w-full">© {new Date().getFullYear()} Medirent</div>
+                    <div className=" w-full flex md:flex-row xs:flex-row md:justify-start xs:justify-start md:items-start xs:items-start">
+                        <div className=" text-gray-800 flex text-sm md:w-fit xs:w-full">© {new Date().getFullYear()} Medirent</div>
 
-                        <ul className="flex xs:gap-0 md:gap-5 ml-5 md:w-fit xs:w-full">
-                            <li className='mb-4 text-start text-sm font-[400] text-gray-400 flex flex-row'>
+                        <ul className=" flex xs:gap-0 md:gap-5 ml-5 md:w-fit xs:w-full justify-end">
+                            <li className='mb-4 text-start text-sm font-[400] text-gray-400 flex flex-row ml-0'>
                                 <span className=' text-gray-800 hover:text-primary cursor-pointer flex'>• Privacy</span>
                             </li>
-                            <li className='mb-4 text-start text-sm font-[400] text-gray-400 ml-2'>
+                            <li className='mb-4 text-start text-sm font-[400] text-gray-400 lg:ml-2 md:ml-10 xs:ml-6'>
                                 <span className=' text-gray-800 hover:text-primary cursor-pointer'>• Terms</span>
                             </li>
                         </ul>

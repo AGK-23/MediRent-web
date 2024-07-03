@@ -12,21 +12,21 @@ import TopPage from "../LandingPage/TopPage";
 
 const MainPage = () => {
     return (
-        <div className='md:mt-0 xs:mt-[6rem]'>
+        <div className='md:mt-0 xs:mt-[4rem]'>
             <div className="bg-[#A4ABAC]">
                 <TopPage />
             </div>
-            <div>
+            <div className='lg:px-[120px] md:px-3 xs:px-3'>
                 <SecondPage />
             </div>
-            <div>
+            <div className='lg:px-[120px] md:px-3 xs:px-0'>
                 <ServicePage/>
             </div>
-            <div>
+            <div className='lg:px-[120px] md:px-3 xs:px-3'>
                 <HomeListing />
             </div>
 
-            <div>
+            <div className='lg:px-[120px] md:px-3 xs:px-3'>
                 <FaqsPage />
             </div>
 
