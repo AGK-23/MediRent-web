@@ -35,6 +35,8 @@ const Unauthorized = lazy(() => import('./pages/Error/unathorized'));
 const NotFound = lazy(() => import('./pages/Error/error'));
 
 const LandListing = lazy(() => import('./components/LandingPage/ListingPage/ListingPage.jsx'));
+const AboutUs = lazy(() => import('./components/LandingPage/About/AboutUs.jsx'));
+const Faqs = lazy(() => import('./components/LandingPage/Faqs/Faqs.jsx'));
 
 function App() {
   return (
@@ -48,6 +50,10 @@ function App() {
                   <Route path="/" element={<MainPage />} />
                   <Route path="/listings" element={<ListingHome />} />
                   <Route path="/all-listings" element={<LandListing />} />
+                  <Route path="/faqs" element={<Faqs />} />
+                  <Route path="/about-us" element={<AboutUs />} />
+
+
                   <Route path="/auth/login" element={<Login />} />
                   <Route path="/auth/registration-page" element={<CreateTenant />} />
                   <Route path="/auth/housing-subscription" element={<CreateLandLord />} />

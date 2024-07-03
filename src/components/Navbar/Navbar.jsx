@@ -5,21 +5,10 @@ import { Link } from "react-router-dom";
 import useMediaQuery from "../../hooks/useMediaQuery.jsx";
 import PrimaryButton from "../primaryButton/PrimaryButton.jsx"
 
-// import NavbarLinks from "./NavbarLinks";
+import NavbarLinks from "./NavbarLinks";
 import Logo from "../../assets/logo.png";
-// import { BiSolidDownArrow } from "react-icons/bi";
-// import { FaGoogle } from "react-icons/fa";
-// import {
-//   FaFacebook,
-//   FaTwitter,
-//   FaPinterest,
-//   FaInstagram,
-//   FaLinkedin,
-// } from "react-icons/fa";
-
-// import SearchButton from "../SearchButton.jsx";
-
 import NavLinks from "./NavLinks.jsx";
+
 
 const Path = (props) => (
   <motion.path
@@ -222,22 +211,43 @@ const Navbar = ({ isTopOfPage }) => {
 
                 </div>
               </div>
-
-              {/* THIRD NAVBAR  */}
-              {/* <div className="w-full bg-gray-100  relative left-0 pt-1">
-                <SearchButton />
-              </div> */}
-
             </div>
           </div>
+
+
           <div>
             <div
               onClick={OpenScreen}
               className={`${open ? "left-0" : "left-[-100%]"
-                } absolute left-0 top-32 bg-slate-800 bg-opacity-75 md:bg-opacity-50 w-full h-screen`}
+                } absolute left-0 top-[4rem] bg-slate-800 bg-opacity-75 md:bg-opacity-50 w-full h-screen`}
             ></div>
 
-            <ul
+            {/* <div className="px-0">
+            <NavbarLinks />
+          </div> */}
+
+            <div
+              className={`
+              bg-white fixed h-fit top-[4rem] overflow-y-auto bottom-0 py-10 px-4 md:w-[450px] w-full
+              duration-500 ${open ? "left-0" : "left-[-100%]"}
+              `}
+              style={{
+                height: "100%",
+                // width: '100%',
+                flex: "1",
+                padding: "1rem 1.1rem 1rem 1rem",
+                overflowY: "auto",
+                overflowX: "hidden",
+              }}
+            >
+              <div className="px-0">
+            <NavbarLinks OpenScreen={OpenScreen} />
+          </div>
+
+            </div>
+
+
+            {/* <ul
               className={`
               bg-white fixed h-fit top-[4rem] overflow-y-auto bottom-0 py-10 px-4 md:w-[450px] w-full
               duration-500 ${open ? "left-0" : "left-[-100%]"}
@@ -261,19 +271,9 @@ const Navbar = ({ isTopOfPage }) => {
                   <Link to="/">Tenants</Link>
                 </div>
               </li>
-              <li>
-                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                  <Link to="/">FAQ</Link>
-                </div>
-              </li>
               
-              <li>
-                <div className="py-4 px-1 inline-block capitalize relative border-0 leading-1vw text-[#008080] hover:text-black font-[500]  transition-colors duration-150 ease-linear">
-                  <Link to="/">About Us</Link>
-                </div>
-              </li>
-              
-            </ul>
+
+            </ul> */}
           </div>
         </div>
       )}

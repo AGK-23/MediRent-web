@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState, useRef, useEffect } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { links } from "../../data/Mylinks";
 // import { linkData } from "./data";
 
@@ -67,7 +67,7 @@ const NavLinks = () => {
                   setSubHeading("");
                 }}
               >
-                {link.name}
+                <Link to={link.link}>{link.name}</Link>
                 <span className="text-sm md:hidden inline">
                   {!link.submenu ? "" : heading === link.name && link.submenu ? <HiOutlineChevronUp /> : <HiOutlineChevronDown />}
 

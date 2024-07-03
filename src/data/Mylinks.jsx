@@ -377,18 +377,27 @@ export const links = [
     {
       name: "Tenants",
       submenu: true,
+      link:'/'
     },
     {
       name: "LandLord",
       submenu: true,
+      link:'/'
+    },
+    {
+        name: "Listing",
+        submenu: false,
+        link:'/all-listings'
     },
     {
       name: "FAQs",
       submenu: false,
+      link:'/faqs'
     },
     {
       name: "About Us",
       submenu: false,
+      link:'/about-us'
     },
 ];
 
