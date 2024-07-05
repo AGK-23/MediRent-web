@@ -11,6 +11,7 @@ import Area from "../../../assets/Listing/area.svg";
 import BathTub from "../../../assets/Listing/bath-tub.svg";
 import Bed from "../../../assets/Listing/bed.svg";
 import AvailabilityModal from "../../ui/AvailabilityModal";
+import { Link } from "react-router-dom";
 
 
 
@@ -94,12 +95,6 @@ const TopSearch = () => {
         setSelectedAvailability(null);
     };
 
-
-
-
-
-
-
     return (
         <div className='flex w-full flex-col md:mt-[10rem] xs:mt-[0rem] py-0 relative'>
             <div className=' md:w-full gap-3 xs:w-full mt-0 xs:pb-2 md:pb-0 md:mt-10 xs:mt-12 relative'>
@@ -124,9 +119,9 @@ const TopSearch = () => {
                             <div key={index} className="flex justify-center items-center  flex-col ">
                                 <div className="bg-white rounded-lg px-0 py-3 shadow-xl">
                                     <div className=''>
-                                        <div className='flex items-center rounded-lg'>
+                                        <Link to="/listing-details/1"  className='flex items-center rounded-lg'>
                                             <img alt="" src={listing.image} className="cursor-pointer " />
-                                        </div>
+                                        </Link>
                                     </div>
                                     <div className="flex flex-col gap-0 h-fit pt-6 md:px-3 xs:px-2">
                                         <div>

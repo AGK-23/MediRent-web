@@ -602,6 +602,10 @@ input[type="date"]:focus::-webkit-datetime-edit {
   width: 100%; /* Set the width of the header container to 100% */
 }
 
+/* .svg-color {
+  fill: #1F3249;
+} */
+
 
 
 @tailwind base;

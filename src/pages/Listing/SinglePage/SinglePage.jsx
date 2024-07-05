@@ -45,6 +45,8 @@ function SinglePage() {
                 // console.log("all the individual person..", response?.data);
                 setListings(response?.data?.data);
 
+                console.log("all the listing...", response);
+
             } catch (error) {
                 console.error('Error fetching listings:', error);
             }

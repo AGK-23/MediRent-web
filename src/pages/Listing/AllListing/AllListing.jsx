@@ -1,6 +1,6 @@
 // import React from 'react'
 
-import { listData } from '../../../data/Mylinks';
+// import { listData } from '../../../data/Mylinks';
 
 import Card from './Card.jsx';
 import { useState, useEffect } from 'react';
@@ -18,11 +18,11 @@ const AllListing = () => {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
-  let data = listData;
+  // let data = listData;
 
-  const filteredData = data.filter(item => {
-    return item?.title?.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+  // const filteredData = data.filter(item => {
+  //   return item?.title?.toLowerCase().includes(searchTerm.toLowerCase());
+  // });
 
   const [listings, setListings] = useState([]);
 

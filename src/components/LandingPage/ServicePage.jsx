@@ -37,10 +37,6 @@ const modalTwo = {
 const ServicePage = () => {
     const [heading, setHeading] = useState("For Tenants");
 
-
-
-
-
     return (
         <div className='md:mt-[30px] xs:mt-[87px]'>
             <div className=' '>

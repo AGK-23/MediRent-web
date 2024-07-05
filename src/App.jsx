@@ -37,6 +37,8 @@ const NotFound = lazy(() => import('./pages/Error/error'));
 const LandListing = lazy(() => import('./components/LandingPage/ListingPage/ListingPage.jsx'));
 const AboutUs = lazy(() => import('./components/LandingPage/About/AboutUs.jsx'));
 const Faqs = lazy(() => import('./components/LandingPage/Faqs/Faqs.jsx'));
+const ListingDetails = lazy(() => import('./components/LandingPage/ListingDetails/ListingDetails.jsx'));
+
 
 function App() {
   return (
@@ -52,6 +54,7 @@ function App() {
                   <Route path="/all-listings" element={<LandListing />} />
                   <Route path="/faqs" element={<Faqs />} />
                   <Route path="/about-us" element={<AboutUs />} />
+                  <Route path="/listing-details/1" element={<ListingDetails />} />
 
 
                   <Route path="/auth/login" element={<Login />} />

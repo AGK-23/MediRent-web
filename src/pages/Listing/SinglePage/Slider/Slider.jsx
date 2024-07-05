@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { HiOutlineChevronRight, HiOutlineChevronDown, HiOutlineChevronLeft } from "react-icons/hi";
+// import { HiOutlineChevronRight, HiOutlineChevronDown, HiOutlineChevronLeft } from "react-icons/hi";
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 
 function Slider({ avatars }) {
     const [imageIndex, setImageIndex] = useState(null);
-    const [imageInd, setImageInd] = useState(0)
+    // const [imageInd, setImageInd] = useState(0)
 
     // const changeSlide = (direction) => {
     //     if (direction === "left") {

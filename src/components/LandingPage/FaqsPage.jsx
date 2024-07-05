@@ -54,7 +54,7 @@ const FaqsPage = () => {
                                         </div>
 
                                         <Link
-                                            to="/"
+                                            to="/faqs"
                                             className={`bg-primary font-normal text-white w-fit rounded-full opacity-70 px-[30px] py-[5px] text-center flex justify-between items-center group`}>
                                             Visit all FAQs
                                         </Link>
