@@ -13,6 +13,7 @@ const CustomDateInput = ({ calendar, value, onChange, className, wrapperClass })
     };
 
     const handleInputClick = () => {
+        console.log("first", showCalendar)
         setShowCalendar(!showCalendar);
     };
 
@@ -34,32 +35,34 @@ const CustomDateInput = ({ calendar, value, onChange, className, wrapperClass })
     }, []);
 
     return (
-        <div ref={inputRef} className={`form-group relative flex w-[100%] h-[58px] text-[1rem] ${className} ${wrapperClass} `}>
-            <input
-                type="text"
-                value={value ? value.toLocaleDateString() : ''}
-                onClick={handleInputClick}
-                
-                
-            />
-            {calendar && <img
-                src={Calendar}
-                alt="calendar"
-                width={20}
-                height={20}
-                className={`transition-all ease-in-out duration-300 absolute top-5 right-2 cursor-pointer`}
-            />}
-            {showCalendar && (
-                <div className="absolute z-10 mt-2 bg-white border rounded-md shadow-lg">
-                    <DatePicker
-                        selected={value}
-                        onChange={handleDateChange}
-                        dateFormat="MM/dd/yyyy"
-                        className="p-4"
-                    />
-                </div>
-            )}
+        <div ref={inputRef} className={`form-group relative flex w-[100%] h-[58px] text-[1rem]`}>
+      {
+        <div className="absolute z-10 mt-0 top-0 bg-[#f6f6f6] border rounded-md shadow-none py-[3px]">
+          <DatePicker
+            selected={value}
+            onChange={handleDateChange}
+            dateFormat="MM/dd/yyyy"
+            className="p-0"
+          />
         </div>
+      }
+      {/* <input
+        type="text"
+        value={value ? value.toLocaleDateString() : ''}
+        readOnly
+        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        onClick={handleInputClick}
+      /> */}
+      <button onClick={handleInputClick}>
+        <img
+          src={Calendar}
+          alt="calendar"
+          width={20}
+          height={20}
+          className={`transition-all ease-in-out duration-300 absolute z-20 top-5 right-2 cursor-pointer`}
+        />
+      </button>
+    </div>
     );
 };
 
