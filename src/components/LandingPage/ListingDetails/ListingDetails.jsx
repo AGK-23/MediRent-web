@@ -190,7 +190,7 @@ const ListingDetails = () => {
 
                                         <div className="grid grid-cols-2 gap-2">
                                             <div>
-                                                <CustomDateInput calendar={true} value={selectedDate} onChange={handleDateChange} />
+                                                <CustomDateInput value={selectedDate} onChange={handleDateChange} />
                                             </div>
 
                                             <CustomSelect

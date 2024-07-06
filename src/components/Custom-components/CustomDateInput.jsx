@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import { useState, useRef, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Calendar from "../../assets/Listing/calendar.svg"
 
-const CustomDateInput = ({ calendar, value, onChange, className, wrapperClass }) => {
+const CustomDateInput = ({ value, onChange}) => {
     const [showCalendar, setShowCalendar] = useState(false);
     const inputRef = useRef(null);
 
@@ -37,7 +38,7 @@ const CustomDateInput = ({ calendar, value, onChange, className, wrapperClass })
     return (
         <div ref={inputRef} className={`form-group relative flex w-[100%] h-[58px] text-[1rem]`}>
       {
-        <div className="absolute z-10 mt-0 top-0 bg-[#f6f6f6] border rounded-md shadow-none py-[3px]">
+        <div className="absolute z-10 mt-0 top-0 bg-[#f6f6f6] border rounded-[10px] shadow-none py-[3px]">
           <DatePicker
             selected={value}
             onChange={handleDateChange}
