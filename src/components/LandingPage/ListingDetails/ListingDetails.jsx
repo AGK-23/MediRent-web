@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 // import React from 'react'
 
-import { useState } from "react";
+
+import React, { useEffect, useRef, useState } from 'react';
 import ApartmentResidential from "../../../assets/Listing/apartment-residential.png";
 import CozyStudio from "../../../assets/Listing/cozy-studio-apartment-with-bedroom-living-space.png";
 import ModernBathroom from "../../../assets/Listing/modern-bathroom.png";
@@ -11,36 +12,143 @@ import RoadCity from "../../../assets/Listing/Apartment-city.png"
 import Star from "../../../assets/Listing/star.svg";
 import Area from "../../../assets/Listing/area.svg";
 import BathTub from "../../../assets/Listing/bath-tub.svg";
+import Bed from "../../../assets/Listing/bed.svg"
 import Home from "../../../assets/Listing/home.svg";
-import Cancel from "../../../assets/svg/cancel.svg"
+import ImagePeople from "../../../assets/Listing/image-people.svg"
+// import Cancel from "../../../assets/svg/cancel.svg"
 
 
 import CustomInputs from "../../Custom-components/CustomInputs";
 import CustomSelect from "../../Custom-components/Custom-Select";
 import CustomDateInput from "../../Custom-components/CustomDateInput";
 
+import AvailabilityModal from '../../ui/AvailabilityModal';
+
+
+const propertyState = [
+    {
+        image: RoadCity,
+        location: "505 Thurlow St, Vancouver, BC V6E 4J6, Canada",
+        bedRooms: "2",
+        bathRooms: "1",
+        area: "400sq fts",
+        rating: "2",
+        unitType: "4BHK",
+        amount: "$800",
+    },
+    {
+        image: RenderingWhite,
+        location: "1826 Tchesinkut Lake Rd Smithers, Canada",
+        bedRooms: "2",
+        bathRooms: "4",
+        area: "5600sq fts",
+        rating: "5",
+        unitType: "4BHK",
+        amount: "$1200",
+    },
+    {
+        image: CozyStudio,
+        location: "4616 St. Paul Street St Catharines, Canada",
+        bedRooms: "1",
+        bathRooms: "2",
+        area: "5600sq fts",
+        rating: "3",
+        unitType: "4BHK",
+        amount: "$4800",
+    }
+]
+
+
+
 
 const initialState = {
     avatars: [RoadCity, ModernBathroom, CozyStudio, RenderingWhite, ApartmentResidential]
 }
 
+// AIzaSyDGlJZdJHSJbAU0SXqH3raKKRu_4z1-hyc
 
 const ListingDetails = () => {
     const [listings, setListings] = useState(initialState);
-    // const [showCalendar, setShowCalendar] = useState(false);
 
     const [formData, setFormData] = useState({
         fullname: "",
         email: "",
         phone: "",
-        address: `I am interested in 505 Thurlow St, Vancouver, BC V6E 4J6, Canada`
+        address: `I am interested in 505 Thurlow St, Vancouver, BC V6E 4J6, Canada`,
     });
 
-
-    const [selectedUnit, setSelectedUnit] = useState('')
-
+    const [selectedUnit, setSelectedUnit] = useState("");
 
     let { fullname, email, phone, address } = formData;
+
+    const mapRef = useRef(null);
+    const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
+
+    const [selectedAvailability, setSelectedAvailability] = useState(null);
+
+
+    const [properties, setProperties] = useState(propertyState);
+    const [showModal, setShowModal] = useState(false);
+
+    const handleCheckAvailability = (availability) => {
+        setSelectedAvailability(availability);
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setSelectedAvailability(null);
+    };
+
+    useEffect(() => {
+        // Initialize the Google Maps API
+        const script = document.createElement("script");
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCNLbVG4hWNL12CHRp9UdVPtQicQKn4Iao`;
+        script.async = true;
+        document.body.appendChild(script);
+
+        // Get the coordinates for the location
+        const getCoordinates = async () => {
+            const response = await fetch(
+                `https://maps.googleapis.com/maps/api/geocode/json?address=505+Thurlow+St,+Vancouver,+BC+V6E+4J6,+Canada&key=AIzaSyCNLbVG4hWNL12CHRp9UdVPtQicQKn4Iao`
+            );
+            const data = await response.json();
+
+            console.log("map..", data, data.results[0].geometry.location)
+            const { lat, lng } = data.results[0].geometry.location;
+            setCoordinates({ lat, lng });
+
+            console.log("location..", coordinates)
+        };
+
+        // Create the map
+        const initMap = () => {
+            const map = new window.google.maps.Map(mapRef.current, {
+                center: coordinates,
+                zoom: 14,
+            });
+
+            // Add a marker for the location
+            new window.google.maps.Marker({
+                position: coordinates,
+                map: map,
+                title: "505 Thurlow St, Vancouver, BC V6E 4J6, Canada",
+            });
+        };
+
+        // Wait for the Google Maps API to load and the coordinates to be fetched before initializing the map
+        Promise.all([
+            new Promise((resolve) => (script.onload = resolve)),
+            getCoordinates(),
+
+        ]).then(initMap);
+
+        return () => {
+            // Clean up the script tag when the component is unmounted
+            document.body.removeChild(script);
+        };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [coordinates.lat, coordinates.lng]);
 
     const onFilter = (level) => {
         setSelectedUnit(level)
@@ -132,6 +240,11 @@ const ListingDetails = () => {
                         <div className="flex xs:w-full flex-col md:w-full leading-[30.24px] justify-between mt-4 py-10 border-t-[1px] border-b-[1px] border-gray-300">
                             <div className="text-[#1F3249] font-[600] md:text-[24px] xs:text-[16px]">Description</div>
                             <div className="text-[#5A6770] font-[400] leading-[20.8px] md:text-[16px] xs:text-[10px] mt-3">Welcome to 505 Thurlow St, Vancouver, BC V6E 4J6, Canada This exquisite 2-bedroom, 1-bathroom home features a modern kitchen and spacious living areas. Located in a vibrant neighborhood, enjoy easy access to top-rated schools, diverse shopping centers, and beautiful parks. With excellent public transportation options and close proximity to major highways, this home offers the perfect blend of luxury and convenience.</div>
+                        </div>
+
+                        <div className="flex xs:w-full flex-col md:w-full leading-[30.24px] justify-between mt-4 py-5 border-none">
+                            <div className="text-[#1F3249] font-[600] md:text-[24px] xs:text-[16px]">Location</div>
+                            <div ref={mapRef} className='mt-3' style={{ width: '100%', height: '500px' }} />
                         </div>
 
 
@@ -267,11 +380,138 @@ const ListingDetails = () => {
                                 <button className="mt-5 w-full rounded-lg bg-primary px-10 py-[15px] text-center text-white opacity-70">Request a Tour</button>
                             </div>
                         </div>
+
+                        <div className=" relative flex w-full px-0 my-6 mx-0 ">
+                            <div className="md:w-full xs:w-full bg-white border-[1px] rounded-lg shadow-lg p-[1rem] mx-1">
+                                <div className="flex flex-col gap-4">
+                                    <div className='flex w-full flex-col  gap-3'>
+                                        <img src={ImagePeople} alt=""  className="cursor-pointer w-[50px] object-cover h-[50px]" />
+
+                                        <div className='my-1 font-[400] text-[16px] text-black leading-[29.64px]'>
+                                        Managed by:
+                                        </div>
+
+                                        <div className='my-1 font-[600] text-[23px] text-black leading-[29.64px]'>
+                                        The Syndicate Org
+                                        </div>
+
+                                        <div className='my-1 font-[400] text-[23px] text-black leading-[29.64px]'>
+                                            +1 12345543567
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <button className="mt-5 w-full rounded-lg bg-white px-10 text-slate-900 py-[15px] text-center font-semibold border-[1px] border-gray-500">Request Info</button>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
 
 
+
+            </div>
+
+            <div className=" flex justify-center items-center  md:px-0 xs:px-0 py-10">
+                <div className="grid md:w-full xs:w-full md:grid-cols-1 xs:grid-cols-1 gap-5 xs:px-0 mt-0 md:mx-0 xs:mx-0 justify-center ">
+                    <div className="md:col-span-2 xs:col w-full ">
+
+                        <div className="flex xs:w-full flex-col md:w-full leading-[30.24px] justify-between mt-4 py-10 ">
+                            <div className=" flex justify-center flex-col items-center lg:mx-28 md:px-0 xs:px-0 py-10 border-t-[1px]  border-gray-300">
+                            <div className="text-[#1F3249] font-[600] text-start md:text-[24px] xs:text-[16px] w-full">Similar properties nearby</div>
+                                <div className="grid md:w-full xs:w-full md:grid-cols-3 xs:grid-cols-1 gap-5 xs:px-3 mt-10 md:mx-0 xs:mx-0 justify-center items-center">
+                                    {properties && (
+                                        properties.map((property, index) => (
+                                            <div key={index} className="flex justify-start items-center  flex-col ">
+                                                <div className="bg-white rounded-lg px-0 pb-3 shadow-xl">
+                                                    <div className=''>
+                                                        <div className='flex items-center rounded-lg'>
+                                                            <img alt="" src={property.image} className="rounded-tl-lg rounded-tr-lg cursor-pointer w-[360px] h-[200px]" />
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex flex-col gap-0 h-fit pt-6 md:px-3 xs:px-2">
+                                                        <div>
+                                                            <div className="flex justify-start items-center border-none ">
+                                                                <div className=''>
+
+                                                                    <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                        <span className="text-slate-700 font-semibold text-[16px]">{property.amount}</span> <span className="text-gray-500">/month</span>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div className="flex justify-start items-center border-none ">
+                                                                <div className=''>
+
+                                                                    <div className='text-slate-700 font-[400] text-[10px] w-[80%]'>
+                                                                        {property.location}
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="grid grid-cols-4 gap-5 mt-[15px] w-full ">
+                                                            <div className="flex justify-center items-center border-none w-full">
+                                                                <div className='flex justify-center items-center flex-col'>
+                                                                    <img alt="" src={Bed} className="cursor-pointer w-6 h-6" />
+                                                                    <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                        {property.bedRooms} Beds
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div className="flex justify-center items-center border-none w-full">
+                                                                <div className='flex justify-center items-center flex-col w-full'>
+                                                                    <img alt="" src={BathTub} className="cursor-pointer w-6 h-6" />
+                                                                    <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                        {property.bathRooms} Bath
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div className="flex justify-center items-center border-none w-full">
+                                                                <div className='flex justify-center items-center flex-col w-full'>
+                                                                    <img alt="" src={Area} className="cursor-pointer w-6 h-6" />
+                                                                    <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                        {property.area}
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div className="flex justify-center items-center border-none w-full">
+                                                                <div className='flex justify-start items-center flex-col w-full'>
+                                                                    <img alt="" src={Star} className="cursor-pointer w-6 h-6" />
+                                                                    <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                        {property.rating} Star
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <button
+                                                            onClick={() => handleCheckAvailability(property)}
+                                                            className="mt-5 rounded-lg bg-primary px-10 py-[15px] text-center text-white opacity-70">Check Availability</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
+                                    )}
+                                </div>
+
+                                {showModal && selectedAvailability && (
+                                    <AvailabilityModal availability={selectedAvailability} onClose={handleCloseModal} />
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 

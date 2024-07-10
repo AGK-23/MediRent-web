@@ -60,7 +60,7 @@ const CustomDateInput = ({ value, onChange}) => {
           alt="calendar"
           width={20}
           height={20}
-          className={`transition-all ease-in-out duration-300 absolute z-20 top-5 right-2 cursor-pointer`}
+          className={`transition-all ease-in-out duration-300 absolute z-10 top-5 right-2 cursor-pointer`}
         />
       </button>
     </div>
