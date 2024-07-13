@@ -518,10 +518,10 @@ textarea {
   box-shadow: none !important;
 }
 
-.form-group textarea {
-  /* padding-top: 10px; */
+/* .form-group textarea {
+  padding-top: 10px;
   padding: 0px 10px;
-}
+} */
 
 .form-group input {
   height: 100%;
@@ -535,6 +535,12 @@ textarea {
   top: 28px;
 }
 
+.form-group textarea {
+  padding-top: 30px;
+  padding-left: 20px;
+}
+
+
 .form-group input:focus + label,
 input.has-value + label,
 textarea:focus + label,
@@ -546,8 +552,8 @@ textarea.has-value + label {
 
 .form-group > input:focus,
 .form-group input.has-value {
-  height: 64px;
-  /* height: 58px; */
+  /* height: 64px; */
+  height: 58px;
   padding-bottom: 0px;
 }
 

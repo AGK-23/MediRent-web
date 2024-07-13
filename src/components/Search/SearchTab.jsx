@@ -47,8 +47,8 @@ const SearchTab = () => {
                 
 
                 <div className="flex flex-row lg:gap-4 md:gap-4 xs:gap-0 md:col-span-1 xs:col-span-2 justify-between">
-                    <div className="flex justify-center">
-                        <button className="rounded-full bg-primary p-4">
+                    <div className="flex justify-center items-center">
+                        <button className="rounded-full bg-primary w-[60px] h-[60px] flex justify-center items-center">
                             <img
                                 alt=""
                                 src={Search}

@@ -2,15 +2,23 @@
 // import React from 'react'
 
 import Calendar from "../../assets/Listing/calendar.svg"
+import eye from "../../assets/svg/eye.svg"
+import eyeSlash from "../../assets/svg/eye-slash.svg"
 
 
 import { useEffect, useRef } from 'react';
 
-const CustomInputs = ({ value, wrapperClass, setValue, className, label, type, id, showToggle,
-  isToggle, changeToggle, showLabel = true, inputType = "input", calendar = false, required = false, disabled = false }) => {
+const CustomInputs = ({ value, onChange, wrapperClass, className, label, type, id, showToggle,
+  isToggle, changeToggle, showLabel = true, inputType = "input", calendar = false, showRequirement = false, required = false, disabled = false }) => {
 
 
-  const inputRef = useRef(null);
+    const inputRef = useRef(null);
+
+    const handleChange = (e) => {
+      if (onChange) {
+        onChange(e.target.value);
+      }
+    };
 
   useEffect(() => {
     const input = inputRef.current;
@@ -47,25 +55,34 @@ const CustomInputs = ({ value, wrapperClass, setValue, className, label, type, i
           disabled={disabled}
           defaultValue={''}
           placeholder={showLabel ? '' : label}
-          value={value} onChange={(e) => {
-            if (setValue)
-              setValue(e.target.value)
-          }}
+          value={value} 
+          // onChange={(e) => {
+          //   if (setValue)
+          //     setValue(e.target.value)
+          // }}
+          onChange={handleChange}
           id={id}
           type={type}
           required={required}
           ref={inputRef} />
         : <textarea
+          id={id}
           disabled={disabled}
           defaultValue={''}
-          value={value} onChange={(e) => {
-            if (setValue)
-              setValue(e.target.value)
-          }}
-
-          required={required} ref={inputRef}></textarea>
+          value={value} 
+          placeholder={showLabel ? '' : label}
+          // onChange={(e) => {
+          //   if (setValue)
+          //     setValue(e.target.value)
+          // }}
+          onChange={handleChange}
+          type={type}
+          required={required} 
+          ref={inputRef}
+          ></textarea>
       }
-      {showLabel && <label htmlFor={id}>{label}</label>}
+      {showLabel && <label htmlFor={id}>{label} {showRequirement && <span className="text-red-600 text-[10px]">*</span>}</label>}
+
 
       {calendar && <img
         src={Calendar}
@@ -92,7 +109,7 @@ const CustomInputs = ({ value, wrapperClass, setValue, className, label, type, i
             {isToggle ? (
               <div className="cursor-pointer">
                 <img
-                  src={'/images/eye.svg'}
+                  src={eye}
                   alt="logo"
                   width={20}
                   height={20}
@@ -111,7 +128,7 @@ const CustomInputs = ({ value, wrapperClass, setValue, className, label, type, i
                 }}
               >
                 <img
-                  src={'/images/eye-slash.svg'}
+                  src={eyeSlash}
                   alt="logo"
                   width={20}
                   height={20}
@@ -124,9 +141,6 @@ const CustomInputs = ({ value, wrapperClass, setValue, className, label, type, i
 
         )
       }
-
-
-
     </div>
   )
 }

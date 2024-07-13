@@ -1,12 +1,14 @@
 // import React from "react";
 import axios from "axios";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { BsCheckLg } from "react-icons/bs";
+import { BsCheckLg, BsChevronRight } from "react-icons/bs";
 // BsChevronLeft, BsShopWindow
 // import Currency from "../../registration/Currency.jsx"
+
+import PhotoLandlord from "../../assets/svg/photo-landlord.svg"
 
 
 import { toast } from "react-toastify";
@@ -26,6 +28,8 @@ import Spinner from "../../assets/svg/Spinner.svg"
 
 import { axiosPrivate } from "../../api/axios.jsx";
 
+import CustomInputs from "../../components/Custom-components/CustomInputs.jsx";
+import CustomSelect from "../../components/Custom-components/Custom-Select.jsx";
 
 
 const CreateLandLord = () => {
@@ -78,29 +82,35 @@ const CreateLandLord = () => {
         phone: "",
         country: "",
         province: "",
-        promotionCode: "",
+        // promotionCode: "",
     });
 
     //NUMBER THREE THIS IS THE STATE FOR THE HOUSING DETAILS
     const [detailsData, setDetailsData] = useState({
-        termOption: "",
-        designOption: "",
-        dailyRent: "",
-        weeklyRent: "",
-        monthlyRent: "",
+        // termOption: "",
+        // designOption: "",
+        // dailyRent: "",
+        // weeklyRent: "",
+        // monthlyRent: "",
         numberOfBedRoom: "",
         numberOfBathRoom: "",
-        licenseNumber: "",
+        numberOfKitchen: "",
+        price: "",
+        buildYear: "",
+        propertySize: "",
+        area: "",
+        starRating: "",
+        // licenseNumber: "",
         description: "",
         propertyType: "",
-        currency: "",
+        // currency: "",
         amenitiesOption: [],
     });
 
     const [housing, setHousing] = useState(null);
 
     // const [housing, setHousing] = useState("7b057fdb-255d-4d37-b8b9-e9de3addd458");
-    
+
     // const [housing, setHousing] = useState("3fa85f64-5717-4562-b3fc-2c963f66afa6");
 
     useEffect(() => {
@@ -124,19 +134,28 @@ const CreateLandLord = () => {
         phone: housingData?.phone,
         country: housingData?.country,
         province: housingData?.province,
-        promotionCode: housingData?.promotionCode,
+        // promotionCode: housingData?.promotionCode,
 
-        termOption: detailsData?.termOption,
-        designOption: detailsData?.designOption,
-        dailyRent: detailsData?.dailyRent,
-        weeklyRent: detailsData?.weeklyRent,
-        monthlyRent: detailsData?.monthlyRent,
+        // termOption: detailsData?.termOption,
+        // designOption: detailsData?.designOption,
+        // dailyRent: detailsData?.dailyRent,
+        // weeklyRent: detailsData?.weeklyRent,
+        // monthlyRent: detailsData?.monthlyRent,
         numberOfBedRoom: detailsData?.numberOfBedRoom,
         numberOfBathRoom: detailsData?.numberOfBathRoom,
-        licenseNumber: detailsData?.licenseNumber,
-        description: detailsData?.description,
+        numberOfKitchen: detailsData?.numberOfKitchen,
+
+        price: detailsData?.price,
+        buildYear: detailsData?.buildYear,
+        propertySize: detailsData?.propertySize,
         propertyType: detailsData?.propertyType,
-        currency: detailsData?.currency,
+        area: detailsData?.area,
+        starRating: detailsData?.starRating,
+
+        // licenseNumber: detailsData?.licenseNumber,
+        description: detailsData?.description,
+        
+        // currency: detailsData?.currency,
         amenitiesOption: detailsData?.amenitiesOption,
 
         avatars: fileList,
@@ -191,22 +210,30 @@ const CreateLandLord = () => {
             phone: housingData?.phone,
             country: housingData?.country,
             province: housingData?.province,
-            promotionCode: housingData?.promotionCode,
-    
-            termOption: detailsData?.termOption,
-            designOption: detailsData?.designOption,
-            dailyRent: detailsData?.dailyRent,
-            weeklyRent: detailsData?.weeklyRent,
-            monthlyRent: detailsData?.monthlyRent,
+            // promotionCode: housingData?.promotionCode,
+
+            // termOption: detailsData?.termOption,
+            // designOption: detailsData?.designOption,
+            // dailyRent: detailsData?.dailyRent,
+            // weeklyRent: detailsData?.weeklyRent,
+            // monthlyRent: detailsData?.monthlyRent,
             numberOfBedRoom: detailsData?.numberOfBedRoom,
             numberOfBathRoom: detailsData?.numberOfBathRoom,
-            licenseNumber: detailsData?.licenseNumber,
+            numberOfKitchen: detailsData?.numberOfKitchen,
+
+            price: detailsData?.price,
+            buildYear: detailsData?.buildYear,
+            propertySize: detailsData?.propertySize,
+            area: detailsData?.area,
+            starRating: detailsData?.starRating,
+
+            // licenseNumber: detailsData?.licenseNumber,
             description: detailsData?.description,
             propertyType: detailsData?.propertyType,
-            currency: detailsData?.currency,
+            // currency: detailsData?.currency,
             amenitiesOption: detailsData?.amenitiesOption
         }));
-    
+
         setLoginData(prevState => ({
             ...prevState,
             email: formData?.email,
@@ -215,29 +242,31 @@ const CreateLandLord = () => {
     }, [detailsData, housingData, formData]);
 
 
-    const [active, setActive] = useState(1)
+    const [active, setActive] = useState(2)
     const [selectedCity, setSelectedCity] = useState("");
     // eslint-disable-next-line no-unused-vars
     const [selectedStates, setSelectedStates] = useState("");
+    // eslint-disable-next-line no-unused-vars
     const [selectedCountry, setSelectedCountry] = useState(''); // State to store the selected country
     // eslint-disable-next-line no-unused-vars
     const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
     // eslint-disable-next-line no-unused-vars
     const [isLoading, setIsLoading] = useState(true);
+    const [allCities, setAllCities] = useState([]);
 
 
 
-    const firstNameInput = useRef();
-    const lastNameInput = useRef();
-    const addressInput = useRef();
-    const cityInput = useRef();
-    const postalCodeInput = useRef();
-    const phoneInput = useRef();
-    const emailInput = useRef();
-    const emailConfirmationInput = useRef();
-    const passwordInput = useRef();
-    const confirmPasswordInput = useRef();
-    const yearsActiveInput = useRef();
+    // const firstNameInput = useRef();
+    // const lastNameInput = useRef();
+    // const addressInput = useRef();
+    // const cityInput = useRef();
+    // const postalCodeInput = useRef();
+    // const phoneInput = useRef();
+    // const emailInput = useRef();
+    // const emailConfirmationInput = useRef();
+    // const passwordInput = useRef();
+    // const confirmPasswordInput = useRef();
+    // const yearsActiveInput = useRef();
 
 
     var {
@@ -267,12 +296,21 @@ const CreateLandLord = () => {
     const [testFour, setTestFour] = useState(false);
     const [textValue, setTextValue] = useState(false);
 
-    const handlePasswordChange = (e) => {
-        setFormData({ ...formData, password: e.target.value })
-        checkForTextOne(e.target.value)
-        checkForTextTwo(e.target.value)
-        checkForTextThree(e.target.value)
-        checkForTextFour(e.target.value)
+    // const handlePasswordChange = (e) => {
+    //     setFormData({ ...formData, password: e.target.value })
+    //     checkForTextOne(e.target.value)
+    //     checkForTextTwo(e.target.value)
+    //     checkForTextThree(e.target.value)
+    //     checkForTextFour(e.target.value)
+    // }
+
+    const handlePasswordChange = (value) => {
+        console.log("object", value);
+        setFormData({ ...formData, password: value })
+        checkForTextOne(value)
+        checkForTextTwo(value)
+        checkForTextThree(value)
+        checkForTextFour(value)
     }
 
     const checkForTextOne = (userValue) => {
@@ -324,6 +362,7 @@ const CreateLandLord = () => {
     }
 
     const handleCheckLandLord = async () => {
+        console.log("drink in the code", formData);
         // e.preventDefault();
         try {
             if (
@@ -378,11 +417,12 @@ const CreateLandLord = () => {
             //     formData,
             // );
 
+            console.log("first..", formData)
+
             const response = await axiosPrivate.post("/account/landlord-registration", formData);
 
             setLandLoading(false);
 
-            // console.log("Landlord is rent..", response.data.data, "Loading..", landLoading);
 
             if (response?.data?.Success === true) {
                 toast.success("Landlord's account Created");
@@ -493,7 +533,7 @@ const CreateLandLord = () => {
                 const response = await fetchData();
                 setSelectedCity(response.data?.data);
                 setIsLoading(false);
-                // console.log(response.data?.data);
+                // console.log(response.data?.data, selectedCity);
                 // console.log(selectedStates);
             } catch (error) {
                 console.error(error);
@@ -527,10 +567,10 @@ const CreateLandLord = () => {
         });
     };
 
-    const handleReferenceChange = (e) => {
+    const handleReferenceChange = (value) => {
         setFormData(prevState => ({
             ...prevState,
-            discoveryMethod: e.target.value,
+            discoveryMethod: value,
         }));
     };
 
@@ -543,42 +583,64 @@ const CreateLandLord = () => {
         // console.log("king ...", functionOption, "hair..", e.target.nextSibling.textContent.trim());
     };
 
-    const handleCityChange = (event) => {
-        setSelectedCities(event.target.value);
-        let selectedValue = event.target.value === "Select a city" ? null : event.target.value;
+    const handleCityChange = (value) => {
+        setSelectedCities(value);
+        let selectedValue = value === "Select a city" ? null : value;
         setFormData(prevFormData => ({
             ...prevFormData,
             province: selectedValue
         }));
     };
 
-    const handleCountryChange = (event) => {
-        // setSelectedCities(event.target.value);
-        setSelectedCountry(event.target.value);
+
+
+    const handleCountryChange = (value) => {
+        setSelectedCountry(value);
+
+        // setallCities(selectedCity.find((country) => country.name === selectedCountry)
         setSelectedCities(''); // Clear the selected city when the country changes
-        let selectedValue = event.target.value === "Select a country" ? null : event.target.value;
+        let selectedValue = value === "Select a country" ? null : value;
         setFormData(prevFormData => ({
             ...prevFormData,
             country: selectedValue
         }));
-    };
 
-    const handleInputUser = (e) => setFormData(
-        {
-            ...formData,
-            [e.target.name]: e.target.value
+        const selectedCountryObj = selectedCity?.find((country) => country.name === value);
+
+        // console.log("first code...", selectedCity, selectedCountry, value)
+        if (selectedCountryObj) {
+            setAllCities(selectedCountryObj.states);
+            // console.log("second code...", selectedCountryObj.states, allCities)
+        } else {
+            setAllCities([]);
         }
-    );
-
-    const handleActiveUser = (event) => {
-        const { value } = event.target;
-        // console.log("all the value..", value );
-
-        setFormData(prevState => ({
-            ...prevState,
-            yearsActive: value
-        }));
     };
+
+    // useEffect(() => {
+    //     const selectedCountryObj = selectedCity?.find((country) => country.name === selectedCountry);
+    //     if (selectedCountryObj) {
+    //       setAllCities(selectedCountryObj.states);
+    //     } else {
+    //       setAllCities([]);
+    //     }
+    //   }, [selectedCountry, selectedCity]);
+
+    // const handleInputUser = (e) => setFormData(
+    //     {
+    //         ...formData,
+    //         [e.target.name]: e.target.value
+    //     }
+    // );
+
+    // const handleActiveUser = (event) => {
+    //     const { value } = event.target;
+    //     // console.log("all the value..", value );
+
+    //     setFormData(prevState => ({
+    //         ...prevState,
+    //         yearsActive: value
+    //     }));
+    // };
 
 
     // CREATE LISTING FOR THE LANDLORD
@@ -589,13 +651,13 @@ const CreateLandLord = () => {
             // Retrieve accessToken from localStorage
             const accessToken = JSON.parse(localStorage.getItem('accessToken'));
 
-    
+
             if (!accessToken) {
                 // Handle case where accessToken is not available
                 console.error('Access Token not found in localStorage');
                 return;
             }
-    
+
             // Set the headers with the accessToken
             const headers = {
                 'Authorization': `Bearer ${accessToken}`,
@@ -628,7 +690,7 @@ const CreateLandLord = () => {
                 {
                     listingId: housing?.id,
                     propertyDates: convertedDates
-                }, 
+                },
                 { headers }
             );
 
@@ -642,7 +704,7 @@ const CreateLandLord = () => {
             }
 
             // console.log("all the Listing..", response.data);
-            
+
 
         } catch (error) {
             setUserLoading(false);
@@ -651,39 +713,39 @@ const CreateLandLord = () => {
         }
     };
 
-    const handleRentUser = async() => {
+    const handleRentUser = async () => {
         try {
             // Retrieve accessToken from localStorage
             const accessToken = JSON.parse(localStorage.getItem('accessToken'));
 
             // setLandLoading(true);
             setHousingLoading(true)
-            
+
 
             console.log("landlord..", housingLoading)
 
             console.log("all the data for housing..", createListing);
-    
+
             if (!accessToken) {
                 // Handle case where accessToken is not available
                 // console.error('Access Token not found in localStorage');
                 return;
             }
-    
+
             // Set the headers with the accessToken
             const headers = {
                 'Authorization': `Bearer ${accessToken}`,
                 'Content-Type': 'application/json',
             };
-    
+
             // Make the POST request to create a listing
-            const response = await axios.post(`https://medirent-api-3gwy.onrender.com/housing/add-listing`, 
-                createListing, 
+            const response = await axios.post(`https://medirent-api-3gwy.onrender.com/housing/add-listing`,
+                createListing,
                 { headers }
             );
 
             setHousingLoading(false);
-    
+
             setHousing(response?.data?.data)
 
             // Handle the response as needed
@@ -728,7 +790,7 @@ const CreateLandLord = () => {
             };
 
             const formData = new FormData();
-            
+
             fileList.forEach((file) => {
                 // console.log("all the file..", file, index);
                 formData.append(`files`, file);
@@ -778,12 +840,17 @@ const CreateLandLord = () => {
 
     const [isToggle, setIsToggle] = useState(true);
     const changeToggle = () => setIsToggle(!isToggle);
+
+    // const [passwordToggle, setPasswordToggle] = useState(true);
+    const [confirmPasswordToggle, setConfirmPasswordToggle] = useState(true);
+    // const changePasswordToggle = () => setPasswordToggle(!passwordToggle);
+    const changeConfirmPasswordToggle = () => setConfirmPasswordToggle(!confirmPasswordToggle);
     // const [error, setError] = useState("");
 
 
     return (
-        <div className="py-0 md:mt-32 xs:mt-[4rem] bg-white">
-            <div className="flex font-medium justify-between max-w-screen-xl mx-auto">
+        <div className="py-0 md:mt-16 xs:mt-[4rem] bg-white grid md:grid-cols-4 xs:grid-cols-1">
+            {/* <div className="flex font-medium justify-between max-w-screen-xl mx-auto">
                 <div
                     className="bg-white w-full h-screen bg-HomeImage bg-cover
                         bg-center flex justify-center lg:h-[50vh] md:h-[70vh] sm:h-[80vh] xs:h-[70vh]"
@@ -792,208 +859,241 @@ const CreateLandLord = () => {
                         <p className="text-white text-4xl font-medium text-center">JOIN THE MEDIRENT COMMUNITY!</p>
                     </div>
                 </div>
+            </div> */}
+
+            <div className="md:col-1 xs:col bg-[#FCD3CD] md:flex xs:hidden flex-col ">
+
+                <div className="my-20 px-5">
+                    <div className="text-[#0E0C3D] font-semibold text-[24px] mb-5">Join Our Trusted Community of Landlords</div>
+                    <div className="text-black font-normal text-[16px]">Unlock the full potential of your property by listing with Medirent. By providing complete and accurate details, you will ensure your space is showcased to the right tenants</div>
+                </div>
+
+                <div className="px-10">
+                    <div>
+                        <img alt="" src={PhotoLandlord} className="text-[1px] text-white w-full h-full" />
+                    </div>
+                </div>
+
             </div>
 
-
-            <div className=" bg-[#dfdfdf] md:flex-1 flex-col w-full  items-center relative z-10 flex font-medium justify-between max-w-screen-xl mx-auto">
-                <div className=" w-full mt-10">
-                    <div className="w-full lg:flex xs:hidden md:hidden flex-row justify-center">
-                        <div className="flex flex-col ">
+            {/* bg-[#dfdfdf] */}
+            <div className="md:col-span-3 xs:col bg-white  flex-col w-fit items-center relative z-10 flex font-medium justify-between max-w-screen-xl mx-auto md:px-2 xs:px-0">
+                <div className=" w-fit mt-20 ">
+                    <div className="w-fit lg:flex xs:hidden md:hidden flex-row justify-center">
+                        <div className="flex flex-col pr-2">
                             <div className="flex flex-row">
 
-                                <div className={`${active > 1 ? "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-third text-white"
-                                    : "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-white text-lime-700"
+                                <div className={`${active > 1 ? "flex items-center justify-center rounded-full p-1 h-8 w-8 !bg-secondary text-white"
+                                    : "flex items-center justify-center rounded-full p-1 h-8 w-8  border-[1px] border-gray-400 !text-[#717171]"
                                     }`}>
                                     {
                                         active > 1 ?
                                             <span className="font-semibold">
-                                                <BsCheckLg />
+                                                1
                                             </span>
                                             :
-                                            <span className="font-bold text-black">
-                                                1
+                                            <span className="font-bold">
+                                                <BsCheckLg/>
                                             </span>
 
                                     }
                                 </div>
-                                <div className="flex items-center h-full">
-                                    <div
-                                        className={`${active > 1 ? "h-2 w-40 !bg-third "
-                                            : " h-2 w-40 !bg-white"
-                                            }`}
-                                    ></div>
+                                <span
+                                    className={`${active > 1 ? " !text-black px-0  md:text-[14px]  flex mt-1  "
+                                        : " !text-[#717171] md:text-[14px] "
+                                        } flex justify-center items-center px-5`}
+                                >
+                                    Registration
+                                </span>
+                                <span
+                                    className={`${active > 1 ? " !text-black px-0  md:text-xs  flex mt-1  "
+                                        : " !text-[#717171] md:text-md "
+                                        } flex justify-center items-center px-0`}
+                                >
+                                    <BsChevronRight />
+                                </span>
 
-                                </div>
+
                             </div>
-                            <span
-                                className={`${active > 1 ? " !text-third px-2  md:text-md  flex mt-1  "
-                                    : " !text-black px-2 md:text-md flex mt-1 "
-                                    }`}
-                            >
-                                Registration
-                            </span>
+
                         </div>
 
-                        <div className="flex flex-col ">
+                        <div className="flex flex-col pr-2">
                             <div className="flex flex-row">
 
-                                <div className={`${active > 2 ? "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-third text-white"
-                                    : "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-white text-lime-700"
+                                <div className={`${active > 2 ? "flex items-center justify-center rounded-full p-1 h-8 w-8 !bg-secondary text-white"
+                                    : "flex items-center justify-center rounded-full p-1 h-8 w-8  border-[1px] border-gray-400 !text-[#717171]"
                                     }`}>
                                     {
                                         active > 2 ?
                                             <span className="font-semibold">
-                                                <BsCheckLg />
+                                                2
                                             </span>
                                             :
-                                            <span className="font-bold text-black">
+                                            <span className="font-bold">
                                                 2
                                             </span>
 
                                     }
                                 </div>
-                                <div className="flex items-center h-full">
-                                    <div
-                                        className={`${active > 2 ? "h-2 w-40 !bg-third "
-                                            : " h-2 w-40 !bg-white"
-                                            }`}
-                                    ></div>
+                                <span
+                                    className={`${active > 2 ? " !text-black px-0  md:text-[14px]  flex mt-1  "
+                                        : " !text-[#717171] md:text-[14px] "
+                                        } flex justify-center items-center px-5`}
+                                >
+                                    Address
+                                </span>
+                                <span
+                                    className={`${active > 2 ? " !text-black px-0  md:text-xs  flex mt-1  "
+                                        : " !text-[#717171] md:text-md "
+                                        } flex justify-center items-center px-0`}
+                                >
+                                    <BsChevronRight />
+                                </span>
 
-                                </div>
+
                             </div>
-                            <span
-                                className={`${active > 2 ? " !text-third px-2  md:text-md  flex mt-1  "
-                                    : " !text-black px-2 md:text-md flex mt-1 "
-                                    }`}
-                            >
-                                Address
-                            </span>
+
                         </div>
 
-                        <div className="flex flex-col ">
+                        <div className="flex flex-col pr-2">
                             <div className="flex flex-row">
 
-                                <div className={`${active > 3 ? "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-third text-white"
-                                    : "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-white text-lime-700"
+                                <div className={`${active > 3 ? "flex items-center justify-center rounded-full p-1 h-8 w-8 !bg-secondary text-white"
+                                    : "flex items-center justify-center rounded-full p-1 h-8 w-8  border-[1px] border-gray-400 !text-[#717171]"
                                     }`}>
                                     {
                                         active > 3 ?
                                             <span className="font-semibold">
-                                                <BsCheckLg />
+                                                3
                                             </span>
                                             :
-                                            <span className="font-bold text-black">
+                                            <span className="font-bold">
                                                 3
                                             </span>
 
                                     }
                                 </div>
-                                <div className="flex items-center h-full">
-                                    <div
-                                        className={`${active > 3 ? "h-2 w-40 !bg-third "
-                                            : " h-2 w-40 !bg-white"
-                                            }`}
-                                    ></div>
+                                <span
+                                    className={`${active > 3 ? " !text-black px-0  md:text-[14px]  flex mt-1  "
+                                        : " !text-[#717171] md:text-[14px] "
+                                        } flex justify-center items-center px-5`}
+                                >
+                                    Details
+                                </span>
+                                <span
+                                    className={`${active > 3 ? " !text-black px-0  md:text-xs  flex mt-1  "
+                                        : " !text-[#717171] md:text-md "
+                                        } flex justify-center items-center px-0`}
+                                >
+                                    <BsChevronRight />
+                                </span>
 
-                                </div>
+
                             </div>
-                            <span
-                                className={`${active > 3 ? " !text-third px-2  md:text-md  flex mt-1  "
-                                    : " !text-black px-2 md:text-md flex mt-1 "
-                                    }`}
-                            >
-                                Details
-                            </span>
+
                         </div>
 
-                        <div className="flex flex-col ">
+                        <div className="flex flex-col pr-2">
                             <div className="flex flex-row">
 
-                                <div className={`${active > 4 ? "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-third text-white"
-                                    : "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-white text-lime-700"
+                                <div className={`${active > 4 ? "flex items-center justify-center rounded-full p-1 h-8 w-8 !bg-secondary text-white"
+                                    : "flex items-center justify-center rounded-full p-1 h-8 w-8  border-[1px] border-gray-400 !text-[#717171]"
                                     }`}>
                                     {
                                         active > 4 ?
                                             <span className="font-semibold">
-                                                <BsCheckLg />
+                                                4
                                             </span>
                                             :
-                                            <span className="font-bold text-black">
+                                            <span className="font-bold">
                                                 4
                                             </span>
 
                                     }
                                 </div>
-                                <div className="flex items-center h-full">
-                                    <div
-                                        className={`${active > 4 ? "h-2 w-40 !bg-third "
-                                            : " h-2 w-40 !bg-white"
-                                            }`}
-                                    ></div>
+                                <span
+                                    className={`${active > 4 ? " !text-black px-0  md:text-[14px]  flex mt-1  "
+                                        : " !text-[#717171] md:text-[14px] "
+                                        } flex justify-center items-center px-5`}
+                                >
+                                    Photos
+                                </span>
+                                <span
+                                    className={`${active > 4 ? " !text-black px-0  md:text-xs  flex mt-1  "
+                                        : " !text-[#717171] md:text-md "
+                                        } flex justify-center items-center px-0`}
+                                >
+                                    <BsChevronRight />
+                                </span>
 
-                                </div>
+
                             </div>
-                            <span
-                                className={`${active > 4 ? " !text-third px-2  md:text-md  flex mt-1  "
-                                    : " !text-black px-2 md:text-md flex mt-1 "
-                                    }`}
-                            >
-                                Photos
-                            </span>
+
                         </div>
 
-                        <div className="flex flex-col ">
+                        <div className="flex flex-col pr-2">
                             <div className="flex flex-row">
 
-                                <div className={`${active > 5 ? "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-third text-white"
-                                    : "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-white text-lime-700"
+                                <div className={`${active > 5 ? "flex items-center justify-center rounded-full p-1 h-8 w-8 !bg-secondary text-white"
+                                    : "flex items-center justify-center rounded-full p-1 h-8 w-8  border-[1px] border-gray-400 !text-[#717171]"
                                     }`}>
                                     {
                                         active > 5 ?
                                             <span className="font-semibold">
-                                                <BsCheckLg />
+                                                5
                                             </span>
                                             :
-                                            <span className="font-bold text-black">
+                                            <span className="font-bold">
                                                 5
                                             </span>
 
                                     }
                                 </div>
-                                {/* <div className="flex items-center h-full">
-                                    <div
-                                        className={`${active > 5 ? "h-2 w-40 !bg-third "
-                                            : " h-2 w-40 !bg-white"
-                                            }`}
-                                    ></div>
+                                <span
+                                    className={`${active > 5 ? " !text-black px-0  md:text-[14px]  flex mt-1  "
+                                        : " !text-[#717171] md:text-[14px] "
+                                        } flex justify-center items-center px-5`}
+                                >
+                                    Availability
+                                </span>
+                                {/* <span
+                                    className={`${active > 5 ? " !text-black px-0  md:text-xs  flex mt-1  "
+                                        : " !text-[#717171] md:text-md "
+                                        } flex justify-center items-center px-0`}
+                                >
+                                    <BsChevronRight />
+                                </span> */}
 
-                                </div> */}
+
                             </div>
-                            <span
-                                className={`${active > 5 ? " !text-third px-2  md:text-md  flex mt-1  "
-                                    : " !text-black px-2 md:text-md flex mt-1 "
-                                    }`}
-                            >
-                                Availiability
-                            </span>
+
                         </div>
                     </div>
 
                     <div className="w-full md:flex xs:flex lg:hidden flex-row justify-center">
-                        <div className="bg-third rounded-full px-10 py-10 text-white text-2xl font-bold">
-                            {active}/5
+                        <div className="bg-secondary rounded-full px-10 py-10 text-white text-2xl font-bold">
+                            {active - 1}/5
 
                         </div>
                     </div>
                 </div>
 
+
+
                 <div className="flex items-center justify-center lg:w-full md:w-full">
                     <div className="w-full flex flex-col p-0 max-w-4xl px-2">
-                        <div className="w-full flex-1 mt-4">
+                        <div className="w-full flex mt-10">
+                            <div className="text-[#717171] text-[16px] font-[400] my-5">
+                                Step {active - 1}/5
+
+                            </div>
+                        </div>
+                        <div className="w-full flex-1 mt-0">
                             <div className="">
-                                {(active === 0 || active <= 1) && (
+                                {(active === 1 || active <= 2) && (
                                     <div className="">
-                                        <div className="my-10 text-center">
+                                        {/* <div className="my-10 text-center">
                                             <h1 className="md:text-3xl xs:text-2xl text-center text-black font-medium">
                                                 Create your <b>landlord account</b> here
                                             </h1>
@@ -1012,72 +1112,281 @@ const CreateLandLord = () => {
                                             </div>
 
                                             <div className="text-center my-6 font-base md:text-3xl xs:text-xl"> Contact information</div>
+                                        </div> */}
+
+                                        <div className="mt-0 text-start">
+
+                                            <h1 className="md:text-[24px] xs:text-[20px] text-start text-black font-semibold">
+                                                Let’s start with your plan and details
+                                            </h1>
+
+                                            <div className="mt-1 font-normal">
+
+                                                <p className="text-[#717171] text-start text-[12px]">
+                                                    Please select the plan and fill the details below along with your contact details
+                                                </p>
+
+
+                                            </div>
+
+                                            <div className="text-start my-6 font-semibold md:text-[16px] xs:text-[13px]">Let’s start with your plan and details</div>
                                         </div>
 
                                         {/* <div className="text-center my-6 font-base md:text-3xl xs:text-xl"> Contact information</div> */}
 
-                                        <div className="relative my-10">
-                                            <input
-                                                id="firstName"
-                                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                                type="text"
-                                                ref={firstNameInput}
-                                                name="firstName"
-                                                value={firstName}
-                                                onChange={handleInputUser}
-                                                placeholder=" "
-                                            />
-                                            <label
-                                                htmlFor="text"
-                                                className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                                            >
-                                                First Name
-                                            </label>
+                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                <CustomInputs
+                                                    id="firstname"
+                                                    type='text'
+                                                    required
+                                                    // setValue={setFormData}
+                                                    value={firstName}
+                                                    showRequirement={true}
+                                                    onChange={(value) => setFormData(prevFormData => ({
+                                                        ...prevFormData,
+                                                        firstName: value
+                                                    }))}
+                                                    label={'First Name'}
+                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                />
+                                            </div>
+                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                <CustomInputs
+                                                    id="lastname"
+                                                    type='text'
+                                                    required
+                                                    // setValue={setFormData}
+                                                    value={lastName}
+                                                    showRequirement={true}
+                                                    onChange={(value) => setFormData(prevFormData => ({
+                                                        ...prevFormData,
+                                                        lastName: value
+                                                    }))}
+
+                                                    label={'Last Name'}
+                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                />
+                                            </div>
                                         </div>
 
-                                        <div className="relative my-10">
-                                            <input
-                                                id="lastName"
-                                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                                type="text"
-                                                ref={lastNameInput}
-                                                name="lastName"
-                                                value={lastName}
-                                                onChange={handleInputUser}
-                                                placeholder=" "
-                                            />
-                                            <label
-                                                htmlFor="text"
-                                                className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                                            >
-                                                Last Name
-                                            </label>
+                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                <CustomInputs
+                                                    id="email"
+                                                    type='email'
+                                                    required
+                                                    // setValue={setFormData}
+                                                    value={email}
+                                                    showRequirement={true}
+                                                    onChange={(value) => setFormData(prevFormData => ({
+                                                        ...prevFormData,
+                                                        email: value
+                                                    }))}
+
+                                                    label={'Email'}
+                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                />
+                                            </div>
+                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                <CustomInputs
+                                                    id="emailConfirmation"
+                                                    type='text'
+                                                    required
+                                                    // setValue={setFormData}
+                                                    value={emailConfirmation}
+                                                    showRequirement={true}
+                                                    onChange={(value) => setFormData(prevFormData => ({
+                                                        ...prevFormData,
+                                                        emailConfirmation: value
+                                                    }))}
+
+                                                    label={'Re-enter Email Address'}
+                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                />
+                                            </div>
                                         </div>
 
-                                        <div className="relative my-10">
-                                            <input
-                                                id="yearsActive"
-                                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                                type="number"
-                                                ref={yearsActiveInput}
-                                                name="yearsActive"
-                                                value={yearsActive}
-                                                onChange={handleActiveUser}
-                                                placeholder=" "
-                                            />
-                                            <label
-                                                htmlFor="text"
-                                                className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                                            >
-                                                Years Of Active Experience
-                                            </label>
+                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                <CustomInputs
+                                                    id="phone"
+                                                    type='text'
+                                                    required
+                                                    setValue={setFormData}
+                                                    value={phone}
+                                                    label={'Phone Number'}
+                                                    onChange={(value) => setFormData(prevFormData => ({
+                                                        ...prevFormData,
+                                                        phone: value
+                                                    }))}
+                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                />
+                                            </div>
+                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                <CustomInputs
+                                                    id="yearsActive"
+                                                    type='number'
+                                                    required
+                                                    // setValue={setFormData}
+                                                    value={yearsActive}
+                                                    onChange={(value) => setFormData(prevFormData => ({
+                                                        ...prevFormData,
+                                                        yearsActive: value
+
+                                                    }))}
+                                                    label={'Years Of Active Experience'}
+                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                />
+                                            </div>
                                         </div>
+
+                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+
+                                                <CustomSelect
+                                                    wrapperClass=' !h-[58px] !w-full !px-[12px]'
+                                                    labelClass=' text-black w-full text-gray-500'
+                                                    optionsClass='!text-[0.875rem] !h-[48px] !w-[100%] !text-black'
+                                                    optionWrapperClass=' w-[100%] !w-full border-[1px] shadow-lg border-gray-200 xl:left-[0px] !left-[0px] !h-[400px] !bottom-[-410px] overflow-y-auto '
+                                                    required={false}
+                                                    label='Select a Country'
+                                                    setSelected={handleCountryChange}
+                                                    selected={country}
+                                                    options={selectedCity}
+                                                    otherOptions={true}
+                                                />
+                                            </div>
+                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                <CustomSelect
+                                                    wrapperClass=' !h-[58px] !w-full !px-[12px]'
+                                                    labelClass=' text-black w-full text-gray-500'
+                                                    optionsClass='!text-[0.875rem] !h-[48px] !w-[100%] !text-black'
+                                                    optionWrapperClass=' w-[100%] !w-full border-[1px] shadow-lg border-gray-200 xl:left-[0px] !left-[0px] !h-[400px] !bottom-[-410px] overflow-y-auto '
+                                                    required={false}
+                                                    label='Select a state'
+                                                    setSelected={handleCityChange}
+                                                    selected={province}
+                                                    options={allCities}
+                                                    otherOptions={true}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                <CustomInputs
+                                                    id="postalCode"
+                                                    type='text'
+                                                    required
+                                                    // setValue={setFormData}
+                                                    value={postalCode}
+                                                    onChange={(value) => setFormData(prevFormData => ({
+                                                        ...prevFormData,
+                                                        postalCode: value
+                                                    }))}
+                                                    label={'Postal Code'}
+                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                />
+                                            </div>
+                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                <CustomInputs
+                                                    id="city"
+                                                    type='text'
+                                                    required
+                                                    // setValue={setFormData}
+                                                    value={city}
+                                                    onChange={(value) => setFormData(prevFormData => ({
+                                                        ...prevFormData,
+                                                        city: value
+                                                    }))}
+                                                    label={'City'}
+                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                            <div className={`form-group flex w-[100%] text-[1rem] my-0 flex-col`}>
+                                                <CustomInputs
+                                                    changeToggle={changeToggle}
+                                                    showToggle={true}
+                                                    isToggle={isToggle}
+                                                    id='password'
+                                                    type={`${isToggle ? 'text' : 'password'}`}
+                                                    label='Password'
+                                                    className='mb-[0px]'
+                                                    // onChange={(value) => setFormData(prevFormData => ({
+                                                    //     ...prevFormData,
+                                                    //     password: value
+                                                    // }))}
+                                                    onChange={handlePasswordChange}
+                                                />
+                                                <div className="flex justify-between flex-wrap mt-2">
+                                                    <div className="ml-auto mt-2 w-min">
+                                                        <div className="password-strength">
+                                                            <div className="strength-bars flex items-center justify-center gap-1">
+                                                                <div className={`${testOne ? "bg-[#dc6969]" : "bg-[#b6a7a7]"} bar bar--weak filled h-[4px] w-6 rounded-l block`}>
+                                                                </div>
+
+                                                                <div className={`${testTwo ? "bg-[#ffe48c]" : "bg-[#b6a7a7]"} bar bar--normal filled h-[4px] w-6 rounded-l block`}>
+                                                                </div>
+
+                                                                <div className={`${testThree ? "bg-[#46c28e]" : "bg-[#b6a7a7]"} bar bar--strong filled h-[4px] w-6 rounded-l block`}>
+                                                                </div>
+
+                                                                <div className={`${testFour ? "bg-[#208058]" : "bg-[#b6a7a7]"} bar bar--stronger filled h-[4px] w-6 rounded-l block`}>
+                                                                </div>
+                                                                {/* <div className="bar bar--stronger bg-[#e0e0e0] h-[4px] w-6 rounded-l block"></div> */}
+
+                                                            </div>
+                                                            <p className="strength-text text-gray-600 text-xs whitespace-nowrap">
+                                                                {text}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                <CustomInputs
+                                                    changeToggle={changeConfirmPasswordToggle}
+                                                    showToggle={true}
+                                                    isToggle={confirmPasswordToggle}
+                                                    id='password'
+                                                    type={`${confirmPasswordToggle ? 'text' : 'password'}`}
+                                                    label='Confirm Password'
+                                                    onChange={(value) => setFormData(prevFormData => ({
+                                                        ...prevFormData,
+                                                        confirmPassword: value
+                                                    }))}
+                                                    className='mb-[32px]'
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                <CustomInputs
+                                                    id="address"
+                                                    type='text'
+                                                    required
+                                                    // setValue={setFormData}
+                                                    value={address}
+                                                    showRequirement={true}
+                                                    onChange={(value) => setFormData(prevFormData => ({
+                                                        ...prevFormData,
+                                                        address: value
+                                                    }))}
+                                                    label={'address'}
+                                                    className='px-0 mb-[5px] md:w-[370px] xs:w-full text-[16px]'
+                                                />
+                                            </div>
+
+                                        </div>
+
 
                                         <div className="text-left text-gray-700">
-                                            <h1 className="mb-0 p-0 text-2xl text-black">Functions</h1>
-
-
-
+                                            <h1 className="mb-0 p-0 text-xl text-black">Listing Type</h1>
 
                                             <div className="flex items-center my-7">
                                                 <input
@@ -1146,64 +1455,8 @@ const CreateLandLord = () => {
 
                                         </div>
 
-                                        <div className="relative my-10">
-                                            <input
-                                                id="email"
-                                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                                type="text"
-                                                ref={emailInput}
-                                                name="email"
-                                                value={email}
-                                                onChange={handleInputUser}
-                                                placeholder=""
-                                            />
-                                            <label
-                                                htmlFor="text "
-                                                className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                                            >
-                                                E-mail
-                                            </label>
-                                        </div>
 
-                                        <div className="relative my-10">
-                                            <input
-                                                id="emailConfirmation"
-                                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                                type="email"
-                                                ref={emailConfirmationInput}
-                                                name="emailConfirmation"
-                                                value={emailConfirmation}
-                                                onChange={handleInputUser}
-                                                placeholder=""
-                                            />
-                                            <label
-                                                htmlFor="email"
-                                                className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                                            >
-                                                Email Confirmation
-                                            </label>
-                                        </div>
-
-                                        <div className="relative my-10">
-                                            <input
-                                                id="address"
-                                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                                type="text"
-                                                ref={addressInput}
-                                                name="address"
-                                                value={address}
-                                                onChange={handleInputUser}
-                                                placeholder=" "
-                                            />
-                                            <label
-                                                htmlFor="text"
-                                                className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                                            >
-                                                Address
-                                            </label>
-                                        </div>
-
-                                        <div className="">
+                                        {/* <div className="">
                                             <div >
                                                 <div className="relative my-10">
                                                     {selectedCity ? (
@@ -1254,9 +1507,9 @@ const CreateLandLord = () => {
                                                     </select>
                                                 )}
                                             </div>
-                                        </div>
+                                        </div> */}
 
-                                        <div className="relative my-10">
+                                        {/* <div className="relative my-10">
                                             <input
                                                 id="city"
                                                 className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
@@ -1312,6 +1565,7 @@ const CreateLandLord = () => {
 
                                             >Phone</label>
                                         </div>
+
                                         <div className="group relative">
                                             <input
                                                 id="password"
@@ -1389,34 +1643,11 @@ const CreateLandLord = () => {
                                                     </div>
                                                 )}
                                             </div>
-                                        </div>
+                                        </div> */}
 
-                                        <div className="flex justify-between flex-wrap ">
-                                            <div className="ml-auto mt-2 w-min">
-                                                <div className="password-strength">
-                                                    <div className="strength-bars flex items-center justify-center gap-1">
-                                                        <div className={`${testOne ? "bg-[#dc6969]" : "bg-[#b6a7a7]"} bar bar--weak filled h-[4px] w-6 rounded-l block`}>
-                                                        </div>
 
-                                                        <div className={`${testTwo ? "bg-[#ffe48c]" : "bg-[#b6a7a7]"} bar bar--normal filled h-[4px] w-6 rounded-l block`}>
-                                                        </div>
 
-                                                        <div className={`${testThree ? "bg-[#46c28e]" : "bg-[#b6a7a7]"} bar bar--strong filled h-[4px] w-6 rounded-l block`}>
-                                                        </div>
-
-                                                        <div className={`${testFour ? "bg-[#208058]" : "bg-[#b6a7a7]"} bar bar--stronger filled h-[4px] w-6 rounded-l block`}>
-                                                        </div>
-                                                        {/* <div className="bar bar--stronger bg-[#e0e0e0] h-[4px] w-6 rounded-l block"></div> */}
-
-                                                    </div>
-                                                    <p className="strength-text text-gray-600 text-xs whitespace-nowrap">
-                                                        {text}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="group relative my-10">
+                                        {/* <div className="group relative my-10">
                                             <input
                                                 id="confirmPassword"
                                                 className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
@@ -1495,12 +1726,12 @@ const CreateLandLord = () => {
                                                     </div>
                                                 )}
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                         <div className="mb-8 text-left">
                                             <h1 className="mb-3 text-sm">How did you discover Medirent?</h1>
 
-                                            <select
+                                            {/* <select
                                                 onChange={handleReferenceChange}
                                                 value={discoveryMethod}
                                                 className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md "
@@ -1516,10 +1747,51 @@ const CreateLandLord = () => {
                                                     Journal/medical affiliated website
                                                 </option>
                                                 <option value="other">other</option>
-                                            </select>
+                                            </select> */}
+
+                                            <CustomSelect
+                                                wrapperClass='!border-[0.5px] !border-gray !h-[58px] md:w-[400px] xs:w-full'
+                                                labelClass='!text-[0.875rem] text-black'
+                                                optionsClass='!text-[0.875rem] !h-[48px] !w-[100%]'
+                                                optionWrapperClass=' border-[1px] border-gray-400 w-[100%] !w-[300px] xl:left-[0px] !left-[0px] !h-[400px] !bottom-[-410px] overflow-y-auto'
+
+                                                label='Set Discovery Method'
+                                                setSelected={handleReferenceChange}
+                                                selected={discoveryMethod}
+                                                options={[
+                                                    {
+                                                        label: 'Facebook/socialmedia',
+                                                        value: 'Facebook/socialmedia'
+                                                    },
+                                                    {
+                                                        label: 'Medical school admin recommended',
+                                                        value: 'Medical school admin recommended'
+                                                    },
+                                                    {
+                                                        label: 'Friend/colleague',
+                                                        value: 'Friend/colleague'
+                                                    },
+                                                    {
+                                                        label: 'Real Estate Agent',
+                                                        value: 'Real Estate Agent'
+                                                    },
+                                                    {
+                                                        label: 'Internet browsing',
+                                                        value: 'Internet browsing'
+                                                    },
+                                                    {
+                                                        label: 'Journal/medical affiliated website',
+                                                        value: 'Journal/medical affiliated website'
+                                                    },
+                                                    {
+                                                        label: 'Others',
+                                                        value: 'Others'
+                                                    }
+                                                ]}
+                                            />
                                         </div>
 
-                                        <div className="mb-8 text-left text-xl">
+                                        <div className="mb-8 text-left text-md">
                                             <input
                                                 type="checkbox"
                                                 id="receiveNewsletter"
@@ -1536,12 +1808,12 @@ const CreateLandLord = () => {
                                             {textValue}
                                         </div>
 
-                                        <div className="flex justify-between  pb-10">
+                                        <div className="flex justify-end w-full pb-10">
                                             <div className="flex justify-end z-10 relative mt-4 ">
-                                        
+
                                                 <button
                                                     onClick={handleProviderOne}
-                                                    className="flex justify-end z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-4 xs:px-10"
+                                                    className="flex justify-end items-center z-10 relative bg-[#F97262] text-white md:text-sm rounded-full md:py-3 md:px-12 xs:text-[15px] xs:py-1 xs:px-8"
                                                     disabled={landLoading} // Disable the button when userLoading is true
                                                 >
                                                     {landLoading ? ( // Display spinner if userLoading is true
@@ -1552,7 +1824,7 @@ const CreateLandLord = () => {
 
                                                         </div>
                                                     ) : (
-                                                        <span className="">Next Step</span> // Show the "Submit" text when isLoading is false
+                                                        <span className="">Next</span> // Show the "Submit" text when isLoading is false
                                                     )}
                                                 </button>
                                             </div>
@@ -1560,7 +1832,7 @@ const CreateLandLord = () => {
                                     </div>
                                 )}
 
-                                {(active > 1 && active <= 2) && (
+                                {(active > 2 && active <= 3) && (
                                     <Address
                                         active={active}
                                         setActive={setActive}
@@ -1569,7 +1841,7 @@ const CreateLandLord = () => {
                                     />
                                 )}
 
-                                {(active > 2 && active <= 3) && (
+                                {(active > 3 && active <= 4) && (
                                     <HousingDetails
                                         active={active}
                                         setActive={setActive}
@@ -1578,11 +1850,11 @@ const CreateLandLord = () => {
                                         handleRentUser={handleRentUser}
                                         housingLoading={housingLoading}
                                         setHousingLoading={setHousingLoading} // Pass setHousingLoading here
-                                        // updateHousingLoading={(loading) => setHousingLoading(loading)} // Pass a callback function to update housingLoading
+                                    // updateHousingLoading={(loading) => setHousingLoading(loading)} // Pass a callback function to update housingLoading
                                     />
                                 )}
 
-                                {(active > 3 && active <= 4) && (
+                                {(active > 4 && active <= 5) && (
                                     <Photo
                                         active={active}
                                         setActive={setActive}
@@ -1595,7 +1867,7 @@ const CreateLandLord = () => {
                                     />
                                 )}
 
-                                {(active > 4 && active <= 5) && (
+                                {(active > 5 && active <= 6) && (
                                     <AvailabilityLandlord
                                         active={active}
                                         setActive={setActive}

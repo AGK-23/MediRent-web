@@ -51,9 +51,12 @@ const AvailabilityModal = ({ availability, onClose }) => {
                                     id="fullname"
                                     type='text'
                                     required
-                                    setValue={setFormData}
+                                    // setValue={setFormData}
                                     value={fullname}
-
+                                    onChange={(value) => setFormData(prevFormData => ({
+                                        ...prevFormData,
+                                        fullname: value
+                                    }))}
                                     label={'FullName'}
                                     className='px-0 mb-[14px] md:w-[400px] xs:w-full text-[16px]'
                                 />
@@ -64,9 +67,12 @@ const AvailabilityModal = ({ availability, onClose }) => {
                                     id="email"
                                     type='email'
                                     required
-                                    setValue={setFormData}
+                                    // setValue={setFormData}
                                     value={email}
-
+                                    onChange={(value) => setFormData(prevFormData => ({
+                                        ...prevFormData,
+                                        email: value
+                                    }))}
                                     label={'Email Address'}
                                     className='px-0 mb-[14px] md:w-[400px] xs:w-full text-[16px]'
                                 />
@@ -78,9 +84,12 @@ const AvailabilityModal = ({ availability, onClose }) => {
                                     id="phone"
                                     type='text'
                                     required
-                                    setValue={setFormData}
+                                    // setValue={setFormData}
                                     value={phone}
-
+                                    onChange={(value) => setFormData(prevFormData => ({
+                                        ...prevFormData,
+                                        phone: value
+                                    }))}
                                     label={'Phone Number'}
                                     className='px-0 mb-[14px] md:w-[400px] xs:w-full text-[16px]'
                                 />
@@ -93,10 +102,9 @@ const AvailabilityModal = ({ availability, onClose }) => {
                                     type='text'
                                     required
                                     inputType="textarea"
-                                    setValue={setFormData}
+                                    // setValue={setFormData}
                                     value={address}
                                     disabled={true}
-
                                     label={''}
                                     className='px-0 mb-[14px] md:w-[400px] xs:w-full text-[16px] !h-[100px] text-gray-500'
                                 />

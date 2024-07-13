@@ -14,7 +14,8 @@ const CustomSelect = ({
     optionWrapperClass,
     optionsClass,
     labelClass,
-    required,
+    // required,
+    otherOptions = false
 }) => {
     const [showOptions, setShowOptions] = useState(false);
 
@@ -50,16 +51,42 @@ const CustomSelect = ({
                 : ""
                 } text-gray relative cursor-pointer flex items-center justify-between w-[100%] bg-[#F6F6F6] px-[18px] h-[58px] rounded-[10px] select ${wrapperClass}`}
         >
-            <div className={`text-[1rem] ${labelClass} ${selected ? "!text-black" : ""}`}>
+            {/* <div className={`text-[1rem] ${labelClass} ${selected ? "!text-black" : ""}`}>
                 {selected ? options.find((o) => o.value === selected)?.label : label}
-            </div>
+            </div> */}
 
-            <input
-                required={required}
-                value={selected}
-                className="w-[1px] h-[1px]"
-                defaultValue={""}
-            />
+            {
+                (otherOptions && !selected) && (
+                    <div className={`text-[1rem] ${labelClass} ${selected ? "!text-black" : ""}`}>
+                        {selected ? options.find((o) => o.value === selected)?.label : label}
+                    </div>
+                )
+            }
+
+            {
+                (!otherOptions) && (
+                    <div className={`text-[1rem] ${labelClass} ${selected ? "!text-black" : ""}`}>
+                        {selected ? options.find((o) => o.value === selected)?.label : label}
+                    </div>
+                )
+            }
+
+            {
+                (otherOptions) && (
+                    <div>{selected}</div>
+                )
+            }
+
+            {/* {
+                (!otherOptions) && (
+                    <input
+                        required={required}
+                        value={selected}
+                        className="w-[1px] h-[1px]"
+                        defaultValue={""}
+                    />
+                )
+            } */}
 
             <img
                 src={ArrowDown}
@@ -73,27 +100,57 @@ const CustomSelect = ({
             {showOptions &&
                 <div
                     className={`transition-all ease-in-out duration-300 pt-[10px] pb-[10px] z-[300] overflow-y-auto options absolute w-[100%] min-h-[60px] rounded-[10px] left-[0] 
-                    ${options?.length > 2 ? 'bottom-[-230px] h-[230px]' 
-                    : options?.length > 0 ? 'bottom-[-180px] h-[180px]' 
-                    : 'bottom-[-70px] h-[70px]'}  
+                    ${options?.length > 2 ? 'bottom-[-230px] h-[230px]'
+                            : options?.length > 0 ? 'bottom-[-180px] h-[180px]'
+                                : 'bottom-[-70px] h-[70px]'}  
                     bg-white ${optionWrapperClass}`}
-                >
-                    <div className="relative">
 
-                        {options?.length ? options.map(({ label, value }, index) => (
-                            <button
-                                type="button"
-                                onClick={(e) => {
-                                    e.stopPropagation()
-                                    console.log("HERE AND HERE")
-                                    setSelected(value)
-                                    toggleOptions()
-                                }}
-                                key={index} className={`transition-all ease-in-out duration-300 hover:bg-primary hover:text-white h-[58px] w-[100%] truncate flex items-center px-[18px] text-[1rem] font-[500] text-[#292D32] ${selected === value ? 'bg-primary !text-white' : ''} ${optionsClass}`}>
-                                <span className="!text-left w-[100%] truncate">{label}</span>
-                            </button>
-                        )) : <span className="px-[18px] text-[1rem] font-[500] text-[#292D32]">No Data</span>}
-                    </div>
+                >
+                    {
+                        (otherOptions) && (
+                            <div className="relative">
+                                {options?.length ? (
+                                    options.map(({ name }, index) => (
+                                        <button
+                                            type="button"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setSelected(name);
+                                                toggleOptions();
+                                            }}
+                                            key={index}
+                                            className={`transition-all ease-in-out duration-300 hover:bg-primary hover:text-white h-[58px] w-[100%] truncate flex items-center px-[18px] text-[1rem] font-[500] text-[#292D32] ${selected === name ? 'bg-primary !text-white' : ''} ${optionsClass}`}
+                                        >
+                                            <span className="!text-left w-[100%] truncate">{name}</span>
+                                        </button>
+                                    ))
+                                ) : (
+                                    <span className="px-[18px] text-[1rem] font-[500] text-[#292D32]">No Data</span>
+                                )}
+                            </div>
+                        )
+                    }
+
+                    {
+                        (!otherOptions) && (
+                            <div className="relative">
+
+                                {options?.length ? options.map(({ label, value }, index) => (
+                                    <button
+                                        type="button"
+                                        onClick={(e) => {
+                                            e.stopPropagation()
+                                            console.log("HERE AND HERE")
+                                            setSelected(value)
+                                            toggleOptions()
+                                        }}
+                                        key={index} className={`transition-all ease-in-out duration-300 hover:bg-primary hover:text-white h-[58px] w-[100%] truncate flex items-center px-[18px] text-[1rem] font-[500] text-[#292D32] ${selected === value ? 'bg-primary !text-white' : ''} ${optionsClass}`}>
+                                        <span className="!text-left w-[100%] truncate">{label}</span>
+                                    </button>
+                                )) : <span className="px-[18px] text-[1rem] font-[500] text-[#292D32]">No Data</span>}
+                            </div>
+                        )
+                    }
                 </div>}
         </div>
     );

@@ -1,19 +1,22 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 // import CurrencySelect from '../../../registration/Currency.jsx';
 import axios from 'axios';
 import { toast } from "react-toastify";
 import Spinner from "../../../assets/svg/Spinner.svg"
+import CustomInputs from "../../../components/Custom-components/CustomInputs";
+import CustomSelect from "../../../components/Custom-components/Custom-Select";
+
 
 const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handleRentUser, housingLoading, setHousingLoading }) => {
 
-    const dailyRentInput = useRef();
-    const weeklyRentInput = useRef();
-    const monthlyRentInput = useRef();
-    const numberOfBedRoomInput = useRef();
-    const numberOfBathRoomInput = useRef();
-    const licenseNumberInput = useRef();
+    // const dailyRentInput = useRef();
+    // const weeklyRentInput = useRef();
+    // const monthlyRentInput = useRef();
+    // const numberOfBedRoomInput = useRef();
+    // const numberOfBathRoomInput = useRef();
+    // const licenseNumberInput = useRef();
 
     // THIRD STATE IN THE CODE 
     // const [detailsData, setDetailsData] = useState({
@@ -32,33 +35,32 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
     // });
 
     var {
-        termOption,
         designOption,
-        dailyRent,
-        weeklyRent,
-        monthlyRent,
         numberOfBedRoom,
         numberOfBathRoom,
-        licenseNumber,
+        numberOfKitchen,
+        price,
+        buildYear,
+        propertySize,
+        area,
+        starRating,
         propertyType,
         description,
-        currency,
         amenitiesOption
     } = detailsData;
 
     const handleCheckHousingDetails = async () => {
         if (
-            !termOption ||
-            !designOption ||
-            !dailyRent ||
-            !weeklyRent ||
-            !monthlyRent ||
+            
             !numberOfBedRoom ||
             !numberOfBathRoom ||
-            !licenseNumber ||
+            !numberOfKitchen ||
+            !price ||
+            !buildYear ||
+            !propertySize ||
+            !area ||
             !propertyType ||
             !description ||
-            !currency ||
             amenitiesOption.length === 0
         ) {
             toast.warning('Please fill in all required fields.');
@@ -66,10 +68,10 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
         }
         // setActive(4)
 
-        
-        
+
+
         // setHousingLoading(true);
-        
+
         console.log("all the details..", housingLoading)
         try {
             // Call handleRentUser function from props
@@ -144,28 +146,17 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
         });
     };
 
-    const handleCurrencyChange = (e) => {
+    // const handleCurrencyChange = (e) => {
+    //     setDetailsData(prevState => ({
+    //         ...prevState,
+    //         currency: e.target.value,
+    //     }));
+    // };
+    const handlePropertyType = (value) => {
+        // console.log("value", value);
         setDetailsData(prevState => ({
             ...prevState,
-            currency: e.target.value,
-        }));
-    };
-
-    const handleOptionChange = (option) => {
-        // setSelectedOption(option);
-
-        setDetailsData(prevState => ({
-            ...prevState,
-            termOption: option,
-        }));
-    };
-
-    const handleRadioChange = (option) => {
-        // setSelectedOption(option);
-
-        setDetailsData(prevState => ({
-            ...prevState,
-            designOption: option,
+            propertyType: value,
         }));
     };
 
@@ -177,100 +168,83 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
         setActive(active - 1);
     };
 
-
-
-    const handleReferenceChange = (e) => {
-        setDetailsData(prevState => ({
-            ...prevState,
-            propertyType: e.target.value,
-        }));
-    };
-
-    const handleDetailsUser = (e) => setDetailsData(
-        {
-            ...detailsData,
-            [e.target.name]: e.target.value
-        }
-    );
-
-    const handleTextareaChange = (e) => setDetailsData(
-        {
-            ...detailsData,
-            description: e.target.value
-        }
-    );
-
-    const handleDailyUser = (event) => {
-        const { value } = event.target;
-        // console.log("all the value..", value );
-
-        setDetailsData(prevState => ({
-            ...prevState,
-            dailyRent: value
-        }));
-    };
-
-    const handleWeeklyUser = (event) => {
-        const { value } = event.target;
-        // console.log("value..", value );
-
-        setDetailsData(prevState => ({
-            ...prevState,
-            weeklyRent: value
-        }));
-    };
-
-    const handleMonthlyUser = (event) => {
-        const { value } = event.target;
-        // console.log("the value..", value );
-
-        setDetailsData(prevState => ({
-            ...prevState,
-            monthlyRent: value
-        }));
-    };
-
-    const handleBedRoomUser = (event) => {
-        const { value } = event.target;
-        // console.log("weekly..", value );
-
+    const handleBedRoomUser = (value) => {
         setDetailsData({
             ...detailsData,
             numberOfBedRoom: value
         });
-        // setDetailsData(prevState => ({
-        //     ...prevState,
-        //     [name]: value
-        // }));
     };
 
-    const handleBathUser = (event) => {
-        const { value } = event.target;
-        // console.log("weekly..", value );
-
+    const handleBathUser = (value) => {
         setDetailsData({
             ...detailsData,
             numberOfBathRoom: value
         });
-        // setDetailsData(prevState => ({
-        //     ...prevState,
-        //     [name]: value
-        // }));
     };
+
+    const handleKitchenUser = (value) => {
+        setDetailsData({
+            ...detailsData,
+            numberOfKitchen: value
+        });
+    };
+
+    const handlePriceUser = (value) => {
+        setDetailsData({
+            ...detailsData,
+            price: value
+        });
+    };
+
+    const handleBuildYearUser = (value) => {
+        setDetailsData({
+            ...detailsData,
+            buildYear: value
+        });
+    };
+
+    const handlePropertySizeUser = (value) => {
+        setDetailsData({
+            ...detailsData,
+            propertySize: value
+        });
+    };
+
+    const handleAreaUser = (value) => {
+        setDetailsData({
+            ...detailsData,
+            area: value
+        });
+    };
+
+    const handleDescriptionUser = (value) => {
+
+        // console.log("description..", value);
+        setDetailsData({
+            ...detailsData,
+            description: value
+        });
+    };
+
+    
 
 
     return (
         <div>
-            <div className="my-10">
-                <div className="flex flex-col">
-                    <div className="text-center my-10 font-base md:text-3xl xs:text-xl"> Housing details</div>
+            <div className="my-0">
+                <div className="mt-0 text-start">
+                    <h1 className="md:text-[24px] xs:text-[20px] text-start text-black font-semibold">
+                        Add Property Features
+                    </h1>
+
+                    <div className="mt-1 font-normal">
+                        <p className="text-[#717171] text-start text-[12px]">
+                            Enter all the essential details and amenities of your property to attract potential tenants.
+                        </p>
+                    </div>
                 </div>
 
-                <div className="bg-[#fff9e2] py-4 px-4 text-start text-[#c29c4b] md:text-base xs:text-xs my-10">
-                    Minimum short term stay is determined by landlord and local regulations.
-                </div>
-
-                <div className="grid md:grid-cols-2 xs:grid-cols-1 md:gap-16 xs:gap-5 md:w-fit xs:full my-10">
+                {/* <div className="grid md:grid-cols-2 xs:grid-cols-1 md:gap-16 xs:gap-5 md:w-fit xs:full my-10">
                     <div className="flex justify-center items-center flex-row">
                         <input
                             type="checkbox"
@@ -294,9 +268,9 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
                         />
                         <label className="ml-2 w-full" htmlFor="long-term">Long term rental</label>
                     </div>
-                </div>
+                </div> */}
 
-                <select
+                {/* <select
                     onChange={handleReferenceChange}
                     value={propertyType}
 
@@ -314,526 +288,300 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
                     <option value="House">House</option>
                     <option value="Maisonett">Maisonette (self contained seperate entrance)</option>
                     <option value="Room to rent">Room to rent shared communal </option>
-                </select>
+                </select> */}
 
-                <div className="relative my-10">
-                    <input
-                        id="dailyRent"
-                        className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                        type="number"
-                        ref={dailyRentInput}
-                        name="dailyRent"
-                        value={dailyRent}
-                        onChange={handleDailyUser}
-                        placeholder=" "
-                    />
-                    <label
-                        htmlFor="dailyRent"
-                        className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                    >
-                        Daily Rent
-                    </label>
-                </div>
-
-                <div className="relative my-10">
-                    <input
-                        id="weeklyRent"
-                        className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                        type="number"
-                        ref={weeklyRentInput}
-                        name="weeklyRent"
-                        value={weeklyRent}
-                        onChange={handleWeeklyUser}
-                        placeholder=" "
-                    />
-                    <label
-                        htmlFor="weeklyRent"
-                        className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                    >
-                        Weekly Rent
-                    </label>
-                </div>
-
-                <div className="relative my-10">
-                    <input
-                        id="monthlyRent"
-                        className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                        type="number"
-                        ref={monthlyRentInput}
-                        name="monthlyRent"
-                        value={monthlyRent}
-                        onChange={handleMonthlyUser}
-                        placeholder=" "
-                    />
-                    <label
-                        htmlFor="monthlyRent"
-                        className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                    >
-                        Monthly Rent
-                    </label>
-                </div>
-
-                <div>
-                    {/* <CurrencySelect /> */}
-                    <div className="">
-
-
-                        {currencies ? (
-                            <select
-                                onChange={handleCurrencyChange}
-                                value={currency}
-                                className="md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                            >
-                                <option value="">Select a Currency</option>
-                                {currencies?.map((currency, index) => (
-                                    <option key={index} value={currency.value}>
-                                        {currency.label}
-                                    </option>
-                                ))}
-                            </select>
-
-                        ) : (
-                            <div>loading</div>
-                        )}
-                    </div>
-                </div>
-
-                <div className="relative my-10">
-                    <input
-                        id="numberOfBedRoom"
-                        className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                        type="number"
-                        ref={numberOfBedRoomInput}
-                        name="numberOfBedRoom"
-                        value={numberOfBedRoom}
-                        onChange={handleBedRoomUser}
-                        placeholder=" "
-                    />
-                    <label
-                        htmlFor="numberOfRoom"
-                        className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                    >
-                        Number of Bedrooms
-                    </label>
-                </div>
-
-                <div className="relative my-10">
-                    <input
-                        id="numberOfBathRoom"
-                        className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                        type="number"
-                        ref={numberOfBathRoomInput}
-                        name="numberOfBathRoom"
-                        value={numberOfBathRoom}
-                        onChange={handleBathUser}
-                        placeholder=" "
-                    />
-                    <label
-                        htmlFor="numberOfBathRoom"
-                        className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                    >
-                        Number of Bathrooms
-                    </label>
-                </div>
-
-                <div className=" grid md:grid-cols-2 xs:grid-cols-1 md:gap-16 xs:gap-5  md:w-fit xs:full my-10">
-
-
-                    <div className="flex justify-center items-center flex-row">
-                        <input
-                            type="radio"
-                            id="furnished"
-                            name="renting"
-                            value="furnished"
-                            className="outline-none h-5 w-5 "
-                            // checked={designOption === 'furnished'}
-                            onChange={() => handleRadioChange('furnished')}
+                <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                        <CustomSelect
+                            wrapperClass=' !h-[58px] !w-full !px-[12px]'
+                            labelClass=' text-black w-full text-gray-500'
+                            optionsClass='!text-[0.875rem] !h-[48px] !w-[100%] !text-black'
+                            optionWrapperClass=' w-[100%] !w-full border-[1px] shadow-lg border-gray-200 xl:left-[0px] !left-[0px] !h-[400px] !bottom-[-410px] overflow-y-auto '
+                            // otherOptions={true}
+                            label='Property Type'
+                            setSelected={handlePropertyType}
+                            selected={propertyType}
+                            options={[
+                                {
+                                    label: 'House',
+                                    value: 'House'
+                                },
+                                {
+                                    label: 'Commercial',
+                                    value: 'Commercial'
+                                },
+                                {
+                                    label: 'Apartment',
+                                    value: 'Apartment'
+                                },
+                                {
+                                    label: 'Duplex',
+                                    value: 'Duplex'
+                                }
+                            ]}
                         />
-                        <label htmlFor="furnished" className="ml-2 w-full">Furnished</label>
                     </div>
-
-                    <div className="flex justify-center items-center flex-row">
-                        <input
-                            type="radio"
-                            id="unfurnished"
-                            name="renting"
-                            value="unfurnished"
-                            className="outline-none h-5 w-5 "
-                            // checked={designOption === 'unfurnished'}
-                            onChange={() => handleRadioChange('unfurnished')}
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                        <CustomInputs
+                            id="bedRoom"
+                            type='number'
+                            required
+                            // setValue={setFormData}
+                            value={numberOfBedRoom}
+                            showRequirement={true}
+                            onChange={handleBedRoomUser}
+                            label={'Bed room'}
+                            className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
                         />
-                        <label htmlFor="unfurnished" className="ml-2 w-full">Unfurnished</label>
                     </div>
+
                 </div>
 
-                <h1 className="font-normal md:text-2xl xs:text-lg">Amenities</h1>
+                <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                        <CustomInputs
+                            id="bedRoom"
+                            type='number'
+                            required
+                            // setValue={setFormData}
+                            value={numberOfBathRoom}
+                            showRequirement={true}
+                            onChange={handleBathUser}
+                            label={'Bath room'}
+                            className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                        />
+                    </div>
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                        <CustomInputs
+                            id="Kitchen"
+                            type='number'
+                            required
+                            // setValue={setFormData}
+                            value={numberOfKitchen}
+                            showRequirement={true}
+                            onChange={handleKitchenUser}
+                            label={'Kitchen'}
+                            className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                        />
+                    </div>
 
-
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="nearMedSchool"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Near Med School/Hospital (within 20 minutes by car)"
-                        checked={amenitiesOption && amenitiesOption?.includes("Near Med School/Hospital (within 20 minutes by car)")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="nearMedSchool" className="ml-4 md:text-base xs:text-xs w-full">Near Med School/Hospital (within 20 minutes by car)</label>
                 </div>
 
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="walkable"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Walkable to Public Transit/Shopping/Amenities"
-                        checked={amenitiesOption && amenitiesOption?.includes("Walkable to Public Transit/Shopping/Amenities")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="walkable" className="ml-4 md:text-base xs:text-xs w-full">Walkable to Public Transit/Shopping/Amenities</label>
+                <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                        {/* <div className="">
+                            Price is per month
+                        </div> */}
+                        <CustomInputs
+                            id="price"
+                            type='number'
+                            required
+                            // setValue={setFormData}
+                            value={price}
+                            showRequirement={true}
+                            onChange={handlePriceUser}
+                            label={'Price'}
+                            className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                        />
+                    </div>
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                        <CustomInputs
+                            id="buildYear"
+                            type='number'
+                            required
+                            // setValue={setFormData}
+                            value={buildYear}
+                            showRequirement={true}
+                            onChange={handleBuildYearUser}
+                            label={'Build Year'}
+                            className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                        />
+                    </div>
+
                 </div>
 
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="public"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Video Virtual Tour Available"
-                        checked={amenitiesOption && amenitiesOption?.includes("Video Virtual Tour Available")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="public" className="ml-4 md:text-base xs:text-xs w-full">Video Virtual Tour Available</label>
+                <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+
+                        <CustomInputs
+                            id="propertySize"
+                            type='number'
+                            required
+                            // setValue={setFormData}
+                            value={propertySize}
+                            showRequirement={true}
+                            onChange={handlePropertySizeUser}
+                            label={'Property Size'}
+                            className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                        />
+                    </div>
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                        <CustomInputs
+                            id="area"
+                            type='number'
+                            required
+                            // setValue={setFormData}
+                            value={area}
+                            showRequirement={true}
+                            onChange={handleAreaUser}
+                            label={'Area'}
+                            className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                        />
+                    </div>
+
                 </div>
 
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="utilities"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="All Utilities included"
-                        checked={amenitiesOption && amenitiesOption?.includes("All Utilities included")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="utilities" className="ml-4 md:text-base xs:text-xs w-full">All Utilities included</label>
+                <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+
+                        <CustomInputs
+                            id="description"
+                            type='text'
+                            required
+                            inputType="textarea"
+                            // setValue={setFormData}
+                            // value={description}
+                            showRequirement={true}
+                            onChange={handleDescriptionUser}
+                            label={'Description'}
+                            className='px-0 mb-[5px] md:w-full xs:w-full text-[16px] !h-[200px]'
+                            value={description}                           
+                        />
+                    </div>
+                    
+
+                </div>               
+
+                <div className="text-start my-6 font-semibold md:text-[16px] xs:text-[13px]">Features and Amenities</div>
+
+
+                <div className="w-fit">
+                    <div className="grid md:grid-cols-3 xs:grid-cols-1 gap-10">
+                        <div className="flex items-center my-3">
+                            <input
+                                type="checkbox"
+                                id="Fully Furnished"
+                                name="Fully Furnished"
+                                className="outline-none h-6 w-6"
+                                value="Fully Furnished"
+                                checked={amenitiesOption && amenitiesOption?.includes("Fully Furnished")}
+                                onChange={handleAmenitiesChange}
+                            />
+                            <label htmlFor="Fully Furnished" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">Fully Furnished</label>
+                        </div>
+
+                        <div className="flex items-center my-3">
+                            <input
+                                type="checkbox"
+                                id="Treated Water Supply"
+                                name="Treated Water Supply"
+                                className="outline-none h-6 w-6"
+                                value="Treated Water Supply"
+                                checked={amenitiesOption && amenitiesOption?.includes("Treated Water Supply")}
+                                onChange={handleAmenitiesChange}
+                            />
+                            <label htmlFor="Treated Water Supply" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">Treated Water Supply</label>
+                        </div>
+
+                        <div className="flex items-center my-3">
+                            <input
+                                type="checkbox"
+                                id="Garden"
+                                name="Garden"
+                                className="outline-none h-6 w-6"
+                                value="Garden"
+                                checked={amenitiesOption && amenitiesOption?.includes("Garden")}
+                                onChange={handleAmenitiesChange}
+                            />
+                            <label htmlFor="Garden" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">Garden</label>
+                        </div>
+
+                    </div>
+
+                    <div className="grid md:grid-cols-3 xs:grid-cols-1 gap-10">
+                        <div className="flex items-center my-3">
+                            <input
+                                type="checkbox"
+                                id="24/7 Power Supply"
+                                name="24/7 Power Supply"
+                                className="outline-none h-6 w-6"
+                                value="24/7 Power Supply"
+                                checked={amenitiesOption && amenitiesOption?.includes("24/7 Power Supply")}
+                                onChange={handleAmenitiesChange}
+                            />
+                            <label htmlFor="24/7 Power Supply" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">24/7 Power Supply</label>
+                        </div>
+
+                        <div className="flex items-center my-3">
+                            <input
+                                type="checkbox"
+                                id="Secure Parking"
+                                name="Secure Parking"
+                                className="outline-none h-6 w-6"
+                                value="Secure Parking"
+                                checked={amenitiesOption && amenitiesOption?.includes("Secure Parking")}
+                                onChange={handleAmenitiesChange}
+                            />
+                            <label htmlFor="Secure Parking" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">Secure Parking</label>
+                        </div>
+
+                        <div className="flex items-center my-3">
+                            <input
+                                type="checkbox"
+                                id="Proximity to Medical Facilities"
+                                name="Proximity to Medical Facilities"
+                                className="outline-none h-6 w-6"
+                                value="Proximity to Medical Facilities"
+                                checked={amenitiesOption && amenitiesOption?.includes("Proximity to Medical Facilities")}
+                                onChange={handleAmenitiesChange}
+                            />
+                            <label htmlFor="Proximity to Medical Facilities" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">Proximity to Medical Facilities</label>
+                        </div>
+
+                    </div>
+
+                    <div className="grid md:grid-cols-3 xs:grid-cols-1 gap-10">
+                        <div className="flex items-center my-3">
+                            <input
+                                type="checkbox"
+                                id="High-Speed Internet"
+                                name="High-Speed Internet"
+                                className="outline-none h-6 w-6"
+                                value="High-Speed Internet"
+                                checked={amenitiesOption && amenitiesOption?.includes("High-Speed Internet")}
+                                onChange={handleAmenitiesChange}
+                            />
+                            <label htmlFor="High-Speed Internet" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">High-Speed Internet</label>
+                        </div>
+
+                        <div className="flex items-center my-3">
+                            <input
+                                type="checkbox"
+                                id="Community Spaces"
+                                name="Community Spaces"
+                                className="outline-none h-6 w-6"
+                                value="Community Spaces"
+                                checked={amenitiesOption && amenitiesOption?.includes("Community Spaces")}
+                                onChange={handleAmenitiesChange}
+                            />
+                            <label htmlFor="Community Spaces" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">Community Spaces</label>
+                        </div>
+                    </div>                
                 </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="someutilities"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Some utilities included"
-                        checked={amenitiesOption && amenitiesOption?.includes("Some utilities included")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="someutilities" className="ml-4 md:text-base xs:text-xs w-full">Some utilities included</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="gym"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Gym/Fitness room"
-                        checked={amenitiesOption && amenitiesOption?.includes("Gym/Fitness room")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="gym" className="ml-4 md:text-base xs:text-xs w-full">Gym/Fitness room</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="pool"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Pool"
-                        checked={amenitiesOption && amenitiesOption?.includes("Pool")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="pool" className="ml-4 md:text-base xs:text-xs w-full">Pool</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="pet"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Pet friendly"
-                        checked={amenitiesOption && amenitiesOption?.includes("Pet friendly")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="Pet" className="ml-4 md:text-base xs:text-xs w-full">Pet friendly</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="petallowed"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="No pets allowed"
-                        checked={amenitiesOption && amenitiesOption?.includes("No pets allowed")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="petallowed" className="ml-4 md:text-base xs:text-xs w-full">No pets allowed</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="parking"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Available Parking (may or may not be included in rent)"
-                        checked={amenitiesOption && amenitiesOption?.includes("Available Parking (may or may not be included in rent)")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="parking" className="ml-4 md:text-base xs:text-xs w-full">Available Parking (may or may not be included in rent)</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="indoorparking"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Indoor Parking (may or may not be included in rent)"
-                        checked={amenitiesOption && amenitiesOption?.includes("Indoor Parking (may or may not be included in rent)")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="indoorparking" className="ml-4 md:text-base xs:text-xs w-full">Indoor Parking (may or may not be included in rent)</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="laundry"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="In-unit Laundry"
-                        checked={amenitiesOption && amenitiesOption?.includes("In-unit Laundry")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="laundry" className="ml-4 md:text-base xs:text-xs w-full">In-unit Laundry</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="a/c"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="A/C"
-                        checked={amenitiesOption && amenitiesOption?.includes("A/C")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="a/c" className="ml-4 md:text-base xs:text-xs w-full">A/C</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="child"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Child friendly"
-                        checked={amenitiesOption && amenitiesOption?.includes("Child friendly")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="child" className="ml-4 md:text-base xs:text-xs w-full">Child friendly</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="dishwasher"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Dishwasher"
-                        checked={amenitiesOption && amenitiesOption?.includes("Dishwasher")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="dishwasher" className="ml-4 md:text-base xs:text-xs w-full">Dishwasher</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="site"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="On Site Concierge 24 hours"
-                        checked={amenitiesOption && amenitiesOption?.includes("On Site Concierge 24 hours")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="site" className="ml-4 md:text-base xs:text-xs w-full">On Site Concierge 24 hours</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="charger"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="EV Charger on premises or nearby"
-                        checked={amenitiesOption && amenitiesOption?.includes("EV Charger on premises or nearby")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="charger" className="ml-4 md:text-base xs:text-xs w-full">EV Charger on premises or nearby</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="landlord"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Landlord is a member of the medical community"
-                        checked={amenitiesOption && amenitiesOption?.includes("Landlord is a member of the medical community")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="landlord" className="ml-4 md:text-base xs:text-xs w-full">Landlord is a member of the medical community</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="smoking"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="No smoking/vaping/cannabis"
-                        checked={amenitiesOption && amenitiesOption?.includes("No smoking/vaping/cannabis")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="smoking" className="ml-4 md:text-base xs:text-xs w-full">No smoking/vaping/cannabis</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="balcony"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Outdoor space/Balcony/Backyard"
-                        checked={amenitiesOption && amenitiesOption?.includes("Outdoor space/Balcony/Backyard")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="balcony" className="ml-4 md:text-base xs:text-xs w-full">Outdoor space/Balcony/Backyard</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="bath"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Private Bath"
-                        checked={amenitiesOption && amenitiesOption?.includes("Private Bath")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="bath" className="ml-4 md:text-base xs:text-xs w-full">Private Bath</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="living"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Shared Living Space"
-                        checked={amenitiesOption && amenitiesOption?.includes("Shared Living Space")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="living" className="ml-4 md:text-base xs:text-xs w-full">Shared Living Space</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="wheelchair"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Wheelchair accessible"
-                        checked={amenitiesOption && amenitiesOption?.includes("Wheelchair accessible")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="wheelchair" className="ml-4 md:text-base xs:text-xs w-full">Wheelchair accessible</label>
-                </div>
-
-                <div className="flex items-center my-3">
-                    <input
-                        type="checkbox"
-                        id="housing"
-                        name="renting"
-                        className="outline-none h-4 w-4"
-                        value="Housing for Healthcare project"
-                        checked={amenitiesOption && amenitiesOption?.includes("Housing for Healthcare project")}
-                        onChange={handleAmenitiesChange}
-                    />
-                    <label htmlFor="housing" className="ml-4 md:text-base xs:text-xs w-full">Housing for Healthcare project</label>
-                </div>
-
-                <div className="relative my-0">
-                    <input
-                        id="licenseNumber"
-                        className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                        type="text"
-                        ref={licenseNumberInput}
-                        name="licenseNumber"
-                        value={licenseNumber}
-                        onChange={handleDetailsUser}
-                        placeholder=" "
-                    />
-                    <label
-                        htmlFor="text"
-                        className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                    >
-                        Lincense Number
-                    </label>
-                </div>
-                <div className="mt-2 md:text-xs xs:text-[10px]">Many cities require landlord licensing. Check your local laws. We provide this field to post registration number.</div>
-
-
-                <div className="bg-[#fff9e2] py-4 px-4 text-start text-[#c29c4b] md:text-base xs:text-xs my-10">
-                    MediRent will automatically select the nearest medical school and hospital to your location, but you can always change it later in your dashboard.
-                </div>
-
-                <div className="bg-[#fff9e2] py-4 px-4 text-start text-[#c29c4b] md:text-base xs:text-xs my-10">
-                    Do not post any links to outside web sites, phone numbers or email address for your own security and privacy. They will be removed.
-                </div>
-
-                <div
-                    className="md:mt-2 xs:mt-0 leading-tighter text-gray-900 text-base cursor-text bg-transparent my-3"
-                >
-                    Description:
-                </div>
-
-                <div className="relative my-0">
-                    <textarea
-                        value={description}
-                        onChange={handleTextareaChange}
-                        rows="8"
-                        cols="8"
-                        className="w-full px-6 border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                    ></textarea>
-                </div>
-
-                <div className="flex justify-between pb-10">
-                    <div className="flex justify-end z-10 relative mt-4  mr-3">
-                        
-
+            
+                <div className="flex justify-end pb-10 w-full gap-2">
+                    <div className="flex justify-end z-10 relative mt-4 ">
+                        <button
+                            onClick={renderPreviousForm}
+                            className="flex justify-end z-10 relative bg-white border-[1px] border-gray-400 text-gray-400 md:text-sm rounded-full md:py-3 md:px-8 xs:text-[15px] xs:py-1 xs:px-8"
+                        >
+                            <span className="">Previous</span>
+                        </button>
+                    </div>
+                    <div className="flex justify-end z-10 relative mt-4">
                         <button
                             onClick={handleProviderThree}
-                            className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-4"
+                            className="flex justify-end items-center z-10 relative bg-[#F97262] text-white md:text-sm rounded-full md:py-3 md:px-12 xs:text-[15px] xs:py-1 xs:px-8"
                             disabled={housingLoading} // Disable the button when userLoading is true
                         >
                             {housingLoading ? ( // Display spinner if userLoading is true
@@ -848,15 +596,9 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
                             )}
                         </button>
                     </div>
-                    <div className="flex justify-end z-10 relative mt-4 ">
-                        <button
-                            onClick={renderPreviousForm}
-                            className="flex justify-end z-10 relative bg-rose-500 text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-10"
-                        >
-                            <span className="">Previous</span>
-                        </button>
-                    </div>
                 </div>
+
+                
             </div>
         </div>
     )

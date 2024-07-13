@@ -1,23 +1,27 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+// import React from 'react'
 import axios from "axios";
 
-import { useState, useRef, useEffect } from "react";
-import { FaCircleInfo } from "react-icons/fa6";
+import { useState, useEffect } from "react";
+// import { FaCircleInfo } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import CustomInputs from "../../../components/Custom-components/CustomInputs";
+import CustomSelect from "../../../components/Custom-components/Custom-Select";
 
 
 
-const Address = ({active, setActive, housingData, setHousingData }) => {
-    
-    
-    const listingTitleInput = useRef();
-    const addressInput = useRef();
-    const cityInput = useRef();
-    const postalCodeInput = useRef();
-    const phoneInput = useRef();
-    const countryInput = useRef();
-    const provinceInput = useRef();
-    const promotionCodeInput = useRef();
+const Address = ({ active, setActive, housingData, setHousingData }) => {
+
+
+    // const listingTitleInput = useRef();
+    // const addressInput = useRef();
+    // const cityInput = useRef();
+    // const postalCodeInput = useRef();
+    // const phoneInput = useRef();
+    // const countryInput = useRef();
+    // const provinceInput = useRef();
+    // const promotionCodeInput = useRef();
 
 
     var {
@@ -28,7 +32,7 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
         phone,
         country,
         province,
-        promotionCode,
+       
     } = housingData;
 
     const handleCheckAddress = () => {
@@ -39,13 +43,13 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
             !country ||
             !postalCode ||
             !phone ||
-            !province  
+            !province
         ) {
             toast.warning('Please fill in all required fields.');
             return;
         }
         setActive(3)
-        
+
     };
 
     const handleProviderTwo = () => {
@@ -67,49 +71,61 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
     // eslint-disable-next-line no-unused-vars
     const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
     const [isLoading, setIsLoading] = useState(true);
-
-    
-
-    
-
-    const handleHousingUser = (e) => setHousingData(
-        {
-            ...housingData,
-            [e.target.name]: e.target.value
-        }
-    );
+    const [allCities, setAllCities] = useState([]);
 
 
-    const handleCityHousingChange = (event) => {
-        setSelectedCities(event.target.value);
-        let selectedValue = event.target.value === "Select a city" ? null : event.target.value;
+
+
+
+    // const handleHousingUser = (e) => setHousingData(
+    //     {
+    //         ...housingData,
+    //         [e.target.name]: e.target.value
+    //     }
+    // );
+
+
+    const handleCityChange = (value) => {
+        setSelectedCities(value);
+        let selectedValue = value === "Select a city" ? null : value;
         setHousingData(prevHousingData => ({
             ...prevHousingData,
             province: selectedValue
         }));
     };
 
-    const handleCountryHousingChange = (event) => {
-        // setSelectedCities(event.target.value);
-        setSelectedCountry(event.target.value);
+    const handleCountryChange = (value) => {
+        setSelectedCountry(value);
+
+        // setallCities(selectedCity.find((country) => country.name === selectedCountry)
         setSelectedCities(''); // Clear the selected city when the country changes
-        let selectedValue = event.target.value === "Select a country" ? null : event.target.value;
+        let selectedValue = value === "Select a country" ? null : value;
         setHousingData(prevHousingData => ({
             ...prevHousingData,
             country: selectedValue
         }));
+
+        const selectedCountryObj = selectedCity?.find((country) => country.name === value);
+
+        // console.log("first code...", selectedCity, selectedCountry, value)
+        if (selectedCountryObj) {
+            setAllCities(selectedCountryObj.states);
+            // console.log("second code...", selectedCountryObj.states, allCities)
+        } else {
+            setAllCities([]);
+        }
     };
 
-    const [chosenBox, setChosenBox] = useState(2);
+    // const [chosenBox, setChosenBox] = useState(2);
 
-    const handleChoose = (boxNumber) => {
-        setChosenBox(boxNumber);
-        // Do not call onNextboX here
-    };
+    // const handleChoose = (boxNumber) => {
+    //     setChosenBox(boxNumber);
+    //     // Do not call onNextboX here
+    // };
 
-    const isBoxChosen = (boxNumber) => {
-        return chosenBox === boxNumber;
-    };
+    // const isBoxChosen = (boxNumber) => {
+    //     return chosenBox === boxNumber;
+    // };
 
     function fetchData() {
         const options = {
@@ -151,7 +167,7 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
             setIsLoading(true);
             try {
                 const response = await fetchStateData();
-                // setSelectedStates(response?.data?.data);
+                setSelectedStates(response?.data?.data);
                 setIsLoading(false);
                 // console.log("state is Loading..", response.data?.data);
 
@@ -168,12 +184,12 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
 
     return (
         <div>
-            <div className="my-10">
-                <div className="flex flex-col ">
+            <div className="my-0">
+                {/* <div className="flex flex-col ">
                     <div className="text-center my-6 font-base md:text-3xl xs:text-xl"> Select your Package</div>
 
                     <div className="grid md:grid-cols-3 xs:grid-cols-1 gap-10  md:mx-10 xs:mx-3">
-                        {/* Square 1 */}
+                        
                         <div
                             className={`py-5 border-[3px]  rounded-lg text-center bg-white ${isBoxChosen(1) ? 'border-third' : 'border-gray-300'
                                 }`}
@@ -200,7 +216,7 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
                             </div>
                         </div>
 
-                        {/* Square 2 */}
+                        
                         <div
                             className={`py-5 border-[3px]  rounded-lg text-center bg-white ${isBoxChosen(2) ? 'border-third' : 'border-gray-300'
                                 }`}
@@ -233,7 +249,7 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
 
                         >
                             <div className="flex justify-center items-center flex-col h-full mx-5 relative">
-                                {/* <div className='w-fit ml-auto bg-[#fbc421] px-3 right-16 absolute top-4 text-third'>Recommended</div> */}
+                                
                                 <div className="text-2xl text-third w-full  float-left flex justify-end"><FaCircleInfo /></div>
                                 <div className={`font-bold w-full  ${isBoxChosen(3) ? 'text-third' : 'text-gray-500'
                                     }`}>MedsBasic Monthly</div>
@@ -252,214 +268,142 @@ const Address = ({active, setActive, housingData, setHousingData }) => {
                         </div>
 
                     </div>
+                </div> */}
 
+                <div className="mt-0 text-start">
+                    <h1 className="md:text-[24px] xs:text-[20px] text-start text-black font-semibold">
+                        Confirm Your Property Location
+                    </h1>
 
+                    <div className="mt-1 font-normal">
+                        <p className="text-[#717171] text-start text-[12px]">
+                            Please provide the exact address of your property to help tenants find it easily.
+                        </p>
+                    </div>
                 </div>
 
-                <div className="text-center my-6 font-base md:text-3xl xs:text-xl">Housing information</div>
-
-                <div className=" ">
-                    <div className="relative my-10 md:mx-0 xs:mx-3">
-                        <input
+                <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                        <CustomInputs
                             id="listingTitle"
-                            className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                            type="text"
-                            ref={listingTitleInput}
-                            name="listingTitle"
+                            type='text'
+                            required
+                            // setValue={setFormData}
                             value={listingTitle}
-                            onChange={handleHousingUser}
-                            placeholder=" "
+                            showRequirement={true}
+                            onChange={(value) => setHousingData(prevHousingData => ({
+                                ...prevHousingData,
+                                listingTitle: value
+                            }))}
+                            label={'Listing Title'}
+                            className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
                         />
-                        <label
-                            htmlFor="text"
-                            className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                        >
-                            Listing Title
-                        </label>
-                        <div className="mt-2 md:text-base xs:text-xs">For listing, make it short and eye catching</div>
                     </div>
 
-                    <div className="relative my-10 md:mx-0 xs:mx-3">
-                        <input
-                            id="address"
-                            className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                            type="text"
-                            ref={addressInput}
-                            name="address"
-                            value={address}
-                            onChange={handleHousingUser}
-                            placeholder=" "
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                        <CustomSelect
+                            wrapperClass=' !h-[58px] !w-full !px-[12px]'
+                            labelClass='w-full text-[#b0afb0]'
+                            optionsClass='!text-[0.875rem] !h-[58px] !w-[100%] !text-black'
+                            optionWrapperClass=' w-[100%] !w-full border-[1px] shadow-lg border-gray-200 xl:left-[0px] !left-[0px] !h-[400px] !bottom-[-410px] overflow-y-auto '
+                            required={false}
+                            label='Select a Country'
+                            setSelected={handleCountryChange}
+                            selected={country}
+                            options={selectedCity}
+                            otherOptions={true}
                         />
-                        <label
-                            htmlFor="text"
-                            className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                        >
-                            Address
-                        </label>
-
                     </div>
+                </div>
 
-                    <div className=" md:mx-0 xs:mx-3">
-                        <div >
-
-
-                            <div className="relative my-10">
-                                {selectedCity ? (
-                                    <select
-                                        onChange={handleCountryHousingChange}
-                                        value={country}
-                                        className="md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                    >
-                                        <option value="">Select a country</option>
-                                        {selectedCity?.map((country, index) => (
-                                            <option key={index} value={country.name}>
-                                                {country.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                ) : (
-                                    <div>loading</div>
-                                )}
-
-                            </div>
-
-
-                        </div>
-                        <div className="relative my-10">
-
-
-                            {selectedCountry ? (
-                                <div>
-                                    <select
-                                        onChange={handleCityHousingChange}
-                                        value={province}
-                                        className="md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                    >
-                                        <option value="">Select a state</option>
-                                        {selectedCity
-                                            .find((country) => country.name === selectedCountry)
-                                            .states.map((state, index) => (
-                                                <option key={index} value={state.name}>
-                                                    {state.name}
-                                                </option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-                            ) : (
-                                <select
-                                    className="md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                >
-                                    <option value="">Select a state</option>
-                                </select>
-                            )}
-                        </div>
+                <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                        <CustomSelect
+                            wrapperClass='!h-[58px] !w-full !px-[12px]'
+                            labelClass='w-full text-[#b0afb0]'
+                            optionsClass='!text-[0.875rem] !h-[48px] !w-[100%] !text-black'
+                            optionWrapperClass=' w-[100%] !w-full border-[1px] shadow-lg border-gray-200 xl:left-[0px] !left-[0px] !h-[400px] !bottom-[-410px] overflow-y-auto '
+                            required={false}
+                            label='Select a state'
+                            setSelected={handleCityChange}
+                            selected={province}
+                            options={allCities}
+                            otherOptions={true}
+                        />
                     </div>
-
-                    <div className="relative my-10 md:mx-0 xs:mx-3">
-                        <input
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                        <CustomInputs
                             id="city"
-                            className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                            type="text"
-                            ref={cityInput}
-                            name="city"
+                            type='text'
+                            required
+                            showRequirement={true}
+                            // setValue={setFormData}
                             value={city}
-                            onChange={handleHousingUser}
-                            placeholder=" "
+                            onChange={(value) => setHousingData(prevHousingData => ({
+                                ...prevHousingData,
+                                city: value
+                            }))}
+                            label={'City'}
+                            className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
                         />
-                        <label
-                            htmlFor="text"
-                            className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                        >
-                            City
-                        </label>
-                    </div>
-
-                    <div className="relative my-10 md:mx-0 xs:mx-3">
-                        <input
-                            id="postalCode"
-                            className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                            type="text"
-                            ref={postalCodeInput}
-                            name="postalCode"
-                            value={postalCode}
-                            onChange={handleHousingUser}
-                            placeholder=" "
-                        />
-                        <label
-                            htmlFor="text"
-                            className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                        >
-                            Postal Code
-                        </label>
-                    </div>
-                    <div className="relative my-5 md:mx-0 xs:mx-3">
-                        <input
-                            id="phone"
-                            className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                            type="text"
-
-                            ref={phoneInput}
-                            name="phone"
-                            value={phone}
-                            onChange={handleHousingUser}
-                            placeholder=" "
-                        />
-                        <label
-                            htmlFor="text"
-                            className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                        >
-                            Phone Number
-                        </label>
-                    </div>
-
-                    <div className="my-5 md:text-base xs:text-xs md:mx-0 xs:mx-3">Don't miss any tenant request! Add your cell number here to receive text messages when a tenant reaches out!</div>
-
-                    <div className="px-10 py-3 bg-third rounded-lg w-fit text-white md:text-base xs:text-xs md:mx-0 xs:mx-3">Upgrade to Medirent Gold to access this feature</div>
-
-                    <div className="my-5 md:text-base xs:text-xs md:mx-0 xs:mx-3">Enter your promo code below: </div>
-
-                    <div className="relative my-5 md:mx-0 xs:mx-3">
-                        <input
-                            id="promotionCode"
-                            className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                            type="text"
-                            ref={promotionCodeInput}
-                            name="promotionCode"
-                            value={promotionCode}
-                            onChange={handleHousingUser}
-                            placeholder=" "
-                        />
-                        <label
-                            htmlFor="text"
-                            className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                        >
-                            Promotion Code
-                        </label>
-                    </div>
-
-                    <div className="md:mx-0 xs:mx-3 px-10 py-3 mb-5 bg-third rounded-lg w-fit text-white md:text-base xs:text-xs">Apply</div>
-
-                    <div className="flex justify-between pb-10">
-                        <div className="flex justify-end z-10 relative mt-4  mr-3">
-                            <button
-                                onClick={handleProviderTwo}
-                                className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-10"
-                            >
-                                <span className="">Next</span>
-                            </button>
-                        </div>
-                        <div className="flex justify-end z-10 relative mt-4 ">
-                            <button
-                                onClick={renderPreviousForm}
-                                className="flex justify-end z-10 relative bg-rose-500 text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-10"
-                            >
-                                <span className="">Previous</span>
-                            </button>
-                        </div>
                     </div>
 
                 </div>
+
+                <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                        <CustomInputs
+                            id="postalCode"
+                            type='text'
+                            required
+                            showRequirement={true}
+                            // setValue={setFormData}
+                            value={postalCode}
+                            onChange={(value) => setHousingData(prevHousingData => ({
+                                ...prevHousingData,
+                                postalCode: value
+                            }))}
+                            label={'Postal Code'}
+                            className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                        />
+                    </div>
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                        <CustomInputs
+                            id="address"
+                            type='text'
+                            required
+                            showRequirement={true}
+                            // setValue={setFormData}
+                            value={address}
+                            onChange={(value) => setHousingData(prevHousingData => ({
+                                ...prevHousingData,
+                                address: value
+                            }))}
+                            label={'Address'}
+                            className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                        />
+                    </div>
+                </div>
+
+                <div className="flex justify-end pb-10 w-full  gap-2">
+                    <div className="flex justify-end z-10 relative mt-4">
+                        <button
+                            onClick={renderPreviousForm}
+                            className="flex justify-end z-10 relative bg-white border-[1px] border-gray-400 text-gray-400 md:text-sm rounded-full md:py-3 md:px-8 xs:text-[15px] xs:py-1 xs:px-8"
+                        >
+                            <span className="">Previous</span>
+                        </button>
+                    </div>
+                    <div className="flex justify-end z-10 relative mt-4 ">
+                        <button
+                            onClick={handleProviderTwo}
+                            className="flex justify-end items-center z-10 relative bg-[#F97262] text-white md:text-sm rounded-full md:py-3 md:px-12 xs:text-[15px] xs:py-1 xs:px-8"
+                        >
+                            <span className="">Next</span>
+                        </button>
+                    </div>
+                </div>
+                
 
 
             </div>

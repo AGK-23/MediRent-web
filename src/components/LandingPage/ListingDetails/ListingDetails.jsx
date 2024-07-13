@@ -265,8 +265,12 @@ const ListingDetails = () => {
                                                 id="fullname"
                                                 type='text'
                                                 required
-                                                setValue={setFormData}
+                                                // setValue={setFormData}
                                                 value={fullname}
+                                                onChange={(value) => setFormData(prevFormData => ({
+                                                    ...prevFormData,
+                                                    fullname: value
+                                                }))}
 
                                                 label={'FullName'}
                                                 className='px-0 mb-[14px]  text-[16px]'
@@ -279,8 +283,12 @@ const ListingDetails = () => {
                                                 id="email"
                                                 type='email'
                                                 required
-                                                setValue={setFormData}
+                                                // setValue={setFormData}
                                                 value={email}
+                                                onChange={(value) => setFormData(prevFormData => ({
+                                                    ...prevFormData,
+                                                    email: value
+                                                }))}
 
                                                 label={'Email Address'}
                                                 className='px-0 mb-[14px]  text-[16px]'
@@ -293,8 +301,12 @@ const ListingDetails = () => {
                                                 id="phone"
                                                 type='text'
                                                 required
-                                                setValue={setFormData}
+                                                // setValue={setFormData}
                                                 value={phone}
+                                                onChange={(value) => setFormData(prevFormData => ({
+                                                    ...prevFormData,
+                                                    phone: value
+                                                }))}
 
                                                 label={'Phone Number'}
                                                 className='px-0 mb-[14px]  text-[16px]'
@@ -318,39 +330,39 @@ const ListingDetails = () => {
                                                 options={[
                                                     {
                                                         label: '11:00AM',
-                                                        value: '1'
+                                                        value: '11:00AM'
                                                     },
                                                     {
                                                         label: '12:00AM',
-                                                        value: '2'
+                                                        value: '12:00AM'
                                                     },
                                                     {
                                                         label: '1:00PM',
-                                                        value: '3'
+                                                        value: '1:00PM'
                                                     },
                                                     {
                                                         label: '2:00PM',
-                                                        value: '4'
+                                                        value: '2:00PM'
                                                     },
                                                     {
                                                         label: '3:00PM',
-                                                        value: '5'
+                                                        value: '3:00PM'
                                                     },
                                                     {
                                                         label: '4:00PM',
-                                                        value: '6'
+                                                        value: '4:00PM'
                                                     },
                                                     {
                                                         label: '5:00PM',
-                                                        value: '7'
+                                                        value: '5:00PM'
                                                     },
                                                     {
                                                         label: '6:00PM',
-                                                        value: '8'
+                                                        value: '6:00PM'
                                                     },
                                                     {
                                                         label: '7:00PM',
-                                                        value: '9'
+                                                        value: '7:00PM'
                                                     },
 
                                                 ]}

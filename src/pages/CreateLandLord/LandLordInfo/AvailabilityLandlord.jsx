@@ -107,12 +107,12 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
 
 
 
-    const [linkUrl, setLinkUrl] = useState("");
-    const linkUrlInput = useRef();
+    // const [linkUrl, setLinkUrl] = useState("");
+    // const linkUrlInput = useRef();
 
-    const handleLinkUser = (e) => setLinkUrl(
-        setLinkUrl(e.target.value)
-    );
+    // const handleLinkUser = (e) => setLinkUrl(
+    //     setLinkUrl(e.target.value)
+    // );
 
     const handleProviderFive = () => {
         handleCheckAvailable()
@@ -141,24 +141,32 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
 
     return (
         <div>
-            <div className="my-10">
-                <div className="flex flex-col">
-                    <div className="text-center my-10 font-base md:text-3xl xs:text-xl"> AVAILABILITY FORM</div>
+            <div className="my-0">
+                <div className="mt-0 text-start">
+                    <h1 className="md:text-[24px] xs:text-[20px] text-start text-black font-semibold">
+                        Set Your Rental Schedule
+                    </h1>
+
+                    <div className="mt-1 font-normal">
+                        <p className="text-[#717171] text-start text-[12px]">
+                        Specify the availability dates and rental terms to ensure accurate bookings.
+                        </p>
+                    </div>
                 </div>
 
-                <div className="bg-[#fff9e2] py-4 px-4 text-start text-[#c29c4b] md:text-base xs:text-xs my-5">
-                    Hint: keep this calendar up to date to increase your contacts. (click a month to block a full month)
+                <div className="bg-[#C5D8E4] rounded-lg py-4 px-4 text-start text-[#0E0C3D] md:text-base xs:text-xs my-5">
+                    Note : Keep this calendar up to date to increase your contacts. (click a month to block a full month)
                 </div>
 
-                <div className="text-black py-4 px-4 text-start  md:text-base xs:text-xs my-2">
+                {/* <div className="text-black py-4 px-4 text-start  md:text-base xs:text-xs my-2">
                     You can synchronize the calendar of availability of your ad with one from another website (Airbnb, Home Away, Google Calendar, etc.).
                 </div>
 
                 <div className="text-black py-4 px-4 text-start  md:text-base xs:text-xs my-2">
                     To do so, you must copy/paste the link of the calendar below. Once done, your calendar will be updated every night.
-                </div>
+                </div> */}
 
-                <div className="relative my-10">
+                {/* <div className="relative my-10">
                     <input
                         id="linkUrl"
                         className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
@@ -170,29 +178,33 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
                         placeholder="Link with external calendar (URL)"
                     />
 
-                </div>
+                </div> */}
 
-                <div className="flex items-center my-3">
-                    <div className=" border-[1px] border-gray-700 p-2 h-4 w-4 bg-white"></div>
+                <div className="my-10">
+                    <div className="flex items-center my-3">
+                        <div className=" border-[1px] border-gray-700 p-2 h-4 w-4 bg-white"></div>
 
-                    <div className="ml-4 text-gray-700 w-full" >
-                        Dates not Selected
+                        <div className="ml-4 text-gray-700 w-full" >
+                            Dates not Selected
+                        </div>
                     </div>
-                </div>
 
-                <div className="flex items-center my-3">
-                    <div className=" border-[1px] border-gray-700 p-2 h-4 w-4 bg-sky-700"></div>
+                    <div className="flex items-center my-3">
+                        <div className=" border-[1px] border-gray-700 p-2 h-4 w-4 bg-sky-700"></div>
 
-                    <div className="ml-4 text-gray-700 w-full" >
-                        Dates Selected
+                        <div className="ml-4 text-gray-700 w-full" >
+                            Dates Selected
+                        </div>
                     </div>
+
                 </div>
+
 
                 {/* <div className="mt-700">
                     <Calendar />
 
                 </div> */}
-                <div className="flex w-full justify-center items-center flex-col gap-10">
+                <div className="flex flex-row w-full justify-between items-center  gap-10">
                     <DatePicker
                         // selected={null} // Pass null to show the calendar without pre-selected date
                         onChange={handleDateChange}
@@ -235,19 +247,20 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
 
 
 
-                <div className="flex justify-between pb-10">
-                    <div className="flex justify-end z-10 relative mt-4  mr-3">
-                        {/* <button
-                            // onClick={handleProviderFive}
-                            onClick={onSavePostClicked}
-                            className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-6"
+                <div className="flex justify-end pb-10 w-full gap-2">
+                    <div className="flex justify-end z-10 relative mt-4 ">
+                        <button
+                            onClick={renderPreviousForm}
+                            className="flex justify-end z-10 relative bg-white border-[1px] border-gray-400 text-gray-400 md:text-sm rounded-full md:py-3 md:px-8 xs:text-[15px] xs:py-1 xs:px-8"
                         >
-                            <span className="">Submit</span>
-                        </button> */}
-
+                            <span className="">Previous</span>
+                        </button>
+                    </div>
+                    
+                    <div className="flex justify-end z-10 relative mt-4  mr-3">
                         <button
                             onClick={onSavePostClicked}
-                            className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-6"
+                            className="flex justify-end items-center z-10 relative bg-[#F97262] text-white md:text-sm rounded-full md:py-3 md:px-12 xs:text-[15px] xs:py-1 xs:px-8"
                             disabled={userLoading} // Disable the button when userLoading is true
                         >
                             {userLoading ? ( // Display spinner if userLoading is true
@@ -263,14 +276,6 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
                             )}
                         </button>
 
-                    </div>
-                    <div className="flex justify-end z-10 relative mt-4 ">
-                        <button
-                            onClick={renderPreviousForm}
-                            className="flex justify-end z-10 relative bg-rose-500 text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-10"
-                        >
-                            <span className="">Previous</span>
-                        </button>
                     </div>
                 </div>
 
