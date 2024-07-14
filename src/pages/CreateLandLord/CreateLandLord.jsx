@@ -305,7 +305,7 @@ const CreateLandLord = () => {
     // }
 
     const handlePasswordChange = (value) => {
-        console.log("object", value);
+        // console.log("object", value);
         setFormData({ ...formData, password: value })
         checkForTextOne(value)
         checkForTextTwo(value)
@@ -1078,8 +1078,6 @@ const CreateLandLord = () => {
                         </div>
                     </div>
                 </div>
-
-
 
                 <div className="flex items-center justify-center lg:w-full md:w-full">
                     <div className="w-full flex flex-col p-0 max-w-4xl px-2">
@@ -1893,3 +1891,9 @@ const CreateLandLord = () => {
     );
 };
 export default CreateLandLord;
+
+
+
+
+
+

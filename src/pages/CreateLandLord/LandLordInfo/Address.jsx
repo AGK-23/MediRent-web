@@ -73,17 +73,12 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [allCities, setAllCities] = useState([]);
 
-
-
-
-
     // const handleHousingUser = (e) => setHousingData(
     //     {
     //         ...housingData,
     //         [e.target.name]: e.target.value
     //     }
     // );
-
 
     const handleCityChange = (value) => {
         setSelectedCities(value);
@@ -104,9 +99,7 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
             ...prevHousingData,
             country: selectedValue
         }));
-
         const selectedCountryObj = selectedCity?.find((country) => country.name === value);
-
         // console.log("first code...", selectedCity, selectedCountry, value)
         if (selectedCountryObj) {
             setAllCities(selectedCountryObj.states);
@@ -282,7 +275,17 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
                     </div>
                 </div>
 
-                <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                <div className="flex md:flex-row xs:flex-col gap-5 my-5">
+                    <div className={`form-group flex w-[100%] text-[.8rem] my-0 font-semibold`}>
+                        Property address
+                    </div>
+
+                    <div className={`form-group flex w-[100%] text-[.8rem] my-0 text-[#717171] text-end md:justify-end xs:justify-start`}>
+                        <span className="text-red-500 mr-1">*</span> indicates required field
+                    </div>
+                </div>
+
+                <div className="flex md:flex-row xs:flex-col gap-10 my-5">
                     <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
                         <CustomInputs
                             id="listingTitle"
@@ -383,6 +386,26 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
                             className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
                         />
                     </div>
+                </div>
+
+                <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                    <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                        <CustomInputs
+                            id="phone"
+                            type='text'
+                            required
+                            showRequirement={true}
+                            // setValue={setFormData}
+                            value={phone}
+                            onChange={(value) => setHousingData(prevHousingData => ({
+                                ...prevHousingData,
+                                phone: value
+                            }))}
+                            label={'Phone'}
+                            className='px-0 mb-[5px] md:w-[370px] xs:w-full text-[16px]'
+                        />
+                    </div>
+                    
                 </div>
 
                 <div className="flex justify-end pb-10 w-full  gap-2">

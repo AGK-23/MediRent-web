@@ -290,6 +290,16 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
                     <option value="Room to rent">Room to rent shared communal </option>
                 </select> */}
 
+<div className="flex md:flex-row xs:flex-col gap-5 my-5">
+                    <div className={`form-group flex w-[100%] text-[.8rem] my-0 font-semibold`}>
+                        Housing Details
+                    </div>
+
+                    <div className={`form-group flex w-[100%] text-[.8rem] my-0 text-[#717171] text-end md:justify-end xs:justify-start`}>
+                        <span className="text-red-500 mr-1">*</span> indicates required field
+                    </div>
+                </div>
+
                 <div className="flex md:flex-row xs:flex-col gap-10 my-10">
                     <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
                         <CustomSelect
