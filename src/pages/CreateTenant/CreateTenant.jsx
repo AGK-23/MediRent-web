@@ -675,101 +675,137 @@ const CreateTenant = () => {
                                     <div className="text-left text-gray-700">
                                         <h1 className="mb-0 p-0 text-2xl text-black">Functions</h1>
 
-                                        <div className="flex items-center my-7">
-                                            <input
-                                                type="radio"
-                                                id="radioButton"
-                                                name="radioButton"
-                                                className="h-6 w-6  text-third border-gray-500 focus:ring-sky-600"
-                                                onClick={handleRadioChange}
-                                            />
-                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full text-[#717171]">
-                                                Medical Doctor with property/room for rent
-                                            </label>
+                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                <CustomInputs
+                                                    id="postalCode"
+                                                    type='text'
+                                                    required
+                                                    // setValue={setFormData}
+                                                    value={postalCode}
+                                                    onChange={(value) => setFormData(prevFormData => ({
+                                                        ...prevFormData,
+                                                        postalCode: value
+                                                    }))}
+                                                    label={'Postal Code'}
+                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                />
+                                            </div>
+                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                <CustomInputs
+                                                    id="city"
+                                                    type='text'
+                                                    required
+                                                    // setValue={setFormData}
+                                                    value={city}
+                                                    onChange={(value) => setFormData(prevFormData => ({
+                                                        ...prevFormData,
+                                                        city: value
+                                                    }))}
+                                                    label={'City'}
+                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                />
+                                            </div>
                                         </div>
 
-                                        <div className="flex items-center my-7">
-                                            <input
-                                                type="radio"
-                                                id="radioButton"
-                                                name="radioButton"
-                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
-                                                onClick={handleRadioChange}
-                                            />
-                                            <label htmlFor="radioButton" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">
-                                                Nurse, Physician Assistant or Nurse Practitioner
-                                            </label>
+                                        <div className="flex md:flex-row xs:flex-col md:gap-10 xs:gap-0 md:my-10 xs:my-0">
+                                            <div>
+                                                <div className="flex items-center my-7">
+                                                    <input
+                                                        type="radio"
+                                                        id="radioButton"
+                                                        name="radioButton"
+                                                        className="h-6 w-6  text-third border-gray-500 focus:ring-sky-600"
+                                                        onClick={handleRadioChange}
+                                                    />
+                                                    <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full text-[#717171]">
+                                                        Medical Doctor with property/room for rent
+                                                    </label>
+                                                </div>
+                                                <div className="flex items-center my-7">
+                                                    <input
+                                                        type="radio"
+                                                        id="radioButton"
+                                                        name="radioButton"
+                                                        className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                        onClick={handleRadioChange}
+                                                    />
+                                                    <label htmlFor="radioButton" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">
+                                                        Nurse, Physician Assistant or Nurse Practitioner
+                                                    </label>
+                                                </div>
+                                                <div className="flex items-center my-7">
+                                                    <input
+                                                        type="radio"
+                                                        id="radioButton"
+                                                        name="radioButton"
+                                                        className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                        onClick={handleRadioChange}
+                                                    />
+                                                    <label htmlFor="radioButton" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">
+                                                        Allied Healthcare Professional
+                                                    </label>
+                                                </div>
+
+                                                <div className="flex items-center my-7">
+                                                    <input
+                                                        type="radio"
+                                                        id="radioButton"
+                                                        name="radioButton"
+                                                        className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                        onClick={handleRadioChange}
+                                                    />
+                                                    <label htmlFor="radioButton" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">
+                                                        Medical Community landlord
+                                                    </label>
+                                                </div>
+
+                                            </div>
+
+                                            <div>
+                                                <div className="flex items-center md:my-7 xs:my-0">
+                                                    <input
+                                                        type="radio"
+                                                        id="radioButton"
+                                                        name="radioButton"
+                                                        className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                        onClick={handleRadioChange}
+                                                    />
+                                                    <label htmlFor="radioButton" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">
+                                                        Traveling Nurse
+                                                    </label>
+                                                </div>
+
+                                                <div className="flex items-center my-7">
+                                                    <input
+                                                        type="radio"
+                                                        id="radioButton"
+                                                        name="radioButton"
+                                                        className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                        onClick={handleRadioChange}
+                                                    />
+                                                    <label htmlFor="radioButton" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">
+                                                        Housing for Healthcare program
+                                                    </label>
+                                                </div>
+                                                <div className="flex items-center my-7">
+                                                    <input
+                                                        type="radio"
+                                                        id="radioButton"
+                                                        name="radioButton"
+                                                        className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                        onClick={handleRadioChange}
+                                                    />
+                                                    <label htmlFor="radioButton" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">
+                                                        Others
+                                                    </label>
+                                                </div>
+
+                                            </div>
                                         </div>
 
-                                        <div className="flex items-center my-7">
-                                            <input
-                                                type="radio"
-                                                id="radioButton"
-                                                name="radioButton"
-                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
-                                                onClick={handleRadioChange}
-                                            />
-                                            <label htmlFor="radioButton" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">
-                                                Allied Healthcare Professional
-                                            </label>
-                                        </div>
-
-                                        <div className="flex items-center my-7">
-                                            <input
-                                                type="radio"
-                                                id="radioButton"
-                                                name="radioButton"
-                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
-                                                onClick={handleRadioChange}
-                                            />
-                                            <label htmlFor="radioButton" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">
-                                                Medical Community landlord
-                                            </label>
-                                        </div>
-
-                                        <div className="flex items-center my-7">
-                                            <input
-                                                type="radio"
-                                                id="radioButton"
-                                                name="radioButton"
-                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
-                                                onClick={handleRadioChange}
-                                            />
-                                            <label htmlFor="radioButton" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">
-                                                Traveling Nurse
-                                            </label>
-                                        </div>
-
-                                        <div className="flex items-center my-7">
-                                            <input
-                                                type="radio"
-                                                id="radioButton"
-                                                name="radioButton"
-                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
-                                                onClick={handleRadioChange}
-                                            />
-                                            <label htmlFor="radioButton" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">
-                                                Housing for Healthcare program
-                                            </label>
-                                        </div>
-
-                                        <div className="flex items-center my-7">
-                                            <input
-                                                type="radio"
-                                                id="radioButton"
-                                                name="radioButton"
-                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
-                                                onClick={handleRadioChange}
-                                            />
-                                            <label htmlFor="radioButton" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">
-                                                Others
-                                            </label>
-                                        </div>
 
                                     </div>
-
-
-
 
                                     <div className="mb-8 text-left">
                                         <h1 className="mb-3 text-sm">How did you discover Medirent?</h1>
@@ -837,7 +873,7 @@ const CreateTenant = () => {
 
                                             <button
                                                 onClick={handleCreateTenantUser}
-                                                className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-16 xs:text-[15px] xs:py-3 xs:px-6"
+                                                className="flex justify-end items-center z-10 relative bg-[#F97262] text-white md:text-sm rounded-full md:py-3 md:px-12 xs:text-[15px] xs:py-1 xs:px-8"
                                                 disabled={userLoading} // Disable the button when userLoading is true
                                             >
                                                 {userLoading ? ( // Display spinner if userLoading is true
