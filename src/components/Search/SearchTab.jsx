@@ -34,13 +34,13 @@ const SearchTab = () => {
                 </div>
                 <div className="flex flex-col col">
                     <div className="text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
-                        Price Range
+                        Price
                     </div>
                     <input type="text" placeholder="Select" className="text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/>
                 </div>
                 <div className="flex flex-col col">
                     <div className="md:text-start xs:text-end text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
-                        Property Size
+                        Area
                     </div>
                     <input type="text" placeholder="Select" className="md:text-start xs:text-end text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/>
                 </div>

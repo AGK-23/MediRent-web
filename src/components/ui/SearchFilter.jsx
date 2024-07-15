@@ -375,7 +375,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                 </div>
 
                                 <div className='my-5'>
-                                    <div className="md:text-[15px] xs:text-[12px] text-black  w-full flex justify-start items-center font-[600] ">Range</div>
+                                    <div className="md:text-[15px] xs:text-[12px] text-black  w-full flex justify-start items-center font-[600] ">Price Range</div>
 
                                     <div className='flex my-3'>
 
