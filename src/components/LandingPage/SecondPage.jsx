@@ -55,7 +55,7 @@ const SecondPage = () => {
                                             Process for Newcomers
                                         </span>
 
-                                        <div className="md:text-[32px] xs:text-[21px] md:leading-[40.32px] xs:leading-[26.46px] font-semibold md:w-[540px] xs:w-fit">
+                                        <div className="md:text-[32px] xs:text-[21px] md:leading-[40.32px] xs:leading-[26.46px] font-semibold md:w-[540px] xs:w-fit capitalize">
                                             Few easy steps to get Started
                                         </div>
 

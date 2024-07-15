@@ -1,6 +1,6 @@
 // import React from "react";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -14,14 +14,17 @@ import Spinner from "../../assets/svg/Spinner.svg"
 // import { encryptAes, deCryptedData } from "../../components/EndPoints/Encrypted";
 
 import { axiosPrivate } from "../../api/axios";
+import PhotoLogin from "../../assets/svg/photo-tenants.svg";
+import Google from "../../assets/svg/google.svg"
+import CustomInputs from "../../components/Custom-components/CustomInputs";
 
 
 
 
 const Login = () => {
     const navigate = useNavigate();
-    const emailInput = useRef();
-    const passwordInput = useRef();
+    // const emailInput = useRef();
+    // const passwordInput = useRef();
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -32,18 +35,19 @@ const Login = () => {
 
     var {
         email,
-        password,
+        // password,
     } = formData;
 
-    const handleInputUser = (e) => setFormData(
-        {
-            ...formData,
-            [e.target.name]: e.target.value
-        }
-    );
+    // const handleInputUser = (e) => setFormData(
+    //     {
+    //         ...formData,
+    //         [e.target.name]: e.target.value
+    //     }
+    // );
 
-    const handlePasswordChange = (e) => {
-        setFormData({ ...formData, password: e.target.value })
+    const handlePasswordChange = (value) => {
+        // console.log("object", value);
+        setFormData({ ...formData, password: value })
     }
 
     const [isToggle, setIsToggle] = useState(true);
@@ -132,8 +136,8 @@ const Login = () => {
 
 
     return (
-        <div className="py-0 md:mt-32 xs:mt-[4rem] bg-white">
-            <div className="flex font-medium justify-between max-w-screen-xl mx-auto">
+        <div className="py-0 md:mt-16 xs:mt-[4rem] bg-white grid md:grid-cols-4 xs:grid-cols-1">
+            {/* <div className="flex font-medium justify-between max-w-screen-xl mx-auto">
                 <div
                     className="bg-white w-full h-screen bg-HomeImage bg-cover
                         bg-center flex justify-center lg:h-[50vh] md:h-[70vh] sm:h-[80vh] xs:h-[70vh]"
@@ -142,25 +146,52 @@ const Login = () => {
                         <p className="text-white text-4xl font-medium text-center">LOGIN</p>
                     </div>
                 </div>
+            </div> */}
+
+            <div className="md:col-1 xs:col bg-[#FCD3CD] md:flex xs:hidden flex-col ">
+
+                <div className="my-20 px-5">
+                    <div className="text-[#0E0C3D] font-semibold text-[24px] mb-5">SignIn to Your Account</div>
+                    <div className="text-black font-normal text-[16px]">Sign up to discover a variety of verified properties tailored for healthcare professionals. Provide your details below to start your journey towards finding a comfortable and convenient home that meets your unique needs.</div>
+                </div>
+
+                <div className="px-10">
+                    <div>
+                        <img alt="" src={PhotoLogin} className="text-[1px] text-white w-full h-full" />
+                    </div>
+                </div>
+
             </div>
 
 
-            <div className=" bg-[#f2f2f2] md:flex-1 flex-col w-full  items-center relative z-10 flex font-medium justify-between max-w-screen-xl mx-auto">
+            <div className=" md:col-span-3 xs:col bg-white  md:mt-20 xs:mt-10 flex-col w-full items-center relative z-10 flex font-medium justify-between max-w-screen-xl mx-auto md:px-2 xs:px-0">
                 <div className="flex items-center justify-center lg:w-full md:w-full">
-                    <div className="w-full flex flex-col p-0 max-w-4xl px-2">
+                    <div className="w-full justify-center items-center flex flex-col p-0 max-w-4xl px-2">
 
-                        <div className="w-full flex-1 mt-4">
+                        <div className="w-fit flex-1 mt-0">
 
 
-                            <div className="my-10 text-center">
+                            {/* <div className="my-10 text-center">
                                 <div className="text-2xl text-black font-normal text-center">
                                     Log in to your <span className="font-bold">account</span>
                                 </div>
+                            </div> */}
+                            <div className="mt-0 text-start">
+                                <h1 className="md:text-[24px] xs:text-[20px] text-start text-black font-semibold">
+                                    Log in to your <span className="">account</span>
+                                </h1>
+
+                                <div className="mt-1 font-normal">
+                                    <p className="text-[#717171] text-start text-[12px]">
+                                        Please select the plan and fill the details below along with your contact details
+                                    </p>
+                                </div>
+                                <div className="text-start my-6 font-semibold md:text-[16px] xs:text-[13px]">Let’s start with your plan and details</div>
                             </div>
 
                             <div className="">
                                 <div className="">
-                                    <div className="relative ">
+                                    {/* <div className="relative ">
                                         <input
                                             id="email"
                                             className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
@@ -255,22 +286,63 @@ const Login = () => {
                                                 </div>
                                             )}
                                         </div>
+                                    </div> */}
+
+                                    <div className="px-0">
+                                        <div className="rounded-full px-2 py-2 w-fit border-[1px] border-gray-400 flex">
+
+                                            <div className="mr-3">
+                                                <img alt="" src={Google} className="text-[1px] text-white w-full h-full" />
+                                            </div>
+                                            <div className="text-[15px]">Sign In with Google</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex md:flex-col xs:flex-col gap-10 my-5">
+                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                            <CustomInputs
+                                                id="email"
+                                                type='email'
+                                                required
+                                                // setValue={setFormData}
+                                                value={email}
+                                                showRequirement={true}
+                                                onChange={(value) => setFormData(prevFormData => ({
+                                                    ...prevFormData,
+                                                    email: value
+                                                }))}
+                                                label={'Email Adddress'}
+                                                className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                            />
+                                        </div>
+                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                            <CustomInputs
+                                                changeToggle={changeToggle}
+                                                showToggle={true}
+                                                isToggle={isToggle}
+                                                id='password'
+                                                type={`${isToggle ? 'text' : 'password'}`}
+                                                label='Password'
+                                                className='mb-[0px]'
+                                                onChange={handlePasswordChange}
+                                            />
+                                        </div>
                                     </div>
 
                                     <div className="flex justify-between border-b border-gray-600 pb-10">
                                         <div className="flex justify-end z-10 relative mt-4 ">
-                                            
+
 
                                             <button
                                                 onClick={handleLoginUser}
-                                                className="flex justify-end z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-10 xs:text-[10px] xs:py-2 xs:px-5"
+                                                className="flex justify-end items-center z-10 relative bg-[#F97262] text-white md:text-sm rounded-full md:py-3 md:px-12 xs:text-[15px] xs:py-1 xs:px-8"
                                                 disabled={isLoading} // Disable the button when isLoading is true
                                             >
                                                 {isLoading ? ( // Display spinner if userLoading is true
                                                     <div className="flex items-center px-6">
                                                         <div>
                                                             <img alt="" src={Spinner} className="text-[1px] text-white" />
-                                                            
+
                                                         </div>
 
                                                     </div>
@@ -286,7 +358,7 @@ const Login = () => {
                                         <div className="flex justify-end z-10 relative mt-4 ">
                                             <Link
                                                 to="/auth/forgotpassword"
-                                                className="flex justify-end z-10 relative bg-pink-400 text-white md:text-sm rounded-lg md:py-3 md:px-10 xs:text-[10px] xs:py-2 xs:px-5"
+                                                className="flex justify-end z-10 relative bg-white border-[1px] border-gray-400 text-gray-400 md:text-sm rounded-full md:py-3 md:px-8 xs:text-[15px] xs:py-1 xs:px-8"
                                             >
                                                 <span className="">Lost Password?</span>
                                             </Link>
@@ -299,18 +371,18 @@ const Login = () => {
                                         <div className="flex justify-end z-10 relative mt-4 ">
                                             <Link
                                                 to="/auth/housing-subscription"
-                                                className="flex justify-end z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-10 xs:text-[10px] xs:py-2 xs:px-4"
+                                                className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-full md:py-3 md:px-12 xs:text-[12px] xs:py-2 xs:px-5"
                                             >
-                                                <span className="">Create a Landlord account</span>
+                                                <span className="">Landlord account</span>
                                             </Link>
                                         </div>
 
                                         <div className="flex justify-end z-10 relative mt-4 ">
                                             <Link
                                                 to="/auth/registration-page"
-                                                className="flex justify-end z-10 relative bg-third text-white md:text-sm rounded-lg md:py-3 md:px-10 xs:text-[10px] xs:py-2 xs:px-4"
+                                                className="flex justify-end items-center z-10 relative bg-third text-white md:text-sm rounded-full md:py-3 md:px-12 xs:text-[12px] xs:py-2 xs:px-5"
                                             >
-                                                <span className="">Create a Tenant account</span>
+                                                <span className="">Tenant account</span>
                                             </Link>
                                         </div>
 

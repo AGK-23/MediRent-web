@@ -36,7 +36,7 @@ const Faqs = () => {
                                     <div className=" mb-3 md:px-4 xs:px-0 text-black flex-col font-normal md:mb-7 xs:mb-3 flex justify-center items-center w-full">
 
                                         <div className="md:text-[32px] xs:text-[21px] md:leading-[40.32px] xs:leading-[26.46px] font-semibold md:w-full xs:w-fit flex justify-center items-center">
-                                            Frequently asked Questions
+                                            Frequently Asked Questions
                                         </div>
 
                                         <div className="text-black mb-0 text-[16px] text-start py-5 md:w-full md:pr-10 xs:pr-0 xs:w-fit flex justify-center items-center">

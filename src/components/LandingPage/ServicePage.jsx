@@ -104,7 +104,7 @@ const ServicePage = () => {
 
                                             <div className=" w-full ">
                                                 <div className="flex lg:flex-row md:flex-col  xs:flex-col justify-center items-center w-full gap-10 px-2">
-                                                    <div className="py-2 flex md:w-[450px] xs:w-fit justify-center bg-[#fefefe] rounded-lg shadow-lg">
+                                                    <div className="py-2 flex md:w-[450px] xs:w-fit justify-center bg-[#fefefe] rounded-lg shadow-lg border-[1px]">
 
                                                         <div className="px-[25px]">
                                                             <div className="mt-0 text-start text-[24px] leading-6 py-[20px] font-semibold text-black ">
@@ -129,7 +129,7 @@ const ServicePage = () => {
 
                                                         </div>
                                                     </div>
-                                                    <div className="py-2 flex md:w-[450px] xs:w-fit justify-center bg-[#fefefe] rounded-lg shadow-lg">
+                                                    <div className="py-2 flex md:w-[450px] xs:w-fit justify-center bg-[#fefefe] rounded-lg shadow-lg border-[1px]">
                                                         <div className="px-[25px]">
                                                             <div className="mt-0 text-start text-[24px] leading-6 py-[20px] font-semibold text-black ">
                                                                 Get Tenant Insurance
@@ -164,7 +164,7 @@ const ServicePage = () => {
 
                                             <div className=" w-full ">
                                                 <div className="flex lg:flex-row md:flex-col xs:flex-col justify-center items-center w-full gap-10 px-2">
-                                                    <div className="py-2 flex md:w-[450px] xs:w-fit justify-center bg-[#fefefe] rounded-lg shadow-lg">
+                                                    <div className="py-2 flex md:w-[450px] xs:w-fit justify-center bg-[#fefefe] rounded-lg shadow-lg border-[1px]">
 
                                                         <div className="px-[25px]">
                                                             <div className="mt-0 text-start text-[24px] leading-6 py-[20px] font-semibold text-black ">
@@ -190,7 +190,7 @@ const ServicePage = () => {
                                                         </div>
 
                                                     </div>
-                                                    <div className="py-2 flex md:w-[450px] xs:w-fit justify-center bg-[#fefefe] rounded-lg shadow-lg">
+                                                    <div className="py-2 flex md:w-[450px] xs:w-fit justify-center bg-[#fefefe] rounded-lg shadow-lg border-[1px]">
 
 
                                                         <div className="px-[25px]">

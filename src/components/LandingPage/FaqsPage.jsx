@@ -43,7 +43,7 @@ const FaqsPage = () => {
                                     <div className=" mb-3 md:px-4 xs:px-0 text-black flex-col font-normal md:mb-7 xs:mb-3 flex ">
 
                                         <div className="md:text-[32px] xs:text-[21px] md:leading-[40.32px] xs:leading-[26.46px] font-semibold md:w-full xs:w-fit">
-                                            Frequently asked Questions
+                                            Frequently Asked Questions
                                         </div>
 
                                         <div className="text-black mb-0 flex text-[16px] text-start py-5 md:w-[440px] md:pr-10 xs:pr-0 xs:w-fit">

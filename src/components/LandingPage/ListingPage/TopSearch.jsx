@@ -102,7 +102,8 @@ const TopSearch = () => {
                 <div className="flex flex-col">
                     <div className=" mb-3 xs:px-2 text-black flex-col font-normal md:px-[170px] md:mb-7 xs:mb-3 flex ">
                         <div className="text-[32px] leading-[40.32px] font-semibold xs:w-full flex">
-                            Search space to Rent
+                            {/* Search space to Rent */}
+                            Find Your Perfect Rental
                         </div>
 
                         <div className='mt-[33px] w-full'>

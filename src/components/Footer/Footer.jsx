@@ -77,7 +77,7 @@ function Footer() {
                             <h2 className='text-start font-semibold mb-6 text-xl text-slate-900'>Why Medirent</h2>
 
                             <div className='mb-4 text-start text-[16px] font-[400] text-gray-400'>
-                                <span className=' text-[#1B2126] hover:text-primary cursor-pointer'>Rent a space</span>
+                                <span className=' text-[#1B2126] hover:text-primary cursor-pointer'>Rent a Space</span>
                             </div>
                             <div className='mb-4 text-start text-[16px] font-[400] text-gray-400'>
                                 <span className=' text-[#1B2126] hover:text-primary cursor-pointer'>Get Tenant Insurance</span>
