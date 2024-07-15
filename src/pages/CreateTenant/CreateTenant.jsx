@@ -675,39 +675,6 @@ const CreateTenant = () => {
                                     <div className="text-left text-gray-700">
                                         <h1 className="mb-0 p-0 text-2xl text-black">Functions</h1>
 
-                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
-                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                                                <CustomInputs
-                                                    id="postalCode"
-                                                    type='text'
-                                                    required
-                                                    // setValue={setFormData}
-                                                    value={postalCode}
-                                                    onChange={(value) => setFormData(prevFormData => ({
-                                                        ...prevFormData,
-                                                        postalCode: value
-                                                    }))}
-                                                    label={'Postal Code'}
-                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
-                                                />
-                                            </div>
-                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                                                <CustomInputs
-                                                    id="city"
-                                                    type='text'
-                                                    required
-                                                    // setValue={setFormData}
-                                                    value={city}
-                                                    onChange={(value) => setFormData(prevFormData => ({
-                                                        ...prevFormData,
-                                                        city: value
-                                                    }))}
-                                                    label={'City'}
-                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
-                                                />
-                                            </div>
-                                        </div>
-
                                         <div className="flex md:flex-row xs:flex-col md:gap-10 xs:gap-0 md:my-10 xs:my-0">
                                             <div>
                                                 <div className="flex items-center my-7">
