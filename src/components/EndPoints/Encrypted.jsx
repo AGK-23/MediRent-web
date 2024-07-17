@@ -22,6 +22,8 @@ export const encryptAes = (data) => {
 export const deCryptedData = (data) => {
     console.log({ data })
     const dataHex = CryptoJS.enc.Hex.parse(data);
+
+    // console.log("town in the code..", dataHex, data)
     const preDecrypted = CryptoJS.AES.decrypt(
         { ciphertext: dataHex },
         secretKey,
@@ -30,8 +32,41 @@ export const deCryptedData = (data) => {
     const encDecrypted = preDecrypted.toString(CryptoJS.enc.Utf8);
 
     let decrypted = encDecrypted;
+
+    console.log("decrypt.. ", decrypted)
     if (decrypted.includes("{")) {
         decrypted = JSON.parse(encDecrypted);
     }
     return decrypted;
 };
+
+// export const deCryptedData = (data) => {
+//     console.log({ data });
+
+//     try {
+//         const preDecrypted = CryptoJS.AES.decrypt(
+//             data,
+//             secretKey,
+//             {
+//                 iv: intiVector,
+//                 mode: CryptoJS.mode.CBC,
+//                 padding: CryptoJS.pad.Pkcs7
+//             }
+//         );
+
+//         const decrypted = preDecrypted.toString(CryptoJS.enc.Utf8);
+//         let parsedData;
+
+//         if (decrypted.includes("{")) {
+//             parsedData = JSON.parse(decrypted);
+//         } else {
+//             parsedData = decrypted;
+//         }
+
+//         console.log("Decrypted data:", parsedData);
+//         return parsedData;
+//     } catch (error) {
+//         console.error("Error decrypting data:", error);
+//         return null;
+//     }
+// };

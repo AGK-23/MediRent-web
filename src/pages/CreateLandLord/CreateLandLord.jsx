@@ -66,6 +66,7 @@ const CreateLandLord = () => {
         province: "",
         discoveryMethod: "",
         receiveNewsletter: false,
+        // role: "landlord",
     });
 
     const [loginData, setLoginData] = useState({
@@ -92,9 +93,9 @@ const CreateLandLord = () => {
         // dailyRent: "",
         // weeklyRent: "",
         // monthlyRent: "",
-        numberOfBedRoom: "",
-        numberOfBathRoom: "",
-        numberOfKitchen: "",
+        numberOfBedRoom: null,
+        numberOfBathRoom: null,
+        numberOfKitchens: null,
         price: "",
         buildYear: "",
         propertySize: "",
@@ -143,7 +144,7 @@ const CreateLandLord = () => {
         // monthlyRent: detailsData?.monthlyRent,
         numberOfBedRoom: detailsData?.numberOfBedRoom,
         numberOfBathRoom: detailsData?.numberOfBathRoom,
-        numberOfKitchen: detailsData?.numberOfKitchen,
+        numberOfKitchens: detailsData?.numberOfKitchens,
 
         price: detailsData?.price,
         buildYear: detailsData?.buildYear,
@@ -219,7 +220,7 @@ const CreateLandLord = () => {
             // monthlyRent: detailsData?.monthlyRent,
             numberOfBedRoom: detailsData?.numberOfBedRoom,
             numberOfBathRoom: detailsData?.numberOfBathRoom,
-            numberOfKitchen: detailsData?.numberOfKitchen,
+            numberOfKitchens: detailsData?.numberOfKitchens,
 
             price: detailsData?.price,
             buildYear: detailsData?.buildYear,
@@ -411,8 +412,6 @@ const CreateLandLord = () => {
 
             setLandLoading(true);
 
-            // console.log("user form for landlord...", formData);
-
             // const response = await axios.post(`https://medirent-api-3gwy.onrender.com/account/landlord-registration`,
             //     formData,
             // );
@@ -421,11 +420,20 @@ const CreateLandLord = () => {
 
             const response = await axiosPrivate.post("/account/landlord-registration", formData);
 
+            console.log("safe..", response)
+
             setLandLoading(false);
 
 
             if (response?.data?.Success === true) {
+                console.log("safe in the code..", response?.data?.Success)
                 toast.success("Landlord's account Created");
+
+                // setLoginData(prevState => ({
+                //     ...prevState,
+                //     email: formData?.email,
+                //     password: formData?.password
+                // }));
 
                 await handleLoginUser()
             }
@@ -433,7 +441,7 @@ const CreateLandLord = () => {
 
         } catch (error) {
             setLandLoading(false);
-            // console.log("error in the landlord..", error)
+            console.log("error in the landlord..", error)
         }
 
         // setActive(2)
@@ -447,7 +455,7 @@ const CreateLandLord = () => {
             setLoginLoading(true)
 
 
-            // console.log("lOGIN DATA...", loginData);
+            console.log("lOGIN DATA...", loginData);
 
             // const response = await axios.post(`https://medirent-api-3gwy.onrender.com/account/signin`,
             //     loginData,
@@ -456,6 +464,8 @@ const CreateLandLord = () => {
             const response = await axiosPrivate.post("/account/signin", loginData);
 
             setLoginLoading(false)
+
+            console.log("all the pricing..", response)
 
             // console.log("landlord account..", response.data.data, "Loading..", loginLoading);
 
@@ -477,7 +487,8 @@ const CreateLandLord = () => {
             if (response.data.Success === true) {
                 toast.success("Login Successfully");
 
-                setActive(2)
+                setActive(3)
+                console.log("active", active)
             }
             return response.data;
         } catch (error) {
@@ -754,7 +765,7 @@ const CreateLandLord = () => {
             if (response.data.success === true) {
                 toast.success("Listing Created");
 
-                setActive(4)
+                setActive(5)
             }
 
             return response.data; // Return the response data if needed
@@ -824,7 +835,7 @@ const CreateLandLord = () => {
             if (response.data.success === true) {
                 toast.success("Images Successfully Uploaded");
 
-                setActive(5)
+                setActive(6)
             }
 
             return response.data;

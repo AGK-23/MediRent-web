@@ -48,7 +48,7 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
             toast.warning('Please fill in all required fields.');
             return;
         }
-        setActive(3)
+        setActive(4)
 
     };
 

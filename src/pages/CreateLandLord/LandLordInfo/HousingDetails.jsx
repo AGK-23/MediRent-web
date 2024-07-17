@@ -38,7 +38,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
         designOption,
         numberOfBedRoom,
         numberOfBathRoom,
-        numberOfKitchen,
+        numberOfKitchens,
         price,
         buildYear,
         propertySize,
@@ -54,7 +54,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
             
             !numberOfBedRoom ||
             !numberOfBathRoom ||
-            !numberOfKitchen ||
+            !numberOfKitchens ||
             !price ||
             !buildYear ||
             !propertySize ||
@@ -171,21 +171,23 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
     const handleBedRoomUser = (value) => {
         setDetailsData({
             ...detailsData,
-            numberOfBedRoom: value
+            numberOfBedRoom: parseInt(value)
         });
     };
 
     const handleBathUser = (value) => {
         setDetailsData({
             ...detailsData,
-            numberOfBathRoom: value
+            numberOfBathRoom: parseInt(value)
         });
     };
 
     const handleKitchenUser = (value) => {
+
+        // console.log("kitchen..", typeof parseInt(value))
         setDetailsData({
             ...detailsData,
-            numberOfKitchen: value
+            numberOfKitchens: parseInt(value)
         });
     };
 
@@ -337,7 +339,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
                             type='number'
                             required
                             // setValue={setFormData}
-                            value={numberOfBedRoom}
+                            value={parseInt(numberOfBedRoom)}
                             showRequirement={true}
                             onChange={handleBedRoomUser}
                             label={'Bed room'}
@@ -367,7 +369,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
                             type='number'
                             required
                             // setValue={setFormData}
-                            value={numberOfKitchen}
+                            value={numberOfKitchens}
                             showRequirement={true}
                             onChange={handleKitchenUser}
                             label={'Kitchen'}
@@ -466,7 +468,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
 
 
                 <div className="w-fit">
-                    <div className="grid md:grid-cols-3 xs:grid-cols-1 gap-10">
+                    <div className="grid md:grid-cols-3 xs:grid-cols-1 md:gap-10 xs:gap-0">
                         <div className="flex items-center my-3">
                             <input
                                 type="checkbox"
@@ -508,7 +510,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
 
                     </div>
 
-                    <div className="grid md:grid-cols-3 xs:grid-cols-1 gap-10">
+                    <div className="grid md:grid-cols-3 xs:grid-cols-1 md:gap-10 xs:gap-0">
                         <div className="flex items-center my-3">
                             <input
                                 type="checkbox"
@@ -550,7 +552,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
 
                     </div>
 
-                    <div className="grid md:grid-cols-3 xs:grid-cols-1 gap-10">
+                    <div className="grid md:grid-cols-3 xs:grid-cols-1 md:gap-10 xs:gap-0">
                         <div className="flex items-center my-3">
                             <input
                                 type="checkbox"

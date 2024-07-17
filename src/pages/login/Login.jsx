@@ -15,9 +15,15 @@ import Spinner from "../../assets/svg/Spinner.svg"
 
 import { axiosPrivate } from "../../api/axios";
 import PhotoLogin from "../../assets/svg/photo-tenants.svg";
-import Google from "../../assets/svg/google.svg"
+// import Google from "../../assets/svg/google.svg"
 import CustomInputs from "../../components/Custom-components/CustomInputs";
+// import Line from "../../assets/svg/line.svg";
 
+// import { GoogleLogin, GoogleLogout } from '@react-oauth/google';
+// import axios from 'axios';
+
+
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
 
 
@@ -28,10 +34,20 @@ const Login = () => {
 
     const [isLoading, setIsLoading] = useState(false);
 
+    const [userGoogle, setUserGoogle] = useState(null);
+
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
+
+    const [formDataGoogle, setFormDataGoogle] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+
+    });
+    // const [user, setUser] = useState(null);
 
     var {
         email,
@@ -133,10 +149,36 @@ const Login = () => {
         }
     };
 
+    const handleGoogleLogin = (credentialResponse) => {
+        // Decode the JWT token to get the user's profile information
+        const userProfile = JSON.parse(atob(credentialResponse.credential.split('.')[1]));
+
+
+        setUserGoogle(userProfile)
+
+        if (userProfile) {
+
+
+            setFormDataGoogle((prevFormDataGoogle) => {
+                console.log("prevFormData:", prevFormDataGoogle);
+                return {
+                    ...prevFormDataGoogle,
+                    firstName: userProfile.given_name,
+                    lastName: userProfile.family_name,
+                    email: userProfile.email,
+
+                };
+            });
+
+            console.log("set the form..", formDataGoogle, userGoogle)
+
+        }
+    };
+
 
 
     return (
-        <div className="py-0 md:mt-16 xs:mt-[4rem] bg-white grid md:grid-cols-4 xs:grid-cols-1">
+        <div className="py-0 md:mt-16 xs:mt-[4rem] bg-white grid md:grid-cols-5 xs:grid-cols-1">
             {/* <div className="flex font-medium justify-between max-w-screen-xl mx-auto">
                 <div
                     className="bg-white w-full h-screen bg-HomeImage bg-cover
@@ -148,7 +190,7 @@ const Login = () => {
                 </div>
             </div> */}
 
-            <div className="md:col-1 xs:col bg-[#FCD3CD] md:flex xs:hidden flex-col ">
+            <div className="md:col-span-2 xs:col bg-[#FCD3CD] md:flex xs:hidden flex-col ">
 
                 <div className="my-20 px-5">
                     <div className="text-[#0E0C3D] font-semibold text-[24px] mb-5">SignIn to Your Account</div>
@@ -164,13 +206,11 @@ const Login = () => {
             </div>
 
 
-            <div className=" md:col-span-3 xs:col bg-white  md:mt-20 xs:mt-10 flex-col w-full items-center relative z-10 flex font-medium justify-between max-w-screen-xl mx-auto md:px-2 xs:px-0">
+            <div className=" md:col-span-3 xs:col bg-white  md:mt-10 xs:mt-10 flex-col w-full items-center relative z-10 flex font-medium justify-between max-w-screen-xl mx-auto lg:px-40 md:px-20 xs:px-0">
                 <div className="flex items-center justify-center lg:w-full md:w-full">
                     <div className="w-full justify-center items-center flex flex-col p-0 max-w-4xl px-2">
 
-                        <div className="w-fit flex-1 mt-0">
-
-
+                        <div className="w-full flex-1 mt-0">
                             {/* <div className="my-10 text-center">
                                 <div className="text-2xl text-black font-normal text-center">
                                     Log in to your <span className="font-bold">account</span>
@@ -178,127 +218,59 @@ const Login = () => {
                             </div> */}
                             <div className="mt-0 text-start">
                                 <h1 className="md:text-[24px] xs:text-[20px] text-start text-black font-semibold">
-                                    Log in to your <span className="">account</span>
+                                    Sign in to your account
                                 </h1>
 
                                 <div className="mt-1 font-normal">
                                     <p className="text-[#717171] text-start text-[12px]">
-                                        Please select the plan and fill the details below along with your contact details
+                                        To get started, fill in your information or log in with google
                                     </p>
                                 </div>
-                                <div className="text-start my-6 font-semibold md:text-[16px] xs:text-[13px]">Let’s start with your plan and details</div>
+                                {/* <div className="text-start my-6 font-semibold md:text-[16px] xs:text-[13px]">Let’s start with your plan and details</div> */}
                             </div>
 
                             <div className="">
                                 <div className="">
-                                    {/* <div className="relative ">
-                                        <input
-                                            id="email"
-                                            className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                            type="email"
-                                            ref={emailInput}
-                                            name="email"
-                                            value={email}
-                                            onChange={handleInputUser}
-                                            placeholder=""
-                                        />
-                                        <label
-                                            htmlFor="email"
-                                            className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                                        >
-                                            E-mail
-                                        </label>
-                                    </div>
-                                    <div className="group relative md:mt-10 xs:mt-5">
-                                        <input
-                                            id="password"
-                                            className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                            type={`${isToggle ? "password" : "text"}`}
-                                            ref={passwordInput}
-                                            name="password"
-                                            value={password}
-                                            onChange={handlePasswordChange}
-                                            placeholder=""
-                                        />
-                                        <label
-                                            htmlFor="email"
-                                            className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                                        >
-                                            Password
-                                        </label>
 
-                                        <div
-                                            className="flex mt-3 flex-col h-6 "
-                                            onClick={changeToggle}
-                                            style={{
-                                                position: "absolute",
-                                                width: "30px",
-                                                right: "5px",
-                                                bottom: "12px",
-                                                lineHeight: "20px",
-                                            }}
-                                        >
-                                            {isToggle ? (
-                                                <div className="cursor-pointer">
-                                                    <svg
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="eye-slash"
-                                                        className="w-6 h-6 text-gray-600"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            fill="currentColor"
-                                                            d="M286.693 391.984l32.579 46.542A333.958 333.958 0 0 1 288 440C168.19 440 63.031 376.051 6.646 280.369a47.999 47.999 0 0 1 0-48.739c24.023-40.766 56.913-75.775 96.024-102.537l57.077 81.539C154.736 224.82 152 240.087 152 256c0 74.736 60.135 135.282 134.693 135.984zm282.661-111.615c-31.667 53.737-78.747 97.46-135.175 125.475l.011.015 41.47 59.2c7.6 10.86 4.96 25.82-5.9 33.42l-13.11 9.18c-10.86 7.6-25.82 4.96-33.42-5.9L100.34 46.94c-7.6-10.86-4.96-25.82 5.9-33.42l13.11-9.18c10.86-7.6 25.82-4.96 33.42 5.9l51.038 72.617C230.68 75.776 258.905 72 288 72c119.81 0 224.969 63.949 281.354 159.631a48.002 48.002 0 0 1 0 48.738zM424 256c0-75.174-60.838-136-136-136-17.939 0-35.056 3.473-50.729 9.772l19.299 27.058c25.869-8.171 55.044-6.163 80.4 7.41h-.03c-23.65 0-42.82 19.17-42.82 42.82 0 23.626 19.147 42.82 42.82 42.82 23.65 0 42.82-19.17 42.82-42.82v-.03c18.462 34.49 16.312 77.914-8.25 110.95v.01l19.314 27.061C411.496 321.2 424 290.074 424 256zM262.014 356.727l-77.53-110.757c-5.014 52.387 29.314 98.354 77.53 110.757z"
-                                                        />
-                                                    </svg>
-                                                </div>
-                                            ) : (
-                                                <div
-                                                    className="cursor-pointer"
-                                                    style={{
-                                                        position: "absolute",
-                                                        width: "40px",
-                                                        height: "40px",
 
-                                                        lineHeight: "20px",
-                                                    }}
-                                                >
-                                                    <svg
-                                                        aria-hidden="true"
-                                                        focusable="false"
-                                                        data-prefix="fas"
-                                                        data-icon="eye"
-                                                        className="w-6 h-6 text-gray-600"
-                                                        role="img"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 576 512"
-                                                    >
-                                                        <path
-                                                            fill="currentColor"
-                                                            d="M569.354 231.631C512.969 135.949 407.81 72 288 72 168.14 72 63.004 135.994 6.646 231.631a47.999 47.999 0 0 0 0 48.739C63.031 376.051 168.19 440 288 440c119.86 0 224.996-63.994 281.354-159.631a47.997 47.997 0 0 0 0-48.738zM288 392c-75.162 0-136-60.827-136-136 0-75.162 60.826-136 136-136 75.162 0 136 60.826 136 136 0 75.162-60.826 136-136 136zm104-136c0 57.438-46.562 104-104 104s-104-46.562-104-104c0-17.708 4.431-34.379 12.236-48.973l-.001.032c0 23.651 19.173 42.823 42.824 42.823s42.824-19.173 42.824-42.823c0-23.651-19.173-42.824-42.824-42.824l-.032.001C253.621 156.431 270.292 152 288 152c57.438 0 104 46.562 104 104z"
-                                                        />
-                                                    </svg>
-
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div> */}
-
-                                    <div className="px-0">
-                                        <div className="rounded-full px-2 py-2 w-fit border-[1px] border-gray-400 flex">
+                                    <div className="px-0 mt-0 cursor-pointer">
+                                        {/* <div className=" px-2 py-2 w-full bg-gray-100 flex justify-center items-center">
 
                                             <div className="mr-3">
-                                                <img alt="" src={Google} className="text-[1px] text-white w-full h-full" />
+                                                <img alt=""  src={Google} width={16} height={16} className="text-[1px] text-white" />
                                             </div>
                                             <div className="text-[15px]">Sign In with Google</div>
-                                        </div>
+                                        </div> */}
+                                        <GoogleOAuthProvider clientId="1061797876618-qshcq6n3nd057kv6586f859g8mj5cp6a.apps.googleusercontent.com">
+
+                                            <button className="px-0 mt-10 cursor-pointer w-full " >
+                                                <div className=" px-2 py-2 w-full bg-gray-100 flex justify-center items-center">
+                                                    {/* onClick={() => setSignInState(2)} */}
+
+                                                    {/* <div className="mr-3">
+                                                                <img alt="" src={Google} width={16} height={16} className="text-[1px] text-white" />
+                                                            </div>
+                                                            <div className="text-[15px]">Sign up with Google</div> */}
+
+                                                    {/* <GoogleLogin
+                                                                onSuccess={handleGoogleLogin}
+                                                                onError={(err) => console.error('Google login error:', err)}
+                                                            /> */}
+                                                    <GoogleLogin
+                                                        className="border-none hidden"
+                                                        onSuccess={handleGoogleLogin}
+                                                        onError={(err) => console.error('Google sign-in error:', err)}
+                                                    />
+                                                </div>
+                                            </button>
+                                        </GoogleOAuthProvider>
                                     </div>
 
-                                    <div className="flex md:flex-col xs:flex-col gap-10 my-5">
+                                    <div className='flex justify-center items-center h-[1px] my-10 w-full bg-[#d5d1d1] text-center font-[500] '>
+                                        <span className='bg-white px-5 py-5 text-black'>Or</span>
+                                    </div>
+
+                                    <div className="flex md:flex-col xs:flex-col gap-5 my-5">
                                         <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
                                             <CustomInputs
                                                 id="email"
@@ -329,10 +301,8 @@ const Login = () => {
                                         </div>
                                     </div>
 
-                                    <div className="flex justify-between border-b border-gray-600 pb-10">
+                                    <div className="flex justify-between border-b border-gray-600 pb-5">
                                         <div className="flex justify-end z-10 relative mt-4 ">
-
-
                                             <button
                                                 onClick={handleLoginUser}
                                                 className="flex justify-end items-center z-10 relative bg-[#F97262] text-white md:text-sm rounded-full md:py-3 md:px-12 xs:text-[15px] xs:py-1 xs:px-8"
