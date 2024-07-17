@@ -406,7 +406,7 @@ const CreateTenant = () => {
 
             // console.log("all this navigate..", formData)
 
-            console.log("test four...", testFour, "test Three...", testThree, "test two...", testTwo, "test one...", testOne)
+            // console.log("test four...", testFour, "test Three...", testThree, "test two...", testTwo, "test one...", testOne)
 
         } catch (error) {
             toast.error("User creation Failed");
@@ -520,7 +520,7 @@ const CreateTenant = () => {
                                                 </div>
 
                                                 <button className="px-0 mt-0 cursor-pointer w-full" onClick={() => setSignInState(3)}>
-                                                    <div className=" px-2 py-2 w-full bg-gray-100 flex justify-center items-center">
+                                                    <div className=" px-2 py-4 w-full bg-gray-100 flex justify-center items-center">
 
                                                         <div className="mr-3">
                                                             <img alt="" src={Mail} className="text-[1px] text-white w-full h-full" />

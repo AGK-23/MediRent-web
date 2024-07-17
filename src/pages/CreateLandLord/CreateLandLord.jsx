@@ -30,10 +30,20 @@ import { axiosPrivate } from "../../api/axios.jsx";
 
 import CustomInputs from "../../components/Custom-components/CustomInputs.jsx";
 import CustomSelect from "../../components/Custom-components/Custom-Select.jsx";
+import Mail from "../../assets/svg/mail.svg";
+
+
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
 
 const CreateLandLord = () => {
     const navigate = useNavigate();
+
+    const [signInState, setSignInState] = useState(1);
+
+    const [userGoogle, setUserGoogle] = useState(null);
+
+
     // const [avatar, setAvatar] = useState(null);
     const [userLoading, setUserLoading] = useState(false);
 
@@ -155,7 +165,7 @@ const CreateLandLord = () => {
 
         // licenseNumber: detailsData?.licenseNumber,
         description: detailsData?.description,
-        
+
         // currency: detailsData?.currency,
         amenitiesOption: detailsData?.amenitiesOption,
 
@@ -510,6 +520,33 @@ const CreateLandLord = () => {
         handleCheckLandLord()
         // console.log("all the data..", formData);
 
+    };
+
+    const handleGoogleSignup = (credentialResponse) => {
+        // Decode the JWT token to get the user's profile information
+        const userProfile = JSON.parse(atob(credentialResponse.credential.split('.')[1]));
+        // Implement your Google sign-up logic here
+        console.log('Google sign-up response:', userProfile);
+
+        setUserGoogle(userProfile);
+
+        if (userProfile) {
+
+
+            setFormData((prevFormData) => {
+                console.log("prevFormData:", prevFormData);
+                return {
+                    ...prevFormData,
+                    firstName: userProfile.given_name,
+                    lastName: userProfile.family_name,
+                    email: userProfile.email,
+                    emailConfirmation: userProfile.email,
+                };
+            });
+
+            console.log("set the form..", formData, userGoogle)
+            setSignInState(2)
+        }
     };
 
 
@@ -904,7 +941,7 @@ const CreateLandLord = () => {
                                             </span>
                                             :
                                             <span className="font-bold">
-                                                <BsCheckLg/>
+                                                <BsCheckLg />
                                             </span>
 
                                     }
@@ -1143,701 +1180,486 @@ const CreateLandLord = () => {
 
                                         {/* <div className="text-center my-6 font-base md:text-3xl xs:text-xl"> Contact information</div> */}
 
-                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
-                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                                                <CustomInputs
-                                                    id="firstname"
-                                                    type='text'
-                                                    required
-                                                    // setValue={setFormData}
-                                                    value={firstName}
-                                                    showRequirement={true}
-                                                    onChange={(value) => setFormData(prevFormData => ({
-                                                        ...prevFormData,
-                                                        firstName: value
-                                                    }))}
-                                                    label={'First Name'}
-                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
-                                                />
-                                            </div>
-                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                                                <CustomInputs
-                                                    id="lastname"
-                                                    type='text'
-                                                    required
-                                                    // setValue={setFormData}
-                                                    value={lastName}
-                                                    showRequirement={true}
-                                                    onChange={(value) => setFormData(prevFormData => ({
-                                                        ...prevFormData,
-                                                        lastName: value
-                                                    }))}
+                                        {
+                                            signInState == 1 && (
+                                                <div className="mb-10 ">
 
-                                                    label={'Last Name'}
-                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
-                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                                                <CustomInputs
-                                                    id="email"
-                                                    type='email'
-                                                    required
-                                                    // setValue={setFormData}
-                                                    value={email}
-                                                    showRequirement={true}
-                                                    onChange={(value) => setFormData(prevFormData => ({
-                                                        ...prevFormData,
-                                                        email: value
-                                                    }))}
-
-                                                    label={'Email'}
-                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
-                                                />
-                                            </div>
-                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                                                <CustomInputs
-                                                    id="emailConfirmation"
-                                                    type='text'
-                                                    required
-                                                    // setValue={setFormData}
-                                                    value={emailConfirmation}
-                                                    showRequirement={true}
-                                                    onChange={(value) => setFormData(prevFormData => ({
-                                                        ...prevFormData,
-                                                        emailConfirmation: value
-                                                    }))}
-
-                                                    label={'Re-enter Email Address'}
-                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
-                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                                                <CustomInputs
-                                                    id="phone"
-                                                    type='text'
-                                                    required
-                                                    setValue={setFormData}
-                                                    value={phone}
-                                                    label={'Phone Number'}
-                                                    onChange={(value) => setFormData(prevFormData => ({
-                                                        ...prevFormData,
-                                                        phone: value
-                                                    }))}
-                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
-                                                />
-                                            </div>
-                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                                                <CustomInputs
-                                                    id="yearsActive"
-                                                    type='number'
-                                                    required
-                                                    // setValue={setFormData}
-                                                    value={yearsActive}
-                                                    onChange={(value) => setFormData(prevFormData => ({
-                                                        ...prevFormData,
-                                                        yearsActive: value
-
-                                                    }))}
-                                                    label={'Years Of Active Experience'}
-                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
-                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-
-                                                <CustomSelect
-                                                    wrapperClass=' !h-[58px] !w-full !px-[12px]'
-                                                    labelClass=' text-black w-full text-gray-500'
-                                                    optionsClass='!text-[0.875rem] !h-[48px] !w-[100%] !text-black'
-                                                    optionWrapperClass=' w-[100%] !w-full border-[1px] shadow-lg border-gray-200 xl:left-[0px] !left-[0px] !h-[400px] !bottom-[-410px] overflow-y-auto '
-                                                    required={false}
-                                                    label='Select a Country'
-                                                    setSelected={handleCountryChange}
-                                                    selected={country}
-                                                    options={selectedCity}
-                                                    otherOptions={true}
-                                                />
-                                            </div>
-                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                                                <CustomSelect
-                                                    wrapperClass=' !h-[58px] !w-full !px-[12px]'
-                                                    labelClass=' text-black w-full text-gray-500'
-                                                    optionsClass='!text-[0.875rem] !h-[48px] !w-[100%] !text-black'
-                                                    optionWrapperClass=' w-[100%] !w-full border-[1px] shadow-lg border-gray-200 xl:left-[0px] !left-[0px] !h-[400px] !bottom-[-410px] overflow-y-auto '
-                                                    required={false}
-                                                    label='Select a state'
-                                                    setSelected={handleCityChange}
-                                                    selected={province}
-                                                    options={allCities}
-                                                    otherOptions={true}
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
-                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                                                <CustomInputs
-                                                    id="postalCode"
-                                                    type='text'
-                                                    required
-                                                    // setValue={setFormData}
-                                                    value={postalCode}
-                                                    onChange={(value) => setFormData(prevFormData => ({
-                                                        ...prevFormData,
-                                                        postalCode: value
-                                                    }))}
-                                                    label={'Postal Code'}
-                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
-                                                />
-                                            </div>
-                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                                                <CustomInputs
-                                                    id="city"
-                                                    type='text'
-                                                    required
-                                                    // setValue={setFormData}
-                                                    value={city}
-                                                    onChange={(value) => setFormData(prevFormData => ({
-                                                        ...prevFormData,
-                                                        city: value
-                                                    }))}
-                                                    label={'City'}
-                                                    className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
-                                            <div className={`form-group flex w-[100%] text-[1rem] my-0 flex-col`}>
-                                                <CustomInputs
-                                                    changeToggle={changeToggle}
-                                                    showToggle={true}
-                                                    isToggle={isToggle}
-                                                    id='password'
-                                                    type={`${isToggle ? 'text' : 'password'}`}
-                                                    label='Password'
-                                                    className='mb-[0px]'
-                                                    // onChange={(value) => setFormData(prevFormData => ({
-                                                    //     ...prevFormData,
-                                                    //     password: value
-                                                    // }))}
-                                                    onChange={handlePasswordChange}
-                                                />
-                                                <div className="flex justify-between flex-wrap mt-2">
-                                                    <div className="ml-auto mt-2 w-min">
-                                                        <div className="password-strength">
-                                                            <div className="strength-bars flex items-center justify-center gap-1">
-                                                                <div className={`${testOne ? "bg-[#dc6969]" : "bg-[#b6a7a7]"} bar bar--weak filled h-[4px] w-6 rounded-l block`}>
-                                                                </div>
-
-                                                                <div className={`${testTwo ? "bg-[#ffe48c]" : "bg-[#b6a7a7]"} bar bar--normal filled h-[4px] w-6 rounded-l block`}>
-                                                                </div>
-
-                                                                <div className={`${testThree ? "bg-[#46c28e]" : "bg-[#b6a7a7]"} bar bar--strong filled h-[4px] w-6 rounded-l block`}>
-                                                                </div>
-
-                                                                <div className={`${testFour ? "bg-[#208058]" : "bg-[#b6a7a7]"} bar bar--stronger filled h-[4px] w-6 rounded-l block`}>
-                                                                </div>
-                                                                {/* <div className="bar bar--stronger bg-[#e0e0e0] h-[4px] w-6 rounded-l block"></div> */}
-
-                                                            </div>
-                                                            <p className="strength-text text-gray-600 text-xs whitespace-nowrap">
-                                                                {text}
-                                                            </p>
+                                                    <GoogleOAuthProvider clientId="1061797876618-qshcq6n3nd057kv6586f859g8mj5cp6a.apps.googleusercontent.com">
+                                                        {/* <div>
+                                                        <div>
+                                                            <GoogleLogin
+                                                                onSuccess={handleGoogleLogin}
+                                                                onError={(err) => console.error('Google login error:', err)}
+                                                            />
+                                                            <GoogleLogin
+                                                                onSuccess={handleGoogleSignup}
+                                                                onError={(err) => console.error('Google sign-up error:', err)}
+                                                            />
                                                         </div>
+                                                        
+                                                    </div> */}
+                                                        <button className="px-0 mt-10 cursor-pointer w-full " >
+                                                            <div className=" px-2 py-2 w-full bg-gray-100 flex justify-center items-center">
+                                                                {/* onClick={() => setSignInState(2)} */}
+
+                                                                {/* <div className="mr-3">
+                                                                <img alt="" src={Google} width={16} height={16} className="text-[1px] text-white" />
+                                                            </div>
+                                                            <div className="text-[15px]">Sign up with Google</div> */}
+
+                                                                {/* <GoogleLogin
+                                                                onSuccess={handleGoogleLogin}
+                                                                onError={(err) => console.error('Google login error:', err)}
+                                                            /> */}
+                                                                <GoogleLogin
+                                                                    className="border-none hidden"
+                                                                    onSuccess={handleGoogleSignup}
+                                                                    onError={(err) => console.error('Google sign-up error:', err)}
+                                                                />
+                                                            </div>
+                                                        </button>
+                                                    </GoogleOAuthProvider>
+
+                                                    <div className='flex justify-center items-center h-[1px] my-10 w-full bg-[#d5d1d1] text-center font-[500] '>
+                                                        <span className='bg-white px-5 py-5 text-black'>Or</span>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                                                <CustomInputs
-                                                    changeToggle={changeConfirmPasswordToggle}
-                                                    showToggle={true}
-                                                    isToggle={confirmPasswordToggle}
-                                                    id='password'
-                                                    type={`${confirmPasswordToggle ? 'text' : 'password'}`}
-                                                    label='Confirm Password'
-                                                    onChange={(value) => setFormData(prevFormData => ({
-                                                        ...prevFormData,
-                                                        confirmPassword: value
-                                                    }))}
-                                                    className='mb-[32px]'
-                                                />
-                                            </div>
-                                        </div>
 
-                                        <div className="flex md:flex-row xs:flex-col gap-10 my-10">
-                                            <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                                                <CustomInputs
-                                                    id="address"
-                                                    type='text'
-                                                    required
-                                                    // setValue={setFormData}
-                                                    value={address}
-                                                    showRequirement={true}
-                                                    onChange={(value) => setFormData(prevFormData => ({
-                                                        ...prevFormData,
-                                                        address: value
-                                                    }))}
-                                                    label={'address'}
-                                                    className='px-0 mb-[5px] md:w-[370px] xs:w-full text-[16px]'
-                                                />
-                                            </div>
+                                                    <button className="px-0 mt-0 cursor-pointer w-full" onClick={() => setSignInState(3)}>
+                                                        <div className=" px-2 py-4 w-full bg-gray-100 flex justify-center items-center">
 
-                                        </div>
-
-
-                                        <div className="text-left text-gray-700">
-                                            <h1 className="mb-0 p-0 text-xl text-black">Listing Type</h1>
-
-                                            <div className="flex items-center my-7">
-                                                <input
-                                                    type="radio"
-                                                    id="radioButton"
-                                                    name="radioButton"
-                                                    className="h-6 w-6  text-third border-gray-500 focus:ring-sky-600"
-                                                    onClick={handleRadioChange}
-                                                />
-                                                <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
-                                                    Medical Doctor with property/room for rent
-                                                </label>
-                                            </div>
-
-                                            <div className="flex items-center my-7">
-                                                <input
-                                                    type="radio"
-                                                    id="radioButton"
-                                                    name="radioButton"
-                                                    className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
-                                                    onClick={handleRadioChange}
-                                                />
-                                                <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
-                                                    Medical Trainee renting my property/room
-                                                </label>
-                                            </div>
-
-                                            <div className="flex items-center my-7">
-                                                <input
-                                                    type="radio"
-                                                    id="radioButton"
-                                                    name="radioButton"
-                                                    className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
-                                                    onClick={handleRadioChange}
-                                                />
-                                                <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
-                                                    Private Community Landlord
-                                                </label>
-                                            </div>
-
-                                            <div className="flex items-center my-7">
-                                                <input
-                                                    type="radio"
-                                                    id="radioButton"
-                                                    name="radioButton"
-                                                    className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
-                                                    onClick={handleRadioChange}
-                                                />
-                                                <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
-                                                    Property Manager
-                                                </label>
-                                            </div>
-
-                                            <div className="flex items-center my-7">
-                                                <input
-                                                    type="radio"
-                                                    id="radioButton"
-                                                    name="radioButton"
-                                                    className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
-                                                    onClick={handleRadioChange}
-                                                />
-                                                <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
-                                                    Other Health Care person with a property/room for rent
-                                                </label>
-                                            </div>
-
-                                        </div>
-
-
-                                        {/* <div className="">
-                                            <div >
-                                                <div className="relative my-10">
-                                                    {selectedCity ? (
-                                                        <select
-                                                            onChange={handleCountryChange}
-                                                            value={country}
-                                                            className="md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                                        >
-                                                            <option value="">Select a country</option>
-                                                            {selectedCity?.map((country, index) => (
-                                                                <option key={index} value={country.name}>
-                                                                    {country.name}
-                                                                </option>
-                                                            ))}
-                                                        </select>
-                                                    ) : (
-                                                        <div>loading</div>
-                                                    )}
+                                                            <div className="mr-3">
+                                                                <img alt="" src={Mail} className="text-[1px] text-white w-full h-full" />
+                                                            </div>
+                                                            <div className="text-[15px]">Sign up with Mail</div>
+                                                        </div>
+                                                    </button>
 
                                                 </div>
-                                            </div>
-                                            <div className="relative my-10">
+                                            )
+                                        }
 
+                                        {
+                                            (signInState == 3) && (
 
-                                                {selectedCountry ? (
-                                                    <div>
-                                                        <select
-                                                            onChange={handleCityChange}
-                                                            value={province}
-                                                            className="md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                                        >
-                                                            <option value="">Select a state</option>
-                                                            {selectedCity
-                                                                .find((country) => country.name === selectedCountry)
-                                                                .states.map((state, index) => (
-                                                                    <option key={index} value={state.name}>
-                                                                        {state.name}
-                                                                    </option>
-                                                                ))
-                                                            }
-                                                        </select>
-                                                    </div>
-                                                ) : (
-                                                    <select
-                                                        className='md:h-14 xs:h-10 w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md'
-                                                    >
-                                                        <option value="">Select a state</option>
-                                                    </select>
-                                                )}
-                                            </div>
-                                        </div> */}
-
-                                        {/* <div className="relative my-10">
-                                            <input
-                                                id="city"
-                                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                                type="text"
-                                                ref={cityInput}
-                                                name="city"
-                                                value={city}
-                                                onChange={handleInputUser}
-                                                placeholder=" "
-                                            />
-                                            <label
-                                                htmlFor="text"
-                                                className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                                            >
-                                                City
-                                            </label>
-                                        </div>
-
-                                        <div className="relative my-10">
-                                            <input
-                                                id="postalCode"
-                                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                                type="text"
-                                                ref={postalCodeInput}
-                                                name="postalCode"
-                                                value={postalCode}
-                                                onChange={handleInputUser}
-                                                placeholder=" "
-                                            />
-                                            <label
-                                                htmlFor="text"
-                                                className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                                            >
-                                                Postal Code
-                                            </label>
-                                        </div>
-
-                                        <div className="relative my-10">
-                                            <input
-                                                id="phone"
-                                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                                type="text"
-                                                ref={phoneInput}
-                                                name="phone"
-                                                value={phone}
-                                                onChange={handleInputUser}
-                                                placeholder=" "
-
-                                            />
-                                            <label
-                                                htmlFor="text"
-                                                className="label absolute mt-2 ml-3 leading-tighter text-gray-600 text-base cursor-text"
-
-                                            >Phone</label>
-                                        </div>
-
-                                        <div className="group relative">
-                                            <input
-                                                id="password"
-                                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                                type={`${isToggle ? "password" : "text"}`}
-                                                ref={passwordInput}
-                                                name="password"
-                                                value={password}
-                                                onChange={handlePasswordChange}
-                                                placeholder=""
-                                            />
-                                            <label
-                                                htmlFor="email"
-                                                className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                                            >
-                                                Password
-                                            </label>
-
-                                            <div
-                                                className="flex mt-3 flex-col h-6 "
-                                                onClick={changeToggle}
-                                                style={{
-                                                    position: "absolute",
-                                                    width: "30px",
-                                                    right: "5px",
-                                                    bottom: "12px",
-                                                    lineHeight: "20px",
-                                                }}
-                                            >
-                                                {isToggle ? (
-                                                    <div className="cursor-pointer">
-                                                        <svg
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="eye-slash"
-                                                            className="w-6 h-6 text-gray-600"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                fill="currentColor"
-                                                                d="M286.693 391.984l32.579 46.542A333.958 333.958 0 0 1 288 440C168.19 440 63.031 376.051 6.646 280.369a47.999 47.999 0 0 1 0-48.739c24.023-40.766 56.913-75.775 96.024-102.537l57.077 81.539C154.736 224.82 152 240.087 152 256c0 74.736 60.135 135.282 134.693 135.984zm282.661-111.615c-31.667 53.737-78.747 97.46-135.175 125.475l.011.015 41.47 59.2c7.6 10.86 4.96 25.82-5.9 33.42l-13.11 9.18c-10.86 7.6-25.82 4.96-33.42-5.9L100.34 46.94c-7.6-10.86-4.96-25.82 5.9-33.42l13.11-9.18c10.86-7.6 25.82-4.96 33.42 5.9l51.038 72.617C230.68 75.776 258.905 72 288 72c119.81 0 224.969 63.949 281.354 159.631a48.002 48.002 0 0 1 0 48.738zM424 256c0-75.174-60.838-136-136-136-17.939 0-35.056 3.473-50.729 9.772l19.299 27.058c25.869-8.171 55.044-6.163 80.4 7.41h-.03c-23.65 0-42.82 19.17-42.82 42.82 0 23.626 19.147 42.82 42.82 42.82 23.65 0 42.82-19.17 42.82-42.82v-.03c18.462 34.49 16.312 77.914-8.25 110.95v.01l19.314 27.061C411.496 321.2 424 290.074 424 256zM262.014 356.727l-77.53-110.757c-5.014 52.387 29.314 98.354 77.53 110.757z"
+                                                <div>
+                                                    <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                            <CustomInputs
+                                                                id="firstname"
+                                                                type='text'
+                                                                required
+                                                                // setValue={setFormData}
+                                                                value={firstName}
+                                                                showRequirement={true}
+                                                                onChange={(value) => setFormData(prevFormData => ({
+                                                                    ...prevFormData,
+                                                                    firstName: value
+                                                                }))}
+                                                                label={'First Name'}
+                                                                className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
                                                             />
-                                                        </svg>
-                                                    </div>
-                                                ) : (
-                                                    <div
-                                                        className="cursor-pointer"
-                                                        style={{
-                                                            position: "absolute",
-                                                            width: "40px",
-                                                            height: "40px",
-
-                                                            lineHeight: "20px",
-                                                        }}
-                                                    >
-                                                        <svg
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="eye"
-                                                            className="w-6 h-6 text-gray-600"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                fill="currentColor"
-                                                                d="M569.354 231.631C512.969 135.949 407.81 72 288 72 168.14 72 63.004 135.994 6.646 231.631a47.999 47.999 0 0 0 0 48.739C63.031 376.051 168.19 440 288 440c119.86 0 224.996-63.994 281.354-159.631a47.997 47.997 0 0 0 0-48.738zM288 392c-75.162 0-136-60.827-136-136 0-75.162 60.826-136 136-136 75.162 0 136 60.826 136 136 0 75.162-60.826 136-136 136zm104-136c0 57.438-46.562 104-104 104s-104-46.562-104-104c0-17.708 4.431-34.379 12.236-48.973l-.001.032c0 23.651 19.173 42.823 42.824 42.823s42.824-19.173 42.824-42.823c0-23.651-19.173-42.824-42.824-42.824l-.032.001C253.621 156.431 270.292 152 288 152c57.438 0 104 46.562 104 104z"
-                                                            />
-                                                        </svg>
-
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </div> */}
-
-
-
-                                        {/* <div className="group relative my-10">
-                                            <input
-                                                id="confirmPassword"
-                                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                                                type={`${isToggle ? "password" : "text"}`}
-                                                ref={confirmPasswordInput}
-                                                name="confirmPassword"
-                                                value={confirmPassword}
-                                                onChange={handleInputUser}
-                                                placeholder=""
-                                            />
-                                            <label
-                                                htmlFor="email"
-                                                className="label absolute md:mt-2 xs:mt-0 ml-3 leading-tighter text-gray-600 text-base cursor-text bg-transparent"
-                                            >
-                                                Confirm Password
-                                            </label>
-
-
-
-                                            <div
-                                                className="flex mt-3 flex-col h-6 "
-                                                onClick={changeToggle}
-                                                style={{
-                                                    position: "absolute",
-                                                    width: "30px",
-                                                    right: "5px",
-                                                    bottom: "12px",
-                                                    lineHeight: "20px",
-                                                }}
-                                            >
-                                                {isToggle ? (
-                                                    <div className="cursor-pointer">
-                                                        <svg
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="eye-slash"
-                                                            className="w-6 h-6 text-gray-600"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                fill="currentColor"
-                                                                d="M286.693 391.984l32.579 46.542A333.958 333.958 0 0 1 288 440C168.19 440 63.031 376.051 6.646 280.369a47.999 47.999 0 0 1 0-48.739c24.023-40.766 56.913-75.775 96.024-102.537l57.077 81.539C154.736 224.82 152 240.087 152 256c0 74.736 60.135 135.282 134.693 135.984zm282.661-111.615c-31.667 53.737-78.747 97.46-135.175 125.475l.011.015 41.47 59.2c7.6 10.86 4.96 25.82-5.9 33.42l-13.11 9.18c-10.86 7.6-25.82 4.96-33.42-5.9L100.34 46.94c-7.6-10.86-4.96-25.82 5.9-33.42l13.11-9.18c10.86-7.6 25.82-4.96 33.42 5.9l51.038 72.617C230.68 75.776 258.905 72 288 72c119.81 0 224.969 63.949 281.354 159.631a48.002 48.002 0 0 1 0 48.738zM424 256c0-75.174-60.838-136-136-136-17.939 0-35.056 3.473-50.729 9.772l19.299 27.058c25.869-8.171 55.044-6.163 80.4 7.41h-.03c-23.65 0-42.82 19.17-42.82 42.82 0 23.626 19.147 42.82 42.82 42.82 23.65 0 42.82-19.17 42.82-42.82v-.03c18.462 34.49 16.312 77.914-8.25 110.95v.01l19.314 27.061C411.496 321.2 424 290.074 424 256zM262.014 356.727l-77.53-110.757c-5.014 52.387 29.314 98.354 77.53 110.757z"
-                                                            />
-                                                        </svg>
-                                                    </div>
-                                                ) : (
-                                                    <div
-                                                        className="cursor-pointer"
-                                                        style={{
-                                                            position: "absolute",
-                                                            width: "40px",
-                                                            height: "40px",
-
-                                                            lineHeight: "20px",
-                                                        }}
-                                                    >
-                                                        <svg
-                                                            aria-hidden="true"
-                                                            focusable="false"
-                                                            data-prefix="fas"
-                                                            data-icon="eye"
-                                                            className="w-6 h-6 text-gray-600"
-                                                            role="img"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 576 512"
-                                                        >
-                                                            <path
-                                                                fill="currentColor"
-                                                                d="M569.354 231.631C512.969 135.949 407.81 72 288 72 168.14 72 63.004 135.994 6.646 231.631a47.999 47.999 0 0 0 0 48.739C63.031 376.051 168.19 440 288 440c119.86 0 224.996-63.994 281.354-159.631a47.997 47.997 0 0 0 0-48.738zM288 392c-75.162 0-136-60.827-136-136 0-75.162 60.826-136 136-136 75.162 0 136 60.826 136 136 0 75.162-60.826 136-136 136zm104-136c0 57.438-46.562 104-104 104s-104-46.562-104-104c0-17.708 4.431-34.379 12.236-48.973l-.001.032c0 23.651 19.173 42.823 42.824 42.823s42.824-19.173 42.824-42.823c0-23.651-19.173-42.824-42.824-42.824l-.032.001C253.621 156.431 270.292 152 288 152c57.438 0 104 46.562 104 104z"
-                                                            />
-                                                        </svg>
-
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </div> */}
-
-                                        <div className="mb-8 text-left">
-                                            <h1 className="mb-3 text-sm">How did you discover Medirent?</h1>
-
-                                            {/* <select
-                                                onChange={handleReferenceChange}
-                                                value={discoveryMethod}
-                                                className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md "
-                                            >
-                                                <option value="Facebook/socialmedia">Facebook/socialmedia</option>
-                                                <option value="Medical school admin recommended">
-                                                    Medical school admin recommended
-                                                </option>
-                                                <option value="Friend/colleague">Friend/colleague</option>
-                                                <option value="Real Estate Agent">Real Estate Agent</option>
-                                                <option value="Internet browsing">Internet browsing</option>
-                                                <option value="Journal/medical affiliated website">
-                                                    Journal/medical affiliated website
-                                                </option>
-                                                <option value="other">other</option>
-                                            </select> */}
-
-                                            <CustomSelect
-                                                wrapperClass='!border-[0.5px] !border-gray !h-[58px] md:w-[400px] xs:w-full'
-                                                labelClass='!text-[0.875rem] text-black'
-                                                optionsClass='!text-[0.875rem] !h-[48px] !w-[100%]'
-                                                optionWrapperClass=' border-[1px] border-gray-400 w-[100%] !w-[300px] xl:left-[0px] !left-[0px] !h-[400px] !bottom-[-410px] overflow-y-auto'
-
-                                                label='Set Discovery Method'
-                                                setSelected={handleReferenceChange}
-                                                selected={discoveryMethod}
-                                                options={[
-                                                    {
-                                                        label: 'Facebook/socialmedia',
-                                                        value: 'Facebook/socialmedia'
-                                                    },
-                                                    {
-                                                        label: 'Medical school admin recommended',
-                                                        value: 'Medical school admin recommended'
-                                                    },
-                                                    {
-                                                        label: 'Friend/colleague',
-                                                        value: 'Friend/colleague'
-                                                    },
-                                                    {
-                                                        label: 'Real Estate Agent',
-                                                        value: 'Real Estate Agent'
-                                                    },
-                                                    {
-                                                        label: 'Internet browsing',
-                                                        value: 'Internet browsing'
-                                                    },
-                                                    {
-                                                        label: 'Journal/medical affiliated website',
-                                                        value: 'Journal/medical affiliated website'
-                                                    },
-                                                    {
-                                                        label: 'Others',
-                                                        value: 'Others'
-                                                    }
-                                                ]}
-                                            />
-                                        </div>
-
-                                        <div className="mb-8 text-left text-md">
-                                            <input
-                                                type="checkbox"
-                                                id="receiveNewsletter"
-                                                className="mr-2 border-black-500"
-                                                checked={receiveNewsletter}
-                                                onChange={handleCheckboxChange}
-                                            />
-                                            <label htmlFor="receiveNewsletter" className="text-gray-700">
-                                                I would like to receive newsletters
-                                            </label>
-                                        </div>
-
-                                        <div className="md:text-base xs:text-xs w-fit mt-2 text-rose-600">
-                                            {textValue}
-                                        </div>
-
-                                        <div className="flex justify-end w-full pb-10">
-                                            <div className="flex justify-end z-10 relative mt-4 ">
-
-                                                <button
-                                                    onClick={handleProviderOne}
-                                                    className="flex justify-end items-center z-10 relative bg-[#F97262] text-white md:text-sm rounded-full md:py-3 md:px-12 xs:text-[15px] xs:py-1 xs:px-8"
-                                                    disabled={landLoading} // Disable the button when userLoading is true
-                                                >
-                                                    {landLoading ? ( // Display spinner if userLoading is true
-                                                        <div className="flex items-center px-6">
-                                                            <div>
-                                                                <img alt="" src={Spinner} className="text-[1px] text-white" />
-                                                            </div>
-
                                                         </div>
-                                                    ) : (
-                                                        <span className="">Next</span> // Show the "Submit" text when isLoading is false
-                                                    )}
-                                                </button>
-                                            </div>
-                                        </div>
+                                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                            <CustomInputs
+                                                                id="lastname"
+                                                                type='text'
+                                                                required
+                                                                // setValue={setFormData}
+                                                                value={lastName}
+                                                                showRequirement={true}
+                                                                onChange={(value) => setFormData(prevFormData => ({
+                                                                    ...prevFormData,
+                                                                    lastName: value
+                                                                }))}
+
+                                                                label={'Last Name'}
+                                                                className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                            <CustomInputs
+                                                                id="email"
+                                                                type='email'
+                                                                required
+                                                                // setValue={setFormData}
+                                                                value={email}
+                                                                showRequirement={true}
+                                                                onChange={(value) => setFormData(prevFormData => ({
+                                                                    ...prevFormData,
+                                                                    email: value
+                                                                }))}
+
+                                                                label={'Email'}
+                                                                className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                            />
+                                                        </div>
+                                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                            <CustomInputs
+                                                                id="emailConfirmation"
+                                                                type='text'
+                                                                required
+                                                                // setValue={setFormData}
+                                                                value={emailConfirmation}
+                                                                showRequirement={true}
+                                                                onChange={(value) => setFormData(prevFormData => ({
+                                                                    ...prevFormData,
+                                                                    emailConfirmation: value
+                                                                }))}
+
+                                                                label={'Re-enter Email Address'}
+                                                                className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            )
+                                        }
+
+                                        {
+                                            (signInState == 2 || signInState == 3) && (
+                                                <div>
+                                                    <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                            <CustomInputs
+                                                                id="phone"
+                                                                type='text'
+                                                                required
+                                                                setValue={setFormData}
+                                                                value={phone}
+                                                                label={'Phone Number'}
+                                                                onChange={(value) => setFormData(prevFormData => ({
+                                                                    ...prevFormData,
+                                                                    phone: value
+                                                                }))}
+                                                                className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                            />
+                                                        </div>
+                                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                            <CustomInputs
+                                                                id="yearsActive"
+                                                                type='number'
+                                                                required
+                                                                // setValue={setFormData}
+                                                                value={yearsActive}
+                                                                onChange={(value) => setFormData(prevFormData => ({
+                                                                    ...prevFormData,
+                                                                    yearsActive: value
+
+                                                                }))}
+                                                                label={'Years Of Active Experience'}
+                                                                className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+
+                                                            <CustomSelect
+                                                                wrapperClass=' !h-[58px] !w-full !px-[12px]'
+                                                                labelClass=' text-black w-full text-gray-500'
+                                                                optionsClass='!text-[0.875rem] !h-[48px] !w-[100%] !text-black'
+                                                                optionWrapperClass=' w-[100%] !w-full border-[1px] shadow-lg border-gray-200 xl:left-[0px] !left-[0px] !h-[400px] !bottom-[-410px] overflow-y-auto '
+                                                                required={false}
+                                                                label='Select a Country'
+                                                                setSelected={handleCountryChange}
+                                                                selected={country}
+                                                                options={selectedCity}
+                                                                otherOptions={true}
+                                                            />
+                                                        </div>
+                                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                            <CustomSelect
+                                                                wrapperClass=' !h-[58px] !w-full !px-[12px]'
+                                                                labelClass=' text-black w-full text-gray-500'
+                                                                optionsClass='!text-[0.875rem] !h-[48px] !w-[100%] !text-black'
+                                                                optionWrapperClass=' w-[100%] !w-full border-[1px] shadow-lg border-gray-200 xl:left-[0px] !left-[0px] !h-[400px] !bottom-[-410px] overflow-y-auto '
+                                                                required={false}
+                                                                label='Select a state'
+                                                                setSelected={handleCityChange}
+                                                                selected={province}
+                                                                options={allCities}
+                                                                otherOptions={true}
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                            <CustomInputs
+                                                                id="postalCode"
+                                                                type='text'
+                                                                required
+                                                                // setValue={setFormData}
+                                                                value={postalCode}
+                                                                onChange={(value) => setFormData(prevFormData => ({
+                                                                    ...prevFormData,
+                                                                    postalCode: value
+                                                                }))}
+                                                                label={'Postal Code'}
+                                                                className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                            />
+                                                        </div>
+                                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                            <CustomInputs
+                                                                id="city"
+                                                                type='text'
+                                                                required
+                                                                // setValue={setFormData}
+                                                                value={city}
+                                                                onChange={(value) => setFormData(prevFormData => ({
+                                                                    ...prevFormData,
+                                                                    city: value
+                                                                }))}
+                                                                label={'City'}
+                                                                className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                                        <div className={`form-group flex w-[100%] text-[1rem] my-0 flex-col`}>
+                                                            <CustomInputs
+                                                                changeToggle={changeToggle}
+                                                                showToggle={true}
+                                                                isToggle={isToggle}
+                                                                id='password'
+                                                                type={`${isToggle ? 'text' : 'password'}`}
+                                                                label='Password'
+                                                                className='mb-[0px]'
+                                                                // onChange={(value) => setFormData(prevFormData => ({
+                                                                //     ...prevFormData,
+                                                                //     password: value
+                                                                // }))}
+                                                                onChange={handlePasswordChange}
+                                                            />
+                                                            <div className="flex justify-between flex-wrap mt-2">
+                                                                <div className="ml-auto mt-2 w-min">
+                                                                    <div className="password-strength">
+                                                                        <div className="strength-bars flex items-center justify-center gap-1">
+                                                                            <div className={`${testOne ? "bg-[#dc6969]" : "bg-[#b6a7a7]"} bar bar--weak filled h-[4px] w-6 rounded-l block`}>
+                                                                            </div>
+
+                                                                            <div className={`${testTwo ? "bg-[#ffe48c]" : "bg-[#b6a7a7]"} bar bar--normal filled h-[4px] w-6 rounded-l block`}>
+                                                                            </div>
+
+                                                                            <div className={`${testThree ? "bg-[#46c28e]" : "bg-[#b6a7a7]"} bar bar--strong filled h-[4px] w-6 rounded-l block`}>
+                                                                            </div>
+
+                                                                            <div className={`${testFour ? "bg-[#208058]" : "bg-[#b6a7a7]"} bar bar--stronger filled h-[4px] w-6 rounded-l block`}>
+                                                                            </div>
+                                                                            {/* <div className="bar bar--stronger bg-[#e0e0e0] h-[4px] w-6 rounded-l block"></div> */}
+
+                                                                        </div>
+                                                                        <p className="strength-text text-gray-600 text-xs whitespace-nowrap">
+                                                                            {text}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                            <CustomInputs
+                                                                changeToggle={changeConfirmPasswordToggle}
+                                                                showToggle={true}
+                                                                isToggle={confirmPasswordToggle}
+                                                                id='password'
+                                                                type={`${confirmPasswordToggle ? 'text' : 'password'}`}
+                                                                label='Confirm Password'
+                                                                onChange={(value) => setFormData(prevFormData => ({
+                                                                    ...prevFormData,
+                                                                    confirmPassword: value
+                                                                }))}
+                                                                className='mb-[32px]'
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                            <CustomInputs
+                                                                id="address"
+                                                                type='text'
+                                                                required
+                                                                // setValue={setFormData}
+                                                                value={address}
+                                                                showRequirement={true}
+                                                                onChange={(value) => setFormData(prevFormData => ({
+                                                                    ...prevFormData,
+                                                                    address: value
+                                                                }))}
+                                                                label={'address'}
+                                                                className='px-0 mb-[5px] md:w-[370px] xs:w-full text-[16px]'
+                                                            />
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className="text-left text-gray-700">
+                                                        <h1 className="mb-0 p-0 text-xl text-black">Listing Type</h1>
+
+                                                        <div className="flex items-center my-7">
+                                                            <input
+                                                                type="radio"
+                                                                id="radioButton"
+                                                                name="radioButton"
+                                                                className="h-6 w-6  text-third border-gray-500 focus:ring-sky-600"
+                                                                onClick={handleRadioChange}
+                                                            />
+                                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
+                                                                Medical Doctor with property/room for rent
+                                                            </label>
+                                                        </div>
+
+                                                        <div className="flex items-center my-7">
+                                                            <input
+                                                                type="radio"
+                                                                id="radioButton"
+                                                                name="radioButton"
+                                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                                onClick={handleRadioChange}
+                                                            />
+                                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
+                                                                Medical Trainee renting my property/room
+                                                            </label>
+                                                        </div>
+
+                                                        <div className="flex items-center my-7">
+                                                            <input
+                                                                type="radio"
+                                                                id="radioButton"
+                                                                name="radioButton"
+                                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                                onClick={handleRadioChange}
+                                                            />
+                                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
+                                                                Private Community Landlord
+                                                            </label>
+                                                        </div>
+
+                                                        <div className="flex items-center my-7">
+                                                            <input
+                                                                type="radio"
+                                                                id="radioButton"
+                                                                name="radioButton"
+                                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                                onClick={handleRadioChange}
+                                                            />
+                                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
+                                                                Property Manager
+                                                            </label>
+                                                        </div>
+
+                                                        <div className="flex items-center my-7">
+                                                            <input
+                                                                type="radio"
+                                                                id="radioButton"
+                                                                name="radioButton"
+                                                                className="h-6 w-6 text-third border-gray-500 focus:ring-sky-600"
+                                                                onClick={handleRadioChange}
+                                                            />
+                                                            <label htmlFor="radioButton" className="ml-4 md:text-base xs:text-xs w-full">
+                                                                Other Health Care person with a property/room for rent
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className="mb-8 text-left">
+                                                        <h1 className="mb-3 text-sm">How did you discover Medirent?</h1>
+
+                                                        <CustomSelect
+                                                            wrapperClass='!border-[0.5px] !border-gray !h-[58px] md:w-[400px] xs:w-full'
+                                                            labelClass='!text-[0.875rem] text-black'
+                                                            optionsClass='!text-[0.875rem] !h-[48px] !w-[100%]'
+                                                            optionWrapperClass=' border-[1px] border-gray-400 w-[100%] !w-[300px] xl:left-[0px] !left-[0px] !h-[400px] !bottom-[-410px] overflow-y-auto'
+
+                                                            label='Set Discovery Method'
+                                                            setSelected={handleReferenceChange}
+                                                            selected={discoveryMethod}
+                                                            options={[
+                                                                {
+                                                                    label: 'Facebook/socialmedia',
+                                                                    value: 'Facebook/socialmedia'
+                                                                },
+                                                                {
+                                                                    label: 'Medical school admin recommended',
+                                                                    value: 'Medical school admin recommended'
+                                                                },
+                                                                {
+                                                                    label: 'Friend/colleague',
+                                                                    value: 'Friend/colleague'
+                                                                },
+                                                                {
+                                                                    label: 'Real Estate Agent',
+                                                                    value: 'Real Estate Agent'
+                                                                },
+                                                                {
+                                                                    label: 'Internet browsing',
+                                                                    value: 'Internet browsing'
+                                                                },
+                                                                {
+                                                                    label: 'Journal/medical affiliated website',
+                                                                    value: 'Journal/medical affiliated website'
+                                                                },
+                                                                {
+                                                                    label: 'Others',
+                                                                    value: 'Others'
+                                                                }
+                                                            ]}
+                                                        />
+                                                    </div>
+
+                                                    <div className="mb-8 text-left text-md">
+                                                        <input
+                                                            type="checkbox"
+                                                            id="receiveNewsletter"
+                                                            className="mr-2 border-black-500"
+                                                            checked={receiveNewsletter}
+                                                            onChange={handleCheckboxChange}
+                                                        />
+                                                        <label htmlFor="receiveNewsletter" className="text-gray-700">
+                                                            I would like to receive newsletters
+                                                        </label>
+                                                    </div>
+
+                                                    <div className="md:text-base xs:text-xs w-fit mt-2 text-rose-600">
+                                                        {textValue}
+                                                    </div>
+
+                                                    <div className="flex justify-end w-full pb-10">
+                                                        <div className="flex justify-end z-10 relative mt-4 ">
+
+                                                            <button
+                                                                onClick={handleProviderOne}
+                                                                className="flex justify-end items-center z-10 relative bg-[#F97262] text-white md:text-sm rounded-full md:py-3 md:px-12 xs:text-[15px] xs:py-1 xs:px-8"
+                                                                disabled={landLoading} // Disable the button when userLoading is true
+                                                            >
+                                                                {landLoading ? ( // Display spinner if userLoading is true
+                                                                    <div className="flex items-center px-6">
+                                                                        <div>
+                                                                            <img alt="" src={Spinner} className="text-[1px] text-white" />
+                                                                        </div>
+
+                                                                    </div>
+                                                                ) : (
+                                                                    <span className="">Next</span> // Show the "Submit" text when isLoading is false
+                                                                )}
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    
+
+                                                </div>
+                                            )
+                                        }
+
+
                                     </div>
                                 )}
 

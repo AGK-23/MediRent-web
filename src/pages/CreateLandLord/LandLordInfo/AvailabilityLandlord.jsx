@@ -204,7 +204,7 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
                     <Calendar />
 
                 </div> */}
-                <div className="flex flex-row w-full justify-between items-center  gap-10">
+                <div className="flex md:flex-row xs:flex-col w-full justify-between items-center  gap-10">
                     <DatePicker
                         // selected={null} // Pass null to show the calendar without pre-selected date
                         onChange={handleDateChange}
@@ -230,7 +230,7 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
                             <h2>Available Dates:</h2>
                             <ul>
                                 {selectedDates.map((date, index) => (
-                                    <li key={index} className="my-8 flex justify-between items-center w-full ">
+                                    <li key={index} className="my-8 bg-yellow-500 flex justify-between items-center w-full ">
                                         <span className="w-full  whitespace-nowrap">{date?.toDateString()}</span>
                                         <span className="w-full ">
                                             <button className="rounded-lg text-white bg-rose-600 px-4 py-1 ml-10 text-sm" onClick={() => handleRemoveDate(date)}>Remove</button>
