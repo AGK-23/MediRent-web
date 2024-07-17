@@ -1,6 +1,6 @@
 // import React from "react";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -42,12 +42,26 @@ const Login = () => {
     });
 
     const [formDataGoogle, setFormDataGoogle] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
+        // firstName: '',
+        // lastName: '',
+        // email: '',
+
+        aud: "",
+        azp: "",
+        email: "",
+        email_verified: false,
+        exp: null,
+        family_name: "",
+        given_name: "",
+        iat: null,
+        iss: "",
+        jti: "",
+        name: "",
+        nbf: null,
+        picture: "",
+        sub: "",
 
     });
-    // const [user, setUser] = useState(null);
 
     var {
         email,
@@ -149,31 +163,86 @@ const Login = () => {
         }
     };
 
-    const handleGoogleLogin = (credentialResponse) => {
-        // Decode the JWT token to get the user's profile information
-        const userProfile = JSON.parse(atob(credentialResponse.credential.split('.')[1]));
+    // const [formDataGoogle, setFormDataGoogle] = useState({});
 
+const handleGoogleLogin = (credentialResponse) => {
+  // Decode the JWT token to get the user's profile information
+  const userProfile = JSON.parse(atob(credentialResponse.credential.split('.')[1]));
 
-        setUserGoogle(userProfile)
+  console.log("set google..", userProfile);
 
-        if (userProfile) {
+  setUserGoogle(userProfile);
 
+  // Update formDataGoogle state
+  setFormDataGoogle({
+    aud: userProfile.aud,
+    azp: userProfile.azp,
+    email: userProfile.email,
+    email_verified: userProfile.email_verified,
+    exp: userProfile.exp,
+    family_name: userProfile.family_name,
+    given_name: userProfile.given_name,
+    iat: userProfile.iat,
+    iss: userProfile.iss,
+    jti: userProfile.jti,
+    name: userProfile.name,
+    nbf: userProfile.nbf,
+    picture: userProfile.picture,
+    sub: userProfile.sub,
+  });
+};
 
-            setFormDataGoogle((prevFormDataGoogle) => {
-                console.log("prevFormData:", prevFormDataGoogle);
-                return {
-                    ...prevFormDataGoogle,
-                    firstName: userProfile.given_name,
-                    lastName: userProfile.family_name,
-                    email: userProfile.email,
+// Use useEffect to make the API call when userGoogle changes
+useEffect(() => {
+  if (userGoogle) {
+    console.log("correct", userGoogle);
 
-                };
-            });
+    const makeApiCall = async () => {
+      try {
+        const idToken = JSON.stringify(formDataGoogle);
+        const finalData = { idToken };
+        const jsonformat = { idToken };
 
-            console.log("set the form..", formDataGoogle, userGoogle)
+        console.log("object", idToken, finalData, "the thing", jsonformat, userGoogle);
 
+        const response = await axiosPrivate.post("/account/signin-google", formDataGoogle);
+        console.log("API response:", response.data, finalData);
+
+        console.log("response in the code..", response);
+
+        setIsLoading(false);
+
+        localStorage.setItem("token", JSON.stringify(response?.data));
+        localStorage.setItem("accessToken", JSON.stringify(response.data?.Data?.AccessToken));
+
+        // Retrieve the stringified object from local storage
+        const storedToken = localStorage.getItem('token');
+        const userDetails = JSON.parse(storedToken);
+
+        console.log("account item..", storedToken, userDetails);
+
+        if (response.data.success === true) {
+          toast.success("Account Login Successfully");
         }
+
+        if (userDetails?.Data?.AccountType === "Tenant") {
+          navigate('/admin/renter/tenant');
+        }
+
+        if (userDetails?.Data?.AccountType === "Landlord") {
+          navigate('/admin/dashboard/landlord');
+        }
+      } catch (error) {
+        console.error("API error:", error);
+        toast.error(error.message);
+      }
     };
+
+    makeApiCall();
+  }
+}, [userGoogle, formDataGoogle, navigate]);
+
+
 
 
 

@@ -58,7 +58,7 @@ axiosPrivate.interceptors.request.use(function (config) {
       data: encryptAes(config.data)
     }
   }
-  if (config.url === "/api/auth/google") {
+  if (config.url === "/account/signin-google") {
     config.data = {
       data: encryptAes(config.data)
     }
@@ -108,10 +108,10 @@ axiosPrivate.interceptors.response.use(function (response) {
     }
   }
 
-  if (response?.config?.url === `/api/auth/google`) {
-    let responseData = deCryptedData(response?.data?.Data)
+  if (response?.config?.url === `/account/signin-google`) {
+    let responseData = deCryptedData(response?.data?.data)
 
-    console.log("all responses ..", responseData)
+    console.log("all responses in the google..", responseData, response, "one thing..", response.data)
     return {
       data: responseData
     }
