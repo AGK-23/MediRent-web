@@ -325,6 +325,21 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
         try {
             setUserLoading(true);
 
+            
+
+            setAllListings((prevState) => ({
+                ...prevState,
+                location: "",
+                propertyType: "",
+                minimumPriceRange: null,
+                maximumPriceRange: null,
+                propertySize: null,
+                bedrooms: null,
+                bathrooms: null,
+                amenities: [], 
+                buildYear: null
+            }));
+
             const response = await axios.post(
                 'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=10',
                 {}, // Sending an empty JSON object
