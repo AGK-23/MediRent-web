@@ -258,7 +258,7 @@ const TopSearch = () => {
                 {
                     allListings ? (
                         <div className="grid md:w-full xs:w-full md:grid-cols-3 xs:grid-cols-1 gap-5 xs:px-3 mt-10 md:mx-10 xs:mx-0 justify-center items-center">
-                            {allSiteListings && (
+                            {allSiteListings?.length > 0 ? (
                                 allSiteListings.map((listing, index) => (
                                     <div key={index} className="flex justify-center items-center  flex-col ">
                                         <div className="bg-white rounded-lg px-0 py-3 shadow-xl">
@@ -349,6 +349,11 @@ const TopSearch = () => {
                                         </div>
                                     </div>
                                 ))
+                            ) : (
+
+                                <div className='w-full flex justify-start font-semibold text-lg items-center h-full '>
+                                    <div className="">No Listings Found</div>
+                                </div>
                             )}
                         </div>
 
