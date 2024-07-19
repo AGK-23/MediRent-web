@@ -89,19 +89,76 @@ const TopSearch = () => {
 
     const [isLoading, setIsLoading] = useState(false)
     const [allSiteListings, setAllSiteListings] = useState([]);
+    const [searchedListings, setSearchedListings] = useState([]);
+
+    const [allListings, setAllListings] = useState({
+        location: "",
+        propertyType: "",
+        minimumPriceRange: null,
+        maximumPriceRange: null,
+        propertySize: null,
+        bedrooms: null,
+        bathrooms: null,
+        amenities: [], 
+        buildYear: null
+    });
+
+    const [all, setAll] = useState({
+        location: allListings.location,
+        propertyType: allListings.propertyType,
+        minimumPriceRange: allListings.minimumPriceRange,
+        maximumPriceRange: allListings.maximumPriceRange,
+        propertySize: allListings.propertySize,
+        bedrooms: allListings.bedrooms,
+        bathrooms: allListings.bathrooms,
+        amenities: allListings.amenities, 
+        buildYear: allListings.buildYear
+    });
 
     useEffect(() => {
-        console.log("Updated searched listings:", allSiteListings);
-    }, [allSiteListings]);
+        setAll(prevState => ({
+            ...prevState,
+            location: allListings.location,
+            propertyType: allListings.propertyType,
+            minimumPriceRange: allListings.minimumPriceRange,
+            maximumPriceRange: allListings.maximumPriceRange,
+            propertySize: allListings.propertySize,
+            bedrooms: allListings.bedrooms,
+            bathrooms: allListings.bathrooms,
+            amenities: allListings.amenities, 
+            buildYear: allListings.buildYear
+        }));
+
+        
+    }, [allListings]);
+
+    var {
+        location,
+        propertyType,
+        minimumPriceRange,
+        maximumPriceRange,
+        propertySize,
+        bedrooms,
+        bathrooms,
+        amenities,
+        buildYear,
+
+    } = allListings
+
+    useEffect(() => {
+        console.log("Updated Bank:", allSiteListings);
+    }, [allSiteListings, searchedListings, allListings, all]);
 
     useEffect(() => {
         const fetchListings = async () => {
             try {
                 setIsLoading(true)
 
+                console.log("first items", allListings, all)
+
                 const response = await axios.post(
                     'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=10',
-                    {}, // Sending an empty JSON object
+                    { }, // Sending an empty JSON object
                     {
                       headers: {
                         'accept': 'application/json',
@@ -125,6 +182,34 @@ const TopSearch = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const handleSearchListing = async (data) => {
+        try {
+            setIsLoading(true)
+
+            console.log("first items", allListings, all, data)
+
+            const response = await axios.post(
+                'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=10',
+                { data }, // Sending an empty JSON object
+                {
+                  headers: {
+                    'accept': 'application/json',
+                    'Content-Type': 'application/json',
+                  },
+                }
+            );
+
+            setAllSiteListings(data);
+            
+            console.log("all the response..", response?.data, allSiteListings);
+            setIsLoading(false)
+
+        } catch (error) {
+            console.error('Error fetching listings:', error);
+            setIsLoading(false)
+        }
+    };
+
 
     const handleCheckAvailability = (availability) => {
         console.log("first in the code", availability)
@@ -137,6 +222,13 @@ const TopSearch = () => {
         setSelectedAvailability(null);
     };
 
+    const [childData, setChildData] = useState(null);
+
+    const handleDataFromChild = (data) => {
+        setChildData(data);
+        console.log("Data received from child:", data);
+    };
+
     return (
         <div className='flex w-full flex-col md:mt-[10rem] xs:mt-[0rem] py-0 relative'>
             <div className=' md:w-full gap-3 xs:w-full mt-0 xs:pb-2 md:pb-0 md:mt-10 xs:mt-12 relative'>
@@ -146,110 +238,127 @@ const TopSearch = () => {
                         <div className="text-[32px] leading-[40.32px] font-semibold xs:w-full flex">
                             {/* Search space to Rent */}
                             Find Your Perfect Rental
+                            {/* {childData} */}
                         </div>
 
                         <div className='mt-[33px] w-full'>
-                            <SearchTab />
+                            <SearchTab
+                                allListings={allListings}
+                                setAllListings={setAllListings}
+                                searchedListings={searchedListings}
+                                setSearchedListings={setSearchedListings}
+                                sendDataToParent={handleDataFromChild}
+                                getAllListing={handleSearchListing}
+                            />
                         </div>
                     </div>
                 </div>
             </div>
 
             <div className=" flex justify-center items-center lg:px-28 md:px-0 xs:px-0 py-10">
-                <div className="grid md:w-full xs:w-full md:grid-cols-3 xs:grid-cols-1 gap-5 xs:px-3 mt-10 md:mx-10 xs:mx-0 justify-center items-center">
-                    {allSiteListings && (
-                        allSiteListings.map((listing, index) => (
-                            <div key={index} className="flex justify-center items-center  flex-col ">
-                                <div className="bg-white rounded-lg px-0 py-3 shadow-xl">
-                                    <div className='w-full h-full'>
-                                        <Link to="/listing-details/1"  className='flex items-center rounded-lg w-full h-full'>
-                                            <img alt="" src={listing.avatars[0]} className="cursor-pointer w-[500px] h-60 object-cover rounded-tl-lg rounded-tr-lg" />
-                                        </Link>
-                                    </div>
-                                    <div className="flex flex-col gap-0 h-fit pt-6 md:px-3 xs:px-2">
-                                        <div>
-                                            <div className="flex justify-start items-center border-none ">
-                                                <div className=''>
-
-                                                    <div className='font-[400] text-slate-400 text-[10px]'>
-                                                        <span className="text-primary font-semibold text-[16px]">{listing?.housingDetails?.propertyType}</span>
-                                                    </div>
-                                                </div>
-
+                {
+                    allListings ? (
+                        <div className="grid md:w-full xs:w-full md:grid-cols-3 xs:grid-cols-1 gap-5 xs:px-3 mt-10 md:mx-10 xs:mx-0 justify-center items-center">
+                            {allSiteListings && (
+                                allSiteListings.map((listing, index) => (
+                                    <div key={index} className="flex justify-center items-center  flex-col ">
+                                        <div className="bg-white rounded-lg px-0 py-3 shadow-xl">
+                                            <div className='w-full h-full'>
+                                                <Link to="/listing-details/1"  className='flex items-center rounded-lg w-full h-full'>
+                                                    <img alt="" src={listing.avatars[0]} className="cursor-pointer w-[500px] h-60 object-cover rounded-tl-lg rounded-tr-lg" />
+                                                </Link>
                                             </div>
-                                            <div className="flex justify-start items-center border-none ">
-                                                <div className=''>
+                                            <div className="flex flex-col gap-0 h-fit pt-6 md:px-3 xs:px-2">
+                                                <div>
+                                                    <div className="flex justify-start items-center border-none ">
+                                                        <div className=''>
 
-                                                    <div className='font-[400] text-slate-400 text-[10px]'>
-                                                        <span className="text-slate-700 font-semibold text-[16px]">${listing?.housingDetails?.price}</span> <span className="text-gray-500">/month</span>
+                                                            <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                <span className="text-primary font-semibold text-[16px]">{listing?.housingDetails?.propertyType}</span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div className="flex justify-start items-center border-none ">
+                                                        <div className=''>
+
+                                                            <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                <span className="text-slate-700 font-semibold text-[16px]">${listing?.housingDetails?.price}</span> <span className="text-gray-500">/month</span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className="flex justify-start items-center border-none ">
+                                                        <div className=''>
+
+                                                            <div className='text-slate-700 font-[400] text-[10px] w-[80%]'>
+                                                                {listing.address}
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
 
-                                            </div>
+                                                <div className="grid grid-cols-4 gap-5 mt-[15px] w-full ">
+                                                    <div className="flex justify-center items-center border-none w-full">
+                                                        <div className='flex justify-center items-center flex-col'>
+                                                            <img alt="" src={Bed} className="cursor-pointer w-6 h-6" />
+                                                            <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                {listing?.housingDetails?.numberOfBathRoom} Beds
+                                                            </div>
+                                                        </div>
 
-                                            <div className="flex justify-start items-center border-none ">
-                                                <div className=''>
+                                                    </div>
 
-                                                    <div className='text-slate-700 font-[400] text-[10px] w-[80%]'>
-                                                        {listing.address}
+                                                    <div className="flex justify-center items-center border-none w-full">
+                                                        <div className='flex justify-center items-center flex-col w-full'>
+                                                            <img alt="" src={BathTub} className="cursor-pointer w-6 h-6" />
+                                                            <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                {listing?.housingDetails?.numberOfBedRoom} Bath
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className="flex justify-center items-center border-none w-full">
+                                                        <div className='flex justify-center items-center flex-col w-full'>
+                                                            <img alt="" src={Area} className="cursor-pointer w-6 h-6" />
+                                                            <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                {listing?.housingDetails?.area}
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className="flex justify-center items-center border-none w-full">
+                                                        <div className='flex justify-start items-center flex-col w-full'>
+                                                            <img alt="" src={Star} className="cursor-pointer w-6 h-6" />
+                                                            <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                {/* {listing.rating}  Star */}
+                                                                4 Star
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
 
+                                                <button
+                                                onClick={() => handleCheckAvailability(listing)} 
+                                                className="mt-5 rounded-lg bg-primary px-10 py-[15px] text-center text-white opacity-70">Check Availability</button>
                                             </div>
                                         </div>
-
-                                        <div className="grid grid-cols-4 gap-5 mt-[15px] w-full ">
-                                            <div className="flex justify-center items-center border-none w-full">
-                                                <div className='flex justify-center items-center flex-col'>
-                                                    <img alt="" src={Bed} className="cursor-pointer w-6 h-6" />
-                                                    <div className='font-[400] text-slate-400 text-[10px]'>
-                                                        {listing?.housingDetails?.numberOfBathRoom} Beds
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div className="flex justify-center items-center border-none w-full">
-                                                <div className='flex justify-center items-center flex-col w-full'>
-                                                    <img alt="" src={BathTub} className="cursor-pointer w-6 h-6" />
-                                                    <div className='font-[400] text-slate-400 text-[10px]'>
-                                                        {listing?.housingDetails?.numberOfBedRoom} Bath
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div className="flex justify-center items-center border-none w-full">
-                                                <div className='flex justify-center items-center flex-col w-full'>
-                                                    <img alt="" src={Area} className="cursor-pointer w-6 h-6" />
-                                                    <div className='font-[400] text-slate-400 text-[10px]'>
-                                                        {listing?.housingDetails?.area}
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div className="flex justify-center items-center border-none w-full">
-                                                <div className='flex justify-start items-center flex-col w-full'>
-                                                    <img alt="" src={Star} className="cursor-pointer w-6 h-6" />
-                                                    <div className='font-[400] text-slate-400 text-[10px]'>
-                                                        {/* {listing.rating}  Star */}
-                                                        4 Star
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                        <button
-                                        onClick={() => handleCheckAvailability(listing)} 
-                                        className="mt-5 rounded-lg bg-primary px-10 py-[15px] text-center text-white opacity-70">Check Availability</button>
                                     </div>
-                                </div>
-                            </div>
-                        ))
-                    )}
-                </div>
+                                ))
+                            )}
+                        </div>
+
+                    ) : (
+                        <div className='w-screen flex justify-center items-center h-[50vh] '>
+                            <div className="loader "></div>
+                        </div>
+                    )
+                }
 
                 {showModal && selectedAvailability && (
                     <AvailabilityModal availability={selectedAvailability} onClose={handleCloseModal} />

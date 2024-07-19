@@ -5,7 +5,8 @@ import Search from "../../assets/Search/search.svg";
 
 import SearchFilter from "../ui/SearchFilter";
 
-const SearchTab = () => {
+// eslint-disable-next-line react/prop-types
+const SearchTab = ({getAllListing, allListings, setAllListings, searchedListings, setSearchedListings, sendDataToParent}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const closeModal = () => {
@@ -33,15 +34,15 @@ const SearchTab = () => {
                 </div>
                 <div className="flex flex-col col">
                     <div className="text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
-                        Price
+                        Build Year 
                     </div>
-                    <input type="text" placeholder="Select" className="text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/>
+                    <input type="number" placeholder="Select" className="text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/>
                 </div>
                 <div className="flex flex-col col">
                     <div className="md:text-start xs:text-end text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
-                        Area
+                        Property Size
                     </div>
-                    <input type="text" placeholder="Select" className="md:text-start xs:text-end text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/>
+                    <input type="number" placeholder="Select" className="md:text-start xs:text-end text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/>
                 </div>
                 
                 <div className="flex flex-row lg:gap-4 md:gap-4 xs:gap-0 md:col-span-1 xs:col-span-2 justify-between">
@@ -76,6 +77,13 @@ const SearchTab = () => {
             <SearchFilter
                 isOpen={isOpen}
                 closeModal={closeModal}
+                allListings={allListings}
+                setAllListings={setAllListings}
+                searchedListings={searchedListings}
+                setSearchedListings={setSearchedListings}
+                sendDataToParent={sendDataToParent}
+                getAllListing={getAllListing}
+                
             />
         </div>
     )

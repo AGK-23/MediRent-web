@@ -39,10 +39,10 @@ const CustomSlider = styled(Slider)({
 
 
 
-const SearchFilter = ({ isOpen, closeModal }) => {
+const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, allListings, setAllListings, searchedListings, setSearchedListings }) => {
     const [userLoading, setUserLoading] = useState(false);
     const [emptyLoading, setEmptyLoading] = useState(true)
-    const [searchedListings, setSearchedListings] = useState([]);
+    // const [searchedListings, setSearchedListings] = useState([]);
 
     const [naming, setNaming] = useState("House");
     const [selectedBathroom, setSelectedBathroom] = useState("");
@@ -55,17 +55,17 @@ const SearchFilter = ({ isOpen, closeModal }) => {
     const [checkedItems, setCheckedItems] = useState(new Array(8).fill(false));
     const [selectedItems, setSelectedItems] = useState([]);
 
-    const [allListings, setAllListings] = useState({
-        location: "",
-        propertyType: "",
-        minimumPriceRange: null,
-        maximumPriceRange: null,
-        propertySize: null,
-        bedrooms: null,
-        bathrooms: null,
-        amenities: [], 
-        buildYear: null
-    });
+    // const [allListings, setAllListings] = useState({
+    //     location: "",
+    //     propertyType: "",
+    //     minimumPriceRange: null,
+    //     maximumPriceRange: null,
+    //     propertySize: null,
+    //     bedrooms: null,
+    //     bathrooms: null,
+    //     amenities: [], 
+    //     buildYear: null
+    // });
 
     var {
         location,
@@ -115,7 +115,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
             propertySize: parseInt(value)
         }));
 
-        console.log("object", allListings, typeof value, value);
+        // console.log("object", allListings, typeof value, value);
     };
 
     const handleChange1 = (event, newValue, activeThumb) => {
@@ -141,7 +141,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
             maximumPriceRange: newValue[1],
         }));
 
-        console.log("number..", allListings)
+        // console.log("number..", allListings)
     };
 
     const valuetext = (value) => {
@@ -171,7 +171,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                 amenities: selectedItems
             }));
 
-            console.log("all check..", updatedCheckedItems, selectedItems, selectedItem, allListings)
+            // console.log("all check..", updatedCheckedItems, selectedItems, selectedItem, allListings)
             return updatedCheckedItems;
         });
     };
@@ -258,7 +258,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
     const handleListing = async () => {
         // e.preventDefault();
         try {
-            
+
 
             setUserLoading(true);
 
@@ -280,10 +280,10 @@ const SearchFilter = ({ isOpen, closeModal }) => {
 
                 }, // Sending an empty JSON object
                 {
-                  headers: {
-                    'accept': 'application/json',
-                    'Content-Type': 'application/json',
-                  },
+                    headers: {
+                        'accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
                 }
             );
 
@@ -296,6 +296,8 @@ const SearchFilter = ({ isOpen, closeModal }) => {
             console.log("all the user..", response, searchedListings);
 
             if (response.data.success === true) {
+
+                getAllListing(response?.data?.data?.items)
 
                 console.log("hello in the building..")
                 closeModal();
@@ -317,6 +319,47 @@ const SearchFilter = ({ isOpen, closeModal }) => {
         }
 
         // setActive(2)
+    };
+
+    const clearAllListing = async () => {
+        try {
+            setUserLoading(true);
+
+            const response = await axios.post(
+                'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=10',
+                {}, // Sending an empty JSON object
+                {
+                    headers: {
+                        'accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+            setUserLoading(false);
+            setSearchedListings(response?.data?.data?.items);
+
+            console.log("all the user..", response, searchedListings);
+
+            if (response.data.success === true) {
+                getAllListing(response?.data?.data?.items)
+                closeModal();
+            }
+        } catch (error) {
+            setUserLoading(false);
+            if (error?.response?.data?.data === null) {
+                setEmptyLoading(false)
+            }
+        }
+
+    };
+
+    const [inputValue, setInputValue] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Send the input value to the parent component
+        sendDataToParent(inputValue);
+        setInputValue(''); // Clear the input after sending
     };
 
 
@@ -744,10 +787,20 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                     className="md:text-lg xs:text-[12px] text-secondary w-full flex justify-end items-center gap-5"
                                 >
 
-                                    <button className='text-[12px] rounded-full md:px-6 xs:px-4 lg:px-6 py-1 bg-transparent border-[2px] font-[600] border-[#c3c7cb] text-gray-500 flex justify-center items-center'>Clear All</button>
+                                    <button className='text-[12px] rounded-full md:px-6 xs:px-4 lg:px-6 py-1 bg-transparent border-[2px] font-[600] border-[#c3c7cb] text-gray-500 flex justify-center items-center' onClick={clearAllListing}>Clear All</button>
                                     <button className='text-[12px] rounded-full md:px-8 xs:px-6 lg:px-8 py-1 border-[2px] border-transparent bg-[#5893A5] text-white flex justify-center items-center' onClick={handleListing}>Apply</button>
                                 </div>
 
+                            </div>
+
+                            <div className='hidden'>
+                                <input
+                                    type="text"
+                                    value={inputValue}
+                                    onChange={(e) => setInputValue(e.target.value)}
+                                    placeholder="Type something..."
+                                />
+                                <button onClick={handleSubmit} type="submit">Send to Parent</button>
                             </div>
                         </div>
                     </div>
