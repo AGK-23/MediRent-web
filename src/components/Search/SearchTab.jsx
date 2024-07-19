@@ -16,7 +16,6 @@ const SearchTab = () => {
         setIsOpen(true);
     };
 
-
     return (
         <div className="md:px-0 xs:px-2">
             <div className="grid md:grid-cols-5 xs:grid-cols-2 lg:gap-16 md:gap-0 xs:gap-6 rounded-lg shadow-lg border-[1px] md:px-6 xs:px-5 py-6 md:w-full xs:w-full bg-white">
@@ -45,7 +44,6 @@ const SearchTab = () => {
                     <input type="text" placeholder="Select" className="md:text-start xs:text-end text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/>
                 </div>
                 
-
                 <div className="flex flex-row lg:gap-4 md:gap-4 xs:gap-0 md:col-span-1 xs:col-span-2 justify-between">
                     <div className="flex justify-center items-center">
                         <button className="rounded-full bg-primary w-[60px] h-[60px] flex justify-center items-center">
@@ -54,7 +52,6 @@ const SearchTab = () => {
                                 src={Search}
                                 className="cursor-pointer "
                             />
-
                         </button>
                     </div>
                     <div 
@@ -62,20 +59,18 @@ const SearchTab = () => {
                         
                     >
                         <button 
-                        onClick={() => openModal()}
-                        className="rounded-lg bg-white p-2 border-[1px] border-[#A4ABAC] flex justify-center items-center flex-col">
+                            onClick={() => openModal()}
+                            className="rounded-lg bg-white p-2 border-[1px] border-[#A4ABAC] flex justify-center items-center flex-col"
+                        >
                             <img
                                 alt=""
                                 src={Filter}
                                 className="cursor-pointer"
                             />
                             <div className="mt-1 text-[10px]"> Advanced</div>
-
                         </button>
                     </div>
                 </div>
-
-
             </div>
 
             <SearchFilter

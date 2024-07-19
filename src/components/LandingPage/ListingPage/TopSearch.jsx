@@ -21,7 +21,7 @@ import axios from 'axios';
 const initialState = [
     {
         image: RoadCity,
-        location: "505 Thurlow St, Vancouver, BC V6E 4J6, Canada",
+        address: "505 Thurlow St, Vancouver, BC V6E 4J6, Canada",
         bedRooms: "2",
         bathRooms: "1",
         area: "400sq fts",
@@ -31,7 +31,7 @@ const initialState = [
     },
     {
         image: ApartmentalResidential,
-        location: "1826 Tchesinkut Lake Rd Smithers, Canada",
+        address: "1826 Tchesinkut Lake Rd Smithers, Canada",
         bedRooms: "2",
         bathRooms: "4",
         area: "5600sq fts",
@@ -41,7 +41,7 @@ const initialState = [
     },
     {
         image: SmallFamily,
-        location: "4616 St. Paul Street St Catharines, Canada",
+        address: "4616 St. Paul Street St Catharines, Canada",
         bedRooms: "1",
         bathRooms: "2",
         area: "5600sq fts",
@@ -51,7 +51,7 @@ const initialState = [
     },
     {
         image: ApartmentalResidential,
-        location: "783 Bridgeport Rd Hamilton, Canada",
+        address: "783 Bridgeport Rd Hamilton, Canada",
         bedRooms: "2",
         bathRooms: "4",
         area: "5600sq fts",
@@ -61,7 +61,7 @@ const initialState = [
     },
     {
         image: SmallFamily,
-        location: " 3928 Fourth Avenue Calgary, Canada",
+        address: " 3928 Fourth Avenue Calgary, Canada",
         bedRooms: "3",
         bathRooms: "5",
         area: "5600sq fts",
@@ -71,7 +71,7 @@ const initialState = [
     },
     {
         image: RoadCity,
-        location: "4225 49th Avenue Fort Good Hope, Canada",
+        address: "4225 49th Avenue Fort Good Hope, Canada",
         bedRooms: "1",
         bathRooms: "2",
         area: "400sq fts",
@@ -83,39 +83,36 @@ const initialState = [
 ]
 
 const TopSearch = () => {
-    const [listings, setListings] = useState(initialState);
+    // const [listings, setListings] = useState(initialState);
     const [showModal, setShowModal] = useState(false);
     const [selectedAvailability, setSelectedAvailability] = useState(null);
 
     const [isLoading, setIsLoading] = useState(false)
+    const [allSiteListings, setAllSiteListings] = useState([]);
 
-    const [allListings, setAllListings] = useState([]);
+    useEffect(() => {
+        console.log("Updated searched listings:", allSiteListings);
+    }, [allSiteListings]);
+
     useEffect(() => {
         const fetchListings = async () => {
             try {
-                // Retrieve accessToken from localStorage
-                // const accessToken = JSON.parse(localStorage.getItem('accessToken'));
-
-
-                // if (!accessToken) {
-                //     // Handle case where accessToken is not available
-                //     console.error('Access Token not found in localStorage');
-                //     return;
-                // }
-
-                // Set the headers with the accessToken
-                // const headers = {
-                //     'Authorization': `Bearer ${accessToken}`,
-                //     'Content-Type': 'application/json',
-                // };
-
                 setIsLoading(true)
 
-                const response = await axios.get('https://medirent-api-3gwy.onrender.com/housing/get-all-user-listings');
+                const response = await axios.post(
+                    'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=10',
+                    {}, // Sending an empty JSON object
+                    {
+                      headers: {
+                        'accept': 'application/json',
+                        'Content-Type': 'application/json',
+                      },
+                    }
+                );
 
-                console.log("all the response..", response?.data);
-                setAllListings(response?.data?.data);
-
+                setAllSiteListings(response?.data?.data?.items);
+                
+                console.log("all the response..", response?.data, allSiteListings);
                 setIsLoading(false)
 
             } catch (error) {
@@ -125,10 +122,12 @@ const TopSearch = () => {
         };
 
         fetchListings();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
     const handleCheckAvailability = (availability) => {
+        console.log("first in the code", availability)
         setSelectedAvailability(availability);
         setShowModal(true);
     };
@@ -158,13 +157,13 @@ const TopSearch = () => {
 
             <div className=" flex justify-center items-center lg:px-28 md:px-0 xs:px-0 py-10">
                 <div className="grid md:w-full xs:w-full md:grid-cols-3 xs:grid-cols-1 gap-5 xs:px-3 mt-10 md:mx-10 xs:mx-0 justify-center items-center">
-                    {listings && (
-                        listings.map((listing, index) => (
+                    {allSiteListings && (
+                        allSiteListings.map((listing, index) => (
                             <div key={index} className="flex justify-center items-center  flex-col ">
                                 <div className="bg-white rounded-lg px-0 py-3 shadow-xl">
-                                    <div className=''>
-                                        <Link to="/listing-details/1"  className='flex items-center rounded-lg'>
-                                            <img alt="" src={listing.image} className="cursor-pointer " />
+                                    <div className='w-full h-full'>
+                                        <Link to="/listing-details/1"  className='flex items-center rounded-lg w-full h-full'>
+                                            <img alt="" src={listing.avatars[0]} className="cursor-pointer w-[500px] h-60 object-cover rounded-tl-lg rounded-tr-lg" />
                                         </Link>
                                     </div>
                                     <div className="flex flex-col gap-0 h-fit pt-6 md:px-3 xs:px-2">
@@ -173,7 +172,16 @@ const TopSearch = () => {
                                                 <div className=''>
 
                                                     <div className='font-[400] text-slate-400 text-[10px]'>
-                                                        <span className="text-slate-700 font-semibold text-[16px]">{listing.amount}</span> <span className="text-gray-500">/month</span>
+                                                        <span className="text-primary font-semibold text-[16px]">{listing?.housingDetails?.propertyType}</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div className="flex justify-start items-center border-none ">
+                                                <div className=''>
+
+                                                    <div className='font-[400] text-slate-400 text-[10px]'>
+                                                        <span className="text-slate-700 font-semibold text-[16px]">${listing?.housingDetails?.price}</span> <span className="text-gray-500">/month</span>
                                                     </div>
                                                 </div>
 
@@ -183,7 +191,7 @@ const TopSearch = () => {
                                                 <div className=''>
 
                                                     <div className='text-slate-700 font-[400] text-[10px] w-[80%]'>
-                                                        {listing.location}
+                                                        {listing.address}
                                                     </div>
                                                 </div>
 
@@ -195,7 +203,7 @@ const TopSearch = () => {
                                                 <div className='flex justify-center items-center flex-col'>
                                                     <img alt="" src={Bed} className="cursor-pointer w-6 h-6" />
                                                     <div className='font-[400] text-slate-400 text-[10px]'>
-                                                        {listing.bedRooms} Beds
+                                                        {listing?.housingDetails?.numberOfBathRoom} Beds
                                                     </div>
                                                 </div>
 
@@ -205,7 +213,7 @@ const TopSearch = () => {
                                                 <div className='flex justify-center items-center flex-col w-full'>
                                                     <img alt="" src={BathTub} className="cursor-pointer w-6 h-6" />
                                                     <div className='font-[400] text-slate-400 text-[10px]'>
-                                                        {listing.bathRooms} Bath
+                                                        {listing?.housingDetails?.numberOfBedRoom} Bath
                                                     </div>
                                                 </div>
 
@@ -215,7 +223,7 @@ const TopSearch = () => {
                                                 <div className='flex justify-center items-center flex-col w-full'>
                                                     <img alt="" src={Area} className="cursor-pointer w-6 h-6" />
                                                     <div className='font-[400] text-slate-400 text-[10px]'>
-                                                        {listing.area}
+                                                        {listing?.housingDetails?.area}
                                                     </div>
                                                 </div>
 
@@ -225,7 +233,8 @@ const TopSearch = () => {
                                                 <div className='flex justify-start items-center flex-col w-full'>
                                                     <img alt="" src={Star} className="cursor-pointer w-6 h-6" />
                                                     <div className='font-[400] text-slate-400 text-[10px]'>
-                                                        {listing.rating} Star
+                                                        {/* {listing.rating}  Star */}
+                                                        4 Star
                                                     </div>
                                                 </div>
 

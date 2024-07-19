@@ -15,7 +15,7 @@ const AvailabilityModal = ({ availability, onClose }) => {
         fullname: "",
         email: "",
         phone: "",
-        address: `I am interested in ${availability.location}`
+        address: `I am interested in ${availability.address}`
     });
     
 

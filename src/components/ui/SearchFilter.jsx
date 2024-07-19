@@ -42,9 +42,7 @@ const CustomSlider = styled(Slider)({
 const SearchFilter = ({ isOpen, closeModal }) => {
     const [userLoading, setUserLoading] = useState(false);
     const [emptyLoading, setEmptyLoading] = useState(true)
-    const [searchedlistings, setSearchedListings] = useState([]);
-
-
+    const [searchedListings, setSearchedListings] = useState([]);
 
     const [naming, setNaming] = useState("House");
     const [selectedBathroom, setSelectedBathroom] = useState("");
@@ -60,12 +58,13 @@ const SearchFilter = ({ isOpen, closeModal }) => {
     const [allListings, setAllListings] = useState({
         location: "",
         propertyType: "",
-        minimumPriceRange: 0,
-        maximumPriceRange: 0,
-        propertySize: 0,
+        minimumPriceRange: null,
+        maximumPriceRange: null,
+        propertySize: null,
         bedrooms: null,
         bathrooms: null,
-        amenities: []
+        amenities: [], 
+        buildYear: null
     });
 
     var {
@@ -77,6 +76,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
         bedrooms,
         bathrooms,
         amenities,
+        buildYear,
 
     } = allListings
 
@@ -236,44 +236,48 @@ const SearchFilter = ({ isOpen, closeModal }) => {
         }));
     };
 
-    const handleChangeYear = (event) => {
-        setSelectedYear(event.target.value);
-    };
+    const handleBuildYearChange = () => {
+
+        // setSelectedBedroom(event.target.value);
+        const { value } = event.target;
+
+        setAllListings((prevState) => ({
+            ...prevState,
+            buildYear: value,
+        }));
+    }
+
+    // const handleChangeYear = (event) => {
+    //     setSelectedYear(event.target.value);
+    // };
+
+    useEffect(() => {
+        console.log("Updated searched listings:", searchedListings);
+    }, [searchedListings]);
 
     const handleListing = async () => {
         // e.preventDefault();
         try {
-            // console.log(formData, "help me");
-            // if (!country || !province) {
-            //     toast.warning("Please fill in all required fields.");
-            //     return;
-            // }
+            
 
             setUserLoading(true);
 
             console.log("user form for landlord...", allListings);
 
-            // const response = await axios.post('https://medirent-api-3gwy.onrender.com/housing/get-all-listings',
-            //     {
-
-            //         // location,
-            //         // propertyType,
-            //         // minimumPriceRange,
-            //         // maximumPriceRange,
-            //         // propertySize,
-            //         // bedrooms,
-            //         // bathrooms,
-            //         // amenities,
-            //     },
-
-            // );
-            // let empty = JSON.stringify({})
             const response = await axios.post(
                 'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=10',
                 {
                     // pageNumber: 1,
                     // pageSize: 10
-                    
+                    propertyType,
+                    minimumPriceRange,
+                    maximumPriceRange,
+                    buildYear,
+                    propertySize,
+                    bedrooms,
+                    bathrooms,
+                    location,
+
                 }, // Sending an empty JSON object
                 {
                   headers: {
@@ -283,44 +287,21 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                 }
             );
 
-            // const response = fetch('https://medirent-api-3gwy.onrender.com/housing/get-all-listings', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify({})
-            // })
-            //     .then(response => {
-            //         if (!response.ok) {
-            //             throw new Error('Network response was not ok');
-            //         }
-
-            //         console.log("response in the code..", response.json())
-            //         return response.json();
-            //     })
-            //     .then(data => {
-            //         console.log('Success:', data);
-            //     })
-            //     .catch(error => {
-            //         console.error('Error:', error);
-            //     });
-
-            // if (response?.data?.code === null) {
-            //     setEmptyLoading(false)
-            //     // console.log("empty Loading...", emptyLoading);
-            // }
 
             setUserLoading(false);
 
             // console.log("Landlord is rent..", response.data.data.items);
-            setSearchedListings(response?.data);
+            setSearchedListings(response?.data?.data?.items);
 
-            console.log("all the user..", searchedlistings, response);
+            console.log("all the user..", response, searchedListings);
 
-            // if (response.data.success === true) {
+            if (response.data.success === true) {
 
-            //     navigate('/listings', { state: { result: listings, emptyLoading } });
-            // }
+                console.log("hello in the building..")
+                closeModal();
+
+                // navigate('/listings', { state: { result: listings, emptyLoading } });
+            }
         } catch (error) {
             setUserLoading(false);
             // console.log("error in the landlord..", error);
@@ -533,7 +514,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                             type="text"
                                             name=""
                                             id=""
-                                            placeholder="Address"
+                                            placeholder="City"
                                             onChange={handleAddressChange}
                                         />
 
@@ -660,7 +641,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                     <div className='flex mt-3 gap-5 flex-col'>
                                         <div className="md:text-[15px] xs:text-[12px] text-black  w-full flex justify-start items-center font-[600]">Build Year</div>
                                         <div className='flex w-full'>
-                                            <select
+                                            {/* <select
                                                 value={selectedYear}
                                                 onChange={handleChangeYear}
                                                 className="text-[14px] h-12 peer px-4 py-2 w-full rounded-md border border-gray-200 bg-[#f7f7f7] outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white "
@@ -674,7 +655,15 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                                         {numberOfPlace.label}
                                                     </option>
                                                 ))}
-                                            </select>
+                                            </select> */}
+                                            <input
+                                                className="relative mt-3 h-12 w-full text-[1rem] outline-none border-[1px] px-2 rounded-[4px] bg-[#f7f7f7]"
+                                                type="number"
+                                                name=""
+                                                id=""
+                                                placeholder="Year"
+                                                onChange={handleBuildYearChange}
+                                            />
                                         </div>
                                     </div>
 

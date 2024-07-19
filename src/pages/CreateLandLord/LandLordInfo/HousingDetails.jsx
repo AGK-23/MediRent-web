@@ -220,16 +220,12 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
     };
 
     const handleDescriptionUser = (value) => {
-
         // console.log("description..", value);
         setDetailsData({
             ...detailsData,
             description: value
         });
     };
-
-    
-
 
     return (
         <div>
