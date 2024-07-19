@@ -103,58 +103,58 @@ const TopSearch = () => {
         buildYear: null
     });
 
-    const [all, setAll] = useState({
-        location: allListings.location,
-        propertyType: allListings.propertyType,
-        minimumPriceRange: allListings.minimumPriceRange,
-        maximumPriceRange: allListings.maximumPriceRange,
-        propertySize: allListings.propertySize,
-        bedrooms: allListings.bedrooms,
-        bathrooms: allListings.bathrooms,
-        amenities: allListings.amenities, 
-        buildYear: allListings.buildYear
-    });
+    // const [all, setAll] = useState({
+    //     location: allListings.location,
+    //     propertyType: allListings.propertyType,
+    //     minimumPriceRange: allListings.minimumPriceRange,
+    //     maximumPriceRange: allListings.maximumPriceRange,
+    //     propertySize: allListings.propertySize,
+    //     bedrooms: allListings.bedrooms,
+    //     bathrooms: allListings.bathrooms,
+    //     amenities: allListings.amenities, 
+    //     buildYear: allListings.buildYear
+    // });
 
-    useEffect(() => {
-        setAll(prevState => ({
-            ...prevState,
-            location: allListings.location,
-            propertyType: allListings.propertyType,
-            minimumPriceRange: allListings.minimumPriceRange,
-            maximumPriceRange: allListings.maximumPriceRange,
-            propertySize: allListings.propertySize,
-            bedrooms: allListings.bedrooms,
-            bathrooms: allListings.bathrooms,
-            amenities: allListings.amenities, 
-            buildYear: allListings.buildYear
-        }));
+    // useEffect(() => {
+    //     setAll(prevState => ({
+    //         ...prevState,
+    //         location: allListings.location,
+    //         propertyType: allListings.propertyType,
+    //         minimumPriceRange: allListings.minimumPriceRange,
+    //         maximumPriceRange: allListings.maximumPriceRange,
+    //         propertySize: allListings.propertySize,
+    //         bedrooms: allListings.bedrooms,
+    //         bathrooms: allListings.bathrooms,
+    //         amenities: allListings.amenities, 
+    //         buildYear: allListings.buildYear
+    //     }));
 
         
-    }, [allListings]);
+    // }, [allListings]);
 
-    var {
-        location,
-        propertyType,
-        minimumPriceRange,
-        maximumPriceRange,
-        propertySize,
-        bedrooms,
-        bathrooms,
-        amenities,
-        buildYear,
+    // var {
+    //     location,
+    //     propertyType,
+    //     minimumPriceRange,
+    //     maximumPriceRange,
+    //     propertySize,
+    //     bedrooms,
+    //     bathrooms,
+    //     amenities,
+    //     buildYear,
 
-    } = allListings
+    // } = allListings
 
     useEffect(() => {
         console.log("Updated Bank:", allSiteListings);
-    }, [allSiteListings, searchedListings, allListings, all]);
+    }, [allSiteListings]);
 
     useEffect(() => {
         const fetchListings = async () => {
             try {
                 setIsLoading(true)
 
-                console.log("first items", allListings, all)
+                console.log("first items", allListings)
 
                 const response = await axios.post(
                     'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=10',
@@ -186,7 +186,7 @@ const TopSearch = () => {
         try {
             setIsLoading(true)
 
-            console.log("first items", allListings, all, data)
+            console.log("first items", allListings, data)
 
             const response = await axios.post(
                 'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=10',
@@ -243,8 +243,7 @@ const TopSearch = () => {
 
                         <div className='mt-[33px] w-full'>
                             <SearchTab
-                                allListings={allListings}
-                                setAllListings={setAllListings}
+                                
                                 searchedListings={searchedListings}
                                 setSearchedListings={setSearchedListings}
                                 sendDataToParent={handleDataFromChild}

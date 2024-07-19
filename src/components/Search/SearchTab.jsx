@@ -6,7 +6,7 @@ import Search from "../../assets/Search/search.svg";
 import SearchFilter from "../ui/SearchFilter";
 
 // eslint-disable-next-line react/prop-types
-const SearchTab = ({getAllListing, allListings, setAllListings, searchedListings, setSearchedListings, sendDataToParent}) => {
+const SearchTab = ({getAllListing, searchedListings, setSearchedListings, sendDataToParent}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const closeModal = () => {
@@ -77,8 +77,7 @@ const SearchTab = ({getAllListing, allListings, setAllListings, searchedListings
             <SearchFilter
                 isOpen={isOpen}
                 closeModal={closeModal}
-                allListings={allListings}
-                setAllListings={setAllListings}
+                
                 searchedListings={searchedListings}
                 setSearchedListings={setSearchedListings}
                 sendDataToParent={sendDataToParent}

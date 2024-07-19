@@ -39,7 +39,7 @@ const CustomSlider = styled(Slider)({
 
 
 
-const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, allListings, setAllListings, searchedListings, setSearchedListings }) => {
+const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, searchedListings, setSearchedListings }) => {
     const [userLoading, setUserLoading] = useState(false);
     const [emptyLoading, setEmptyLoading] = useState(true)
     // const [searchedListings, setSearchedListings] = useState([]);
@@ -55,17 +55,17 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, all
     const [checkedItems, setCheckedItems] = useState(new Array(8).fill(false));
     const [selectedItems, setSelectedItems] = useState([]);
 
-    // const [allListings, setAllListings] = useState({
-    //     location: "",
-    //     propertyType: "",
-    //     minimumPriceRange: null,
-    //     maximumPriceRange: null,
-    //     propertySize: null,
-    //     bedrooms: null,
-    //     bathrooms: null,
-    //     amenities: [], 
-    //     buildYear: null
-    // });
+    const [allListings, setAllListings] = useState({
+        location: "",
+        propertyType: "",
+        minimumPriceRange: null,
+        maximumPriceRange: null,
+        propertySize: null,
+        bedrooms: null,
+        bathrooms: null,
+        amenities: [], 
+        buildYear: null
+    });
 
     var {
         location,
