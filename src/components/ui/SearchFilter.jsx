@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 
 
@@ -8,13 +9,16 @@ import Cancel from "../../assets/svg/cancel.svg"
 // import Box from '@mui/material/Box';
 // import Slider from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
-
+import axios from "axios";
 import { Box, Slider, Typography } from '@mui/material';
 
 import House from "../../assets/Search/house.svg";
 import Commercial from "../../assets/Search/commercial.svg";
 import Building from "../../assets/Search/building.svg";
 import Duplex from "../../assets/Search/duplex.svg";
+// import AllListing from '../../pages/Listing/AllListing/AllListing';
+
+
 
 
 const CustomSlider = styled(Slider)({
@@ -36,17 +40,83 @@ const CustomSlider = styled(Slider)({
 
 
 const SearchFilter = ({ isOpen, closeModal }) => {
+    const [userLoading, setUserLoading] = useState(false);
+    const [emptyLoading, setEmptyLoading] = useState(true)
+    const [searchedlistings, setSearchedListings] = useState([]);
+
+
+
     const [naming, setNaming] = useState("House");
     const [selectedBathroom, setSelectedBathroom] = useState("");
     const [selectedBedroom, setSelectedBedroom] = useState("");
 
     const [selectedYear, setSelectedYear] = useState("");
-    const [selectedPlotSize, setSelectedPlotSize] = useState("");
+    // const [selectedPlotSize, setSelectedPlotSize] = useState("");
     const [value1, setValue1] = useState([50000, 200000]);
     //   const [value2, setValue2] = useState([20, 37]);
     const [checkedItems, setCheckedItems] = useState(new Array(8).fill(false));
     const [selectedItems, setSelectedItems] = useState([]);
 
+    const [allListings, setAllListings] = useState({
+        location: "",
+        propertyType: "",
+        minimumPriceRange: 0,
+        maximumPriceRange: 0,
+        propertySize: 0,
+        bedrooms: null,
+        bathrooms: null,
+        amenities: []
+    });
+
+    var {
+        location,
+        propertyType,
+        minimumPriceRange,
+        maximumPriceRange,
+        propertySize,
+        bedrooms,
+        bathrooms,
+        amenities,
+
+    } = allListings
+
+    // useEffect(() => {
+    //     setAllListings(prevState => ({
+    //         ...prevState,
+    //         location: "",
+    //         propertyType: "",
+    //         minimumPriceRange: 0,
+    //         maximumPriceRange: 0,
+    //         propertySize: "",
+    //         bedrooms: "",
+    //         bathrooms: "",
+    //         amenities: []
+    //     }));
+    // }, [allListings]);
+
+    const handleAddressChange = (event) => {
+        const { value } = event.target;
+        // console.log("all the value..", value );
+
+        setAllListings(prevState => ({
+            ...prevState,
+            location: value
+        }));
+
+        // console.log("object", allListings);
+    };
+
+    const handlePropertySizeChange = (event) => {
+        const { value } = event.target;
+        // console.log("all the value..", value );
+
+        setAllListings(prevState => ({
+            ...prevState,
+            propertySize: parseInt(value)
+        }));
+
+        console.log("object", allListings, typeof value, value);
+    };
 
     const handleChange1 = (event, newValue, activeThumb) => {
         if (!Array.isArray(newValue)) {
@@ -64,6 +134,14 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                 Math.min(newValue[1], 500000)
             ]);
         }
+
+        setAllListings(prevState => ({
+            ...prevState,
+            minimumPriceRange: newValue[0],
+            maximumPriceRange: newValue[1],
+        }));
+
+        console.log("number..", allListings)
     };
 
     const valuetext = (value) => {
@@ -87,13 +165,16 @@ const SearchFilter = ({ isOpen, closeModal }) => {
             } else {
                 setSelectedItems((prevSelectedItems) => [...new Set([...prevSelectedItems.filter((item) => item !== selectedItem)])]);
             }
+
+            setAllListings(prevState => ({
+                ...prevState,
+                amenities: selectedItems
+            }));
+
+            console.log("all check..", updatedCheckedItems, selectedItems, selectedItem, allListings)
             return updatedCheckedItems;
         });
     };
-
-    
-
-
     // eslint-disable-next-line no-unused-vars
     const [linkName, setLinkName] = useState({
         nameOne: "House",
@@ -102,30 +183,159 @@ const SearchFilter = ({ isOpen, closeModal }) => {
         nameFour: "Duplex",
     });
 
+    const handlePropertyType = (name) => {
+        if (naming !== name) {
+            setNaming(name);
+            setAllListings((prevState) => ({
+                ...prevState,
+                propertyType: name,
+            }));
+        } else {
+            setNaming(name);
+            setAllListings((prevState) => ({
+                ...prevState,
+                propertyType: name,
+            }));
+        }
 
+        // console.log("property size..", allListings)
+    };
 
     const numberOfPlaces = [
         // { label: "Voter ID", value: "Voter ID", disabled: true, index: 0 },
         { label: "1", value: "1", index: 0 },
         { label: "2", value: "2", index: 1 },
         { label: "3", value: "3", index: 3 },
+        { label: "4", value: "4", index: 4 },
+        { label: "5", value: "5", index: 5 },
+        { label: "6", value: "6", index: 6 },
+        { label: "7", value: "7", index: 7 },
+        { label: "8", value: "8", index: 8 },
+        { label: "9", value: "9", index: 9 },
+        { label: "10", value: "10", index: 10 },
 
     ];
 
     const handleBathroom = (event) => {
         setSelectedBathroom(event.target.value);
+        const { value } = event.target;
+
+        setAllListings((prevState) => ({
+            ...prevState,
+            bathrooms: parseInt(value),
+        }));
     };
 
     const handleBedroom = (event) => {
         setSelectedBedroom(event.target.value);
+        const { value } = event.target;
+
+        setAllListings((prevState) => ({
+            ...prevState,
+            bedrooms: parseInt(value),
+        }));
     };
 
     const handleChangeYear = (event) => {
         setSelectedYear(event.target.value);
     };
 
-    const handleChangePlotSize = (event) => {
-        setSelectedPlotSize(event.target.value);
+    const handleListing = async () => {
+        // e.preventDefault();
+        try {
+            // console.log(formData, "help me");
+            // if (!country || !province) {
+            //     toast.warning("Please fill in all required fields.");
+            //     return;
+            // }
+
+            setUserLoading(true);
+
+            console.log("user form for landlord...", allListings);
+
+            // const response = await axios.post('https://medirent-api-3gwy.onrender.com/housing/get-all-listings',
+            //     {
+
+            //         // location,
+            //         // propertyType,
+            //         // minimumPriceRange,
+            //         // maximumPriceRange,
+            //         // propertySize,
+            //         // bedrooms,
+            //         // bathrooms,
+            //         // amenities,
+            //     },
+
+            // );
+            // let empty = JSON.stringify({})
+            const response = await axios.post(
+                'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=10',
+                {
+                    // pageNumber: 1,
+                    // pageSize: 10
+                    
+                }, // Sending an empty JSON object
+                {
+                  headers: {
+                    'accept': 'application/json',
+                    'Content-Type': 'application/json',
+                  },
+                }
+            );
+
+            // const response = fetch('https://medirent-api-3gwy.onrender.com/housing/get-all-listings', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({})
+            // })
+            //     .then(response => {
+            //         if (!response.ok) {
+            //             throw new Error('Network response was not ok');
+            //         }
+
+            //         console.log("response in the code..", response.json())
+            //         return response.json();
+            //     })
+            //     .then(data => {
+            //         console.log('Success:', data);
+            //     })
+            //     .catch(error => {
+            //         console.error('Error:', error);
+            //     });
+
+            // if (response?.data?.code === null) {
+            //     setEmptyLoading(false)
+            //     // console.log("empty Loading...", emptyLoading);
+            // }
+
+            setUserLoading(false);
+
+            // console.log("Landlord is rent..", response.data.data.items);
+            setSearchedListings(response?.data);
+
+            console.log("all the user..", searchedlistings, response);
+
+            // if (response.data.success === true) {
+
+            //     navigate('/listings', { state: { result: listings, emptyLoading } });
+            // }
+        } catch (error) {
+            setUserLoading(false);
+            // console.log("error in the landlord..", error);
+
+            // console.log("all the promise in the code..", error?.response?.data);
+            if (error?.response?.data?.data === null) {
+                setEmptyLoading(false)
+                // console.log("empty Loading...", emptyLoading);
+                // navigate('/listings', { state: { result: listings, emptyLoading } });
+            }
+
+            // console.log("the current image..", emptyLoading)
+        }
+
+        // setActive(2)
     };
 
 
@@ -181,12 +391,13 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                                             <div
                                                                 className={`${naming === linkName.nameOne ? "border-secondary text-black" : "border-[#c3c7cb]"
                                                                     } py-4 flex items-center justify-center group w-full  px-10 text-center  border-[2px] rounded-lg`}
-                                                                onClick={() => {
-                                                                    naming !== linkName.nameOne
-                                                                        ? setNaming(linkName.nameOne)
-                                                                        : setNaming(linkName.nameOne);
+                                                                // onClick={() => {
+                                                                //     naming !== linkName.nameOne
+                                                                //         ? setNaming(linkName.nameOne)
+                                                                //         : setNaming(linkName.nameOne);
 
-                                                                }}
+                                                                // }}
+                                                                onClick={() => handlePropertyType(linkName.nameOne)}
                                                             >
                                                                 <div className="flex justify-center flex-col items-center w-full text-xs ">
                                                                     <div className=' w-full flex justify-center items-center'>
@@ -211,12 +422,13 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                                             <div
                                                                 className={`${naming === linkName.nameTwo ? "border-secondary" : "border-[#c3c7cb]"
                                                                     } py-4 flex items-center justify-center group w-full  px-10 text-center  border-[2px] rounded-lg`}
-                                                                onClick={() => {
-                                                                    naming !== linkName.nameTwo
-                                                                        ? setNaming(linkName.nameTwo)
-                                                                        : setNaming(linkName.nameTwo);
+                                                                // onClick={() => {
+                                                                //     naming !== linkName.nameTwo
+                                                                //         ? setNaming(linkName.nameTwo)
+                                                                //         : setNaming(linkName.nameTwo);
 
-                                                                }}
+                                                                // }}
+                                                                onClick={() => handlePropertyType(linkName.nameTwo)}
                                                             >
                                                                 <div className="flex justify-center flex-col items-center w-full text-xs ">
                                                                     <div className=' w-full flex justify-center items-center'>
@@ -242,12 +454,13 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                                             <div
                                                                 className={`${naming === linkName.nameThree ? "border-secondary" : "border-[#c3c7cb]"
                                                                     } py-4 flex items-center justify-center group w-full  px-10 text-center  border-[2px] rounded-lg`}
-                                                                onClick={() => {
-                                                                    naming !== linkName.nameThree
-                                                                        ? setNaming(linkName.nameThree)
-                                                                        : setNaming(linkName.nameThree);
+                                                                // onClick={() => {
+                                                                //     naming !== linkName.nameThree
+                                                                //         ? setNaming(linkName.nameThree)
+                                                                //         : setNaming(linkName.nameThree);
 
-                                                                }}
+                                                                // }}
+                                                                onClick={() => handlePropertyType(linkName.nameThree)}
                                                             >
                                                                 <div className="flex justify-center flex-col items-center w-full text-xs ">
                                                                     <div className=' w-full flex justify-center items-center'>
@@ -272,12 +485,13 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                                             <div
                                                                 className={`${naming === linkName.nameFour ? "border-secondary" : "border-[#c3c7cb]"
                                                                     } py-4 flex items-center justify-center group w-full  px-10 text-center  border-[2px] rounded-lg`}
-                                                                onClick={() => {
-                                                                    naming !== linkName.nameFour
-                                                                        ? setNaming(linkName.nameFour)
-                                                                        : setNaming(linkName.nameFour);
+                                                                // onClick={() => {
+                                                                //     naming !== linkName.nameFour
+                                                                //         ? setNaming(linkName.nameFour)
+                                                                //         : setNaming(linkName.nameFour);
 
-                                                                }}
+                                                                // }}
+                                                                onClick={() => handlePropertyType(linkName.nameFour)}
                                                             >
                                                                 <div className="flex justify-center flex-col items-center w-full text-xs ">
                                                                     <div className=' w-full flex justify-center items-center'>
@@ -320,6 +534,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                             name=""
                                             id=""
                                             placeholder="Address"
+                                            onChange={handleAddressChange}
                                         />
 
 
@@ -330,7 +545,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
 
                                         <div className='flex mt-3 gap-5'>
                                             <div className='flex w-full'>
-                                                <select
+                                                {/* <select
                                                     value={selectedBedroom}
                                                     onChange={handleBedroom}
                                                     className="text-[14px] h-12 peer px-4 py-2 w-full rounded-md border border-gray-200 bg-[#f7f7f7] outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white "
@@ -344,11 +559,20 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                                             {numberOfPlace.label}
                                                         </option>
                                                     ))}
-                                                </select>
+                                                </select> */}
+
+                                                <input
+                                                    className="relative mt-3 h-12 w-full text-[1rem] outline-none border-[1px] px-2 rounded-[4px] bg-[#f7f7f7]"
+                                                    type="number"
+                                                    name=""
+                                                    id=""
+                                                    placeholder="Bedrooms"
+                                                    onChange={handleBedroom}
+                                                />
                                             </div>
 
                                             <div className='flex w-full'>
-                                                <select
+                                                {/* <select
                                                     value={selectedBathroom}
                                                     onChange={handleBathroom}
                                                     className="text-[14px] h-12 peer px-4 py-2 w-full rounded-md border border-gray-200 bg-[#f7f7f7] outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white "
@@ -362,7 +586,16 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                                             {numberOfPlace.label}
                                                         </option>
                                                     ))}
-                                                </select>
+                                                </select> */}
+
+                                                <input
+                                                    className="relative mt-3 h-12 w-full text-[1rem] outline-none border-[1px] px-2 rounded-[4px] bg-[#f7f7f7]"
+                                                    type="number"
+                                                    name=""
+                                                    id=""
+                                                    placeholder="Bathrooms"
+                                                    onChange={handleBathroom}
+                                                />
 
 
                                             </div>
@@ -446,9 +679,9 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                     </div>
 
                                     <div className='flex mt-3 gap-5 flex-col'>
-                                        <div className="md:text-[15px] xs:text-[12px] text-black  w-full flex justify-start items-center font-[600]">Plot Size</div>
+                                        <div className="md:text-[15px] xs:text-[12px] text-black  w-full flex justify-start items-center font-[600]">Property Size</div>
                                         <div className='flex w-full'>
-                                            <select
+                                            {/* <select
                                                 value={selectedPlotSize}
                                                 onChange={handleChangePlotSize}
                                                 className="text-[14px] h-12 peer px-4 py-2 w-full rounded-md border border-gray-200 bg-[#f7f7f7] outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white "
@@ -462,7 +695,16 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                                         {numberOfPlace.label}
                                                     </option>
                                                 ))}
-                                            </select>
+                                            </select> */}
+
+                                            <input
+                                                className="relative mt-3 h-12 w-full text-[1rem] outline-none border-[1px] px-2 rounded-[4px] bg-[#f7f7f7]"
+                                                type="number"
+                                                name=""
+                                                id=""
+                                                placeholder="Property Size"
+                                                onChange={handlePropertySizeChange}
+                                            />
                                         </div>
                                     </div>
 
@@ -514,7 +756,7 @@ const SearchFilter = ({ isOpen, closeModal }) => {
                                 >
 
                                     <button className='text-[12px] rounded-full md:px-6 xs:px-4 lg:px-6 py-1 bg-transparent border-[2px] font-[600] border-[#c3c7cb] text-gray-500 flex justify-center items-center'>Clear All</button>
-                                    <button className='text-[12px] rounded-full md:px-8 xs:px-6 lg:px-8 py-1 border-[2px] border-transparent bg-[#5893A5] text-white flex justify-center items-center'>Apply</button>
+                                    <button className='text-[12px] rounded-full md:px-8 xs:px-6 lg:px-8 py-1 border-[2px] border-transparent bg-[#5893A5] text-white flex justify-center items-center' onClick={handleListing}>Apply</button>
                                 </div>
 
                             </div>

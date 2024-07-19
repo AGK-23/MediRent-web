@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 // import React from 'react'
-import { useState } from "react";
+// import { useState } from "react";
 import SearchTab from "../../Search/SearchTab"
 import RoadCity from "../../../assets/Listing/road-city.png";
 import ApartmentalResidential from "../../../assets/Listing/apartment-residential.png";
@@ -12,6 +12,9 @@ import BathTub from "../../../assets/Listing/bath-tub.svg";
 import Bed from "../../../assets/Listing/bed.svg";
 import AvailabilityModal from "../../ui/AvailabilityModal";
 import { Link } from "react-router-dom";
+
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 
@@ -83,6 +86,46 @@ const TopSearch = () => {
     const [listings, setListings] = useState(initialState);
     const [showModal, setShowModal] = useState(false);
     const [selectedAvailability, setSelectedAvailability] = useState(null);
+
+    const [isLoading, setIsLoading] = useState(false)
+
+    const [allListings, setAllListings] = useState([]);
+    useEffect(() => {
+        const fetchListings = async () => {
+            try {
+                // Retrieve accessToken from localStorage
+                // const accessToken = JSON.parse(localStorage.getItem('accessToken'));
+
+
+                // if (!accessToken) {
+                //     // Handle case where accessToken is not available
+                //     console.error('Access Token not found in localStorage');
+                //     return;
+                // }
+
+                // Set the headers with the accessToken
+                // const headers = {
+                //     'Authorization': `Bearer ${accessToken}`,
+                //     'Content-Type': 'application/json',
+                // };
+
+                setIsLoading(true)
+
+                const response = await axios.get('https://medirent-api-3gwy.onrender.com/housing/get-all-user-listings');
+
+                console.log("all the response..", response?.data);
+                setAllListings(response?.data?.data);
+
+                setIsLoading(false)
+
+            } catch (error) {
+                console.error('Error fetching listings:', error);
+                setIsLoading(false)
+            }
+        };
+
+        fetchListings();
+    }, []);
 
 
     const handleCheckAvailability = (availability) => {

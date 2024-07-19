@@ -263,7 +263,7 @@ useEffect(() => {
 
                 <div className="my-20 px-5">
                     <div className="text-[#0E0C3D] font-semibold text-[24px] mb-5">SignIn to Your Account</div>
-                    <div className="text-black font-normal text-[16px]">Sign up to discover a variety of verified properties tailored for healthcare professionals. Provide your details below to start your journey towards finding a comfortable and convenient home that meets your unique needs.</div>
+                    <div className="text-black font-normal text-[16px]">Sign In to discover a variety of verified properties tailored for healthcare professionals. Provide your details below to start your journey towards finding a comfortable and convenient home that meets your unique needs.</div>
                 </div>
 
                 <div className="px-10">
