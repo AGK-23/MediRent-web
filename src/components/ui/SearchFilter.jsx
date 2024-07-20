@@ -325,8 +325,6 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
         try {
             setUserLoading(true);
 
-            
-
             setAllListings((prevState) => ({
                 ...prevState,
                 location: "",

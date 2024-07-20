@@ -189,7 +189,7 @@ const TopSearch = () => {
             console.log("first items", allListings, data)
 
             const response = await axios.post(
-                'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=10',
+                'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=100',
                 { data }, // Sending an empty JSON object
                 {
                   headers: {
@@ -263,7 +263,7 @@ const TopSearch = () => {
                                     <div key={index} className="flex justify-center items-center  flex-col ">
                                         <div className="bg-white rounded-lg px-0 py-3 shadow-xl">
                                             <div className='w-full h-full'>
-                                                <Link to="/listing-details/1"  className='flex items-center rounded-lg w-full h-full'>
+                                                <Link to={`/listing-details/${listing.id}`}  className='flex items-center rounded-lg w-full h-full'>
                                                     <img alt="" src={listing.avatars[0]} className="cursor-pointer w-[500px] h-60 object-cover rounded-tl-lg rounded-tr-lg" />
                                                 </Link>
                                             </div>
@@ -351,8 +351,11 @@ const TopSearch = () => {
                                 ))
                             ) : (
 
-                                <div className='w-full flex justify-start font-semibold text-lg items-center h-full '>
-                                    <div className="">No Listings Found</div>
+                                // <div className='w-full flex justify-start font-semibold text-lg items-center h-full '>
+                                //     <div className="">No Listings Found</div>
+                                // </div>
+                                <div className='xs:w-full md:w-[80vw] flex justify-center items-center h-[50vh] '>
+                                    <div className="loader "></div>
                                 </div>
                             )}
                         </div>

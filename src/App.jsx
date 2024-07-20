@@ -54,7 +54,7 @@ function App() {
                   <Route path="/all-listings" element={<LandListing />} />
                   <Route path="/faqs" element={<Faqs />} />
                   <Route path="/about-us" element={<AboutUs />} />
-                  <Route path="/listing-details/1" element={<ListingDetails />} />
+                  <Route path="/listing-details/:id" element={<ListingDetails />} />
 
 
                   <Route path="/auth/login" element={<Login />} />
