@@ -156,7 +156,7 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
 
 
             // Update the selectedItems array
-            const selectedItem = ['Swimming Pool', 'Heating System', 'Garden', 'Garage', 'Backyard', 'Finished Basement', 'Fireplace', 'Balcony'][index];
+            const selectedItem = ['Fully Furnished', 'Treated Water Supply', 'Garden', '24/7 Power Supply', 'Secure Parking', 'Community Spaces ', 'High-Speed Internet', 'Proximity to Hospital'][index];
             if (updatedCheckedItems[index]) {
                 if (!selectedItems.includes(selectedItem)) {
                     setSelectedItems((prevSelectedItems) => [...new Set([...prevSelectedItems, selectedItem])]);
@@ -277,6 +277,7 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
                     bedrooms,
                     bathrooms,
                     location,
+                    amenities
 
                 }, // Sending an empty JSON object
                 {
@@ -633,14 +634,8 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
                                                     placeholder="Bathrooms"
                                                     onChange={handleBathroom}
                                                 />
-
-
                                             </div>
-
                                         </div>
-
-
-
                                     </div>
                                 </div>
 
@@ -758,8 +753,8 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
                                 <div className='my-10'>
                                     <div className="md:text-[15px] xs:text-[12px] text-black  w-full flex justify-start items-center font-[600] ">Features and Amenities</div>
 
-                                    <div className='w-full grid md:grid-cols-3 xs:grid-cols-2'>
-                                        {['Swimming Pool', 'Heating System', 'Garden', 'Garage', 'Backyard', 'Finished Basement', 'Fireplace', 'Balcony'].map((item, index) => (
+                                    <div className='w-full grid md:grid-cols-3 xs:grid-cols-2 '>
+                                        {['Fully Furnished', 'Treated Water Supply', 'Garden', '24/7 Power Supply', 'Secure Parking', 'Community Spaces', 'High-Speed Internet', 'Proximity to Hospital'].map((item, index) => (
                                             <div key={index} className="mr-3 relative my-3 w-full">
                                                 <input
                                                     type="checkbox"

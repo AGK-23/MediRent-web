@@ -1,13 +1,22 @@
+/* eslint-disable no-unused-vars */
 // import React from 'react'
 import { useState } from "react";
 import Filter from "../../assets/Search/filter.svg";
 import Search from "../../assets/Search/search.svg";
 
 import SearchFilter from "../ui/SearchFilter";
+import CustomSelect from "../Custom-components/Custom-Select";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
-const SearchTab = ({getAllListing, searchedListings, setSearchedListings, sendDataToParent}) => {
+const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendDataToParent }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [userLoading, setUserLoading] = useState(false);
+    const [emptyLoading, setEmptyLoading] = useState(true);
+    const [searchedAllListings, setSearchedAllListings] = useState([]);
+
 
     const closeModal = () => {
         setIsOpen(false);
@@ -17,37 +26,223 @@ const SearchTab = ({getAllListing, searchedListings, setSearchedListings, sendDa
         setIsOpen(true);
     };
 
+    const [allListings, setAllListings] = useState({
+        location: "",
+        propertyType: "",
+        propertySize: null,
+        buildYear: null
+    });
+
+    var {
+        location,
+        propertyType,
+        propertySize,
+        buildYear,
+
+    } = allListings;
+
+    const validateForm = () => {
+        const { location, propertyType, propertySize, buildYear } = allListings;
+
+        if (!location) {
+            return "Location is required.";
+        }
+        if (!propertyType) {
+            return "Property type is required.";
+        }
+        if (propertySize === null || propertySize <= 0) {
+            return "Property size must be a positive number.";
+        }
+        if (buildYear && (isNaN(buildYear) || buildYear < 1900 || buildYear > new Date().getFullYear())) {
+            return "Build year must be a valid year.";
+        }
+        return null; // No errors
+    };
+
+    const handleLocationChange = (event) => {
+        const { value } = event.target;
+
+        setAllListings(prevState => ({
+            ...prevState,
+            location: value
+        }));
+    };
+
+    const handlePropertySizeChange = (event) => {
+        const { value } = event.target;
+
+        setAllListings(prevState => ({
+            ...prevState,
+            propertySize: parseInt(value)
+        }));
+    };
+
+    const handleBuildYearChange = (event) => {
+        const { value } = event.target;
+
+        setAllListings(prevState => ({
+            ...prevState,
+            buildYear: parseInt(value)
+        }));
+    };
+
+    const handlePropertyType = (value) => {
+        // console.log("value", value);
+        setAllListings(prevState => ({
+            ...prevState,
+            propertyType: value,
+        }));
+    };
+
+    const handleSearch = async (e) => {
+
+        e.preventDefault();
+
+        // const validationError = validateForm();
+        // if (validationError) {
+        //     toast.warning(validationError); 
+        //     return; 
+        // }
+
+        try {
+
+
+            setUserLoading(true);
+
+            console.log("user form for landlord...", allListings);
+
+            const response = await axios.post(
+                'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=100',
+                {
+                    location,
+                    propertyType,
+                    propertySize,
+                    buildYear,
+
+                }, // Sending an empty JSON object
+                {
+                    headers: {
+                        'accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+
+
+            setUserLoading(false);
+
+            // console.log("Landlord is rent..", response.data.data.items);
+            setSearchedAllListings(response?.data?.data?.items);
+
+            console.log("all the user..", response, searchedListings);
+
+            if (response.data.success === true) {
+
+                getAllListing(response?.data?.data?.items)
+
+                console.log("hello in the building..")
+                closeModal();
+
+                // navigate('/listings', { state: { result: listings, emptyLoading } });
+            }
+        } catch (error) {
+            setUserLoading(false);
+            // console.log("error in the landlord..", error);
+
+            // console.log("all the promise in the code..", error?.response?.data);
+            if (error?.response?.data?.data === null) {
+                setEmptyLoading(false)
+                // console.log("empty Loading...", emptyLoading);
+                // navigate('/listings', { state: { result: listings, emptyLoading } });
+            }
+
+            // console.log("the current image..", emptyLoading)
+        }
+
+        // setActive(2)
+
+        console.log("first", allListings)
+    }
+
     return (
         <div className="md:px-0 xs:px-2">
-            <div className="grid md:grid-cols-5 xs:grid-cols-2 lg:gap-16 md:gap-0 xs:gap-6 rounded-lg shadow-lg border-[1px] md:px-6 xs:px-5 py-6 md:w-full xs:w-full bg-white">
+            <div className="grid md:grid-cols-5 xs:grid-cols-2 lg:gap-16 md:gap-0 xs:gap-6 rounded-lg shadow-lg border-[1px] md:px-6 xs:px-2 py-6 md:w-full xs:w-full bg-white">
                 <div className="flex flex-col col  w-full md:mr-0 xs:mr-[69px]">
                     <div className="text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
                         Location
                     </div>
-                    <input type="text" placeholder="Select" className="text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/>
+                    <input
+                        type="text"
+                        placeholder="Select"
+                        className="text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"
+                        value={location}
+                        onChange={handleLocationChange}
+                    />
                 </div>
                 <div className="flex flex-col col w-full">
                     <div className="w-full md:text-start xs:text-end text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
                         Property Type
                     </div>
-                    <input type="text" placeholder="Select" className="md:text-start xs:text-end text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/>
+                    <CustomSelect
+                        wrapperClass=' !h-[38px] !w-full !px-[12px]'
+                        labelClass=' text-black w-full text-gray-500'
+                        optionsClass='!text-[0.875rem] !h-[48px] !w-[100%] !text-black'
+                        optionWrapperClass=' w-[100%] !w-full border-[1px] shadow-lg border-gray-200 xl:left-[0px] !left-[0px] !h-[400px] !bottom-[-410px] overflow-y-auto '
+                        // otherOptions={true}
+                        label='Select type'
+                        setSelected={handlePropertyType}
+                        selected={propertyType}
+                        options={[
+                            {
+                                label: 'House',
+                                value: 'House'
+                            },
+                            {
+                                label: 'Commercial',
+                                value: 'Commercial'
+                            },
+                            {
+                                label: 'Apartment',
+                                value: 'Apartment'
+                            },
+                            {
+                                label: 'Duplex',
+                                value: 'Duplex'
+                            }
+                        ]}
+                    />
+                    {/* <input type="text" placeholder="Select" className="md:text-start xs:text-end text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/> */}
                 </div>
                 <div className="flex flex-col col">
                     <div className="text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
-                        Build Year 
+                        Build Year
                     </div>
-                    <input type="number" placeholder="Select" className="text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/>
+                    <input
+                        type="number"
+                        placeholder="Select"
+                        value={buildYear}
+                        onChange={handleBuildYearChange}
+                        className="text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"
+                    />
                 </div>
                 <div className="flex flex-col col">
                     <div className="md:text-start xs:text-end text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
                         Property Size
                     </div>
-                    <input type="number" placeholder="Select" className="md:text-start xs:text-end text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/>
+                    <input
+                        type="number"
+                        placeholder="Select"
+                        value={propertySize}
+                        onChange={handlePropertySizeChange}
+                        className="md:text-start xs:text-end text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"
+                    />
                 </div>
-                
+
                 <div className="flex flex-row lg:gap-4 md:gap-4 xs:gap-0 md:col-span-1 xs:col-span-2 justify-between">
                     <div className="flex justify-center items-center">
-                        <button className="rounded-full bg-primary w-[60px] h-[60px] flex justify-center items-center">
+                        <button
+                            onClick={handleSearch}
+                            className="rounded-full bg-primary w-[60px] h-[60px] flex justify-center items-center">
                             <img
                                 alt=""
                                 src={Search}
@@ -55,11 +250,11 @@ const SearchTab = ({getAllListing, searchedListings, setSearchedListings, sendDa
                             />
                         </button>
                     </div>
-                    <div 
+                    <div
                         className="flex justify-center"
-                        
+
                     >
-                        <button 
+                        <button
                             onClick={() => openModal()}
                             className="rounded-lg bg-white p-2 border-[1px] border-[#A4ABAC] flex justify-center items-center flex-col"
                         >
@@ -77,12 +272,12 @@ const SearchTab = ({getAllListing, searchedListings, setSearchedListings, sendDa
             <SearchFilter
                 isOpen={isOpen}
                 closeModal={closeModal}
-                
+
                 searchedListings={searchedListings}
                 setSearchedListings={setSearchedListings}
                 sendDataToParent={sendDataToParent}
                 getAllListing={getAllListing}
-                
+
             />
         </div>
     )

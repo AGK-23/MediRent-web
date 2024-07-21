@@ -536,14 +536,14 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
                         <div className="flex items-center my-3">
                             <input
                                 type="checkbox"
-                                id="Proximity to Medical Facilities"
-                                name="Proximity to Medical Facilities"
+                                id="Proximity to Hospital"
+                                name="Proximity to Hospital"
                                 className="outline-none h-6 w-6"
-                                value="Proximity to Medical Facilities"
-                                checked={amenitiesOption && amenitiesOption?.includes("Proximity to Medical Facilities")}
+                                value="Proximity to Hospital"
+                                checked={amenitiesOption && amenitiesOption?.includes("Proximity to Hospital")}
                                 onChange={handleAmenitiesChange}
                             />
-                            <label htmlFor="Proximity to Medical Facilities" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">Proximity to Medical Facilities</label>
+                            <label htmlFor="Proximity to Hospital" className="text-[#717171] ml-4 md:text-base xs:text-xs w-full">Proximity to Hospital</label>
                         </div>
 
                     </div>

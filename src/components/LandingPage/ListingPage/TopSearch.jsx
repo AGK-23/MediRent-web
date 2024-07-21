@@ -168,6 +168,7 @@ const TopSearch = () => {
                 );
 
                 setAllSiteListings(response?.data?.data?.items);
+                setAllListings(response?.data?.data?.items);
                 
                 console.log("all the response..", response?.data, allSiteListings);
                 setIsLoading(false)
@@ -256,7 +257,7 @@ const TopSearch = () => {
 
             <div className=" flex justify-center items-center lg:px-28 md:px-0 xs:px-0 py-10">
                 {
-                    allListings ? (
+                    allListings?.length > 0 ? (
                         <div className="grid md:w-full xs:w-full md:grid-cols-3 xs:grid-cols-1 gap-5 xs:px-3 mt-10 md:mx-10 xs:mx-0 justify-center items-center">
                             {allSiteListings?.length > 0 ? (
                                 allSiteListings.map((listing, index) => (
@@ -351,12 +352,12 @@ const TopSearch = () => {
                                 ))
                             ) : (
 
-                                // <div className='w-full flex justify-start font-semibold text-lg items-center h-full '>
-                                //     <div className="">No Listings Found</div>
-                                // </div>
-                                <div className='xs:w-full md:w-[80vw] flex justify-center items-center h-[50vh] '>
-                                    <div className="loader "></div>
+                                <div className='w-full flex justify-start font-semibold text-lg items-center h-full '>
+                                    <div className="">No Listings Found</div>
                                 </div>
+                                // <div className='xs:w-full md:w-[80vw] flex justify-center items-center h-[50vh] '>
+                                //     <div className="loader "></div>
+                                // </div>
                             )}
                         </div>
 
