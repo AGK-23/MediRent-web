@@ -157,7 +157,7 @@ const TopSearch = () => {
                 console.log("first items", allListings)
 
                 const response = await axios.post(
-                    'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=10',
+                    'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=100',
                     { }, // Sending an empty JSON object
                     {
                       headers: {
@@ -298,6 +298,16 @@ const TopSearch = () => {
                                                         </div>
 
                                                     </div>
+
+                                                </div>
+                                                <div className="flex justify-start items-center border-none ">
+                                                    <div className=''>
+
+                                                        <div className='text-slate-700 font-[400] text-[10px] w-full'>
+                                                            {listing?.listingTitle}
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                                 <div className="grid grid-cols-4 gap-5 mt-[15px] w-full ">
@@ -336,7 +346,7 @@ const TopSearch = () => {
                                                             <img alt="" src={Star} className="cursor-pointer w-6 h-6" />
                                                             <div className='font-[400] text-slate-400 text-[10px]'>
                                                                 {/* {listing.rating}  Star */}
-                                                                4 Star
+                                                                {listing?.housingDetails?.starRating || 0} Star
                                                             </div>
                                                         </div>
 

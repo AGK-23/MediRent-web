@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 // import React from 'react'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Filter from "../../assets/Search/filter.svg";
 import Search from "../../assets/Search/search.svg";
 
@@ -10,8 +10,12 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 
+import { useLocation } from "react-router-dom";
+
 // eslint-disable-next-line react/prop-types
 const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendDataToParent }) => {
+
+    const locationCity = useLocation();
     const [isOpen, setIsOpen] = useState(false);
     const [userLoading, setUserLoading] = useState(false);
     const [emptyLoading, setEmptyLoading] = useState(true);
@@ -25,6 +29,10 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
     const openModal = () => {
         setIsOpen(true);
     };
+
+    useEffect(() => {
+        console.log("window..", locationCity, "City..", locationCity.pathname)
+    }, [locationCity]);
 
     const [allListings, setAllListings] = useState({
         location: "",
@@ -45,7 +53,7 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
         const { location, propertyType, propertySize, buildYear } = allListings;
 
         if (!location) {
-            return "Location is required.";
+            return "location is required.";
         }
         if (!propertyType) {
             return "Property type is required.";
@@ -166,10 +174,10 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
 
     return (
         <div className="md:px-0 xs:px-2">
-            <div className="grid md:grid-cols-5 xs:grid-cols-2 lg:gap-16 md:gap-0 xs:gap-6 rounded-lg shadow-lg border-[1px] md:px-6 xs:px-2 py-6 md:w-full xs:w-full bg-white">
-                <div className="flex flex-col col  w-full md:mr-0 xs:mr-[69px]">
+            <div className="grid md:grid-cols-5 xs:grid-cols-2 lg:gap-10 md:gap-0 xs:gap-6 rounded-lg shadow-lg border-[1px] md:px-6 xs:px-2 py-6 md:w-full xs:w-full bg-white">
+                <div className="flex flex-col col  w-full md:mr-0 xs:mr-[69px] ">
                     <div className="text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
-                        Location
+                        City
                     </div>
                     <input
                         type="text"
@@ -179,7 +187,7 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
                         onChange={handleLocationChange}
                     />
                 </div>
-                <div className="flex flex-col col w-full">
+                <div className="flex flex-col col w-full ">
                     <div className="w-full md:text-start xs:text-end text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
                         Property Type
                     </div>
@@ -213,7 +221,7 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
                     />
                     {/* <input type="text" placeholder="Select" className="md:text-start xs:text-end text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"/> */}
                 </div>
-                <div className="flex flex-col col">
+                <div className="flex flex-col col ">
                     <div className="text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
                         Build Year
                     </div>
@@ -225,7 +233,7 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
                         className="text-[#A4ABAC] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px] outline-none border-none"
                     />
                 </div>
-                <div className="flex flex-col col">
+                <div className="flex flex-col col ">
                     <div className="md:text-start xs:text-end text-[#5A6770] font-[400] lg:text-[17px] md:text-[14px] xs:text-[14px]" >
                         Property Size
                     </div>
@@ -238,7 +246,7 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
                     />
                 </div>
 
-                <div className="flex flex-row lg:gap-4 md:gap-4 xs:gap-0 md:col-span-1 xs:col-span-2 justify-between">
+                <div className={`${locationCity.pathname !== "/" ? "md:col-span-1 xs:col-span-2 justify-between" : "md:col-span-1 xs:col-span-2 justify-center"}  flex flex-row lg:gap-4 md:gap-4 xs:gap-0 `}>
                     <div className="flex justify-center items-center">
                         <button
                             onClick={handleSearch}
@@ -250,22 +258,26 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
                             />
                         </button>
                     </div>
-                    <div
-                        className="flex justify-center"
+                    {
+                        locationCity.pathname !== "/" && (
+                            <div
+                                className="flex justify-center"
+                            >
+                                <button
+                                    onClick={() => openModal()}
+                                    className="rounded-lg bg-white p-2 border-[1px] border-[#A4ABAC] flex justify-center items-center flex-col"
+                                >
+                                    <img
+                                        alt=""
+                                        src={Filter}
+                                        className="cursor-pointer"
+                                    />
+                                    <div className="mt-1 text-[10px]"> Advanced</div>
+                                </button>
+                            </div>
 
-                    >
-                        <button
-                            onClick={() => openModal()}
-                            className="rounded-lg bg-white p-2 border-[1px] border-[#A4ABAC] flex justify-center items-center flex-col"
-                        >
-                            <img
-                                alt=""
-                                src={Filter}
-                                className="cursor-pointer"
-                            />
-                            <div className="mt-1 text-[10px]"> Advanced</div>
-                        </button>
-                    </div>
+                        )
+                    }
                 </div>
             </div>
 
