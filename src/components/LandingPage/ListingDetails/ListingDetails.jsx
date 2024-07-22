@@ -328,7 +328,7 @@ const ListingDetails = () => {
 
 
                                 <div className="md:col-span-1 xs:col w-full">
-                                    <div className=" relative flex w-full px-0 my-6 mx-0 ">
+                                    <div className=" relative hidden w-full px-0 my-6 mx-0 ">
                                         <div className="md:w-full xs:w-full bg-white border-[1px] rounded-lg shadow-lg p-[1rem] mx-1">
                                             <div className="flex  mb-4">
                                                 <h3 className="text-lg font-[500]">Request a Tour</h3>

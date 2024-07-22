@@ -230,6 +230,10 @@ const TopSearch = () => {
         console.log("Data received from child:", data);
     };
 
+    const formatValue = (value) => {
+        return value?.toLocaleString('en-US');
+    };
+
     return (
         <div className='flex w-full flex-col md:mt-[10rem] xs:mt-[0rem] py-0 relative'>
             <div className=' md:w-full gap-3 xs:w-full mt-0 xs:pb-2 md:pb-0 md:mt-10 xs:mt-12 relative'>
@@ -283,7 +287,7 @@ const TopSearch = () => {
                                                         <div className=''>
 
                                                             <div className='font-[400] text-slate-400 text-[10px]'>
-                                                                <span className="text-slate-700 font-semibold text-[16px]">${listing?.housingDetails?.price}</span> <span className="text-gray-500">/month</span>
+                                                                <span className="text-slate-700 font-semibold text-[16px]">${formatValue(listing?.housingDetails?.price)}</span> <span className="text-gray-500">/month</span>
                                                             </div>
                                                         </div>
 
