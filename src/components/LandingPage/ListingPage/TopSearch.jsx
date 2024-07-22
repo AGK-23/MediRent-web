@@ -304,15 +304,7 @@ const TopSearch = () => {
                                                     </div>
 
                                                 </div>
-                                                <div className="flex justify-start items-center border-none ">
-                                                    <div className=''>
-
-                                                        <div className='text-slate-700 font-[400] text-[10px] w-full'>
-                                                            {listing?.listingTitle}
-                                                        </div>
-                                                    </div>
-
-                                                </div>
+                                                
 
                                                 <div className="grid grid-cols-4 gap-5 mt-[15px] w-full ">
                                                     <div className="flex justify-center items-center border-none w-full">

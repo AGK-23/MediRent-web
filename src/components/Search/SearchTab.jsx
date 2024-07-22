@@ -10,12 +10,14 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendDataToParent }) => {
 
     const locationCity = useLocation();
+    const navigate = useNavigate();
+
     const [isOpen, setIsOpen] = useState(false);
     const [userLoading, setUserLoading] = useState(false);
     const [emptyLoading, setEmptyLoading] = useState(true);
@@ -31,8 +33,8 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
     };
 
     useEffect(() => {
-        console.log("window..", locationCity, "City..", locationCity.pathname)
-    }, [locationCity]);
+        console.log("window..", locationCity, "City..", locationCity.pathname, searchedAllListings)
+    }, [locationCity, searchedAllListings]);
 
     const [allListings, setAllListings] = useState({
         location: "",
@@ -142,16 +144,17 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
             // console.log("Landlord is rent..", response.data.data.items);
             setSearchedAllListings(response?.data?.data?.items);
 
-            console.log("all the user..", response, searchedListings);
+            console.log("all the user..", response, searchedAllListings, response.data.success);
 
             if (response.data.success === true) {
+                console.log("money in the bank..")
 
-                getAllListing(response?.data?.data?.items)
+                // getAllListing(response?.data?.data?.items)
 
-                console.log("hello in the building..")
+                console.log("hello in the building..", searchedAllListings)
                 closeModal();
 
-                // navigate('/listings', { state: { result: listings, emptyLoading } });
+                navigate('/all-listings', { state: { result: searchedAllListings, emptyLoading } });
             }
         } catch (error) {
             setUserLoading(false);
@@ -169,7 +172,7 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
 
         // setActive(2)
 
-        console.log("first", allListings)
+        // console.log("first", allListings)
     }
 
     return (

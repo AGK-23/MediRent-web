@@ -281,6 +281,16 @@ const ListingDetails = () => {
                                         </div>
                                     </div>
 
+                                    <div className="flex justify-start items-center border-none ">
+                                        <div className=''>
+
+                                            <div className='text-primary font-semibold md:text-[20px] xs:text-[13px]'>
+                                                {allSiteListings?.listingTitle}
+                                            </div>
+                                        </div>
+
+                                    </div>
+
                                     <div className="flex xs:w-full md:w-[55%] leading-[30.24px] justify-between mt-4">
                                         <div className="text-[#1F3249] font-[400] md:text-[24px] xs:text-[16px]">{allSiteListings?.address}, {allSiteListings?.city}, {allSiteListings?.country}</div>
                                     </div>
