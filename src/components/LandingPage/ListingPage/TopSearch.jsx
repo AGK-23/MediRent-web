@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 import { useState, useEffect, useMemo} from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 
@@ -85,11 +85,14 @@ const initialState = [
 
 const TopSearch = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     // const items = location.state?.items || []; // Access the items from state
 
-    const items = useMemo(() => {
-        return location.state?.items || [];
-    }, [location.state]);
+    // const items = useMemo(() => {
+    //     return location.state?.items || [];
+    // }, [location.state]);
+
+    const [items, setItem] = useState(location.state?.items || [])
     // const [listings, setListings] = useState(initialState);
     const [showModal, setShowModal] = useState(false);
     const [selectedAvailability, setSelectedAvailability] = useState(null);
@@ -177,9 +180,9 @@ const TopSearch = () => {
                 setAllSiteListings(response?.data?.data?.items);
                 setAllListings(response?.data?.data?.items);
 
-                console.log("itrem ..", items)
+                console.log("itrem ..", items, location.state)
 
-                if (items) {
+                if (items.length > 0) {
                     setAllSiteListings(items);
                     setAllListings(items);
                     
@@ -220,11 +223,28 @@ const TopSearch = () => {
             console.log("all the response..", response?.data, allSiteListings);
             setIsLoading(false)
 
+            // setItem([])
+            // location.state.items = [];
+            if (location.state.items.length > 0 ) {
+                navigate('/all-listings', { replace: true, state: { items: [] } });
+                
+            }
+
+            console.log("patrick..", items, location.state.items)
+
         } catch (error) {
             console.error('Error fetching listings:', error);
             setIsLoading(false)
         }
     };
+
+    // useEffect(() => {
+    //     // Check if location.state exists and has items
+    //     if (location.state && location.state.items) {
+    //       // Reset items to an empty array
+    //       location.state.items = [];
+    //     }
+    // }, [location]);
 
 
     const handleCheckAvailability = (availability) => {
