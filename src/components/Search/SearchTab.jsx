@@ -33,8 +33,8 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
     };
 
     useEffect(() => {
-        console.log("window..", locationCity, "City..", locationCity.pathname, searchedAllListings)
-    }, [locationCity, searchedAllListings]);
+        console.log("window..", locationCity.pathname, "City..", locationCity.pathname, searchedAllListings, "shout", searchedListings)
+    }, [locationCity.pathname, searchedAllListings, searchedListings]);
 
     const [allListings, setAllListings] = useState({
         location: "",
@@ -104,23 +104,14 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
         }));
     };
 
-    const handleSearch = async (e) => {
+    const handleListing = async () => {
+        console.log("goal")
 
-        e.preventDefault();
-
-        // const validationError = validateForm();
-        // if (validationError) {
-        //     toast.warning(validationError); 
-        //     return; 
-        // }
-
+        console.log("listings..", searchedListings)
+        // e.preventDefault();
         try {
-
-
             setUserLoading(true);
-
             console.log("user form for landlord...", allListings);
-
             const response = await axios.post(
                 'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=100',
                 {
@@ -128,7 +119,7 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
                     propertyType,
                     propertySize,
                     buildYear,
-
+        
                 }, // Sending an empty JSON object
                 {
                     headers: {
@@ -137,44 +128,36 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
                     },
                 }
             );
-
-
+            console.log("pat")
+            console.log("all the way.", response?.data?.data?.items)
             setUserLoading(false);
+            console.log("pat 3")
+            setSearchedListings(response?.data?.data?.items);
+            console.log("pat 4")
 
-            // console.log("Landlord is rent..", response.data.data.items);
-            setSearchedAllListings(response?.data?.data?.items);
-
-            console.log("all the user..", response, searchedAllListings, response.data.success);
+            console.log("all the user..", response, searchedListings);
 
             if (response.data.success === true) {
-                console.log("money in the bank..")
 
-                // getAllListing(response?.data?.data?.items)
-
-                console.log("hello in the building..", searchedAllListings)
+                getAllListing(response?.data?.data?.items)
+                console.log("hello in the building..")
                 closeModal();
+            }
 
-                navigate('/all-listings', { state: { result: searchedAllListings, emptyLoading } });
+            if(locationCity.pathname == "/"){
+                console.log("pathname")
+                navigate('/all-listings', { state: { result: searchedListings, emptyLoading } });
+        
             }
         } catch (error) {
             setUserLoading(false);
-            // console.log("error in the landlord..", error);
-
-            // console.log("all the promise in the code..", error?.response?.data);
             if (error?.response?.data?.data === null) {
                 setEmptyLoading(false)
-                // console.log("empty Loading...", emptyLoading);
-                // navigate('/listings', { state: { result: listings, emptyLoading } });
             }
-
-            // console.log("the current image..", emptyLoading)
         }
+    };
 
-        // setActive(2)
-
-        // console.log("first", allListings)
-    }
-
+    
     return (
         <div className="md:px-0 xs:px-2">
             <div className="grid md:grid-cols-5 xs:grid-cols-2 lg:gap-10 md:gap-0 xs:gap-6 rounded-lg shadow-lg border-[1px] md:px-6 xs:px-2 py-6 md:w-full xs:w-full bg-white">
@@ -252,7 +235,7 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
                 <div className={`${locationCity.pathname !== "/" ? "md:col-span-1 xs:col-span-2 justify-between" : "md:col-span-1 xs:col-span-2 justify-center"}  flex flex-row lg:gap-4 md:gap-4 xs:gap-0 `}>
                     <div className="flex justify-center items-center">
                         <button
-                            onClick={handleSearch}
+                            onClick={handleListing}
                             className="rounded-full bg-primary w-[60px] h-[60px] flex justify-center items-center">
                             <img
                                 alt=""

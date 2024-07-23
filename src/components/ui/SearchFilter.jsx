@@ -340,7 +340,7 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
             }));
 
             const response = await axios.post(
-                'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=10',
+                'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=100',
                 {}, // Sending an empty JSON object
                 {
                     headers: {
