@@ -7,14 +7,21 @@ import HomeListing from '../LandingPage/HomeListing';
 import SecondPage from '../LandingPage/SecondPage';
 import ServicePage from '../LandingPage/ServicePage';
 import FaqsPage from '../LandingPage/FaqsPage';
+import { useState} from "react";
 
 import TopPage from "../LandingPage/TopPage";
 
 const MainPage = () => {
+    const [allSiteListings, setAllSiteListings] = useState([]);
+
+
     return (
         <div className='md:mt-0 xs:mt-[4rem]'>
             <div className="bg-[#A4ABAC]">
-                <TopPage />
+                <TopPage  
+                    allSiteListings={allSiteListings}
+                    setAllSiteListings={setAllSiteListings}
+                 />
             </div>
             <div className='lg:px-[120px] md:px-3 xs:px-3'>
                 <SecondPage />

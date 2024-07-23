@@ -13,7 +13,7 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendDataToParent }) => {
+const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendDataToParent, allSiteListings, setAllSiteListings }) => {
 
     const locationCity = useLocation();
     const navigate = useNavigate();
@@ -34,7 +34,7 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
 
     useEffect(() => {
         console.log("window..", locationCity.pathname, "City..", locationCity.pathname, searchedAllListings, "shout", searchedListings)
-    }, [locationCity.pathname, searchedAllListings, searchedListings]);
+    }, [locationCity.pathname, searchedAllListings, searchedListings, allSiteListings]);
 
     const [allListings, setAllListings] = useState({
         location: "",
@@ -105,13 +105,13 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
     };
 
     const handleListing = async () => {
-        console.log("goal")
+        // console.log("goal")
 
-        console.log("listings..", searchedListings)
+        // console.log("listings..", searchedListings)
         // e.preventDefault();
         try {
             setUserLoading(true);
-            console.log("user form for landlord...", allListings);
+            // console.log("user form for landlord...", allListings);
             const response = await axios.post(
                 'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=100',
                 {
@@ -128,25 +128,37 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
                     },
                 }
             );
-            console.log("pat")
-            console.log("all the way.", response?.data?.data?.items)
+            // console.log("pat")
+            // console.log("all the way.", response?.data?.data?.items)
             setUserLoading(false);
-            console.log("pat 3")
-            setSearchedListings(response?.data?.data?.items);
-            console.log("pat 4")
+            // console.log("pat 3", allSiteListings, searchedListings)
 
-            console.log("all the user..", response, searchedListings);
-
-            if (response.data.success === true) {
-
-                getAllListing(response?.data?.data?.items)
-                console.log("hello in the building..")
-                closeModal();
+            if(locationCity.pathname !== "/"){
+                // console.log("some path")
+                setSearchedListings(response?.data?.data?.items);
+                // console.log("pat 4")
+    
+                console.log("all the user..", response, searchedListings);
+                
+        
+                if (response.data.success === true) {
+    
+                    getAllListing(response?.data?.data?.items)
+                    // console.log("hello in the building..")
+                    closeModal();
+                }
             }
 
+
             if(locationCity.pathname == "/"){
-                console.log("pathname")
-                navigate('/all-listings', { state: { result: searchedListings, emptyLoading } });
+                setAllSiteListings(response?.data?.data?.items)
+                // console.log("pathname")
+
+                console.log("all site..", allSiteListings, response?.data?.data?.items)
+                const items = response?.data?.data?.items || [];
+
+                console.log("item in the code..", items)
+                navigate('/all-listings', { state: { items } });
         
             }
         } catch (error) {
@@ -156,6 +168,8 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
             }
         }
     };
+
+    
 
     
     return (

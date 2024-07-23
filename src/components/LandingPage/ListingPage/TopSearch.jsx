@@ -13,8 +13,9 @@ import Bed from "../../../assets/Listing/bed.svg";
 import AvailabilityModal from "../../ui/AvailabilityModal";
 import { Link } from "react-router-dom";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo} from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -83,6 +84,12 @@ const initialState = [
 ]
 
 const TopSearch = () => {
+    const location = useLocation();
+    // const items = location.state?.items || []; // Access the items from state
+
+    const items = useMemo(() => {
+        return location.state?.items || [];
+    }, [location.state]);
     // const [listings, setListings] = useState(initialState);
     const [showModal, setShowModal] = useState(false);
     const [selectedAvailability, setSelectedAvailability] = useState(null);
@@ -146,15 +153,15 @@ const TopSearch = () => {
     // } = allListings
 
     useEffect(() => {
-        console.log("Updated Bank:", allSiteListings);
-    }, [allSiteListings]);
+        // console.log("Updated Bank:", allSiteListings, items);
+    }, [allSiteListings, items]);
 
     useEffect(() => {
         const fetchListings = async () => {
             try {
                 setIsLoading(true)
 
-                console.log("first items", allListings)
+                // console.log("first items", allListings)
 
                 const response = await axios.post(
                     'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=100',
@@ -169,8 +176,16 @@ const TopSearch = () => {
 
                 setAllSiteListings(response?.data?.data?.items);
                 setAllListings(response?.data?.data?.items);
+
+                console.log("itrem ..", items)
+
+                if (items) {
+                    setAllSiteListings(items);
+                    setAllListings(items);
+                    
+                }
                 
-                console.log("all the response..", response?.data, allSiteListings);
+                // console.log("all the response..", response?.data, allSiteListings);
                 setIsLoading(false)
 
             } catch (error) {
@@ -213,7 +228,7 @@ const TopSearch = () => {
 
 
     const handleCheckAvailability = (availability) => {
-        console.log("first in the code", availability)
+        // console.log("first in the code", availability)
         setSelectedAvailability(availability);
         setShowModal(true);
     };
@@ -227,7 +242,7 @@ const TopSearch = () => {
 
     const handleDataFromChild = (data) => {
         setChildData(data);
-        console.log("Data received from child:", data);
+        // console.log("Data received from child:", data);
     };
 
     const formatValue = (value) => {

@@ -9,7 +9,8 @@ import { Fade } from 'react-reveal';
 
 // bg-[#A4ABAC]
 
-const TopPage = () => {
+// eslint-disable-next-line react/prop-types
+const TopPage = ({allSiteListings, setAllSiteListings}) => {
     return (
         <div className='flex w-full flex-col bg-[#C6D8E4] items-center justify-end mt-0 relative'>
             <div className='grid xs:grid-cols-1 md:grid-cols-2 md:w-full md:gap-3 xs:gap-0 xs:w-full items-center mt-0 xs:pb-2 md:pb-0 relative'>
@@ -53,7 +54,10 @@ const TopPage = () => {
             </div>
 
             <div className='absolute lg:-bottom-[6rem] md:-bottom-[6.5rem] xs:-bottom-[13rem]'>
-                <SearchTab />
+                <SearchTab
+                    allSiteListings={allSiteListings}
+                    setAllSiteListings={setAllSiteListings} 
+                />
             </div>
         </div>
     )

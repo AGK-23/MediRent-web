@@ -252,7 +252,7 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
     // };
 
     useEffect(() => {
-        console.log("Updated searched listings:", searchedListings);
+        // console.log("Updated searched listings:", searchedListings);
     }, [searchedListings]);
 
     const handleListing = async () => {
