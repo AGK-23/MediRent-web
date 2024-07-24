@@ -29,7 +29,7 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
         address,
         city,
         postalCode,
-        phone,
+        // phone,
         country,
         province,
        
@@ -42,7 +42,6 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
             !city ||
             !country ||
             !postalCode ||
-            !phone ||
             !province
         ) {
             toast.warning('Please fill in all required fields.');
@@ -388,14 +387,14 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
                     </div>
                 </div>
 
-                <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                {/* <div className="flex md:flex-row xs:flex-col gap-10 my-10">
                     <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
                         <CustomInputs
                             id="phone"
                             type='text'
                             required
                             showRequirement={true}
-                            // setValue={setFormData}
+                            
                             value={phone}
                             onChange={(value) => setHousingData(prevHousingData => ({
                                 ...prevHousingData,
@@ -406,7 +405,7 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
                         />
                     </div>
                     
-                </div>
+                </div> */}
 
                 <div className="flex justify-end pb-10 w-full  gap-2">
                     <div className="flex justify-end z-10 relative mt-4">
