@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 
 import ListingItem from './ListingItem';
@@ -15,7 +15,7 @@ const ListingHome = () => {
     const { result } = location.state;
 
     // const { emptyLoading } = result;
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
 
     useEffect(() => {

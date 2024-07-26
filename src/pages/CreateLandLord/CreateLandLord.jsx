@@ -56,8 +56,6 @@ const CreateLandLord = () => {
 
     const [imageLoading, setImageLoading] = useState(false);
 
-
-
     // NUMBER ONE THIS IS THE STATE FOR THE LANDLORD DETAILS
     const [formData, setFormData] = useState({
         firstName: "",
@@ -76,7 +74,6 @@ const CreateLandLord = () => {
         province: "",
         discoveryMethod: "",
         receiveNewsletter: false,
-        // role: "landlord",
     });
 
     const [loginData, setLoginData] = useState({
@@ -90,19 +87,12 @@ const CreateLandLord = () => {
         address: "",
         city: "",
         postalCode: "",
-        // phone: "",
         country: "",
         province: "",
-        // promotionCode: "",
     });
 
     //NUMBER THREE THIS IS THE STATE FOR THE HOUSING DETAILS
     const [detailsData, setDetailsData] = useState({
-        // termOption: "",
-        // designOption: "",
-        // dailyRent: "",
-        // weeklyRent: "",
-        // monthlyRent: "",
         numberOfBedRoom: null,
         numberOfBathRoom: null,
         numberOfKitchens: null,
@@ -111,18 +101,13 @@ const CreateLandLord = () => {
         propertySize: "",
         area: "",
         starRating: "",
-        // licenseNumber: "",
         description: "",
         propertyType: "",
-        // currency: "",
         amenitiesOption: [],
     });
 
     const [housing, setHousing] = useState(null);
 
-    // const [housing, setHousing] = useState("7b057fdb-255d-4d37-b8b9-e9de3addd458");
-
-    // const [housing, setHousing] = useState("3fa85f64-5717-4562-b3fc-2c963f66afa6");
 
     useEffect(() => {
         console.log('Updated housingData:', housing);
@@ -142,33 +127,19 @@ const CreateLandLord = () => {
         address: housingData?.address,
         city: housingData?.city,
         postalCode: housingData?.postalCode,
-        // phone: housingData?.phone,
         country: housingData?.country,
         province: housingData?.province,
-        // promotionCode: housingData?.promotionCode,
-
-        // termOption: detailsData?.termOption,
-        // designOption: detailsData?.designOption,
-        // dailyRent: detailsData?.dailyRent,
-        // weeklyRent: detailsData?.weeklyRent,
-        // monthlyRent: detailsData?.monthlyRent,
         numberOfBedRoom: detailsData?.numberOfBedRoom,
         numberOfBathRoom: detailsData?.numberOfBathRoom,
         numberOfKitchens: detailsData?.numberOfKitchens,
-
         price: detailsData?.price,
         buildYear: detailsData?.buildYear,
         propertySize: detailsData?.propertySize,
         propertyType: detailsData?.propertyType,
         area: detailsData?.area,
         starRating: detailsData?.starRating,
-
-        // licenseNumber: detailsData?.licenseNumber,
         description: detailsData?.description,
-
-        // currency: detailsData?.currency,
         amenitiesOption: detailsData?.amenitiesOption,
-
         avatars: fileList,
         propertyDates: selectedDates,
     })
@@ -218,30 +189,18 @@ const CreateLandLord = () => {
             address: housingData?.address,
             city: housingData?.city,
             postalCode: housingData?.postalCode,
-            // phone: housingData?.phone,
             country: housingData?.country,
             province: housingData?.province,
-            // promotionCode: housingData?.promotionCode,
-
-            // termOption: detailsData?.termOption,
-            // designOption: detailsData?.designOption,
-            // dailyRent: detailsData?.dailyRent,
-            // weeklyRent: detailsData?.weeklyRent,
-            // monthlyRent: detailsData?.monthlyRent,
             numberOfBedRoom: detailsData?.numberOfBedRoom,
             numberOfBathRoom: detailsData?.numberOfBathRoom,
             numberOfKitchens: detailsData?.numberOfKitchens,
-
             price: detailsData?.price,
             buildYear: detailsData?.buildYear,
             propertySize: detailsData?.propertySize,
             area: detailsData?.area,
             starRating: detailsData?.starRating,
-
-            // licenseNumber: detailsData?.licenseNumber,
             description: detailsData?.description,
             propertyType: detailsData?.propertyType,
-            // currency: detailsData?.currency,
             amenitiesOption: detailsData?.amenitiesOption
         }));
 
@@ -264,20 +223,6 @@ const CreateLandLord = () => {
     // eslint-disable-next-line no-unused-vars
     const [isLoading, setIsLoading] = useState(true);
     const [allCities, setAllCities] = useState([]);
-
-
-
-    // const firstNameInput = useRef();
-    // const lastNameInput = useRef();
-    // const addressInput = useRef();
-    // const cityInput = useRef();
-    // const postalCodeInput = useRef();
-    // const phoneInput = useRef();
-    // const emailInput = useRef();
-    // const emailConfirmationInput = useRef();
-    // const passwordInput = useRef();
-    // const confirmPasswordInput = useRef();
-    // const yearsActiveInput = useRef();
 
 
     var {
@@ -307,14 +252,6 @@ const CreateLandLord = () => {
     const [testFour, setTestFour] = useState(false);
     const [textValue, setTextValue] = useState(false);
 
-    // const handlePasswordChange = (e) => {
-    //     setFormData({ ...formData, password: e.target.value })
-    //     checkForTextOne(e.target.value)
-    //     checkForTextTwo(e.target.value)
-    //     checkForTextThree(e.target.value)
-    //     checkForTextFour(e.target.value)
-    // }
-
     const handlePasswordChange = (value) => {
         // console.log("object", value);
         setFormData({ ...formData, password: value })
@@ -329,7 +266,6 @@ const CreateLandLord = () => {
         if (userValue.length > 5) {
             setText("Too Weak")
             setTextValue("At least 6 characters long, with one uppercase letter, one number and one symbol")
-            // console.log("text in the input..", text);
             setTestOne(true)
         } else {
             setText("")
@@ -345,7 +281,6 @@ const CreateLandLord = () => {
             setTextValue("")
             setTestTwo(true)
         } else {
-            // setText("")
             setTestTwo(false)
         }
     }
@@ -356,7 +291,6 @@ const CreateLandLord = () => {
             setText("Strong Password")
             setTestThree(true)
         } else {
-            // setText("")
             setTestThree(false)
         }
     }
@@ -367,14 +301,12 @@ const CreateLandLord = () => {
             setText("Very Strong Password")
             setTestFour(true)
         } else {
-            // setText("")
             setTestFour(false)
         }
     }
 
     const handleCheckLandLord = async () => {
         console.log("drink in the code", formData);
-        // e.preventDefault();
         try {
             if (
                 !firstName ||
@@ -451,11 +383,9 @@ const CreateLandLord = () => {
 
         } catch (error) {
             setLandLoading(false);
-            console.log("error in the landlord..", error)
+            console.log("error in the landlord..", error, error?.response?.data?.Message)
+            toast.error(error?.response?.data?.Message)
         }
-
-        // setActive(2)
-
     };
 
     const handleLoginUser = async () => {
@@ -476,8 +406,6 @@ const CreateLandLord = () => {
             setLoginLoading(false)
 
             console.log("all the pricing..", response)
-
-            // console.log("landlord account..", response.data.data, "Loading..", loginLoading);
 
             localStorage.setItem("token", JSON.stringify(response?.data));
 
@@ -508,17 +436,12 @@ const CreateLandLord = () => {
                 error.toString();
             toast.error(message);
             setLoginLoading(false)
-
-            // console.log("user login..", error);
         }
-
-
     }
 
     // TOGGLE THROUGH THE PAGE FUNCTION 
     const handleProviderOne = () => {
         handleCheckLandLord()
-        // console.log("all the data..", formData);
 
     };
 
@@ -531,8 +454,6 @@ const CreateLandLord = () => {
         setUserGoogle(userProfile);
 
         if (userProfile) {
-
-
             setFormData((prevFormData) => {
                 console.log("prevFormData:", prevFormData);
                 return {
@@ -548,12 +469,6 @@ const CreateLandLord = () => {
             setSignInState(2)
         }
     };
-
-
-    // const renderPreviousForm = () => {
-    //     setActive(active - 1);
-    // };
-    // const [selectedFunction, setSelectedFunction] = useState("");
 
     // FUNCTION TO GET THE COUNTRY AND THE STATE
     function fetchData() {
@@ -581,8 +496,6 @@ const CreateLandLord = () => {
                 const response = await fetchData();
                 setSelectedCity(response.data?.data);
                 setIsLoading(false);
-                // console.log(response.data?.data, selectedCity);
-                // console.log(selectedStates);
             } catch (error) {
                 console.error(error);
             }
@@ -598,8 +511,6 @@ const CreateLandLord = () => {
                 const response = await fetchStateData();
                 setSelectedStates(response?.data?.data);
                 setIsLoading(false);
-                // console.log("state is Loading..", response.data?.data);
-
             } catch (error) {
                 console.error(error);
             }
@@ -627,8 +538,6 @@ const CreateLandLord = () => {
             ...prevState,
             functionOption: e.target.nextSibling.textContent.trim(),
         }));
-
-        // console.log("king ...", functionOption, "hair..", e.target.nextSibling.textContent.trim());
     };
 
     const handleCityChange = (value) => {
@@ -640,12 +549,8 @@ const CreateLandLord = () => {
         }));
     };
 
-
-
     const handleCountryChange = (value) => {
         setSelectedCountry(value);
-
-        // setallCities(selectedCity.find((country) => country.name === selectedCountry)
         setSelectedCities(''); // Clear the selected city when the country changes
         let selectedValue = value === "Select a country" ? null : value;
         setFormData(prevFormData => ({
@@ -655,41 +560,12 @@ const CreateLandLord = () => {
 
         const selectedCountryObj = selectedCity?.find((country) => country.name === value);
 
-        // console.log("first code...", selectedCity, selectedCountry, value)
         if (selectedCountryObj) {
             setAllCities(selectedCountryObj.states);
-            // console.log("second code...", selectedCountryObj.states, allCities)
         } else {
             setAllCities([]);
         }
     };
-
-    // useEffect(() => {
-    //     const selectedCountryObj = selectedCity?.find((country) => country.name === selectedCountry);
-    //     if (selectedCountryObj) {
-    //       setAllCities(selectedCountryObj.states);
-    //     } else {
-    //       setAllCities([]);
-    //     }
-    //   }, [selectedCountry, selectedCity]);
-
-    // const handleInputUser = (e) => setFormData(
-    //     {
-    //         ...formData,
-    //         [e.target.name]: e.target.value
-    //     }
-    // );
-
-    // const handleActiveUser = (event) => {
-    //     const { value } = event.target;
-    //     // console.log("all the value..", value );
-
-    //     setFormData(prevState => ({
-    //         ...prevState,
-    //         yearsActive: value
-    //     }));
-    // };
-
 
     // CREATE LISTING FOR THE LANDLORD
     const handleSubmitCreateListing = async () => {
@@ -699,22 +575,17 @@ const CreateLandLord = () => {
             // Retrieve accessToken from localStorage
             const accessToken = JSON.parse(localStorage.getItem('accessToken'));
 
-
             if (!accessToken) {
                 // Handle case where accessToken is not available
                 console.error('Access Token not found in localStorage');
                 return;
             }
-
             // Set the headers with the accessToken
             const headers = {
                 'Authorization': `Bearer ${accessToken}`,
                 'Content-Type': 'application/json',
             };
-
-
             setUserLoading(true)
-
             const convertedDates = [];
 
             selectedDates.forEach(dateString => {
@@ -722,17 +593,6 @@ const CreateLandLord = () => {
                 const utcDate = date.toISOString();
                 convertedDates.push(utcDate);
             });
-
-            // console.log("all the year in the bank..", convertedDates);
-
-            // const requestBody = {
-            //     listingId: housing?.id,
-            //     propertyDates: convertedDates
-            // };
-
-
-
-            // console.log("the create Listing  ...", housing, requestBody);
 
             const response = await axios.put(`https://medirent-api-3gwy.onrender.com/housing/add-availability-period`,
                 {
@@ -750,10 +610,6 @@ const CreateLandLord = () => {
                 navigate('/success/landlord/1')
 
             }
-
-            // console.log("all the Listing..", response.data);
-
-
         } catch (error) {
             setUserLoading(false);
             toast.error("Listing creation Failed");
@@ -766,7 +622,6 @@ const CreateLandLord = () => {
             // Retrieve accessToken from localStorage
             const accessToken = JSON.parse(localStorage.getItem('accessToken'));
 
-            // setLandLoading(true);
             setHousingLoading(true)
 
 
@@ -808,17 +663,15 @@ const CreateLandLord = () => {
             return response.data; // Return the response data if needed
 
         } catch (error) {
-            // Handle errors
-            // console.error('Error creating listing:', error);
+            // toast.error(error.);
+            toast.error(error?.response?.data?.Message)
+            toast.error("Listing creation Failed");
             setHousingLoading(false);
             throw error; // Throw the error for further handling if needed
         }
     }
 
     const handleFilesUpload = async () => {
-        // housing
-        // fileList
-        // "7b057fdb-255d-4d37-b8b9-e9de3addd458"
         try {
             const accessToken = JSON.parse(localStorage.getItem('accessToken'));
 
@@ -826,8 +679,6 @@ const CreateLandLord = () => {
                 console.error('Access Token not found in localStorage');
                 return;
             }
-
-            // console.log("all the zone image...", housing?.id, "store images...",  fileList);
 
             setImageLoading(true)
 
@@ -842,33 +693,11 @@ const CreateLandLord = () => {
             fileList.forEach((file) => {
                 // console.log("all the file..", file, index);
                 formData.append(`files`, file);
-                // console.log("alll the format in the data..", formData);
             });
-
-            // Extract the housingId from the housing object
-            // const housingId = housing;
-
-            // formData.append('listingId', housing?.id); // Append the housingId string
-
-            // for (var key of formData.entries()) {
-            //     console.log(key[0] + ", " + key[1]);
-            // }
-
-            // for (var [key, value] of formData.entries()) { 
-            //     console.log("al the key..", key, value);
-            // }
-
-
-            // formData.append('housingId', housing);
-
-            // console.log("format data..", formData, housing, fileList);
 
             const response = await axios.post(`https://medirent-api-3gwy.onrender.com/File/upload?listingId=${housing?.id}`, formData, { headers });
 
             setImageLoading(false)
-
-            // console.log('Files uploaded:', response.data);
-
             if (response.data.success === true) {
                 toast.success("Images Successfully Uploaded");
 
@@ -878,7 +707,6 @@ const CreateLandLord = () => {
             return response.data;
         } catch (error) {
             setImageLoading(false)
-            // console.error('Error uploading files:', error);
             throw error;
         }
     };
@@ -888,13 +716,8 @@ const CreateLandLord = () => {
 
     const [isToggle, setIsToggle] = useState(true);
     const changeToggle = () => setIsToggle(!isToggle);
-
-    // const [passwordToggle, setPasswordToggle] = useState(true);
     const [confirmPasswordToggle, setConfirmPasswordToggle] = useState(true);
-    // const changePasswordToggle = () => setPasswordToggle(!passwordToggle);
     const changeConfirmPasswordToggle = () => setConfirmPasswordToggle(!confirmPasswordToggle);
-    // const [error, setError] = useState("");
-
 
     return (
         <div className="py-0 md:mt-16 xs:mt-[4rem] bg-white grid md:grid-cols-4 xs:grid-cols-1">
@@ -1105,15 +928,6 @@ const CreateLandLord = () => {
                                 >
                                     Availability
                                 </span>
-                                {/* <span
-                                    className={`${active > 5 ? " !text-black px-0  md:text-xs  flex mt-1  "
-                                        : " !text-[#717171] md:text-md "
-                                        } flex justify-center items-center px-0`}
-                                >
-                                    <BsChevronRight />
-                                </span> */}
-
-
                             </div>
 
                         </div>
@@ -1177,8 +991,6 @@ const CreateLandLord = () => {
 
                                             <div className="text-start my-6 font-semibold md:text-[16px] xs:text-[13px]">Let’s start with your plan and details</div>
                                         </div>
-
-                                        {/* <div className="text-center my-6 font-base md:text-3xl xs:text-xl"> Contact information</div> */}
 
                                         {
                                             signInState == 1 && (

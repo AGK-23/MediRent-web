@@ -13,7 +13,7 @@ import Bed from "../../../assets/Listing/bed.svg";
 import AvailabilityModal from "../../ui/AvailabilityModal";
 import { Link } from "react-router-dom";
 
-import { useState, useEffect, useMemo} from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -109,7 +109,7 @@ const TopSearch = () => {
         propertySize: null,
         bedrooms: null,
         bathrooms: null,
-        amenities: [], 
+        amenities: [],
         buildYear: null
     });
 
@@ -139,7 +139,7 @@ const TopSearch = () => {
     //         buildYear: allListings.buildYear
     //     }));
 
-        
+
     // }, [allListings]);
 
     // var {
@@ -168,12 +168,12 @@ const TopSearch = () => {
 
                 const response = await axios.post(
                     'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=100',
-                    { }, // Sending an empty JSON object
+                    {}, // Sending an empty JSON object
                     {
-                      headers: {
-                        'accept': 'application/json',
-                        'Content-Type': 'application/json',
-                      },
+                        headers: {
+                            'accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
                     }
                 );
 
@@ -185,9 +185,9 @@ const TopSearch = () => {
                 if (items.length > 0) {
                     setAllSiteListings(items);
                     setAllListings(items);
-                    
+
                 }
-                
+
                 // console.log("all the response..", response?.data, allSiteListings);
                 setIsLoading(false)
 
@@ -198,7 +198,7 @@ const TopSearch = () => {
         };
 
         fetchListings();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleSearchListing = async (data) => {
@@ -211,23 +211,23 @@ const TopSearch = () => {
                 'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=100',
                 { data }, // Sending an empty JSON object
                 {
-                  headers: {
-                    'accept': 'application/json',
-                    'Content-Type': 'application/json',
-                  },
+                    headers: {
+                        'accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
                 }
             );
 
             setAllSiteListings(data);
-            
+
             console.log("all the response..", response?.data, allSiteListings);
             setIsLoading(false)
 
             // setItem([])
             // location.state.items = [];
-            if (location.state.items.length > 0 ) {
+            if (location.state.items.length > 0) {
                 navigate('/all-listings', { replace: true, state: { items: [] } });
-                
+
             }
 
             console.log("patrick..", items, location.state.items)
@@ -283,7 +283,7 @@ const TopSearch = () => {
 
                         <div className='mt-[33px] w-full'>
                             <SearchTab
-                                
+
                                 searchedListings={searchedListings}
                                 setSearchedListings={setSearchedListings}
                                 sendDataToParent={handleDataFromChild}
@@ -303,35 +303,38 @@ const TopSearch = () => {
                                     <div key={index} className="flex justify-center items-center  flex-col ">
                                         <div className="bg-white rounded-lg px-0 py-3 shadow-xl">
                                             <div className='w-full h-full'>
-                                                <Link to={`/listing-details/${listing.id}`}  className='flex items-center rounded-lg w-full h-full'>
+                                                <Link to={`/listing-details/${listing.id}`} className='flex items-center rounded-lg w-full h-full'>
                                                     <img alt="" src={listing.avatars[0]} className="cursor-pointer w-[500px] h-60 object-cover rounded-tl-lg rounded-tr-lg" />
                                                 </Link>
                                             </div>
                                             <div className="flex flex-col gap-0 h-fit pt-6 md:px-3 xs:px-2">
                                                 <div>
-                                                    <div className="flex justify-start items-center border-none ">
-                                                        <div className=''>
+                                                    <div className="flex justify-between w-full">
+                                                        <div className="flex justify-start items-center border-none ">
+                                                            <div className=''>
 
-                                                            <div className='font-[400] text-slate-400 text-[10px]'>
-                                                                <span className="text-primary font-semibold text-[16px]">{listing?.housingDetails?.propertyType}</span>
+                                                                <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                    <span className="text-primary font-semibold text-[16px]">{listing?.housingDetails?.propertyType}</span>
+                                                                </div>
                                                             </div>
+
+                                                        </div>
+                                                        <div className="flex justify-start items-center border-none ">
+                                                            <div className=''>
+
+                                                                <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                    <span className="text-slate-700 font-semibold text-[16px]">${formatValue(listing?.housingDetails?.price)}</span> <span className="text-gray-500">/month</span>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
 
                                                     </div>
-                                                    <div className="flex justify-start items-center border-none ">
+
+                                                    <div className="flex justify-start items-center border-none my-4">
                                                         <div className=''>
 
-                                                            <div className='font-[400] text-slate-400 text-[10px]'>
-                                                                <span className="text-slate-700 font-semibold text-[16px]">${formatValue(listing?.housingDetails?.price)}</span> <span className="text-gray-500">/month</span>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div className="flex justify-start items-center border-none ">
-                                                        <div className=''>
-
-                                                            <div className='text-slate-700 font-[400] text-[10px] w-[80%]'>
+                                                            <div className='text-slate-700 font-[400] text-[10px] w-[100%]'>
                                                                 {listing.address}
                                                             </div>
                                                         </div>
@@ -339,10 +342,10 @@ const TopSearch = () => {
                                                     </div>
 
                                                 </div>
-                                                
 
-                                                <div className="grid grid-cols-4 gap-5 mt-[15px] w-full ">
-                                                    <div className="flex justify-center items-center border-none w-full">
+
+                                                <div className="grid grid-cols-4 gap-0 mt-[15px] w-full ">
+                                                    <div className="flex  justify-center items-center border-none w-full">
                                                         <div className='flex justify-center items-center flex-col'>
                                                             <img alt="" src={Bed} className="cursor-pointer w-6 h-6" />
                                                             <div className='font-[400] text-slate-400 text-[10px]'>
@@ -352,7 +355,7 @@ const TopSearch = () => {
 
                                                     </div>
 
-                                                    <div className="flex justify-center items-center border-none w-full">
+                                                    <div className="flex justify-center items-center    border-none w-full">
                                                         <div className='flex justify-center items-center flex-col w-full'>
                                                             <img alt="" src={BathTub} className="cursor-pointer w-6 h-6" />
                                                             <div className='font-[400] text-slate-400 text-[10px]'>
@@ -362,7 +365,7 @@ const TopSearch = () => {
 
                                                     </div>
 
-                                                    <div className="flex justify-center items-center border-none w-full">
+                                                    <div className="flex  justify-center items-center   border-none w-full">
                                                         <div className='flex justify-center items-center flex-col w-full'>
                                                             <img alt="" src={Area} className="cursor-pointer w-6 h-6" />
                                                             <div className='font-[400] text-slate-400 text-[10px]'>
@@ -373,7 +376,7 @@ const TopSearch = () => {
                                                     </div>
 
                                                     <div className="flex justify-center items-center border-none w-full">
-                                                        <div className='flex justify-start items-center flex-col w-full'>
+                                                        <div className='flex justify-center items-center flex-col w-full'>
                                                             <img alt="" src={Star} className="cursor-pointer w-6 h-6" />
                                                             <div className='font-[400] text-slate-400 text-[10px]'>
                                                                 {/* {listing.rating}  Star */}
@@ -385,8 +388,8 @@ const TopSearch = () => {
                                                 </div>
 
                                                 <button
-                                                onClick={() => handleCheckAvailability(listing)} 
-                                                className="mt-5 rounded-lg bg-primary px-10 py-[15px] text-center text-white opacity-70">Check Availability</button>
+                                                    onClick={() => handleCheckAvailability(listing)}
+                                                    className="mt-5 rounded-lg bg-primary px-10 py-[15px] text-center text-white opacity-70">Check Availability</button>
                                             </div>
                                         </div>
                                     </div>

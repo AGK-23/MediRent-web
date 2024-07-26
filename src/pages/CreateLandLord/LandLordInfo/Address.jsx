@@ -13,23 +13,11 @@ import CustomSelect from "../../../components/Custom-components/Custom-Select";
 
 const Address = ({ active, setActive, housingData, setHousingData }) => {
 
-
-    // const listingTitleInput = useRef();
-    // const addressInput = useRef();
-    // const cityInput = useRef();
-    // const postalCodeInput = useRef();
-    // const phoneInput = useRef();
-    // const countryInput = useRef();
-    // const provinceInput = useRef();
-    // const promotionCodeInput = useRef();
-
-
     var {
         listingTitle,
         address,
         city,
         postalCode,
-        // phone,
         country,
         province,
        
@@ -61,8 +49,6 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
         console.log("all the prevoius data...", housingData);
         setActive(active - 1);
     };
-
-
 
     const [selectedCity, setSelectedCity] = useState("");
     const [selectedStates, setSelectedStates] = useState("");
@@ -108,16 +94,6 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
         }
     };
 
-    // const [chosenBox, setChosenBox] = useState(2);
-
-    // const handleChoose = (boxNumber) => {
-    //     setChosenBox(boxNumber);
-    //     // Do not call onNextboX here
-    // };
-
-    // const isBoxChosen = (boxNumber) => {
-    //     return chosenBox === boxNumber;
-    // };
 
     function fetchData() {
         const options = {
@@ -408,14 +384,14 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
                 </div> */}
 
                 <div className="flex justify-end pb-10 w-full  gap-2">
-                    <div className="flex justify-end z-10 relative mt-4">
+                    {/* <div className="flex justify-end z-10 relative mt-4">
                         <button
                             onClick={renderPreviousForm}
                             className="flex justify-end z-10 relative bg-white border-[1px] border-gray-400 text-gray-400 md:text-sm rounded-full md:py-3 md:px-8 xs:text-[15px] xs:py-1 xs:px-8"
                         >
                             <span className="">Previous</span>
                         </button>
-                    </div>
+                    </div> */}
                     <div className="flex justify-end z-10 relative mt-4 ">
                         <button
                             onClick={handleProviderTwo}

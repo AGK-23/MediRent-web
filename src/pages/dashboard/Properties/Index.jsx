@@ -2,6 +2,10 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Star from "../../../assets/Listing/star.svg";
+import Area from "../../../assets/Listing/area.svg";
+import BathTub from "../../../assets/Listing/bath-tub.svg";
+import Bed from "../../../assets/Listing/bed.svg";
 
 
 
@@ -9,7 +13,12 @@ const Index = () => {
     // const [searchTerm, setSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(false)
 
+
     const [listings, setListings] = useState([]);
+
+    const formatValue = (value) => {
+        return value?.toLocaleString('en-US');
+    };
     useEffect(() => {
         const fetchListings = async () => {
             try {
@@ -52,63 +61,124 @@ const Index = () => {
         <div>
             <div className="text-slate-700 text-lg py-7">Properties Overview</div>
 
-            <div className="grid gap-5 md:grid-cols-3 xs:grid-cols-1 ">
-                
-                
+            <div className=" ">
+                {
+                    !isLoading ? (
+                        <div className="grid md:w-full xs:w-full md:grid-cols-3 xs:grid-cols-1 gap-5 xs:px-3 mt-10 md:mx-0 xs:mx-0 justify-center items-center">
+                            {listings?.length > 0 ? (
+                                listings.map((listing, index) => (
+                                    <div key={index} className="flex justify-center items-center  flex-col ">
+                                        <div className="bg-white rounded-lg px-0 py-3 shadow-xl">
+                                            <div className='w-full h-full'>
+                                                <Link to={`/listing-details/${listing.id}`} className='flex items-center rounded-lg w-full h-full'>
+                                                    <img alt="" src={listing.avatars[0]} className="cursor-pointer w-[500px] h-60 object-cover rounded-tl-lg rounded-tr-lg" />
+                                                </Link>
+                                            </div>
+                                            <div className="flex flex-col gap-0 h-fit pt-6 md:px-3 xs:px-2">
+                                                <div>
+                                                    <div className="flex justify-between w-full">
+                                                        <div className="flex justify-start items-center border-none ">
+                                                            <div className=''>
 
-                {!isLoading ? (
-                    listings?.map((Menu, index) => (
-                        <div key={index} className="">
-                            <div
-                                className={`flex rounded-md py-1 cursor-pointer hover:bg-light-white text-secondary text-sm items-center gap-x-4`}
-                            >
-                                <li key={index} className="flex flex-col w-full border shadow-md rounded-lg">
-    
-                                    {Menu?.avatars?.length > 0 && (
-                                        <img src={Menu?.avatars[0]} alt="" className={`cursor-pointer rounded-t-lg w-full h-60`} />
-                                    )}
-                                    <span className="flex justify-between ">
-                                        <span className="flex flex-row relative w-full">
-                                            <span className=" absolute -top-16 px-3 text-white text-sm bg-third">{Menu.address}</span>
-                                        </span>
-                                        {/* <span
-                                            className={`ml-4 flex justify-center items-center`}
-                                            >
-                                            {Menu.arrow ? <HiOutlineChevronRight /> : ""}
-                                        </span> */}
-                                    </span>
-                                    <div className="flex py-4 px-5 flex-col ">
-                                        <span className="md:text-lg xs:text-sm  text-third flex">
-    
-                                            <div className="text-black ">Daily Rent:</div>
-                                            {/* <div className="ml-2">&#36; {item?.housingDetails?.dailyRent}</div> */}
-                                            <span className=" text-third ml-3">&#36; {Menu?.housingDetails?.dailyRent}</span>
-    
-                                        </span>
-                                        {/* <span className="md:text-3xl xs:text-lg px-3  text-third">&#36; {Menu?.housingDetails?.dailyRent}</span> */}
-    
-                                        <span
-                                            className={`origin-left duration-200 font-medium py-2 md:text-lg xs:text-sm text-pink-600`}
-                                        >
-                                            {Menu.title}
-                                        </span>
-    
+                                                                <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                    <span className="text-primary font-semibold text-[16px]">{listing?.housingDetails?.propertyType}</span>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div className="flex justify-start items-center border-none ">
+                                                            <div className=''>
+
+                                                                <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                    <span className="text-slate-700 font-semibold text-[16px]">${formatValue(listing?.housingDetails?.price)}</span> <span className="text-gray-500">/month</span>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className="flex justify-start items-center border-none my-1">
+                                                        <div className=''>
+
+                                                            <div className='text-slate-700 font-[400] text-[10px] w-[100%]'>
+                                                                {listing.address}
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div className="grid grid-cols-4 gap-5 mt-[15px] w-full ">
+                                                    <div className="flex justify-center items-center border-none w-full">
+                                                        <div className='flex justify-center items-center flex-col'>
+                                                            <img alt="" src={Bed} className="cursor-pointer w-6 h-6" />
+                                                            <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                {listing?.housingDetails?.numberOfBathRoom} Beds
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className="flex justify-center items-center border-none w-full">
+                                                        <div className='flex justify-center items-center flex-col w-full'>
+                                                            <img alt="" src={BathTub} className="cursor-pointer w-6 h-6" />
+                                                            <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                {listing?.housingDetails?.numberOfBedRoom} Bath
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className="flex justify-center items-center border-none w-full">
+                                                        <div className='flex justify-center items-center flex-col w-full'>
+                                                            <img alt="" src={Area} className="cursor-pointer w-6 h-6" />
+                                                            <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                {listing?.housingDetails?.area}
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className="flex justify-center items-center border-none w-full">
+                                                        <div className='flex justify-start items-center flex-col w-full'>
+                                                            <img alt="" src={Star} className="cursor-pointer w-6 h-6" />
+                                                            <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                {/* {listing.rating}  Star */}
+                                                                {listing?.housingDetails?.starRating || 0} Star
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <Link 
+                                                    to="/admin/dashboard/listing"
+                                                    className="mt-5 rounded-lg bg-primary font-normal px-10 py-[15px] text-center text-white opacity-70"
+                                                >View all listing</Link>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="flex py-4 px-5 flex-col ">
-                                        <Link to='/admin/dashboard/listing' className="md:text-sm xs:text-xs text-gray-500 rounded-3xl px-3 py-2 border-[1px] border-gray-700 w-fit">
-                                            View All Listing
-                                        </Link>
-    
-                                    </div>
-                                </li>
-                            </div>
+                                ))
+                            ) : (
+
+                                <div className='w-full flex justify-start font-semibold text-lg items-center h-full '>
+                                    <div className="">No Listings Found</div>
+                                </div>
+                                // <div className='xs:w-full md:w-[80vw] flex justify-center items-center h-[50vh] '>
+                                //     <div className="loader "></div>
+                                // </div>
+                            )}
                         </div>
-                    ))
-                ) : (
-                    <div className='w-screen flex justify-center items-center h-[50vh] '>
-                        <div className="loader"></div>
-                    </div>
-                )}
+
+                    ) : (
+                        <div className='w-screen flex justify-center items-center h-[50vh] '>
+                            <div className="loader "></div>
+                        </div>
+                    )
+                }
             </div>
         </div>
 

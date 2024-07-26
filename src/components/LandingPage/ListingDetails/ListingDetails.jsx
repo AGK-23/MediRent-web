@@ -93,6 +93,8 @@ const ListingDetails = () => {
     const [allSiteListings, setAllSiteListings] = useState([]);
     const [searchedListings, setSearchedListings] = useState([]);
 
+    const [searchedLandlord, setSearchedLandlord] = useState([]);
+
     const [allListings, setAllListings] = useState({
         location: "",
         propertyType: "",
@@ -175,6 +177,42 @@ const ListingDetails = () => {
         };
 
         fetchListings();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
+        const fetchLandlord = async () => {
+            try {
+                setIsLoading(true)
+
+                // console.log("first items", allListings, id)
+
+                const response = await axios.post('https://medirent-api-3gwy.onrender.com/account/get-users/landlord?pageIndex=1&pageSize=1000');
+
+                
+                console.log("all landlord.", response?.data);
+                
+                setSearchedLandlord(response?.data);
+
+                // const filteredArray = response?.data?.data?.items.filter(item => item.id === id);
+
+                // setAllSiteListings(filteredArray[0]);
+
+                // setFormData(prevFormData => ({
+                //     ...prevFormData,
+                //     address: `I am interested in ${filteredArray[0].address}`
+                // }));
+                console.log("the landlord item..", searchedLandlord)
+
+                setIsLoading(false)
+
+            } catch (error) {
+                console.error('Error fetching listings:', error);
+                setIsLoading(false)
+            }
+        };
+
+        fetchLandlord();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

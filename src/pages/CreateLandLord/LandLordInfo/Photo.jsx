@@ -6,6 +6,7 @@ import Spinner from "../../../assets/svg/Spinner.svg";
 
 
 
+// eslint-disable-next-line no-unused-vars
 const Photo = ({ active, setActive, avatars, setAvatars, fileList, setFileList, handleFilesUpload, imageLoading }) => {
 
     // const [avatars, setAvatars] = useState([]);
@@ -22,16 +23,6 @@ const Photo = ({ active, setActive, avatars, setAvatars, fileList, setFileList, 
 
         if (files) {
             Array.from(files).forEach((file) => {
-                // console.log(
-                //     "all the photos in..", avatars.length, 
-                //     "file in the bag..", maxPhotos, 
-                //     "all the index..", indexCounter, 
-                //     "files in the building..", files,
-                //     "hello..", URL.createObjectURL(file),
-                //     "football..", file
-
-                // )
-
                 if (avatars.length < maxPhotos) {
                     console.log("the thing..", avatars.length , maxPhotos);
                     if (file.size > maxSize) {
@@ -66,14 +57,11 @@ const Photo = ({ active, setActive, avatars, setAvatars, fileList, setFileList, 
             toast.warning('You have to upload 5 photos.');
             return;
         }
-        // setActive(5)
 
         console.log("all the image details..", imageLoading)
         try {
             // Call handleRentUser function from props
             await handleFilesUpload(fileList);
-
-            // housingLoading will be updated in the parent component after the request is completed
         } catch (error) {
             // Handle errors if needed
         }
@@ -86,9 +74,9 @@ const Photo = ({ active, setActive, avatars, setAvatars, fileList, setFileList, 
         // setActive(5);
     };
 
-    const renderPreviousForm = () => {
-        setActive(active - 1);
-    };
+    // const renderPreviousForm = () => {
+    //     setActive(active - 1);
+    // };
 
     return (
         <div>
@@ -112,7 +100,7 @@ const Photo = ({ active, setActive, avatars, setAvatars, fileList, setFileList, 
 
                     <div className="mt-1 font-normal">
                         <p className="text-[#717171] text-start text-[12px]">
-                            Your current package allows you to upload up to 5 pictures.
+                            Your current package allows you to upload only 5 pictures.
                         </p>
                     </div>
                 </div>
@@ -168,14 +156,14 @@ const Photo = ({ active, setActive, avatars, setAvatars, fileList, setFileList, 
 
 
                 <div className="flex justify-end pb-10 w-full  gap-2">
-                    <div className="flex justify-end z-10 relative mt-4 ">
+                    {/* <div className="flex justify-end z-10 relative mt-4 ">
                         <button
                             onClick={renderPreviousForm}
                             className="flex justify-end z-10 relative bg-white border-[1px] border-gray-400 text-gray-400 md:text-sm rounded-full md:py-3 md:px-8 xs:text-[15px] xs:py-1 xs:px-8"
                         >
                             <span className="">Previous</span>
                         </button>
-                    </div>
+                    </div> */}
                     <div className="flex justify-end z-10 relative mt-4">
                         <button
                             onClick={handleProviderFour}

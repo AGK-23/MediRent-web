@@ -1,23 +1,17 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useState, useRef } from "react";
-// import { useNavigate } from "react-router-dom";
-
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { toast } from "react-toastify";
-
 import Spinner from "../../../assets/svg/Spinner.svg"
 
 
 
 const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDates, formData, createListing, userLoading, setUserLoading, handleSubmitCreateListing }) => {
 
-    // const navigate = useNavigate();
     const [propertyPictures, setPropertyPictures] = useState(null);
-
     const [isLoading, setIsLoading] = useState(false);
-
 
     // const [selectedDates, setSelectedDates] = useState([]);
 
@@ -25,12 +19,6 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
         console.log("all the date..", date, "all value...", selectedDates)
 
         console.log("DATE ..", date[0] instanceof Date)
-
-        // console.log("first...", selectedDates[0], date.getTime())
-        // Check if the selected date already exists in the array
-        // if (!selectedDates.find((selectedDate) => selectedDate.getTime() === date.getTime())) {
-        //     setSelectedDates([...selectedDates, date]);
-        // }
 
         if (date[0] instanceof Date && !selectedDates.some(selectedDate => selectedDate.toDateString() === date[0].toDateString())) {
             setSelectedDates([...selectedDates, date[0]]);
@@ -50,76 +38,23 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
             toast.warning('Please fill in all required fields.');
             return;
         }
-        // console.log("all the houses...", createListing);
-        // toast.success("LandLord's account Successfully")
-        // setActive(5)
-
     };
 
-    // const handleSubmit = async () => {
-    //     try {
-    //         setIsLoading(true);
-
-    //         console.log("all the user ...", formData);
-
-    //         const response = await axios.post(`https://medirent-api.onrender.com/account/landlord-registration`,
-    //             formData,
-    //         );
-
-    //         setIsLoading(false);
-
-    //         if (response.data.success === true) {
-    //             toast.success("Landlord's Account Created");
-    //         }
-
-    //         console.log("all the Landlord...", response.data);
-
-    //     } catch (error) {
-    //         toast.error("Landlord creation Failed");
-    //         console.log("Apparently the Message..", error);
-    //     }
-
-    // }
-
     const handleFormSubmit = async () => {
-        // Any necessary logic before submitting the form
-
-        // Call the function to submit the createListing form
         await handleSubmitCreateListing();
     };
 
-
-
-
-
     const onSavePostClicked = async () => {
         handleCheckAvailable()
-
-        // console.log("Error");
-        // await handleSubmit()
-
         console.log("done");
 
         await handleFormSubmit()
         console.log("completed");
     }
 
-
-
-
-    // const [linkUrl, setLinkUrl] = useState("");
-    // const linkUrlInput = useRef();
-
-    // const handleLinkUser = (e) => setLinkUrl(
-    //     setLinkUrl(e.target.value)
-    // );
-
     const handleProviderFive = () => {
         handleCheckAvailable()
         console.log("all the calendar..", selectedDates)
-
-        // setActive(1);
-        // navigate('/success/landlord/1')
 
     };
 
@@ -133,11 +68,6 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
         setPropertyPictures(files)
         console.log(files);
     };
-
-
-
-
-
 
     return (
         <div>
@@ -158,28 +88,6 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
                     Note : Keep this calendar up to date to increase your contacts. (click a month to block a full month)
                 </div>
 
-                {/* <div className="text-black py-4 px-4 text-start  md:text-base xs:text-xs my-2">
-                    You can synchronize the calendar of availability of your ad with one from another website (Airbnb, Home Away, Google Calendar, etc.).
-                </div>
-
-                <div className="text-black py-4 px-4 text-start  md:text-base xs:text-xs my-2">
-                    To do so, you must copy/paste the link of the calendar below. Once done, your calendar will be updated every night.
-                </div> */}
-
-                {/* <div className="relative my-10">
-                    <input
-                        id="linkUrl"
-                        className="w-full px-6 rounded-md border border-gray-300 md:py-4 xs:py-2 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 focus:outline-none input active:outline-none focus:shadow-md"
-                        type="text"
-                        ref={linkUrlInput}
-                        name="linkUrl"
-                        value={linkUrl}
-                        onChange={handleLinkUser}
-                        placeholder="Link with external calendar (URL)"
-                    />
-
-                </div> */}
-
                 <div className="my-10">
                     <div className="flex items-center my-3">
                         <div className=" border-[1px] border-gray-700 p-2 h-4 w-4 bg-white"></div>
@@ -198,12 +106,6 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
                     </div>
 
                 </div>
-
-
-                {/* <div className="mt-700">
-                    <Calendar />
-
-                </div> */}
                 <div className="flex md:flex-row xs:flex-col w-full justify-between items-center  gap-10">
                     <DatePicker
                         // selected={null} // Pass null to show the calendar without pre-selected date
@@ -248,14 +150,14 @@ const AvailabilityLandlord = ({ active, setActive, selectedDates, setSelectedDat
 
 
                 <div className="flex justify-end pb-10 w-full gap-2">
-                    <div className="flex justify-end z-10 relative mt-4 ">
+                    {/* <div className="flex justify-end z-10 relative mt-4 ">
                         <button
                             onClick={renderPreviousForm}
                             className="flex justify-end z-10 relative bg-white border-[1px] border-gray-400 text-gray-400 md:text-sm rounded-full md:py-3 md:px-8 xs:text-[15px] xs:py-1 xs:px-8"
                         >
                             <span className="">Previous</span>
                         </button>
-                    </div>
+                    </div> */}
                     
                     <div className="flex justify-end z-10 relative mt-4  mr-3">
                         <button

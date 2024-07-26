@@ -6,27 +6,18 @@ import { useState, useEffect } from "react";
 import { BsCheckLg } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
+import { BsChevronRight } from "react-icons/bs";
+
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
-// import { validateEmail } from "../../../components/EndPoints/url.jsx";
-
-
 import '../../login/login.css';
-
-import AddressLandlord from './Details/AddressLandlord.jsx';
+// import AddressLandlord from './Details/AddressLandlord.jsx';
+import AddressLandlord from "../../CreateLandLord/LandLordInfo/Address.jsx"
 // import HousingDetails from "./LandLordInfo/HousingDetails.jsx";
 import HousingDetails from "../../CreateLandLord/LandLordInfo/HousingDetails.jsx";
 import Photo from "../../CreateLandLord/LandLordInfo/Photo.jsx";
 import AvailabilityLandlord from "../../CreateLandLord/LandLordInfo/AvailabilityLandlord.jsx";
 
-// import Spinner from "../../../assets/svg/Spinner.svg"
-
-
-// const AddressLandlord = lazy(() => import('./Details/AddressLandlord.jsx'));
-// const HousingDetails = lazy(() => import('../../CreateLandLord/LandLordInfo/HousingDetails.jsx'));
-// const Photo = lazy(() => import('../../CreateLandLord/LandLordInfo/Photo.jsx'));
-// const AvailabilityLandlord = lazy(() => import('../../CreateLandLord/LandLordInfo/AvailabilityLandlord.jsx'));
 
 
 
@@ -36,9 +27,6 @@ const Create = () => {
     const [userLoading, setUserLoading] = useState(false);
 
     // eslint-disable-next-line no-unused-vars
-    // const [landLoading, setLandLoading] = useState(false);
-
-    // const [loginLoading, setLoginLoading] = useState(false);
 
     const [housingLoading, setHousingLoading] = useState(false);
 
@@ -50,31 +38,28 @@ const Create = () => {
         address: "",
         city: "",
         postalCode: "",
-        phone: "",
         country: "",
         province: "",
-        promotionCode: "",
     });
 
     //NUMBER THREE THIS IS THE STATE FOR THE HOUSING DETAILS
     const [detailsData, setDetailsData] = useState({
-        termOption: "",
-        designOption: "",
-        dailyRent: "",
-        weeklyRent: "",
-        monthlyRent: "",
-        numberOfBedRoom: "",
-        numberOfBathRoom: "",
-        licenseNumber: "",
+        numberOfBedRoom: null,
+        numberOfBathRoom: null,
+        numberOfKitchens: null,
+        price: "",
+        buildYear: "",
+        propertySize: "",
+        area: "",
+        starRating: "",
         description: "",
         propertyType: "",
-        currency: "",
         amenitiesOption: [],
     });
 
-    // const [housing, setHousing] = useState(null);
+    const [housing, setHousing] = useState(null);
 
-    const [housing, setHousing] = useState("7b057fdb-255d-4d37-b8b9-e9de3addd458");
+    // const [housing, setHousing] = useState("7b057fdb-255d-4d37-b8b9-e9de3addd458");
 
 
     useEffect(() => {
@@ -95,24 +80,19 @@ const Create = () => {
         address: housingData?.address,
         city: housingData?.city,
         postalCode: housingData?.postalCode,
-        phone: housingData?.phone,
         country: housingData?.country,
         province: housingData?.province,
-        promotionCode: housingData?.promotionCode,
-
-        termOption: detailsData?.termOption,
-        designOption: detailsData?.designOption,
-        dailyRent: detailsData?.dailyRent,
-        weeklyRent: detailsData?.weeklyRent,
-        monthlyRent: detailsData?.monthlyRent,
         numberOfBedRoom: detailsData?.numberOfBedRoom,
         numberOfBathRoom: detailsData?.numberOfBathRoom,
-        licenseNumber: detailsData?.licenseNumber,
-        description: detailsData?.description,
+        numberOfKitchens: detailsData?.numberOfKitchens,
+        price: detailsData?.price,
+        buildYear: detailsData?.buildYear,
+        propertySize: detailsData?.propertySize,
         propertyType: detailsData?.propertyType,
-        currency: detailsData?.currency,
+        area: detailsData?.area,
+        starRating: detailsData?.starRating,
+        description: detailsData?.description,
         amenitiesOption: detailsData?.amenitiesOption,
-
         avatars: fileList,
         propertyDates: selectedDates,
     })
@@ -125,99 +105,26 @@ const Create = () => {
             address: housingData?.address,
             city: housingData?.city,
             postalCode: housingData?.postalCode,
-            phone: housingData?.phone,
             country: housingData?.country,
             province: housingData?.province,
-            promotionCode: housingData?.promotionCode,
-    
-            termOption: detailsData?.termOption,
-            designOption: detailsData?.designOption,
-            dailyRent: detailsData?.dailyRent,
-            weeklyRent: detailsData?.weeklyRent,
-            monthlyRent: detailsData?.monthlyRent,
             numberOfBedRoom: detailsData?.numberOfBedRoom,
             numberOfBathRoom: detailsData?.numberOfBathRoom,
-            licenseNumber: detailsData?.licenseNumber,
+            numberOfKitchens: detailsData?.numberOfKitchens,
+            price: detailsData?.price,
+            buildYear: detailsData?.buildYear,
+            propertySize: detailsData?.propertySize,
+            area: detailsData?.area,
+            starRating: detailsData?.starRating,
             description: detailsData?.description,
             propertyType: detailsData?.propertyType,
-            currency: detailsData?.currency,
             amenitiesOption: detailsData?.amenitiesOption
         }));
-    
-        
+
     }, [detailsData, housingData]);
 
 
-    const [active, setActive] = useState(1)
-    // const [selectedCity, setSelectedCity] = useState("");
-    // const [selectedStates, setSelectedStates] = useState("");
-    // const [selectedCountry, setSelectedCountry] = useState(''); // State to store the selected country
-    // eslint-disable-next-line no-unused-vars
-    // const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
-    // const [isLoading, setIsLoading] = useState(true);
+    const [active, setActive] = useState(3)
 
-    // const renderPreviousForm = () => {
-    //     setActive(active - 1);
-    // };
-    // const [selectedFunction, setSelectedFunction] = useState("");
-
-    // FUNCTION TO GET THE COUNTRY AND THE STATE
-    // function fetchData() {
-    //     const options = {
-    //         method: "GET",
-    //         // url: 'http://states-and-cities.com/api/v1/states',
-    //         url: "https://countriesnow.space/api/v0.1/countries/states",
-    //     };
-    //     return axios.request(options);
-    // }
-
-    // function fetchStateData() {
-    //     const options = {
-    //         method: "GET",
-    //         url: 'https://countriesnow.space/api/v0.1/countries',
-    //         // url: "https://countriesnow.space/api/v0.1/countries",
-    //     };
-    //     return axios.request(options);
-    // }
-
-    // useEffect(() => {
-    //     async function fetchAndLogData() {
-    //         setIsLoading(true);
-    //         try {
-    //             const response = await fetchData();
-    //             setSelectedCity(response.data?.data);
-    //             setIsLoading(false);
-                
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     }
-    //     fetchAndLogData();
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
-
-    // useEffect(() => {
-    //     async function fetchStateLogData() {
-    //         setIsLoading(true);
-    //         try {
-    //             const response = await fetchStateData();
-    //             setSelectedStates(response?.data?.data);
-    //             setIsLoading(false);
-                
-
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     }
-    //     fetchStateLogData();
-    // }, []);
-
-    
-
-    
-
-
-    // CREATE LISTING FOR THE LANDLORD
     const handleSubmitCreateListing = async () => {
 
         try {
@@ -225,13 +132,13 @@ const Create = () => {
             // Retrieve accessToken from localStorage
             const accessToken = JSON.parse(localStorage.getItem('accessToken'));
 
-    
+
             if (!accessToken) {
                 // Handle case where accessToken is not available
                 console.error('Access Token not found in localStorage');
                 return;
             }
-    
+
             // Set the headers with the accessToken
             const headers = {
                 'Authorization': `Bearer ${accessToken}`,
@@ -264,7 +171,7 @@ const Create = () => {
                 {
                     listingId: housing?.id,
                     propertyDates: convertedDates
-                }, 
+                },
                 { headers }
             );
 
@@ -278,7 +185,7 @@ const Create = () => {
             }
 
             // console.log("all the Listing..", response.data);
-            
+
 
         } catch (error) {
             setUserLoading(false);
@@ -312,6 +219,8 @@ const Create = () => {
                 'Content-Type': 'application/json',
             };
 
+            console.log("first listing..", accessToken, headers, createListing )
+
             // Make the POST request to create a listing
             const response = await axios.post(`https://medirent-api-3gwy.onrender.com/housing/add-listing`,
                 createListing,
@@ -328,7 +237,7 @@ const Create = () => {
             if (response.data.success === true) {
                 toast.success("Listing Created");
 
-                setActive(3)
+                setActive(5)
             }
 
             return response.data; // Return the response data if needed
@@ -337,6 +246,7 @@ const Create = () => {
             // Handle errors
             console.error('Error creating listing:', error);
             setHousingLoading(false);
+            toast.error(error?.response?.data?.Message)
             throw error; // Throw the error for further handling if needed
         }
     }
@@ -365,27 +275,11 @@ const Create = () => {
 
             const formData = new FormData();
 
-            fileList.forEach((file, index) => {
-                console.log("all the file..", file, index);
+            fileList.forEach((file) => {
+                // console.log("all the file..", file, index);
                 formData.append(`files`, file);
-                console.log("alll the format in the data..", formData);
+                // console.log("alll the format in the data..", formData);
             });
-
-            // Extract the housingId from the housing object
-            // const housingId = housing;
-
-            // formData.append('listingId', housing?.id); // Append the housingId string
-
-            // for (var key of formData.entries()) {
-            //     console.log(key[0] + ", " + key[1]);
-            // }
-
-            // for (var [key, value] of formData.entries()) {
-            //     console.log("al the key..", key, value);
-            // }
-
-
-            // formData.append('housingId', housing);
 
             console.log("format data..", formData, housing, fileList);
 
@@ -398,7 +292,7 @@ const Create = () => {
             if (response.data.success === true) {
                 toast.success("Images Successfully Uploaded");
 
-                setActive(4)
+                setActive(6)
             }
 
             return response.data;
@@ -410,15 +304,10 @@ const Create = () => {
     };
 
 
-
-
     const [isToggle, setIsToggle] = useState(true);
     // eslint-disable-next-line no-unused-vars
     const changeToggle = () => setIsToggle(!isToggle);
     // const [error, setError] = useState("");
-
-
-
 
     return (
         <div>
@@ -439,172 +328,159 @@ const Create = () => {
             </div>
 
             <div className="py-0 mt-10 mb-10 bg-white flex font-medium justify-between max-w-screen-xl mx-auto">
-                {/* <div className="flex font-medium justify-between max-w-screen-xl mx-auto">
-                    <div
-                        className="bg-white w-full h-screen bg-HomeImage bg-cover
-                        bg-center flex justify-center lg:h-[50vh] md:h-[70vh] sm:h-[80vh] xs:h-[70vh]"
-                    >
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <p className="text-white text-4xl font-medium text-center">JOIN THE MEDIRENT COMMUNITY!</p>
-                        </div>
-                    </div>
-                </div> */}
-
-
-                <div className=" bg-gray-100 md:flex-1 flex-col w-full items-center relative flex font-medium justify-between max-w-screen-xl mx-auto">
+                <div className=" bg-gray-50 md:flex-1 flex-col w-full items-center relative flex font-medium justify-between max-w-screen-xl mx-auto">
                     <div className=" w-full mt-10">
-                        <div className="w-full lg:flex xs:hidden md:hidden flex-row justify-center">
-                            <div className="flex flex-col ">
-                                <div className="flex flex-row">
+                        <div className=" w-full mt-10 flex justify-center items-center mb-10">
+                            <div className="w-full lg:flex xs:hidden md:hidden flex-row justify-center">
+                                <div className="flex flex-col pr-2">
+                                    <div className="flex flex-row">
 
-                                    <div className={`${active > 1 ? "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-third text-white"
-                                        : "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-white text-lime-700"
-                                        }`}>
-                                        {
-                                            active > 1 ?
-                                                <span className="font-semibold">
-                                                    <BsCheckLg />
-                                                </span>
-                                                :
-                                                <span className="font-bold text-black">
-                                                    1
-                                                </span>
+                                        <div className={`${active > 2 ? "flex items-center justify-center rounded-full p-1 h-8 w-8 !bg-secondary text-white"
+                                            : "flex items-center justify-center rounded-full p-1 h-8 w-8  border-[1px] border-gray-400 !text-[#717171]"
+                                            }`}>
+                                            {
+                                                active > 2 ?
+                                                    <span className="font-semibold">
+                                                        1
+                                                    </span>
+                                                    :
+                                                    <span className="font-bold">
+                                                        <BsCheckLg />
+                                                    </span>
 
-                                        }
+                                            }
+                                        </div>
+                                        <span
+                                            className={`${active > 2 ? " !text-black px-0  md:text-[14px]  flex mt-1  "
+                                                : " !text-[#717171] md:text-[14px] "
+                                                } flex justify-center items-center px-5`}
+                                        >
+                                            Address
+                                        </span>
+                                        <span
+                                            className={`${active > 2 ? " !text-black px-0  md:text-xs  flex mt-1  "
+                                                : " !text-[#717171] md:text-md "
+                                                } flex justify-center items-center px-0`}
+                                        >
+                                            <BsChevronRight />
+                                        </span>
+
+
                                     </div>
-                                    <div className="flex items-center h-full">
-                                        <div
-                                            className={`${active > 1 ? "h-2 w-40 !bg-third "
-                                                : " h-2 w-40 !bg-white"
-                                                }`}
-                                        ></div>
 
-                                    </div>
                                 </div>
-                                <span
-                                    className={`${active > 1 ? " !text-third px-2  md:text-md  flex mt-1  "
-                                        : " !text-black px-2 md:text-md flex mt-1 "
-                                        }`}
-                                >
-                                    Address
-                                </span>
+
+                                <div className="flex flex-col pr-2">
+                                    <div className="flex flex-row">
+
+                                        <div className={`${active > 3 ? "flex items-center justify-center rounded-full p-1 h-8 w-8 !bg-secondary text-white"
+                                            : "flex items-center justify-center rounded-full p-1 h-8 w-8  border-[1px] border-gray-400 !text-[#717171]"
+                                            }`}>
+                                            {
+                                                active > 3 ?
+                                                    <span className="font-semibold">
+                                                        2
+                                                    </span>
+                                                    :
+                                                    <span className="font-bold">
+                                                        2
+                                                    </span>
+
+                                            }
+                                        </div>
+                                        <span
+                                            className={`${active > 3 ? " !text-black px-0  md:text-[14px]  flex mt-1  "
+                                                : " !text-[#717171] md:text-[14px] "
+                                                } flex justify-center items-center px-5`}
+                                        >
+                                            Details
+                                        </span>
+                                        <span
+                                            className={`${active > 3 ? " !text-black px-0  md:text-xs  flex mt-1  "
+                                                : " !text-[#717171] md:text-md "
+                                                } flex justify-center items-center px-0`}
+                                        >
+                                            <BsChevronRight />
+                                        </span>
+
+
+                                    </div>
+
+                                </div>
+
+                                <div className="flex flex-col pr-2">
+                                    <div className="flex flex-row">
+
+                                        <div className={`${active > 4 ? "flex items-center justify-center rounded-full p-1 h-8 w-8 !bg-secondary text-white"
+                                            : "flex items-center justify-center rounded-full p-1 h-8 w-8  border-[1px] border-gray-400 !text-[#717171]"
+                                            }`}>
+                                            {
+                                                active > 4 ?
+                                                    <span className="font-semibold">
+                                                        3
+                                                    </span>
+                                                    :
+                                                    <span className="font-bold">
+                                                        3
+                                                    </span>
+
+                                            }
+                                        </div>
+                                        <span
+                                            className={`${active > 4 ? " !text-black px-0  md:text-[14px]  flex mt-1  "
+                                                : " !text-[#717171] md:text-[14px] "
+                                                } flex justify-center items-center px-5`}
+                                        >
+                                            Photos
+                                        </span>
+                                        <span
+                                            className={`${active > 4 ? " !text-black px-0  md:text-xs  flex mt-1  "
+                                                : " !text-[#717171] md:text-md "
+                                                } flex justify-center items-center px-0`}
+                                        >
+                                            <BsChevronRight />
+                                        </span>
+
+
+                                    </div>
+
+                                </div>
+
+                                <div className="flex flex-col pr-2">
+                                    <div className="flex flex-row">
+
+                                        <div className={`${active > 5 ? "flex items-center justify-center rounded-full p-1 h-8 w-8 !bg-secondary text-white"
+                                            : "flex items-center justify-center rounded-full p-1 h-8 w-8  border-[1px] border-gray-400 !text-[#717171]"
+                                            }`}>
+                                            {
+                                                active > 5 ?
+                                                    <span className="font-semibold">
+                                                        4
+                                                    </span>
+                                                    :
+                                                    <span className="font-bold">
+                                                        4
+                                                    </span>
+
+                                            }
+                                        </div>
+                                        <span
+                                            className={`${active > 5 ? " !text-black px-0  md:text-[14px]  flex mt-1  "
+                                                : " !text-[#717171] md:text-[14px] "
+                                                } flex justify-center items-center px-5`}
+                                        >
+                                            Availability
+                                        </span>
+                                    </div>
+
+                                </div>
                             </div>
 
-                            <div className="flex flex-col ">
-                                <div className="flex flex-row">
+                            <div className="w-full md:flex xs:flex lg:hidden flex-row justify-center">
+                                <div className="bg-secondary rounded-full px-10 py-10 text-white text-2xl font-bold">
+                                    {active - 2}/4
 
-                                    <div className={`${active > 2 ? "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-third text-white"
-                                        : "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-white text-lime-700"
-                                        }`}>
-                                        {
-                                            active > 2 ?
-                                                <span className="font-semibold">
-                                                    <BsCheckLg />
-                                                </span>
-                                                :
-                                                <span className="font-bold text-black">
-                                                    2
-                                                </span>
-
-                                        }
-                                    </div>
-                                    <div className="flex items-center h-full">
-                                        <div
-                                            className={`${active > 2 ? "h-2 w-40 !bg-third "
-                                                : " h-2 w-40 !bg-white"
-                                                }`}
-                                        ></div>
-
-                                    </div>
                                 </div>
-                                <span
-                                    className={`${active > 2 ? " !text-third px-2  md:text-md  flex mt-1  "
-                                        : " !text-black px-2 md:text-md flex mt-1 "
-                                        }`}
-                                >
-                                    Details
-                                </span>
-                            </div>
-
-                            <div className="flex flex-col ">
-                                <div className="flex flex-row">
-
-                                    <div className={`${active > 3 ? "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-third text-white"
-                                        : "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-white text-lime-700"
-                                        }`}>
-                                        {
-                                            active > 3 ?
-                                                <span className="font-semibold">
-                                                    <BsCheckLg />
-                                                </span>
-                                                :
-                                                <span className="font-bold text-black">
-                                                    3
-                                                </span>
-
-                                        }
-                                    </div>
-                                    <div className="flex items-center h-full">
-                                        <div
-                                            className={`${active > 3 ? "h-2 w-40 !bg-third "
-                                                : " h-2 w-40 !bg-white"
-                                                }`}
-                                        ></div>
-
-                                    </div>
-                                </div>
-                                <span
-                                    className={`${active > 3 ? " !text-third px-2  md:text-md  flex mt-1  "
-                                        : " !text-black px-2 md:text-md flex mt-1 "
-                                        }`}
-                                >
-                                    Photos
-                                </span>
-                            </div>
-
-
-
-                            <div className="flex flex-col ">
-                                <div className="flex flex-row">
-
-                                    <div className={`${active > 4 ? "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-third text-white"
-                                        : "flex items-center justify-center rounded-full p-6 h-10 w-10 !bg-white text-lime-700"
-                                        }`}>
-                                        {
-                                            active > 4 ?
-                                                <span className="font-semibold">
-                                                    <BsCheckLg />
-                                                </span>
-                                                :
-                                                <span className="font-bold text-black">
-                                                    4
-                                                </span>
-
-                                        }
-                                    </div>
-                                    {/* <div className="flex items-center h-full">
-                                    <div
-                                        className={`${active > 5 ? "h-2 w-40 !bg-third "
-                                            : " h-2 w-40 !bg-white"
-                                            }`}
-                                    ></div>
-
-                                </div> */}
-                                </div>
-                                <span
-                                    className={`${active > 4 ? " !text-third px-2  md:text-md  flex mt-1  "
-                                        : " !text-black px-2 md:text-md flex mt-1 "
-                                        }`}
-                                >
-                                    Availiability
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className="w-full md:flex xs:flex lg:hidden flex-row justify-center">
-                            <div className="bg-third rounded-full px-10 py-10 text-white text-2xl font-bold">
-                                {active}/4
-
                             </div>
                         </div>
                     </div>
@@ -613,7 +489,7 @@ const Create = () => {
                         <div className="w-full flex flex-col p-0 max-w-4xl px-2">
                             <div className="w-full flex-1 mt-4">
                                 <div className="">
-                                    {(active === 0 || active <= 1) && (
+                                    {(active > 2 && active <= 3) && (
                                         <AddressLandlord
                                             active={active}
                                             setActive={setActive}
@@ -622,7 +498,7 @@ const Create = () => {
                                         />
                                     )}
 
-                                    {(active > 1 && active <= 2) && (
+                                    {(active > 3 && active <= 4) && (
                                         <HousingDetails
                                             active={active}
                                             setActive={setActive}
@@ -635,7 +511,7 @@ const Create = () => {
                                         />
                                     )}
 
-                                    {(active > 2 && active <= 3) && (
+                                    {(active > 4 && active <= 5) && (
                                         <Photo
                                             active={active}
                                             setActive={setActive}
@@ -648,7 +524,7 @@ const Create = () => {
                                         />
                                     )}
 
-                                    {(active > 3 && active <= 4) && (
+                                    {(active > 5 && active <= 6) && (
                                         <AvailabilityLandlord
                                             active={active}
                                             setActive={setActive}

@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-// import CurrencySelect from '../../../registration/Currency.jsx';
 import axios from 'axios';
 import { toast } from "react-toastify";
 import Spinner from "../../../assets/svg/Spinner.svg"
@@ -11,31 +10,8 @@ import CustomSelect from "../../../components/Custom-components/Custom-Select";
 
 const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handleRentUser, housingLoading, setHousingLoading }) => {
 
-    // const dailyRentInput = useRef();
-    // const weeklyRentInput = useRef();
-    // const monthlyRentInput = useRef();
-    // const numberOfBedRoomInput = useRef();
-    // const numberOfBathRoomInput = useRef();
-    // const licenseNumberInput = useRef();
-
-    // THIRD STATE IN THE CODE 
-    // const [detailsData, setDetailsData] = useState({
-    //     termOption: "",
-    //     designOption: "",
-    //     dailyRent: "",
-    //     weeklyRent: "",
-    //     monthlyRent: "",
-    //     numberOfBedRoom: "",
-    //     numberOfBathRoom: "",
-    //     licenseNumber: "",
-    //     description: "",
-    //     propertyType: "",
-    //     currency: "",
-    //     amenitiesOption: [],
-    // });
 
     var {
-        designOption,
         numberOfBedRoom,
         numberOfBathRoom,
         numberOfKitchens,
@@ -66,11 +42,6 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
             toast.warning('Please fill in all required fields.');
             return;
         }
-        // setActive(4)
-
-
-
-        // setHousingLoading(true);
 
         console.log("all the details..", housingLoading)
         try {
@@ -92,8 +63,6 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
         console.log("all the hosing data...", detailsData);
         // setActive(4);
     };
-
-    // const [selectedOption, setSelectedOption] = useState(null);
 
     const [currencies, setCurrencies] = useState([]);
     // eslint-disable-next-line no-unused-vars
@@ -146,12 +115,6 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
         });
     };
 
-    // const handleCurrencyChange = (e) => {
-    //     setDetailsData(prevState => ({
-    //         ...prevState,
-    //         currency: e.target.value,
-    //     }));
-    // };
     const handlePropertyType = (value) => {
         // console.log("value", value);
         setDetailsData(prevState => ({
@@ -159,9 +122,6 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
             propertyType: value,
         }));
     };
-
-
-
 
     const renderPreviousForm = () => {
         console.log("all the prevoius data...", detailsData);
@@ -288,7 +248,7 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
                     <option value="Room to rent">Room to rent shared communal </option>
                 </select> */}
 
-<div className="flex md:flex-row xs:flex-col gap-5 my-5">
+                <div className="flex md:flex-row xs:flex-col gap-5 my-5">
                     <div className={`form-group flex w-[100%] text-[.8rem] my-0 font-semibold`}>
                         Housing Details
                     </div>
@@ -377,9 +337,6 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
 
                 <div className="flex md:flex-row xs:flex-col gap-10 my-10">
                     <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                        {/* <div className="">
-                            Price is per month
-                        </div> */}
                         <CustomInputs
                             id="price"
                             type='number'
@@ -428,7 +385,6 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
                             id="area"
                             type='number'
                             required
-                            // setValue={setFormData}
                             value={area}
                             showRequirement={true}
                             onChange={handleAreaUser}
@@ -447,8 +403,6 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
                             type='text'
                             required
                             inputType="textarea"
-                            // setValue={setFormData}
-                            // value={description}
                             showRequirement={true}
                             onChange={handleDescriptionUser}
                             label={'Description'}
@@ -578,14 +532,14 @@ const HousingDetails = ({ active, setActive, detailsData, setDetailsData, handle
                 </div>
             
                 <div className="flex justify-end pb-10 w-full gap-2">
-                    <div className="flex justify-end z-10 relative mt-4 ">
+                    {/* <div className="flex justify-end z-10 relative mt-4 ">
                         <button
                             onClick={renderPreviousForm}
                             className="flex justify-end z-10 relative bg-white border-[1px] border-gray-400 text-gray-400 md:text-sm rounded-full md:py-3 md:px-8 xs:text-[15px] xs:py-1 xs:px-8"
                         >
                             <span className="">Previous</span>
                         </button>
-                    </div>
+                    </div> */}
                     <div className="flex justify-end z-10 relative mt-4">
                         <button
                             onClick={handleProviderThree}
