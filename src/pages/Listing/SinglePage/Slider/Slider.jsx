@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 // import { HiOutlineChevronRight, HiOutlineChevronDown, HiOutlineChevronLeft } from "react-icons/hi";
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
@@ -52,18 +53,20 @@ function Slider({ avatars }) {
                     </div>
                 </div>
             )}
-            <div className="grid md:grid-cols-3 gap-4 flex-row xs:grid-cols-1 w-full justify-center ">
-                {/* <div className="md:col-span-2 xs:col cursor-pointer flex w-full h-full">
-                    <img src={avatars} alt="" onClick={() => setImageIndex(0)} className="cursor-pointer w-full h- object-cover rounded-lg " />
-                </div> */}
+            <div className="grid md:grid-cols-4 gap-2 flex-row xs:grid-cols-1 w-full justify-center ">
                 <div className="md:col-span-2 xs:col cursor-pointer flex w-full h-full">
                     {avatars?.length > 0 && (
                         <img src={avatars[0]} alt="" onClick={() => setImageIndex(0)} className="cursor-pointer w-full h-full object-cover rounded-lg" />
                     )}
                 </div>
-                <div className="md:col xs:col flex-col justify-between items-center gap-4 flex w-full ">
-                    {avatars?.slice(1).map((image, index) => (
-                        <img src={image} alt="" key={index} onClick={() => setImageIndex(index + 1)} className="cursor-pointer w-full object-cover rounded-lg h-[200px]" />
+                <div className="md:col xs:col flex-col justify-between items-center gap-2 flex w-full ">
+                    {avatars?.slice(1, 3).map((image, index) => (
+                        <img src={image} alt="" key={index} onClick={() => setImageIndex(index + 1)} className="cursor-pointer w-full object-cover rounded-lg h-[250px]" />
+                    ))}
+                </div>
+                <div className="md:col xs:col flex-col justify-between items-center gap-2 flex w-full ">
+                    {avatars?.slice(3, 5).map((image, index) => (
+                        <img src={image} alt="" key={index} onClick={() => setImageIndex(index + 1)} className="cursor-pointer w-full object-cover rounded-lg h-[250px]" />
                     ))}
                 </div>
             </div>

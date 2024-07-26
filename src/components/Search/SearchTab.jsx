@@ -284,12 +284,10 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
             <SearchFilter
                 isOpen={isOpen}
                 closeModal={closeModal}
-
                 searchedListings={searchedListings}
                 setSearchedListings={setSearchedListings}
                 sendDataToParent={sendDataToParent}
                 getAllListing={getAllListing}
-
             />
         </div>
     )

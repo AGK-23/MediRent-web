@@ -70,9 +70,9 @@ const Index = () => {
                                     <div key={index} className="flex justify-center items-center  flex-col ">
                                         <div className="bg-white rounded-lg px-0 py-3 shadow-xl">
                                             <div className='w-full h-full'>
-                                                <Link to={`/listing-details/${listing.id}`} className='flex items-center rounded-lg w-full h-full'>
+                                                <div  className='flex items-center rounded-lg w-full h-full'>
                                                     <img alt="" src={listing.avatars[0]} className="cursor-pointer w-[500px] h-60 object-cover rounded-tl-lg rounded-tr-lg" />
-                                                </Link>
+                                                </div>
                                             </div>
                                             <div className="flex flex-col gap-0 h-fit pt-6 md:px-3 xs:px-2">
                                                 <div>

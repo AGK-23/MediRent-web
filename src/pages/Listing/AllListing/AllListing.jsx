@@ -64,7 +64,7 @@ const AllListing = () => {
   }, []);
 
   const filteredListing = listings.filter(item => {
-    return item?.title?.toLowerCase().includes(searchTerm.toLowerCase());
+    return item?.listingTitle?.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
   return (

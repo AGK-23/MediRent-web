@@ -1,6 +1,12 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
-import { FaBed, FaBath, FaBookmark } from "react-icons/fa6";
+// import { FaBed, FaBath } from "react-icons/fa6";
+
+import Star from "../../../assets/Listing/star.svg";
+import Area from "../../../assets/Listing/area.svg";
+import BathTub from "../../../assets/Listing/bath-tub.svg";
+import Bed from "../../../assets/Listing/bed.svg";
 
 
 
@@ -10,6 +16,13 @@ import { FaBed, FaBath, FaBookmark } from "react-icons/fa6";
 // import "./card.scss";
 
 function Card({ item }) {
+
+
+  const formatValue = (value) => {
+    return value?.toLocaleString('en-US');
+  };
+
+
   return (
 
     <div className="flex md:flex-row xs:flex-col gap-[10px] bg-gray-100 justify-between">
@@ -23,57 +36,79 @@ function Card({ item }) {
         </Link>
       </div>
       <div className="flex flex-col gap-5 w-full px-4">
+
         <h2 className="md:text-lg xs:text-md font-semibold text-gray-700 transition-all duration-400 hover:text-black mt-4">
-          <Link to={`/admin/dashboard/listing/${item.id}`} >{item.title}</Link>
+          <Link to={`/admin/dashboard/listing/${item.id}`} >{item.listingTitle}</Link>
         </h2>
 
         <p className="flex items-center text-gray-600 text-sm ">
-          {/* <img src="/pin.png" alt="" className="w-4 h-4" /> */}
           <div className="text-xl text-primary">
             <FaLocationDot />
           </div>
           <span className="ml-2">{item.address}</span>
         </p>
-        {/* <p className="price text-20 font-light py-1 px-2 rounded bg-yellow-200">&#36; {item.price}</p> */}
-        <span className="md:text-md xs:text-sm  text-third flex">
 
-          <div className="text-black">Daily Rent:</div>
-          <div className="ml-2">&#36; {item?.housingDetails?.dailyRent}</div>
-
-        </span>
-
-        <div className="features flex md:gap-10 xs:gap-2 text-sm md:flex-row xs:flex-col w-full">
-          <div className="feature flex items-center justify-center gap-5 bg-whitesmoke py-1">
-            <div className="text-xl text-primary">
-              <FaBed />
+        <div className="flex justify-start items-center border-none ">
+          <div className=''>
+            <div className='font-[400] text-slate-400 text-[10px]'>
+              <span className="text-slate-700 font-semibold text-[16px]">${formatValue(item?.housingDetails?.price)}</span> <span className="text-gray-500">/month</span>
             </div>
-
-
-            <span className="text-xs flex w-full">
-
-              <div>
-                {item?.housingDetails?.noOfBedrooms}
-              </div>
-              <div className="ml-2">
-                bedroom
-              </div>
-            </span>
           </div>
 
-          <div className="feature flex items-center justify-center gap-5 bg-whitesmoke py-1">
-            {/* <img src="/bath.png" alt="" className="w-4 h-4" /> */}
-            <div className="text-xl text-primary">
-              <FaBath />
-            </div>
-            <span className="text-xs flex w-full">
+        </div>
 
-              <div>
-                {item?.housingDetails?.noOfBathrooms}
+
+        <div className="grid grid-cols-4 gap-5 mt-[2px] w-full">
+          <div className=" flex items-center justify-center gap-5 bg-whitesmoke py-1">
+    
+            <div className="flex justify-center items-center border-none w-full">
+              <div className='flex justify-center items-center flex-col'>
+                <img alt="" src={Bed} className="cursor-pointer w-6 h-6" />
+                <div className='font-[400] text-slate-400 text-[10px]'>
+                  {item?.housingDetails?.numberOfBathRoom} Beds
+                </div>
               </div>
-              <div className="ml-2">
-                bathroom
+
+            </div>
+          </div>
+
+          <div className=" flex items-center justify-center gap-5 bg-whitesmoke py-1">
+    
+            <div className="flex justify-center items-center border-none w-full">
+              <div className='flex justify-center items-center flex-col'>
+                <img alt="" src={BathTub} className="cursor-pointer w-6 h-6" />
+                <div className='font-[400] text-slate-400 text-[10px]'>
+                  {item?.housingDetails?.numberOfBedRoom} Bath
+                </div>
               </div>
-            </span>
+
+            </div>
+          </div>
+
+          <div className=" flex items-center justify-center gap-5 bg-whitesmoke py-1">
+    
+            <div className="flex justify-center items-center border-none w-full">
+              <div className='flex justify-center items-center flex-col'>
+                <img alt="" src={Area} className="cursor-pointer w-6 h-6" />
+                <div className='font-[400] text-slate-400 text-[10px]'>
+                  {item?.housingDetails?.area}
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div className=" flex items-center justify-center gap-5 bg-whitesmoke py-1">
+    
+            <div className="flex justify-center items-center border-none w-full">
+              <div className='flex justify-center items-center flex-col'>
+                <img alt="" src={Star} className="cursor-pointer w-6 h-6" />
+                <div className='font-[400] text-slate-400 text-[10px]'>
+                  {item?.housingDetails?.starRating || 0} Star
+                </div>
+              </div>
+
+            </div>
           </div>
 
         </div>

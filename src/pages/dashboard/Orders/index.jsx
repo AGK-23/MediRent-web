@@ -23,7 +23,7 @@ function Index() {
 
 
   return (
-    <div className='mt-10'>
+    <div className='mt-10 hidden'>
       <div className='text-slate-700 text-lg'>Property Revenues Overview</div>
       <div className="grid md:grid-cols-3 xs:grid-cols-1 md:gap-6 xs:gap-0 mt-5 mb-6 px-0">
         <div className="col-span-2 rounded shadow-md border p-3 md:mb-0 xs:mb-6">
