@@ -7,7 +7,7 @@ import { Link, useParams } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaBed, FaBath, FaPhone } from "react-icons/fa6";
 import { RiArrowRightSLine } from "react-icons/ri";
-
+import { MdOutlineKitchen } from "react-icons/md";
 
 import axios from 'axios';
 
@@ -17,7 +17,9 @@ function TenantSinglePage() {
     const [listings, setListings] = useState([]);
     const { id } = useParams(); // Use useParams to get the addressId from the URL
 
-
+    const formatValue = (value) => {
+        return value?.toLocaleString('en-US');
+    };
 
 
     useEffect(() => {
@@ -79,8 +81,8 @@ function TenantSinglePage() {
                 </div>
 
             </div>
-                <div className="flex h-full">
-                    <div className="px-8">
+            <div className="flex h-full">
+                    <div className="md:px-8 xs:px-2">
                         <div>
                             <Slider avatars={listings?.avatars} />
                         </div>
@@ -89,7 +91,7 @@ function TenantSinglePage() {
                             <div className="flex justify-between sm:flex-col sm:gap-4">
                                 <div className="flex flex-col gap-4">
                                     <h1 className="md:text-xl xs:text-md font-semibold text-gray-700 transition-all duration-400 hover:text-black mt-4">
-                                        {listings.title}
+                                        {listings.listingTitle}
                                     </h1>
                                     <div className="flex items-center gap-1 text-gray-600 text-sm">
                                         {/* <img src="/pin.png" alt="" className="w-4 h-4" /> */}
@@ -134,55 +136,49 @@ function TenantSinglePage() {
                                                 <div className="text-xl text-primary">
                                                     <FaPhone />
                                                 </div>
-                                                <div className="text-black ml-2">Mobile Number:</div>
+                                                <div className="text-black ml-2">Phone:</div>
                                             </div>
 
-                                            <div className="ml-2">{listings?.mobileNumber}</div>
+                                            <div className="ml-2">{listings?.phone}</div>
 
                                         </span>
                                     </div>
 
 
-                                    <span className="md:text-xl xs:text-lg  text-third ">&#36; {listings?.housingDetails?.dailyRent}</span>
+                                    <div className='font-[400] text-slate-400 text-[10px]'>
+                                        <span className="text-slate-700 font-semibold text-[16px]">${formatValue(listings?.housingDetails?.price)}</span> <span className="text-gray-500">/month</span>
+                                    </div>
                                 </div>
-
-
-                                {/* <div className="user flex flex-col items-center justify-center gap-4 p-8 rounded-md bg-yellow-200 font-semibold sm:p-4">
-                                    <img src={userData.img} alt="" className="w-12 h-12 rounded-full" />
-                                    <span>{userData.name}</span>
-                                </div> */}
                             </div>
                             <div className='md:text-xl xs:text-md text-pink-600 font-semibold mt-10'>Apartment Details </div>
 
                             <div className='mt-5'>
                                 <div className='grid md:grid-cols-3 xs:grid-cols-1 gap-5 my-5 items-center justify-center '>
                                     <span className="md:text-md xs:text-sm  text-third flex">
-
-                                        <div className="text-black">Design Options:</div>
-                                        <div className="ml-2">{listings?.housingDetails?.designOption}</div>
-
+                                        <div className="text-black">Area:</div>
+                                        <div className="ml-2">{listings?.housingDetails?.area}</div>
                                     </span>
                                     <span className="md:text-md xs:text-sm  text-third flex">
-
-                                        <div className="text-black">Term Options:</div>
-                                        <div className="ml-2">{listings?.housingDetails?.termOption}</div>
-
+                                        <div className="text-black">Build Year:</div>
+                                        <div className="ml-2">{listings?.housingDetails?.buildYear}</div>
                                     </span>
                                     <span className="md:text-md xs:text-sm  text-third flex">
-
                                         <div className="text-black">PropertyType:</div>
                                         <div className="ml-2">{listings?.housingDetails?.propertyType}</div>
-
+                                    </span>
+                                    <span className="md:text-md xs:text-sm  text-third flex">
+                                        <div className="text-black">PropertySize:</div>
+                                        <div className="ml-2">{listings?.housingDetails?.propertySize}</div>
                                     </span>
                                 </div>
-                                <div className='grid md:grid-cols-2 xs:grid-cols-1 gap-5 my-5 items-center justify-center '>
+                                <div className='grid md:grid-cols-3 xs:grid-cols-1 gap-5 my-5 items-center justify-center '>
                                     <div className="feature flex items-center justify-center gap-5 bg-whitesmoke py-1">
                                         <div className="text-xl text-primary">
                                             <FaBed />
                                         </div>
                                         <span className="text-xs flex w-full ">
                                             <div>
-                                                {listings?.housingDetails?.noOfBedrooms}
+                                                {listings?.housingDetails?.numberOfBedRoom}
                                             </div>
                                             <div className="ml-2">
                                                 bedroom
@@ -197,15 +193,29 @@ function TenantSinglePage() {
                                         </div>
                                         <span className="text-xs flex w-full">
                                             <div>
-                                                {listings?.housingDetails?.noOfBathrooms}
+                                                {listings?.housingDetails?.numberOfBathRoom}
                                             </div>
                                             <div className="ml-2">
                                                 bathroom
                                             </div>
                                         </span>
                                     </div>
+                                    <div className="feature flex items-center justify-center gap-5 bg-whitesmoke py-1">
+                                        {/* <img src="/bath.png" alt="" className="w-4 h-4" /> */}
+                                        <div className="text-xl text-primary">
+                                            < MdOutlineKitchen />
+                                        </div>
+                                        <span className="text-xs flex w-full">
+                                            <div>
+                                                {listings?.housingDetails?.numberOfKitchens}
+                                            </div>
+                                            <div className="ml-2">
+                                                Kitchen
+                                            </div>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div className='grid md:grid-cols-3 xs:grid-cols-1 gap-5 my-5 items-center justify-center '>
+                                {/* <div className='grid md:grid-cols-3 xs:grid-cols-1 gap-5 my-5 items-center justify-center '>
                                     <span className="md:text-md xs:text-sm  text-third flex">
 
                                         <div className="text-black">Daily Rent:</div>
@@ -224,30 +234,16 @@ function TenantSinglePage() {
                                         <div className="ml-2">&#36; {listings?.housingDetails?.monthlyRent}</div>
 
                                     </span>
-                                </div>
+                                </div> */}
 
-                                <div className='grid md:grid-cols-3 xs:grid-cols-1 gap-5 my-5 items-center justify-center '>
-                                    <span className="md:text-md xs:text-sm  text-third flex">
-
-                                        <div className="text-black">Currency:</div>
-                                        <div className="ml-2">{listings?.housingDetails?.currency}</div>
-
-                                    </span>
-                                    <span className="md:text-md xs:text-sm  text-third flex">
-
-                                        <div className="text-black">License Number:</div>
-                                        <div className="ml-2">{listings?.housingDetails?.licenseNumber}</div>
-
-                                    </span>
-
-                                </div>
+                                
 
                                 <div className='text-black font-normal text-lg'>
                                     Amenities
                                 </div>
 
                                 <div className="grid md:grid-cols-5 xs:grid-cols-1 gap-2">
-                                    {listings?.housingDetails?.amenities.map((amenity) => (
+                                    {listings?.housingDetails?.amenitiesOption.map((amenity) => (
                                         <div key={amenity?.id} className="flex items-center h-full bg-white rounded overflow-hidden  border-dashed border-2 border-gray-200">
                                             <div className="flex flex-row justify-center items-center w-full">
                                                 <span className="inline-block h-full w-full rounded overflow-hidden px-2 py-2 text-center text-third md:text-md xs:text-xs">
@@ -256,7 +252,7 @@ function TenantSinglePage() {
                                             </div>
                                         </div>
                                     ))}
-                                    
+
                                 </div>
 
 

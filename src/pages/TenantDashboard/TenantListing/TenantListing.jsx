@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import TenantCard from './TenantCard';
 import NoFound from "../../../assets/svg/NoHouse.svg"
+// import Card from '../../Listing/AllListing/Card';
 
 
 
@@ -21,56 +22,61 @@ const TenantListing = () => {
     const [listings, setListings] = useState([]);
 
     useEffect(() => {
+        console.log("Update Listing:", listings);
+    }, [listings]);
+
+    useEffect(() => {
         const fetchListings = async () => {
-            try {
-                // Retrieve accessToken from localStorage
-                const accessToken = JSON.parse(localStorage.getItem('accessToken'));
-
-
-                if (!accessToken) {
-                    // Handle case where accessToken is not available
-                    console.error('Access Token not found in localStorage');
-                    return;
-                }
-
-                // Set the headers with the accessToken
-                const headers = {
-                    'Authorization': `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json',
-                };
-
-                setIsLoading(true)
-
-                const response = await axios.post('https://medirent-api-3gwy.onrender.com/housing/get-all-listings',
-                    {
-                        pageIndex: 1,
-                        pageSize: 10,
-                        filter: "",
-                        keyword: ""
-                    },
-                    { headers }
-                );
-
-                // console.log("all main page..", response?.data?.data);
-                setListings(response?.data?.data?.items);
-
-                // console.log("all the top..", listings)
-
-                // console.log("made from Africa ..", response?.data?.data?.items);
-
-                setIsLoading(false)
-
-            } catch (error) {
-                console.error('Error fetching listings:', error);
-                setIsLoading(false)
+          try {
+            // Retrieve accessToken from localStorage
+            const accessToken = JSON.parse(localStorage.getItem('accessToken'));
+    
+    
+            if (!accessToken) {
+              // Handle case where accessToken is not available
+              console.error('Access Token not found in localStorage');
+              return;
             }
-        };
+    
+            // Set the headers with the accessToken
+            // const headers = {
+            //   'Authorization': `Bearer ${accessToken}`,
+            //   'Content-Type': 'application/json',
+            // };
+    
+            setIsLoading(true)
+    
+            // const response = await axios.get('https://medirent-api-3gwy.onrender.com/housing/get-all-user-listings', { headers });
+            const response = await axios.post(
+                'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=100',
+                {}, // Sending an empty JSON object
+                {
+                    headers: {
+                        'accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
 
+    
+            console.log("all the response..", response?.data);
+            setListings(response?.data?.data?.items);
+
+            console.log("item is the media..", listings);
+    
+            setIsLoading(false)
+    
+          } catch (error) {
+            console.error('Error fetching listings:', error);
+            setIsLoading(false)
+          }
+        };
+    
         fetchListings();
-    }, []);
+      }, []);
 
     const filteredListing = listings?.filter(item => {
-        return item?.title?.toLowerCase().includes(searchTerm.toLowerCase());
+        return item?.listingTitle?.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
     return (
@@ -98,8 +104,7 @@ const TenantListing = () => {
 
                         </div>
                         :
-                        filteredListing?.map(item => (
-                            
+                        filteredListing.map(item => (
                             <TenantCard key={item.id} item={item} />
                         ))
                 ) : (
