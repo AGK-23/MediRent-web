@@ -64,7 +64,7 @@ const Index = () => {
             <div className=" ">
                 {
                     !isLoading ? (
-                        <div className="grid md:w-full xs:w-full md:grid-cols-3 xs:grid-cols-1 gap-5 xs:px-3 mt-10 md:mx-0 xs:mx-0 justify-center items-center">
+                        <div className="grid md:w-full xs:w-full md:grid-cols-3 xs:grid-cols-1 gap-5 xs:px-1 mt-10 md:mx-0 xs:mx-0 justify-center items-center">
                             {listings?.length > 0 ? (
                                 listings.map((listing, index) => (
                                     <div key={index} className="flex justify-center items-center  flex-col ">

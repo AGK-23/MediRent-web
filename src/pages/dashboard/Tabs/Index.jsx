@@ -1,12 +1,14 @@
+/* eslint-disable react/no-unescaped-entities */
 // import React from 'react'
-import { AiOutlinePieChart, AiOutlineClockCircle } from "react-icons/ai";
-import { HiArrowSmUp, HiArrowSmDown } from "react-icons/hi";
-import { BsBoxSeam } from "react-icons/bs";
-import { MdOutlineLocalShipping } from "react-icons/md";
-import ReactApexChart from "react-apexcharts";
+// import { AiOutlinePieChart, AiOutlineClockCircle } from "react-icons/ai";
+// import { HiArrowSmUp, HiArrowSmDown } from "react-icons/hi";
+// import { BsBoxSeam } from "react-icons/bs";
+// import { MdOutlineLocalShipping } from "react-icons/md";
+// import ReactApexChart from "react-apexcharts";
 import { FiPlusCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 // import { useState, useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
@@ -277,6 +279,9 @@ const state = {
 
 const Index = () => {
   const storedToken = localStorage.getItem('token');
+  const [searchedLandlord, setSearchedLandlord] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const [isLoading, setIsLoading] = useState(false)
 
   const [userName, setUserName] = useState("")
 
@@ -292,6 +297,42 @@ const Index = () => {
     setUserName(userDetails?.Data?.FirstName)
     // console.log('Updated housingData:', userName);
   }, [userDetails]); // Log housingData whenever it changes
+
+  useEffect(() => {
+    const fetchLandlord = async () => {
+        try {
+            setIsLoading(true)
+
+            // console.log("first items", allListings, id)
+
+            const response = await axios.post('https://medirent-api-3gwy.onrender.com/account/get-users/landlord?pageIndex=1&pageSize=10');
+
+            
+            console.log("all landlord.", response?.data);
+            
+            setSearchedLandlord(response?.data);
+
+            // const filteredArray = response?.data?.data?.items.filter(item => item.id === id);
+
+            // setAllSiteListings(filteredArray[0]);
+
+            // setFormData(prevFormData => ({
+            //     ...prevFormData,
+            //     address: `I am interested in ${filteredArray[0].address}`
+            // }));
+            console.log("the landlord item..", searchedLandlord)
+
+            setIsLoading(false)
+
+        } catch (error) {
+            console.error('Error fetching listings:', error);
+            setIsLoading(false)
+        }
+    };
+
+    fetchLandlord();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
 
 
@@ -337,7 +378,9 @@ const Index = () => {
                 <div className="flex justify-center items-center">
                   <div className="">
                     <div className="mb-5 md:text-[2rem] xs:text-[1.5rem] cursor-pointer p-1 text-green-600 flex justify-center items-center">
-                      &#36; 765,780
+                      &#36; 
+                      {/* 765,780 */}
+                      0
                     </div>
                   </div>
                 </div>
@@ -354,7 +397,8 @@ const Index = () => {
                 <div className="flex justify-center items-center">
                   <div className="">
                     <div className="mb-5 md:text-[2rem] xs:text-[1.5rem] cursor-pointer p-1 text-purple-600 flex justify-center items-center">
-                      14
+                      {/* 14 */}
+                      0
                     </div>
                   </div>
                 </div>
@@ -371,7 +415,7 @@ const Index = () => {
                 <div className="flex justify-center items-center">
                   <div className="">
                     <div className="mb-5 md:text-[2rem] xs:text-[1.5rem] cursor-pointer p-1 text-sky-600 flex justify-center items-center">
-                      9
+                      0
                     </div>
                   </div>
                 </div>

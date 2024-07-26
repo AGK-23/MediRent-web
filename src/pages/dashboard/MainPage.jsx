@@ -14,7 +14,7 @@ import Orders from './Orders/index.jsx';
 
 const MainPage = () => {
   return (
-        <div className='h-screen text-lg font-semibold w-full z-0 relative px-6 top-[3rem]'>
+        <div className='h-screen text-lg font-semibold w-full z-0 relative md:px-6 xs:px-2 top-[3rem]'>
             
             <div className=''>
                 <Tabs />
