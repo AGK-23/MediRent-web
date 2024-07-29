@@ -37,33 +37,60 @@ const axiosPrivate = axios.create({
 });
 
 axiosPrivate.interceptors.request.use(function (config) {
-  console.log("response in the bank..", config);
-  if (config.url === "/account/signin") {
+  // console.log("response in the bank..", config);
+  // if (config.url === "/account/signin") {
+  //   config.data = {
+  //     data: encryptAes(config.data)
+  //   }
+  // }
+  // if (config.url === "/account/tenant-registration") {
+  //   config.data = {
+  //     data: encryptAes(config.data)
+  //   }
+  // }
+  // if (config.url === "/account/landlord-registration") {
+  //   config.data = {
+  //     data: encryptAes(config.data)
+  //   }
+  // }
+  // if (config.url === "/account/recover-password") {
+  //   config.data = {
+  //     data: encryptAes(config.data)
+  //   }
+  // }
+  // if (config.url === "/account/signin-google") {
+  //   config.data = {
+  //     data: encryptAes(config.data)
+  //   }
+  // }
+
+  // Encrypt data based on URL
+  const urlsToEncrypt = [
+    "/account/signin",
+    "/account/tenant-registration",
+    "/account/landlord-registration",
+    "/account/recover-password",
+    "/account/signin-google",
+  ];
+
+  if (urlsToEncrypt.includes(config.url)) {
     config.data = {
-      data: encryptAes(config.data)
-    }
+      data: encryptAes(config.data),
+    };
   }
-  if (config.url === "/account/tenant-registration") {
+
+  // Handle pagination for get-users
+  const { pageIndex, pageSize } = config.params || {};
+  if (config.url === `/account/get-users/landlord`) {
     config.data = {
-      data: encryptAes(config.data)
-    }
+      data: encryptAes(config.data),
+    };
+    config.params = {
+      pageIndex,
+      pageSize,
+    };
   }
-  if (config.url === "/account/landlord-registration") {
-    config.data = {
-      data: encryptAes(config.data)
-    }
-  }
-  if (config.url === "/account/recover-password") {
-    config.data = {
-      data: encryptAes(config.data)
-    }
-  }
-  if (config.url === "/account/signin-google") {
-    config.data = {
-      data: encryptAes(config.data)
-    }
-  }
-  console.log("request..", config.url, "data..", config.data);
+  // console.log("request..", config.url, "data..", config.data, config);
   return config;
 
 }, function (error) {
@@ -71,11 +98,11 @@ axiosPrivate.interceptors.request.use(function (config) {
 })
 
 axiosPrivate.interceptors.response.use(function (response) {
-  console.log("response away.", response, "rating..", response?.config?.url, "data..", response.data.Data, "response in the code...", response.data);
+  // console.log("response away.", response, "rating..", response?.config?.url, "data..", response.data.Data, "response in the code...", response.data);
   if (response?.config?.url === `/account/signin`) {
     let responseData = deCryptedData(response?.data?.data)
 
-    console.log("all responses ..", responseData)
+    // console.log("all responses ..", responseData)
     return {
       data: responseData
     }
@@ -115,6 +142,19 @@ axiosPrivate.interceptors.response.use(function (response) {
     return {
       data: responseData
     }
+  }
+
+  // Handle pagination for get-users
+  if (response?.config?.url === `/account/get-users/landlord`) {
+    let responseData = deCryptedData(response?.data?.data)
+    // console.log("some goals..", responseData, responseData.Data.Items);
+    const users = responseData.Data.Items; // Assuming the user data is in this field
+    const totalCount = responseData.Data.TotalCount; // Assuming there's a total count field
+    // console.log("Fetched users:", users, "Total count:", totalCount);
+    return {
+      users: users,
+      totalCount: totalCount,
+    };
   }
 
 }, function (error) {

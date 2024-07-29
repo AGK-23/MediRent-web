@@ -19,6 +19,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 
 
+
 const initialState = [
     {
         image: RoadCity,
@@ -86,6 +87,8 @@ const initialState = [
 const TopSearch = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const [searchedLandlord, setSearchedLandlord] = useState([]);
+    
     // const items = location.state?.items || []; // Access the items from state
 
     // const items = useMemo(() => {
@@ -113,48 +116,6 @@ const TopSearch = () => {
         buildYear: null
     });
 
-    // const [all, setAll] = useState({
-    //     location: allListings.location,
-    //     propertyType: allListings.propertyType,
-    //     minimumPriceRange: allListings.minimumPriceRange,
-    //     maximumPriceRange: allListings.maximumPriceRange,
-    //     propertySize: allListings.propertySize,
-    //     bedrooms: allListings.bedrooms,
-    //     bathrooms: allListings.bathrooms,
-    //     amenities: allListings.amenities, 
-    //     buildYear: allListings.buildYear
-    // });
-
-    // useEffect(() => {
-    //     setAll(prevState => ({
-    //         ...prevState,
-    //         location: allListings.location,
-    //         propertyType: allListings.propertyType,
-    //         minimumPriceRange: allListings.minimumPriceRange,
-    //         maximumPriceRange: allListings.maximumPriceRange,
-    //         propertySize: allListings.propertySize,
-    //         bedrooms: allListings.bedrooms,
-    //         bathrooms: allListings.bathrooms,
-    //         amenities: allListings.amenities, 
-    //         buildYear: allListings.buildYear
-    //     }));
-
-
-    // }, [allListings]);
-
-    // var {
-    //     location,
-    //     propertyType,
-    //     minimumPriceRange,
-    //     maximumPriceRange,
-    //     propertySize,
-    //     bedrooms,
-    //     bathrooms,
-    //     amenities,
-    //     buildYear,
-
-    // } = allListings
-
     useEffect(() => {
         // console.log("Updated Bank:", allSiteListings, items);
     }, [allSiteListings, items]);
@@ -180,7 +141,7 @@ const TopSearch = () => {
                 setAllSiteListings(response?.data?.data?.items);
                 setAllListings(response?.data?.data?.items);
 
-                console.log("itrem ..", items, location.state)
+                // console.log("itrem ..", items, location.state)
 
                 if (items.length > 0) {
                     setAllSiteListings(items);
@@ -200,6 +161,8 @@ const TopSearch = () => {
         fetchListings();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    
 
     const handleSearchListing = async (data) => {
         try {

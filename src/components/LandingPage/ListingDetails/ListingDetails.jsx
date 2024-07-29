@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 // import React from 'react'
 
@@ -18,6 +19,7 @@ import ImagePeople from "../../../assets/Listing/image-people.svg"
 // import Cancel from "../../../assets/svg/cancel.svg"
 import { Link, useParams } from "react-router-dom";
 import axios from 'axios';
+import { axiosPrivate } from '../../../api/axios';
 
 
 import CustomInputs from "../../Custom-components/CustomInputs";
@@ -72,6 +74,8 @@ const initialState = {
 const ListingDetails = () => {
     const [listings, setListings] = useState(initialState);
     const { id } = useParams();
+    const [pageIndexSearch, setPageIndex] = useState(1)
+    const [pageSizeSearch, setPageSize] = useState(100)
 
     const [formData, setFormData] = useState({
         fullname: "",
@@ -94,6 +98,8 @@ const ListingDetails = () => {
     const [searchedListings, setSearchedListings] = useState([]);
 
     const [searchedLandlord, setSearchedLandlord] = useState([]);
+
+    const [filteredLandlord, setFilteredLandlord] = useState([]);
 
     const [allListings, setAllListings] = useState({
         location: "",
@@ -140,7 +146,7 @@ const ListingDetails = () => {
             try {
                 setIsLoading(true)
 
-                console.log("first items", allListings, id)
+                // console.log("first items", allListings, id)
 
                 const response = await axios.post(
                     'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=100',
@@ -181,44 +187,55 @@ const ListingDetails = () => {
     }, []);
 
     useEffect(() => {
-        const fetchLandlord = async () => {
+        console.log("Updated Bank:", allSiteListings, formData, filteredLandlord);
+    }, [allSiteListings, formData, filteredLandlord]);
+
+    useEffect(() => {
+        const fetchLandlord = async (pageIndex, pageSize) => {
             try {
                 setIsLoading(true)
-
+    
                 // console.log("first items", allListings, id)
-
-                const response = await axios.post('https://medirent-api-3gwy.onrender.com/account/get-users/landlord?pageIndex=1&pageSize=1000');
-
+                const response = await axiosPrivate.get('/account/get-users/landlord', {
+                    params: { pageIndex: pageIndexSearch, pageSize: pageSizeSearch },
+                    data: {}, // add any additional data if needed
+                });
+    
+                console.log("all landlord.", response?.users);
                 
-                console.log("all landlord.", response?.data);
-                
-                setSearchedLandlord(response?.data);
+                setSearchedLandlord(response?.users);
+    
+                const filteredArray = response?.users.filter(item => item.Id === allSiteListings.applicationUserId);
 
-                // const filteredArray = response?.data?.data?.items.filter(item => item.id === id);
+                console.log("all the way... ", filteredArray);
 
+                setFilteredLandlord(filteredArray[0])
+
+                console.log("listing ...", filteredLandlord);
+    
                 // setAllSiteListings(filteredArray[0]);
-
+    
                 // setFormData(prevFormData => ({
                 //     ...prevFormData,
                 //     address: `I am interested in ${filteredArray[0].address}`
                 // }));
-                console.log("the landlord item..", searchedLandlord)
-
+                console.log("the landlord people..", searchedLandlord, allSiteListings)
+    
                 setIsLoading(false)
-
+    
             } catch (error) {
                 console.error('Error fetching listings:', error);
                 setIsLoading(false)
             }
         };
-
+    
         fetchLandlord();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [allSiteListings]);
 
-    useEffect(() => {
-        console.log("Updated Bank:", allSiteListings, formData);
-    }, [allSiteListings, formData]);
+    
+
+    
 
     useEffect(() => {
         // Initialize the Google Maps API
@@ -524,21 +541,25 @@ const ListingDetails = () => {
                                                     <img src={ImagePeople} alt="" className="cursor-pointer w-[50px] object-cover h-[50px]" />
 
                                                     <div className='my-1 font-[400] text-[16px] text-black leading-[29.64px]'>
-                                                        Managed by:
+                                                        Managed by: {filteredLandlord?.FirstName} {filteredLandlord?.LastName}
                                                     </div>
 
-                                                    <div className='my-1 font-[600] text-[23px] text-black leading-[29.64px]'>
-                                                        The Syndicate Org
+                                                    <div className='my-1 font-[600] text-[15px] text-black leading-[29.64px]'>
+                                                        {filteredLandlord?.Email}
                                                     </div>
+
+                                                    {/* <div className='my-1 font-[600] text-[23px] text-black leading-[29.64px]'>
+                                                        The Syndicate Org
+                                                    </div> */}
 
                                                     <div className='my-1 font-[400] text-[23px] text-black leading-[29.64px]'>
-                                                        +1 12345543567
+                                                        {filteredLandlord?.Phone }
                                                     </div>
 
                                                 </div>
                                             </div>
 
-                                            <button className="mt-5 w-full rounded-lg bg-white px-10 text-slate-900 py-[15px] text-center font-semibold border-[1px] border-gray-500">Request Info</button>
+                                            <button className="mt-5 w-full rounded-lg md:text-[15px] xs:text-[10px] bg-white px-10 text-slate-900 py-[15px] text-center font-semibold border-[1px] border-gray-300">LandLord's Info</button>
                                         </div>
                                     </div>
                                 </div>

@@ -15,6 +15,7 @@ import axios from "axios";
 // import { useNavigate, Link } from "react-router-dom";
 // import { getUser } from "../../../features/auth/authSlice";
 
+// eslint-disable-next-line no-unused-vars
 const state = {
   series: [
     {
@@ -279,11 +280,54 @@ const state = {
 
 const Index = () => {
   const storedToken = localStorage.getItem('token');
-  const [searchedLandlord, setSearchedLandlord] = useState([]);
+  // const [searchedLandlord, setSearchedLandlord] = useState([]);
   // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(false)
 
   const [userName, setUserName] = useState("")
+
+  // const [isLoading, setIsLoading] = useState(false)
+
+
+  const [listings, setListings] = useState([]);
+
+
+  useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        // Retrieve accessToken from localStorage
+        const accessToken = JSON.parse(localStorage.getItem('accessToken'));
+
+
+        if (!accessToken) {
+          // Handle case where accessToken is not available
+          console.error('Access Token not found in localStorage');
+          return;
+        }
+
+        // Set the headers with the accessToken
+        const headers = {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        };
+
+        setIsLoading(true)
+
+        const response = await axios.get('https://medirent-api-3gwy.onrender.com/housing/get-all-user-listings', { headers });
+
+        console.log("all the response..", response?.data, response?.data.data.length);
+        setListings(response?.data?.data.length);
+
+        setIsLoading(false)
+
+      } catch (error) {
+        console.error('Error fetching listings:', error);
+        setIsLoading(false)
+      }
+    };
+
+    fetchListings();
+  }, []);
 
 
   // Parse the stringified object back to its original form
@@ -291,52 +335,12 @@ const Index = () => {
 
   // console.log("token image", userDetails?.firstName);
 
-  
+
 
   useEffect(() => {
     setUserName(userDetails?.Data?.FirstName)
     // console.log('Updated housingData:', userName);
   }, [userDetails]); // Log housingData whenever it changes
-
-  useEffect(() => {
-    const fetchLandlord = async () => {
-        try {
-            setIsLoading(true)
-
-            // console.log("first items", allListings, id)
-
-            const response = await axios.post('https://medirent-api-3gwy.onrender.com/account/get-users/landlord?pageIndex=1&pageSize=10');
-
-            
-            console.log("all landlord.", response?.data);
-            
-            setSearchedLandlord(response?.data);
-
-            // const filteredArray = response?.data?.data?.items.filter(item => item.id === id);
-
-            // setAllSiteListings(filteredArray[0]);
-
-            // setFormData(prevFormData => ({
-            //     ...prevFormData,
-            //     address: `I am interested in ${filteredArray[0].address}`
-            // }));
-            console.log("the landlord item..", searchedLandlord)
-
-            setIsLoading(false)
-
-        } catch (error) {
-            console.error('Error fetching listings:', error);
-            setIsLoading(false)
-        }
-    };
-
-    fetchLandlord();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
-
-
-
-
 
   return (
     <div className="md:mt-0 xs:mt-10">
@@ -378,7 +382,7 @@ const Index = () => {
                 <div className="flex justify-center items-center">
                   <div className="">
                     <div className="mb-5 md:text-[2rem] xs:text-[1.5rem] cursor-pointer p-1 text-green-600 flex justify-center items-center">
-                      &#36; 
+                      &#36;
                       {/* 765,780 */}
                       0
                     </div>
@@ -398,12 +402,16 @@ const Index = () => {
                   <div className="">
                     <div className="mb-5 md:text-[2rem] xs:text-[1.5rem] cursor-pointer p-1 text-purple-600 flex justify-center items-center">
                       {/* 14 */}
-                      0
+                      {listings || 0 }
                     </div>
                   </div>
                 </div>
                 <span className="font-base block mb-2 text-slate-500 text-sm text-center">
-                  PROPERTIES
+                  {
+                    listings === 1 || listings < 0 && listings ? "PROPERTY" : "PROPERTIES"
+
+                  }
+                  {/* PROPERTIES */}
                 </span>
               </div>
             </div>

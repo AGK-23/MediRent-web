@@ -92,27 +92,6 @@ const Login = () => {
 
             console.log("first email...", formData);
 
-            // const encryptedForm = encryptAes(formData);
-
-            // console.log("encrypted data...", encryptedForm);
-
-            // const response = await axios.post(`https://medirent-api.onrender.com/account/signin`,
-            //     // {
-            //     //     data: encryptedForm
-            //     // },
-            //     encryptedForm,
-            //     {
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //             // 'Content-Type': 'text/plain',
-            //             // 'Access-Control-Allow-Origin': '*',
-            //             // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-            //             // 'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept',
-
-            //         }, 
-            //     }
-            // );
-
             const response = await axiosPrivate.post("/account/signin", formData);
 
             console.log("response in the code..", response)

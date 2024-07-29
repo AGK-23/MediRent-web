@@ -33,7 +33,7 @@ export const deCryptedData = (data) => {
 
     let decrypted = encDecrypted;
 
-    console.log("decrypt.. ", decrypted)
+    // console.log("decrypt.. ", decrypted)
     if (decrypted.includes("{")) {
         decrypted = JSON.parse(encDecrypted);
     }
