@@ -63,6 +63,21 @@ const propertyState = [
 ]
 
 
+const dataArrays = [
+    { id: '1094466b-00ff-49b1-a9f8-864de75fbc75', applicationUserId: 'e0cade67-e3cd-412f-b62b-001ea5f624d2', listingTitle: 'Test', address: '63 Bode Thomas Street', city: 'Surulere' },
+    { id: '1bb0a53b-7d4e-4da8-9297-b9c6f2bd31c5', applicationUserId: '8d33c419-aa6f-4faf-a15d-482aa4165f66', listingTitle: 'Mini Flat', address: '10 Sam Adegbite Close, Off Amodu Ojikutu, Victoria Island, Lagos', city: 'Manitoba' },
+    { id: '1d9d6377-3f52-4282-ae77-60e5cbeb5ad2', applicationUserId: '2f4fea6e-11ba-4c2f-8b3a-7c310b4a4964', listingTitle: 'Nice House', address: '783 Burnett Avenue', city: 'Cambridge' },
+    { id: '28788e9f-7fa0-43d2-af1b-ebc387ad5732', applicationUserId: '8d93fca7-42e5-4ca6-99be-46f4c98d1c05', listingTitle: 'One Mansion In Surulere', address: '20 Adebowale Street Mende Lagos', city: 'Lagos' },
+    { id: '634f7743-751a-42d8-94c2-4fbcaa4977bf', applicationUserId: '50ca9a3b-1fdd-4510-b5f1-25f025683df8', listingTitle: 'Thunder', address: 'Gonna thin vffuii', city: 'Chin' },
+    { id: '82192f8d-5840-4cad-a25b-6d4befbc068d', applicationUserId: '17364bf2-e3fe-46ec-9523-01703bae21a2', listingTitle: '4 Bedroom House in Cambridge', address: 'Hespeler Road', city: 'Cambridge' },
+    { id: '8696b5e2-30d4-4e9e-b99a-ecc8f57f422e', applicationUserId: 'fe8c1b3c-c2d0-4731-89fa-8937504d07d2', listingTitle: '8 Bed House', address: 'xyzzzz', city: 'Cambridge' },
+    { id: '92c0fb1c-3b98-490e-855a-01cd81728399', applicationUserId: 'dd8e41b5-cffb-4d53-8e71-62c327829b55', listingTitle: 'Melbourne Plaza', address: '1B Kingsway', city: 'Melbourne' },
+    { id: '9d61d288-fb16-407c-8cd7-b3c1a7463321', applicationUserId: 'b1b1aaed-2ec6-4edf-99cf-3db9fe7bb2ad', listingTitle: '3 Bedroom House in Cambridge', address: 'Hespeler Road', city: 'Cambridge' },
+    { id: 'a7d72059-8c09-497c-a617-1769944be840', applicationUserId: '8d93fca7-42e5-4ca6-99be-46f4c98d1c05', listingTitle: 'Five Storey Building', address: '1 Layode Crescent Victoria Island', city: 'Lagos' },
+    { id: 'dbdd1c5b-ee5e-411a-83a6-845d88f06df0', applicationUserId: '2859145d-61b4-4a77-a530-d7b767ef1a4a', listingTitle: 'Lekki Mansion', address: '59 Awolowo Rd., Vista Suite (Top Flr.) Ikeja', city: 'Lagos' },
+    { id: 'dee29051-da51-49c1-8b3c-b7a553a0edb1', applicationUserId: 'e3afe6b9-9e9f-42e1-8ed1-0fbed7991621', listingTitle: 'One Room Apartment', address: '22 E. 20th Street', city: 'California' },
+    { id: 'fe19e786-9d6d-44e1-b0fe-ec9f00d792ba', applicationUserId: 'a74db731-df47-4f96-9fff-b7706a820683', listingTitle: 'One Side Apartment', address: '14, Allen Avenue, Centage Plaza Ikeja', city: 'Lagos' }
+];
 
 
 const initialState = {
@@ -72,10 +87,11 @@ const initialState = {
 // AIzaSyDGlJZdJHSJbAU0SXqH3raKKRu_4z1-hyc
 
 const ListingDetails = () => {
-    const [listings, setListings] = useState(initialState);
+    const [listings, setListings] = useState([]);
     const { id } = useParams();
     const [pageIndexSearch, setPageIndex] = useState(1)
     const [pageSizeSearch, setPageSize] = useState(100)
+
 
     const [formData, setFormData] = useState({
         fullname: "",
@@ -101,6 +117,9 @@ const ListingDetails = () => {
 
     const [filteredLandlord, setFilteredLandlord] = useState([]);
 
+
+
+
     const [allListings, setAllListings] = useState({
         location: "",
         propertyType: "",
@@ -112,6 +131,12 @@ const ListingDetails = () => {
         amenities: [],
         buildYear: null
     });
+
+    const [randomObjects, setRandomObjects] = useState([]);
+
+
+
+
 
 
     const [properties, setProperties] = useState(propertyState);
@@ -161,18 +186,20 @@ const ListingDetails = () => {
 
                 // setAllSiteListings(response?.data?.data?.items);
 
-                console.log("all the response..", response?.data,);
+                console.log("all the response..", response?.data);
 
 
                 const filteredArray = response?.data?.data?.items.filter(item => item.id === id);
 
                 setAllSiteListings(filteredArray[0]);
 
+                setListings(response?.data)
+
                 setFormData(prevFormData => ({
                     ...prevFormData,
                     address: `I am interested in ${filteredArray[0].address}`
                 }));
-                console.log("the filtered item..", allSiteListings)
+                // console.log("the filtered item..", allSiteListings)
 
                 setIsLoading(false)
 
@@ -187,55 +214,51 @@ const ListingDetails = () => {
     }, []);
 
     useEffect(() => {
-        console.log("Updated Bank:", allSiteListings, formData, filteredLandlord);
-    }, [allSiteListings, formData, filteredLandlord]);
+        console.log("Updated Bank:", allSiteListings, formData, filteredLandlord, listings);
+    }, [allSiteListings, formData, filteredLandlord, listings]);
 
     useEffect(() => {
         const fetchLandlord = async (pageIndex, pageSize) => {
             try {
                 setIsLoading(true)
-    
+
                 // console.log("first items", allListings, id)
                 const response = await axiosPrivate.get('/account/get-users/landlord', {
                     params: { pageIndex: pageIndexSearch, pageSize: pageSizeSearch },
                     data: {}, // add any additional data if needed
                 });
-    
+
                 console.log("all landlord.", response?.users);
-                
+
                 setSearchedLandlord(response?.users);
-    
+
                 const filteredArray = response?.users.filter(item => item.Id === allSiteListings.applicationUserId);
 
-                console.log("all the way... ", filteredArray);
+                // console.log("all the way... ", filteredArray);
 
                 setFilteredLandlord(filteredArray[0])
 
-                console.log("listing ...", filteredLandlord);
-    
+                // console.log("listing ...", filteredLandlord);
+
                 // setAllSiteListings(filteredArray[0]);
-    
+
                 // setFormData(prevFormData => ({
                 //     ...prevFormData,
                 //     address: `I am interested in ${filteredArray[0].address}`
                 // }));
-                console.log("the landlord people..", searchedLandlord, allSiteListings)
-    
+                // console.log("the landlord people..", searchedLandlord, allSiteListings)
+
                 setIsLoading(false)
-    
+
             } catch (error) {
                 console.error('Error fetching listings:', error);
                 setIsLoading(false)
             }
         };
-    
+
         fetchLandlord();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [allSiteListings]);
-
-    
-
-    
 
     useEffect(() => {
         // Initialize the Google Maps API
@@ -254,11 +277,11 @@ const ListingDetails = () => {
             );
             const data = await response.json();
 
-            console.log("map..", data, data.results[0].geometry.location)
+            // console.log("map..", data, data.results[0].geometry.location)
             const { lat, lng } = data.results[0].geometry.location;
             setCoordinates({ lat, lng });
 
-            console.log("location..", coordinates, allSiteListings)
+            // console.log("location..", coordinates, allSiteListings)
         };
 
         // Create the map
@@ -290,6 +313,32 @@ const ListingDetails = () => {
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [coordinates.lat, coordinates.lng, allSiteListings]);
+
+    useEffect(() => {
+        const getRandomObjects = () => {
+            const dataArray = listings?.data?.items || []; // Ensure dataArray is defined
+            const selectedObjects = [];
+            const arrayLength = dataArray.length;
+
+            if (arrayLength === 0) return; // Exit if there are no items
+
+            while (selectedObjects.length < 3) {
+                const randomIndex = Math.floor(Math.random() * arrayLength);
+                const randomObject = dataArray[randomIndex];
+
+                if (!selectedObjects.includes(randomObject)) {
+                    selectedObjects.push(randomObject);
+                }
+            }
+
+            setRandomObjects(selectedObjects);
+        };
+
+        if (listings) {
+            getRandomObjects(); // Call only if listings is available
+        }
+        console.log("first", listings)
+    }, [listings]); // Run this effect whenever listings change
 
 
     return (
@@ -553,7 +602,7 @@ const ListingDetails = () => {
                                                     </div> */}
 
                                                     <div className='my-1 font-[400] text-[23px] text-black leading-[29.64px]'>
-                                                        {filteredLandlord?.Phone }
+                                                        {filteredLandlord?.Phone}
                                                     </div>
 
                                                 </div>
@@ -587,54 +636,78 @@ const ListingDetails = () => {
                             <div className=" flex justify-center flex-col items-center lg:mx-28 md:px-0 xs:px-0 py-10 border-t-[1px]  border-gray-300">
                                 <div className="text-[#1F3249] font-[600] text-start md:text-[24px] xs:text-[16px] w-full">Similar properties nearby</div>
                                 <div className="grid md:w-full xs:w-full md:grid-cols-3 xs:grid-cols-1 gap-5 xs:px-3 mt-10 md:mx-0 xs:mx-0 justify-center items-center">
-                                    {properties && (
-                                        properties.map((property, index) => (
-                                            <div key={index} className="flex justify-start items-center  flex-col ">
-                                                <div className="bg-white rounded-lg px-0 pb-3 shadow-xl">
-                                                    <div className=''>
-                                                        <div className='flex items-center rounded-lg'>
-                                                            <img alt="" src={property.image} className="rounded-tl-lg rounded-tr-lg cursor-pointer w-[360px] h-[200px]" />
-                                                        </div>
+                                    {randomObjects?.length > 0 && (
+                                        randomObjects.map((listing, index) => (
+                                            <div key={index} className="flex justify-center items-center  flex-col ">
+                                                <div className="bg-white rounded-lg px-0 py-3 shadow-xl">
+                                                    <div className='w-full h-full'>
+                                                        <a href={`/listing-details/${listing.id}`} className='flex items-center rounded-lg w-full h-full'>
+                                                            <img alt="" src={listing.avatars[0]} className="cursor-pointer w-[500px] h-60 object-cover rounded-tl-lg rounded-tr-lg" />
+                                                        </a>
                                                     </div>
                                                     <div className="flex flex-col gap-0 h-fit pt-6 md:px-3 xs:px-2">
                                                         <div>
-                                                            <div className="flex justify-start items-center border-none ">
+                                                            <div className="flex justify-between w-full">
+                                                                <div className="flex justify-start items-center border-none ">
+                                                                    <div className=''>
+
+                                                                        <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                            <span className="text-primary font-semibold text-[16px]">{listing?.housingDetails?.propertyType}</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div className="flex justify-start items-center border-none ">
+                                                                    <div className=''>
+
+                                                                        <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                            <span className="text-slate-700 font-semibold text-[16px]">${formatValue(listing?.housingDetails?.price)}</span> <span className="text-gray-500">/month</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div className="flex justify-start items-center border-none my-4">
                                                                 <div className=''>
 
-                                                                    <div className='font-[400] text-slate-400 text-[10px]'>
-                                                                        <span className="text-slate-700 font-semibold text-[16px]">{property.amount}</span> <span className="text-gray-500">/month</span>
+                                                                    <div className='text-slate-700 font-[400] text-[10px] w-[100%]'>
+                                                                        {listing.address}
                                                                     </div>
                                                                 </div>
 
                                                             </div>
 
-                                                            <div className="flex justify-start items-center border-none ">
-                                                                <div className=''>
-
-                                                                    <div className='text-slate-700 font-[400] text-[10px] w-[80%]'>
-                                                                        {property.location}
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
                                                         </div>
 
-                                                        <div className="grid grid-cols-4 gap-5 mt-[15px] w-full ">
-                                                            <div className="flex justify-center items-center border-none w-full">
+
+                                                        <div className="grid grid-cols-4 gap-0 mt-[15px] w-full ">
+                                                            <div className="flex  justify-center items-center border-none w-full">
                                                                 <div className='flex justify-center items-center flex-col'>
                                                                     <img alt="" src={Bed} className="cursor-pointer w-6 h-6" />
                                                                     <div className='font-[400] text-slate-400 text-[10px]'>
-                                                                        {property.bedRooms} Beds
+                                                                        {listing?.housingDetails?.numberOfBathRoom} Beds
                                                                     </div>
                                                                 </div>
 
                                                             </div>
 
-                                                            <div className="flex justify-center items-center border-none w-full">
+                                                            <div className="flex justify-center items-center    border-none w-full">
                                                                 <div className='flex justify-center items-center flex-col w-full'>
                                                                     <img alt="" src={BathTub} className="cursor-pointer w-6 h-6" />
                                                                     <div className='font-[400] text-slate-400 text-[10px]'>
-                                                                        {property.bathRooms} Bath
+                                                                        {listing?.housingDetails?.numberOfBedRoom} Bath
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div className="flex  justify-center items-center   border-none w-full">
+                                                                <div className='flex justify-center items-center flex-col w-full'>
+                                                                    <img alt="" src={Area} className="cursor-pointer w-6 h-6" />
+                                                                    <div className='font-[400] text-slate-400 text-[10px]'>
+                                                                        {listing?.housingDetails?.area}
                                                                     </div>
                                                                 </div>
 
@@ -642,19 +715,10 @@ const ListingDetails = () => {
 
                                                             <div className="flex justify-center items-center border-none w-full">
                                                                 <div className='flex justify-center items-center flex-col w-full'>
-                                                                    <img alt="" src={Area} className="cursor-pointer w-6 h-6" />
-                                                                    <div className='font-[400] text-slate-400 text-[10px]'>
-                                                                        {property.area}
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
-                                                            <div className="flex justify-center items-center border-none w-full">
-                                                                <div className='flex justify-start items-center flex-col w-full'>
                                                                     <img alt="" src={Star} className="cursor-pointer w-6 h-6" />
                                                                     <div className='font-[400] text-slate-400 text-[10px]'>
-                                                                        {property.rating} Star
+                                                                        {/* {listing.rating}  Star */}
+                                                                        {listing?.housingDetails?.starRating || 0} Star
                                                                     </div>
                                                                 </div>
 
@@ -662,7 +726,7 @@ const ListingDetails = () => {
                                                         </div>
 
                                                         <button
-                                                            onClick={() => handleCheckAvailability(property)}
+                                                            onClick={() => handleCheckAvailability(listing)}
                                                             className="mt-5 rounded-lg bg-primary px-10 py-[15px] text-center text-white opacity-70">Check Availability</button>
                                                     </div>
                                                 </div>
