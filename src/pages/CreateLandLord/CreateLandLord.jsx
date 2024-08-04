@@ -36,6 +36,23 @@ import Mail from "../../assets/svg/mail.svg";
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
 
+const states = [
+    { "name": "Alberta", "abbreviation": "AB", "country_id": "1039" },
+    { "name": "British Columbia", "abbreviation": "BC", "country_id": "1039" },
+    { "name": "Manitoba", "abbreviation": "MB", "country_id": "1039" },
+    { "name": "New Brunswick", "abbreviation": "NB", "country_id": "1039" },
+    { "name": "Newfoundland and Labrador", "abbreviation": "NL", "country_id": "1039" },
+    { "name": "Northwest Territories", "abbreviation": "NT", "country_id": "1039" },
+    { "name": "Nova Scotia", "abbreviation": "NS", "country_id": "1039" },
+    { "name": "Nunavut", "abbreviation": "NU", "country_id": "1039" },
+    { "name": "Ontario", "abbreviation": "ON", "country_id": "1039" },
+    { "name": "Prince Edward Island", "abbreviation": "PE", "country_id": "1039" },
+    { "name": "Quebec", "abbreviation": "QC", "country_id": "1039" },
+    { "name": "Saskatchewan", "abbreviation": "SK", "country_id": "1039" },
+    { "name": "Yukon Territory", "abbreviation": "YT", "country_id": "1039" }
+];
+
+
 const CreateLandLord = () => {
     const navigate = useNavigate();
 
@@ -87,7 +104,7 @@ const CreateLandLord = () => {
         address: "",
         city: "",
         postalCode: "",
-        country: "",
+        country: "Canada",
         province: "",
     });
 
@@ -213,6 +230,7 @@ const CreateLandLord = () => {
 
 
     const [active, setActive] = useState(2)
+    // eslint-disable-next-line no-unused-vars
     const [selectedCity, setSelectedCity] = useState("");
     // eslint-disable-next-line no-unused-vars
     const [selectedStates, setSelectedStates] = useState("");
@@ -222,7 +240,7 @@ const CreateLandLord = () => {
     const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
     // eslint-disable-next-line no-unused-vars
     const [isLoading, setIsLoading] = useState(true);
-    const [allCities, setAllCities] = useState([]);
+    // const [allCities, setAllCities] = useState([]);
 
 
     var {
@@ -306,6 +324,10 @@ const CreateLandLord = () => {
     }
 
     const handleCheckLandLord = async () => {
+        // setFormData(prevFormData => ({
+        //     ...prevFormData,
+        //     country: "Canada"
+        // }));
         console.log("drink in the code", formData);
         try {
             if (
@@ -495,6 +517,7 @@ const CreateLandLord = () => {
             try {
                 const response = await fetchData();
                 setSelectedCity(response.data?.data);
+                console.log("country..", response.data?.data);
                 setIsLoading(false);
             } catch (error) {
                 console.error(error);
@@ -540,32 +563,32 @@ const CreateLandLord = () => {
         }));
     };
 
-    const handleCityChange = (value) => {
-        setSelectedCities(value);
-        let selectedValue = value === "Select a city" ? null : value;
-        setFormData(prevFormData => ({
-            ...prevFormData,
-            province: selectedValue
-        }));
-    };
+    // const handleCityChange = (value) => {
+    //     setSelectedCities(value);
+    //     let selectedValue = value === "Select a city" ? null : value;
+    //     setFormData(prevFormData => ({
+    //         ...prevFormData,
+    //         province: selectedValue
+    //     }));
+    // };
 
-    const handleCountryChange = (value) => {
-        setSelectedCountry(value);
-        setSelectedCities(''); // Clear the selected city when the country changes
-        let selectedValue = value === "Select a country" ? null : value;
-        setFormData(prevFormData => ({
-            ...prevFormData,
-            country: selectedValue
-        }));
+    // const handleCountryChange = (value) => {
+    //     setSelectedCountry(value);
+    //     setSelectedCities(''); // Clear the selected city when the country changes
+    //     let selectedValue = value === "Select a country" ? null : value;
+    //     setFormData(prevFormData => ({
+    //         ...prevFormData,
+    //         country: "Canada"
+    //     }));
 
-        const selectedCountryObj = selectedCity?.find((country) => country.name === value);
+    //     const selectedCountryObj = selectedCity?.find((country) => country.name === value);
 
-        if (selectedCountryObj) {
-            setAllCities(selectedCountryObj.states);
-        } else {
-            setAllCities([]);
-        }
-    };
+    //     if (selectedCountryObj) {
+    //         setAllCities(selectedCountryObj.states);
+    //     } else {
+    //         setAllCities([]);
+    //     }
+    // };
 
     // CREATE LISTING FOR THE LANDLORD
     const handleSubmitCreateListing = async () => {
@@ -710,6 +733,28 @@ const CreateLandLord = () => {
             throw error;
         }
     };
+
+    // const [province, setProvince] = useState('');
+
+    // Map the states to the format expected by CustomSelect
+    // const allProvince = states.map(state => ({
+    //     value: state.abbreviation,
+    //     label: state.name
+    // }));
+
+    const handleProvinceChange = (selectedValue) => {
+        // console.log("all province..", allProvince, selectedValue);
+        // setProvince(selectedValue);
+
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            province: selectedValue,
+            country: "Canada"
+        }));
+        
+
+    };
+
 
 
 
@@ -1065,7 +1110,8 @@ const CreateLandLord = () => {
                                                                 showRequirement={true}
                                                                 onChange={(value) => setFormData(prevFormData => ({
                                                                     ...prevFormData,
-                                                                    firstName: value
+                                                                    firstName: value,
+                                                                    country: "Canada"
                                                                 }))}
                                                                 label={'First Name'}
                                                                 className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
@@ -1081,7 +1127,8 @@ const CreateLandLord = () => {
                                                                 showRequirement={true}
                                                                 onChange={(value) => setFormData(prevFormData => ({
                                                                     ...prevFormData,
-                                                                    lastName: value
+                                                                    lastName: value,
+                                                                    country: "Canada"
                                                                 }))}
 
                                                                 label={'Last Name'}
@@ -1101,7 +1148,8 @@ const CreateLandLord = () => {
                                                                 showRequirement={true}
                                                                 onChange={(value) => setFormData(prevFormData => ({
                                                                     ...prevFormData,
-                                                                    email: value
+                                                                    email: value,
+                                                                    country: "Canada"
                                                                 }))}
 
                                                                 label={'Email'}
@@ -1170,7 +1218,7 @@ const CreateLandLord = () => {
                                                     </div>
 
                                                     <div className="flex md:flex-row xs:flex-col gap-10 my-10">
-                                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                        {/* <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
 
                                                             <CustomSelect
                                                                 wrapperClass=' !h-[58px] !w-full !px-[12px]'
@@ -1184,8 +1232,26 @@ const CreateLandLord = () => {
                                                                 options={selectedCity}
                                                                 otherOptions={true}
                                                             />
-                                                        </div>
+                                                        </div> */}
                                                         <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                            <CustomInputs
+                                                                id="country"
+                                                                type='text'
+                                                                required
+                                                                disabled={true}
+                                                                showRequirement={true}
+                                                                // setValue={setFormData}
+                                                                value={'Canada'}
+                                                                // onChange={(value) => setFormData(prevFormData => ({
+                                                                //     ...prevFormData,
+                                                                //     yearsActive: value
+
+                                                                // }))}
+                                                                label={'Country'}
+                                                                className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                            />
+                                                        </div>
+                                                        {/* <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
                                                             <CustomSelect
                                                                 wrapperClass=' !h-[58px] !w-full !px-[12px]'
                                                                 labelClass=' text-black w-full text-gray-500'
@@ -1198,7 +1264,26 @@ const CreateLandLord = () => {
                                                                 options={allCities}
                                                                 otherOptions={true}
                                                             />
+                                                        </div> */}
+                                                        <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
+                                                            <CustomSelect
+                                                                wrapperClass='!h-[58px] !w-full !px-[12px]'
+                                                                labelClass='text-black w-full text-gray-500'
+                                                                optionsClass='!text-[0.875rem] !h-[48px] !w-[100%] !text-black'
+                                                                optionWrapperClass='w-[100%] !w-full border-[1px] shadow-lg border-gray-200 xl:left-[0px] !left-[0px] !h-[400px] !bottom-[-410px] overflow-y-auto'
+                                                                required={true}
+                                                                label='Select a state'
+                                                                setSelected={handleProvinceChange}
+                                                                selected={province}
+                                                                options={states}
+
+                                                                // setSelected={handleCityPro}
+                                                                // selected={provinceSet}
+                                                                // options={states}
+                                                                otherOptions={true}
+                                                            />
                                                         </div>
+
                                                     </div>
 
                                                     <div className="flex md:flex-row xs:flex-col gap-10 my-10">
@@ -1465,7 +1550,7 @@ const CreateLandLord = () => {
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    
+
 
                                                 </div>
                                             )

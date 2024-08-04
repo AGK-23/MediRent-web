@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 // import { HiArrowSmUp, HiArrowSmDown } from "react-icons/hi";
-import { BiCaretDown, BiWallet, BiPackage, BiUser } from "react-icons/bi";
+import { BiCaretDown, BiWallet, BiUser } from "react-icons/bi";
 import { PiHouseDuotone } from "react-icons/pi";
 
 

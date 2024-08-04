@@ -1,0 +1,67 @@
+[
+    {
+        "name": "Alberta",
+        "abbreviation": "AB",
+        "country_id": "1039"
+    },
+    {
+        "name": "British Columbia",
+        "abbreviation": "BC",
+        "country_id": "1039"
+    },
+    {
+        "name": "Manitoba",
+        "abbreviation": "MB",
+        "country_id": "1039"
+    },
+    {
+        "name": "New Brunswick",
+        "abbreviation": "NB",
+        "country_id": "1039"
+    },
+    {
+        "name": "Newfoundland and Labrador",
+        "abbreviation": "NL",
+        "country_id": "1039"
+    },
+    {
+        "name": "Northwest Territories",
+        "abbreviation": "NT",
+        "country_id": "1039"
+    },
+    {
+        "name": "Nova Scotia",
+        "abbreviation": "NS",
+        "country_id": "1039"
+    },
+    {
+        "name": "Nunavut",
+        "abbreviation": "NU",
+        "country_id": "1039"
+    },
+    {
+        "name": "Ontario",
+        "abbreviation": "ON",
+        "country_id": "1039"
+    },
+    {
+        "name": "Prince Edward Island",
+        "abbreviation": "PE",
+        "country_id": "1039"
+    },
+    {
+        "name": "Quebec",
+        "abbreviation": "QC",
+        "country_id": "1039"
+    },
+    {
+        "name": "Saskatchewan",
+        "abbreviation": "SK",
+        "country_id": "1039"
+    },
+    {
+        "name": "Yukon Territory",
+        "abbreviation": "YT",
+        "country_id": "1039"
+    }
+]

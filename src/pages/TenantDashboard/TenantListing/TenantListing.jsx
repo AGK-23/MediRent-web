@@ -73,6 +73,7 @@ const TenantListing = () => {
         };
     
         fetchListings();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
 
     const filteredListing = listings?.filter(item => {

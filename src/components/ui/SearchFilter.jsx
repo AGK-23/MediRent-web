@@ -43,6 +43,7 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
     const [userLoading, setUserLoading] = useState(false);
     const [emptyLoading, setEmptyLoading] = useState(true)
     // const [searchedListings, setSearchedListings] = useState([]);
+    const [amenitiesList, setAmenitiesList] = useState([]);
 
     const [naming, setNaming] = useState("House");
     const [selectedBathroom, setSelectedBathroom] = useState("");
@@ -54,6 +55,7 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
     //   const [value2, setValue2] = useState([20, 37]);
     const [checkedItems, setCheckedItems] = useState(new Array(8).fill(false));
     const [selectedItems, setSelectedItems] = useState([]);
+    const [isLoading, setIsLoading] = useState(false)
 
     const [allListings, setAllListings] = useState({
         location: "",
@@ -63,7 +65,7 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
         propertySize: null,
         bedrooms: null,
         bathrooms: null,
-        amenities: [], 
+        amenities: [],
         buildYear: null
     });
 
@@ -152,29 +154,40 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
         setCheckedItems((prevCheckedItems) => {
             const updatedCheckedItems = [...prevCheckedItems];
             updatedCheckedItems[index] = !updatedCheckedItems[index];
-            // const checkedCount = updatedCheckedItems.filter(Boolean).length;
-
-
-            // Update the selectedItems array
-            const selectedItem = ['Fully Furnished', 'Treated Water Supply', 'Garden', '24/7 Power Supply', 'Secure Parking', 'Community Spaces ', 'High-Speed Internet', 'Proximity to Hospital'][index];
+    
+            // Get the selected item based on the index
+            const selectedItem = ['Fully Furnished', 'Treated Water Supply', 'Garden', '24/7 Power Supply', 'Secure Parking', 'Community Spaces', 'High-Speed Internet', 'Proximity to Medical Facilities'][index];
+    
             if (updatedCheckedItems[index]) {
-                if (!selectedItems.includes(selectedItem)) {
-                    setSelectedItems((prevSelectedItems) => [...new Set([...prevSelectedItems, selectedItem])]);
-                    // console.log("object", selectedItems, selectedItem);
-                }
+                console.log("thing ..", updatedCheckedItems[index], selectedItem);
+                // If the checkbox is checked and the item is not already in selectedItems
+                setSelectedItems((prevSelectedItems) => {
+                    if (!prevSelectedItems.includes(selectedItem)) {
+                        console.log("Adding item:", selectedItem);
+                        return [...new Set([...prevSelectedItems, selectedItem])];
+                    }
+                    console.log("Already included:", prevSelectedItems, selectedItem);
+                    return prevSelectedItems; // No change if already included
+                });
             } else {
-                setSelectedItems((prevSelectedItems) => [...new Set([...prevSelectedItems.filter((item) => item !== selectedItem)])]);
+                // If the checkbox is unchecked
+                console.log("you")
+                setSelectedItems((prevSelectedItems) => {
+                    return [...new Set(prevSelectedItems.filter((item) => item !== selectedItem))];
+                });
             }
-
+    
             setAllListings(prevState => ({
                 ...prevState,
-                amenities: selectedItems
+                amenities: [...new Set(updatedCheckedItems.map((checked, i) => checked ? selectedItems[i] : null).filter(Boolean))] // Update amenities based on checked items
             }));
-
-            // console.log("all check..", updatedCheckedItems, selectedItems, selectedItem, allListings)
+    
+            console.log("all check..", updatedCheckedItems, selectedItems, selectedItem, allListings);
             return updatedCheckedItems;
         });
     };
+
+    
     // eslint-disable-next-line no-unused-vars
     const [linkName, setLinkName] = useState({
         nameOne: "House",
@@ -252,8 +265,35 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
     // };
 
     useEffect(() => {
-        // console.log("Updated searched listings:", searchedListings);
-    }, [searchedListings]);
+        console.log("Updated searched listings:", searchedListings, amenitiesList, amenities);
+    }, [searchedListings, amenitiesList, amenities]);
+
+
+
+    useEffect(() => {
+        const fetchAmenities = async () => {
+            try {
+                setIsLoading(true)
+
+                // console.log("first items", allListings)
+
+                const response = await axios.get('https://medirent-api-3gwy.onrender.com/Amenity/get-all-amenities');
+
+                setAmenitiesList(response?.data.Data);
+                // setAllListings(response?.data?.data?.items);
+
+                console.log("object", amenitiesList, response?.data);
+                setIsLoading(false)
+
+            } catch (error) {
+                console.error('Error fetching listings:', error);
+                setIsLoading(false)
+            }
+        };
+
+        fetchAmenities();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleListing = async () => {
         // e.preventDefault();
@@ -262,7 +302,19 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
 
             setUserLoading(true);
 
-            console.log("user form for landlord...", allListings);
+            console.log("user form for landlord...", allListings, amenities, amenitiesList, selectedItems);
+
+
+            const resultArray = [];
+
+            selectedItems.forEach(feature => {
+                const foundItem = amenitiesList.find(item => item.Description === feature);
+                if (foundItem) {
+                    resultArray.push({ Id: foundItem.Id, Description: foundItem.Description });
+                }
+            });
+
+            console.log("same array..", resultArray);
 
             const response = await axios.post(
                 'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=10',
@@ -277,7 +329,7 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
                     bedrooms,
                     bathrooms,
                     location,
-                    amenities
+                    resultArray
 
                 }, // Sending an empty JSON object
                 {
@@ -291,7 +343,7 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
 
             setUserLoading(false);
 
-            // console.log("Landlord is rent..", response.data.data.items);
+            // // console.log("Landlord is rent..", response.data.data.items);
             setSearchedListings(response?.data?.data?.items);
 
             console.log("all the user..", response, searchedListings);
@@ -335,7 +387,7 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
                 propertySize: null,
                 bedrooms: null,
                 bathrooms: null,
-                amenities: [], 
+                amenities: [],
                 buildYear: null
             }));
 
@@ -574,8 +626,6 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
                                             placeholder="City"
                                             onChange={handleAddressChange}
                                         />
-
-
                                     </div>
 
                                     <div className='flex justify-start w-full flex-col '>
@@ -753,8 +803,8 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
                                 <div className='my-10'>
                                     <div className="md:text-[15px] xs:text-[12px] text-black  w-full flex justify-start items-center font-[600] ">Features and Amenities</div>
 
-                                    <div className='w-full grid md:grid-cols-3 xs:grid-cols-2 '>
-                                        {['Fully Furnished', 'Treated Water Supply', 'Garden', '24/7 Power Supply', 'Secure Parking', 'Community Spaces', 'High-Speed Internet', 'Proximity to Hospital'].map((item, index) => (
+                                    <div className='w-full grid md:grid-cols-2 xs:grid-cols-1 '>
+                                        {['Fully Furnished', 'Treated Water Supply', 'Garden', '24/7 Power Supply', 'Secure Parking', 'Community Spaces', 'High-Speed Internet side', 'Proximity to Medical Facilities'].map((item, index) => (
                                             <div key={index} className="mr-3 relative my-3 w-full">
                                                 <input
                                                     type="checkbox"
