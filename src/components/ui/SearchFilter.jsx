@@ -159,19 +159,19 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
             const selectedItem = ['Fully Furnished', 'Treated Water Supply', 'Garden', '24/7 Power Supply', 'Secure Parking', 'Community Spaces', 'High-Speed Internet', 'Proximity to Medical Facilities'][index];
     
             if (updatedCheckedItems[index]) {
-                console.log("thing ..", updatedCheckedItems[index], selectedItem);
+                // console.log("thing ..", updatedCheckedItems[index], selectedItem);
                 // If the checkbox is checked and the item is not already in selectedItems
                 setSelectedItems((prevSelectedItems) => {
                     if (!prevSelectedItems.includes(selectedItem)) {
-                        console.log("Adding item:", selectedItem);
+                        // console.log("Adding item:", selectedItem);
                         return [...new Set([...prevSelectedItems, selectedItem])];
                     }
-                    console.log("Already included:", prevSelectedItems, selectedItem);
+                    // console.log("Already included:", prevSelectedItems, selectedItem);
                     return prevSelectedItems; // No change if already included
                 });
             } else {
                 // If the checkbox is unchecked
-                console.log("you")
+                
                 setSelectedItems((prevSelectedItems) => {
                     return [...new Set(prevSelectedItems.filter((item) => item !== selectedItem))];
                 });
@@ -182,7 +182,7 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
                 amenities: [...new Set(updatedCheckedItems.map((checked, i) => checked ? selectedItems[i] : null).filter(Boolean))] // Update amenities based on checked items
             }));
     
-            console.log("all check..", updatedCheckedItems, selectedItems, selectedItem, allListings);
+            // console.log("all check..", updatedCheckedItems, selectedItems, selectedItem, allListings);
             return updatedCheckedItems;
         });
     };
@@ -282,7 +282,7 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
                 setAmenitiesList(response?.data.Data);
                 // setAllListings(response?.data?.data?.items);
 
-                console.log("object", amenitiesList, response?.data);
+                // console.log("object", amenitiesList, response?.data);
                 setIsLoading(false)
 
             } catch (error) {
@@ -302,7 +302,7 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
 
             setUserLoading(true);
 
-            console.log("user form for landlord...", allListings, amenities, amenitiesList, selectedItems);
+            // console.log("user form for landlord...", allListings, amenities, amenitiesList, selectedItems);
 
 
             const resultArray = [];
@@ -310,11 +310,11 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
             selectedItems.forEach(feature => {
                 const foundItem = amenitiesList.find(item => item.Description === feature);
                 if (foundItem) {
-                    resultArray.push({ Id: foundItem.Id, Description: foundItem.Description });
+                    resultArray.push(foundItem.Id);
                 }
             });
 
-            console.log("same array..", resultArray);
+            // console.log("same array..", resultArray);
 
             const response = await axios.post(
                 'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=10',
@@ -329,7 +329,7 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
                     bedrooms,
                     bathrooms,
                     location,
-                    resultArray
+                    amenities: resultArray
 
                 }, // Sending an empty JSON object
                 {
@@ -346,13 +346,13 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
             // // console.log("Landlord is rent..", response.data.data.items);
             setSearchedListings(response?.data?.data?.items);
 
-            console.log("all the user..", response, searchedListings);
+            // console.log("all the user..", response, searchedListings);
 
             if (response.data.success === true) {
 
                 getAllListing(response?.data?.data?.items)
 
-                console.log("hello in the building..")
+                // console.log("hello in the building..")
                 closeModal();
 
                 // navigate('/listings', { state: { result: listings, emptyLoading } });
@@ -404,7 +404,7 @@ const SearchFilter = ({ getAllListing, sendDataToParent, isOpen, closeModal, sea
             setUserLoading(false);
             setSearchedListings(response?.data?.data?.items);
 
-            console.log("all the user..", response, searchedListings);
+            // console.log("all the user..", response, searchedListings);
 
             if (response.data.success === true) {
                 getAllListing(response?.data?.data?.items)

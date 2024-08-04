@@ -21,7 +21,9 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
     const [isOpen, setIsOpen] = useState(false);
     const [userLoading, setUserLoading] = useState(false);
     const [emptyLoading, setEmptyLoading] = useState(true);
+    const [searchLoading, setSearchLoading] = useState(false);
     const [searchedAllListings, setSearchedAllListings] = useState([]);
+    const [listingValue, setListingValue] = useState(false);
 
 
     const closeModal = () => {
@@ -33,14 +35,19 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
     };
 
     useEffect(() => {
+        if(locationCity.pathname === "/all-listings"){
+            setSearchLoading(true)
+            // console.log("door", searchLoading)
+
+        }
         console.log("window..", locationCity.pathname, "City..", locationCity.pathname, searchedAllListings, "shout", searchedListings)
-    }, [locationCity.pathname, searchedAllListings, searchedListings, allSiteListings]);
+    }, [locationCity.pathname, searchedAllListings, searchedListings, allSiteListings, searchLoading, listingValue]);
 
     const [allListings, setAllListings] = useState({
         location: "",
         propertyType: "",
         propertySize: null,
-        buildYear: null
+        buildYear: ""
     });
 
     var {
@@ -92,7 +99,7 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
 
         setAllListings(prevState => ({
             ...prevState,
-            buildYear: parseInt(value)
+            buildYear: value
         }));
     };
 
@@ -138,7 +145,7 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
                 setSearchedListings(response?.data?.data?.items);
                 // console.log("pat 4")
     
-                console.log("all the user..", response, searchedListings);
+                // console.log("all the user..", response, searchedListings);
                 
         
                 if (response.data.success === true) {
@@ -154,11 +161,13 @@ const SearchTab = ({ getAllListing, searchedListings, setSearchedListings, sendD
                 setAllSiteListings(response?.data?.data?.items)
                 // console.log("pathname")
 
-                console.log("all site..", allSiteListings, response?.data?.data?.items)
+                // console.log("all site..", allSiteListings, response?.data?.data?.items)
                 const items = response?.data?.data?.items || [];
 
-                console.log("item in the code..", items)
-                navigate('/all-listings', { state: { items } });
+                setListingValue(true)
+
+                // console.log("item in the code..", items, listingValue)
+                navigate('/all-listings', { state: { items, listingValue: true }});
         
             }
         } catch (error) {

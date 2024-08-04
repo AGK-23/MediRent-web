@@ -88,6 +88,8 @@ const TopSearch = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [searchedLandlord, setSearchedLandlord] = useState([]);
+
+    const { listingValue } = location.state || {}; // Destructure values safely
     
     // const items = location.state?.items || []; // Access the items from state
 
@@ -117,7 +119,7 @@ const TopSearch = () => {
     });
 
     useEffect(() => {
-        // console.log("Updated Bank:", allSiteListings, items);
+        console.log("Updated Bank:", allSiteListings, items);
     }, [allSiteListings, items]);
 
     useEffect(() => {
@@ -141,9 +143,10 @@ const TopSearch = () => {
                 setAllSiteListings(response?.data?.data?.items);
                 setAllListings(response?.data?.data?.items);
 
-                // console.log("itrem ..", items, location.state)
+                // console.log("itrem ..", items, location.state, location.state.items, location.pathname, "count", listingValue)
 
-                if (items.length > 0) {
+                if (listingValue) {
+                    // console.log("the way in the bank", items, location.state)
                     setAllSiteListings(items);
                     setAllListings(items);
 
@@ -168,7 +171,7 @@ const TopSearch = () => {
         try {
             setIsLoading(true)
 
-            console.log("first items", allListings, data)
+            // console.log("first items", allListings, data)
 
             const response = await axios.post(
                 'https://medirent-api-3gwy.onrender.com/housing/get-all-listings?pageNumber=1&pageSize=100',
@@ -183,17 +186,18 @@ const TopSearch = () => {
 
             setAllSiteListings(data);
 
-            console.log("all the response..", response?.data, allSiteListings);
+            // console.log("no more delay..", response?.data, allSiteListings, location.state, location.pathname);
             setIsLoading(false)
 
             // setItem([])
             // location.state.items = [];
             if (location.state.items.length > 0) {
+                
                 navigate('/all-listings', { replace: true, state: { items: [] } });
 
             }
 
-            console.log("patrick..", items, location.state.items)
+            // console.log("patrick..", items, location.state.items)
 
         } catch (error) {
             console.error('Error fetching listings:', error);
@@ -259,7 +263,7 @@ const TopSearch = () => {
 
             <div className=" flex justify-center items-center lg:px-28 md:px-0 xs:px-0 py-10">
                 {
-                    allListings?.length > 0 ? (
+                    !isLoading ? (
                         <div className="grid md:w-full xs:w-full md:grid-cols-3 xs:grid-cols-1 gap-5 xs:px-3 mt-10 md:mx-10 xs:mx-0 justify-center items-center">
                             {allSiteListings?.length > 0 ? (
                                 allSiteListings.map((listing, index) => (
@@ -372,6 +376,9 @@ const TopSearch = () => {
                         <div className='w-screen flex justify-center items-center h-[50vh] '>
                             <div className="loader "></div>
                         </div>
+                        // <div className='w-full flex justify-start font-semibold text-lg items-center h-full '>
+                        //     <div className="">No Listings Found</div>
+                        // </div>
                     )
                 }
 
