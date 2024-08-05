@@ -86,7 +86,7 @@ const CreateLandLord = () => {
         password: "",
         confirmPassword: "",
         functionOption: "",
-        yearsActive: "",
+        // yearsActive: "",
         country: "",
         province: "",
         discoveryMethod: "",
@@ -259,7 +259,7 @@ const CreateLandLord = () => {
         functionOption,
         discoveryMethod,
         receiveNewsletter,
-        yearsActive,
+        // yearsActive,
     } = formData;
 
     // PASSWORD CHECKER 
@@ -339,7 +339,6 @@ const CreateLandLord = () => {
                 !country ||
                 !province ||
                 !postalCode ||
-                !yearsActive ||
                 !phone ||
                 !functionOption ||
                 !emailConfirmation ||
@@ -751,7 +750,7 @@ const CreateLandLord = () => {
             province: selectedValue,
             country: "Canada"
         }));
-        
+
 
     };
 
@@ -1200,7 +1199,7 @@ const CreateLandLord = () => {
                                                             />
                                                         </div>
                                                         <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                                                            <CustomInputs
+                                                            {/* <CustomInputs
                                                                 id="yearsActive"
                                                                 type='number'
                                                                 required
@@ -1213,6 +1212,20 @@ const CreateLandLord = () => {
                                                                 }))}
                                                                 label={'Years Of Active Experience'}
                                                                 className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
+                                                            /> */}
+                                                            <CustomInputs
+                                                                id="address"
+                                                                type='text'
+                                                                required
+                                                                // setValue={setFormData}
+                                                                value={address}
+                                                                showRequirement={true}
+                                                                onChange={(value) => setFormData(prevFormData => ({
+                                                                    ...prevFormData,
+                                                                    address: value
+                                                                }))}
+                                                                label={'Address'}
+                                                                className='px-0 mb-[5px] md:w-[370px] xs:w-full text-[16px]'
                                                             />
                                                         </div>
                                                     </div>
@@ -1377,7 +1390,7 @@ const CreateLandLord = () => {
                                                         </div>
                                                     </div>
 
-                                                    <div className="flex md:flex-row xs:flex-col gap-10 my-10">
+                                                    {/* <div className="flex md:flex-row xs:flex-col gap-10 my-10">
                                                         <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
                                                             <CustomInputs
                                                                 id="address"
@@ -1390,12 +1403,12 @@ const CreateLandLord = () => {
                                                                     ...prevFormData,
                                                                     address: value
                                                                 }))}
-                                                                label={'address'}
+                                                                label={'Address'}
                                                                 className='px-0 mb-[5px] md:w-[370px] xs:w-full text-[16px]'
                                                             />
                                                         </div>
 
-                                                    </div>
+                                                    </div> */}
 
                                                     <div className="text-left text-gray-700">
                                                         <h1 className="mb-0 p-0 text-xl text-black">Listing Type</h1>

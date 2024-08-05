@@ -24,7 +24,21 @@ import Mail from "../../assets/svg/mail.svg";
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
 
-
+const states = [
+    { "name": "Alberta", "abbreviation": "AB", "country_id": "1039" },
+    { "name": "British Columbia", "abbreviation": "BC", "country_id": "1039" },
+    { "name": "Manitoba", "abbreviation": "MB", "country_id": "1039" },
+    { "name": "New Brunswick", "abbreviation": "NB", "country_id": "1039" },
+    { "name": "Newfoundland and Labrador", "abbreviation": "NL", "country_id": "1039" },
+    { "name": "Northwest Territories", "abbreviation": "NT", "country_id": "1039" },
+    { "name": "Nova Scotia", "abbreviation": "NS", "country_id": "1039" },
+    { "name": "Nunavut", "abbreviation": "NU", "country_id": "1039" },
+    { "name": "Ontario", "abbreviation": "ON", "country_id": "1039" },
+    { "name": "Prince Edward Island", "abbreviation": "PE", "country_id": "1039" },
+    { "name": "Quebec", "abbreviation": "QC", "country_id": "1039" },
+    { "name": "Saskatchewan", "abbreviation": "SK", "country_id": "1039" },
+    { "name": "Yukon Territory", "abbreviation": "YT", "country_id": "1039" }
+];
 
 const CreateTenant = () => {
     const navigate = useNavigate();
@@ -32,10 +46,6 @@ const CreateTenant = () => {
     const [signInState, setSignInState] = useState(1);
 
     const [userGoogle, setUserGoogle] = useState(null);
-
-    
-
-
 
     const [selectedCity, setSelectedCity] = useState("");
     // eslint-disable-next-line no-unused-vars
@@ -45,6 +55,7 @@ const CreateTenant = () => {
     // eslint-disable-next-line no-unused-vars
     const [selectedCities, setSelectedCities] = useState(''); // State to store the selected city
     const [isLoading, setIsLoading] = useState(true);
+    // eslint-disable-next-line no-unused-vars
     const [allCities, setAllCities] = useState([]);
 
     const [userLoading, setUserLoading] = useState(false)
@@ -236,10 +247,12 @@ const CreateTenant = () => {
         let selectedValue = value === "Select a city" ? null : value;
         setFormData(prevFormData => ({
             ...prevFormData,
-            province: selectedValue
+            province: selectedValue,
+            country: "Canada"
         }));
     };
 
+    // eslint-disable-next-line no-unused-vars
     const handleCountryChange = (value) => {
         setSelectedCountry(value);
 
@@ -273,7 +286,7 @@ const CreateTenant = () => {
     //     // Decode the JWT token to get the user's profile information
     //     const userProfile = JSON.parse(atob(credentialResponse.credential.split('.')[1]));
 
-        
+
     //     setUserGoogle(userProfile)
     // };
 
@@ -289,17 +302,17 @@ const CreateTenant = () => {
 
         setUserGoogle(userProfile);
 
-        if(userProfile){
-           
+        if (userProfile) {
+
 
             setFormData((prevFormData) => {
                 console.log("prevFormData:", prevFormData);
                 return {
-                  ...prevFormData,
-                  firstName: userProfile.given_name,
-                  lastName: userProfile.family_name,
-                  email: userProfile.email,
-                  emailConfirmation: userProfile.email,
+                    ...prevFormData,
+                    firstName: userProfile.given_name,
+                    lastName: userProfile.family_name,
+                    email: userProfile.email,
+                    emailConfirmation: userProfile.email,
                 };
             });
 
@@ -495,7 +508,7 @@ const CreateTenant = () => {
                                                     </div> */}
                                                     <button className="px-0 mt-10 cursor-pointer w-full " >
                                                         <div className=" px-2 py-2 w-full bg-gray-100 flex justify-center items-center">
-                                                        {/* onClick={() => setSignInState(2)} */}
+                                                            {/* onClick={() => setSignInState(2)} */}
 
                                                             {/* <div className="mr-3">
                                                                 <img alt="" src={Google} width={16} height={16} className="text-[1px] text-white" />
@@ -640,7 +653,8 @@ const CreateTenant = () => {
                                                             showRequirement={true}
                                                             onChange={(value) => setFormData(prevFormData => ({
                                                                 ...prevFormData,
-                                                                address: value
+                                                                address: value,
+                                                                country: "Canada"
                                                             }))}
                                                             label={'Address'}
                                                             className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
@@ -651,7 +665,7 @@ const CreateTenant = () => {
                                                 <div className="flex md:flex-row xs:flex-col gap-10 my-10">
                                                     <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
 
-                                                        <CustomSelect
+                                                        {/* <CustomSelect
                                                             wrapperClass=' !h-[58px] !w-full !px-[12px]'
                                                             labelClass=' text-black w-full text-gray-500'
                                                             optionsClass='!text-[0.875rem] !h-[48px] !w-[100%] !text-black'
@@ -662,6 +676,22 @@ const CreateTenant = () => {
                                                             selected={country}
                                                             options={selectedCity}
                                                             otherOptions={true}
+                                                        /> */}
+                                                        <CustomInputs
+                                                            id="country"
+                                                            type='text'
+                                                            required
+                                                            disabled={true}
+                                                            showRequirement={true}
+                                                            // setValue={setFormData}
+                                                            value={'Canada'}
+                                                            // onChange={(value) => setFormData(prevFormData => ({
+                                                            //     ...prevFormData,
+                                                            //     yearsActive: value
+
+                                                            // }))}
+                                                            label={'Country'}
+                                                            className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
                                                         />
                                                     </div>
                                                     <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
@@ -674,7 +704,7 @@ const CreateTenant = () => {
                                                             label='Select a state'
                                                             setSelected={handleCityChange}
                                                             selected={province}
-                                                            options={allCities}
+                                                            options={states}
                                                             otherOptions={true}
                                                         />
                                                     </div>

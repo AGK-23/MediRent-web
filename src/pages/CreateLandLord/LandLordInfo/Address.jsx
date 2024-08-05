@@ -9,6 +9,22 @@ import { toast } from "react-toastify";
 import CustomInputs from "../../../components/Custom-components/CustomInputs";
 import CustomSelect from "../../../components/Custom-components/Custom-Select";
 
+const states = [
+    { "name": "Alberta", "abbreviation": "AB", "country_id": "1039" },
+    { "name": "British Columbia", "abbreviation": "BC", "country_id": "1039" },
+    { "name": "Manitoba", "abbreviation": "MB", "country_id": "1039" },
+    { "name": "New Brunswick", "abbreviation": "NB", "country_id": "1039" },
+    { "name": "Newfoundland and Labrador", "abbreviation": "NL", "country_id": "1039" },
+    { "name": "Northwest Territories", "abbreviation": "NT", "country_id": "1039" },
+    { "name": "Nova Scotia", "abbreviation": "NS", "country_id": "1039" },
+    { "name": "Nunavut", "abbreviation": "NU", "country_id": "1039" },
+    { "name": "Ontario", "abbreviation": "ON", "country_id": "1039" },
+    { "name": "Prince Edward Island", "abbreviation": "PE", "country_id": "1039" },
+    { "name": "Quebec", "abbreviation": "QC", "country_id": "1039" },
+    { "name": "Saskatchewan", "abbreviation": "SK", "country_id": "1039" },
+    { "name": "Yukon Territory", "abbreviation": "YT", "country_id": "1039" }
+];
+
 
 
 const Address = ({ active, setActive, housingData, setHousingData }) => {
@@ -20,7 +36,7 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
         postalCode,
         country,
         province,
-       
+
     } = housingData;
 
     const handleCheckAddress = () => {
@@ -70,7 +86,8 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
         let selectedValue = value === "Select a city" ? null : value;
         setHousingData(prevHousingData => ({
             ...prevHousingData,
-            province: selectedValue
+            province: selectedValue,
+            country: "Canada"
         }));
     };
 
@@ -271,7 +288,8 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
                             showRequirement={true}
                             onChange={(value) => setHousingData(prevHousingData => ({
                                 ...prevHousingData,
-                                listingTitle: value
+                                listingTitle: value,
+                                country: "Canada"
                             }))}
                             label={'Listing Title'}
                             className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
@@ -279,17 +297,21 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
                     </div>
 
                     <div className={`form-group flex w-[100%] text-[1rem] my-0`}>
-                        <CustomSelect
-                            wrapperClass=' !h-[58px] !w-full !px-[12px]'
-                            labelClass='w-full text-[#b0afb0]'
-                            optionsClass='!text-[0.875rem] !h-[58px] !w-[100%] !text-black'
-                            optionWrapperClass=' w-[100%] !w-full border-[1px] shadow-lg border-gray-200 xl:left-[0px] !left-[0px] !h-[400px] !bottom-[-410px] overflow-y-auto '
-                            required={false}
-                            label='Select a Country'
-                            setSelected={handleCountryChange}
-                            selected={country}
-                            options={selectedCity}
-                            otherOptions={true}
+                        <CustomInputs
+                            id="country"
+                            type='text'
+                            required
+                            disabled={true}
+                            showRequirement={true}
+                            // setValue={setFormData}
+                            value={'Canada'}
+                            // onChange={(value) => setFormData(prevFormData => ({
+                            //     ...prevFormData,
+                            //     yearsActive: value
+
+                            // }))}
+                            label={'Country'}
+                            className='px-0 mb-[5px] md:w-full xs:w-full text-[16px]'
                         />
                     </div>
                 </div>
@@ -305,7 +327,7 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
                             label='Select a state'
                             setSelected={handleCityChange}
                             selected={province}
-                            options={allCities}
+                            options={states}
                             otherOptions={true}
                         />
                     </div>
@@ -401,7 +423,7 @@ const Address = ({ active, setActive, housingData, setHousingData }) => {
                         </button>
                     </div>
                 </div>
-                
+
 
 
             </div>
